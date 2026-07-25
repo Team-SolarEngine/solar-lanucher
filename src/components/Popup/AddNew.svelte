@@ -9,7 +9,11 @@
     let appPath = $state("")
     let appWorkingDirectory = $state("")
 
-    function clearInputs() {
+    let submitted = $state(false)
+
+    function close() {
+        modalNew = false;
+        submitted = false;
         setTimeout(() => {
             appName = ""
             appIconURL = ""
@@ -18,12 +22,10 @@
         }, 500)
     }
 
-    function close() {
-        modalNew = false;
-        clearInputs();
-    }
-
     async function addApp() {
+        submitted = true;
+        if (!appName || !appPath || !appWorkingDirectory) return;
+
         try {
             await invoke("add_app", {
                 app: {
@@ -34,7 +36,13 @@
                 }
             });
             modalNew = false;
-            clearInputs();
+            submitted = false;
+            setTimeout(() => {
+                appName = ""
+                appIconURL = ""
+                appPath = ""
+                appWorkingDirectory = ""
+            }, 500);
             onAppAdded();
         } catch (e) {
             console.error("Failed to add app:", e);
@@ -47,7 +55,7 @@
   <h5>Add a New App</h5>
   <span></span>
 
-  <div class="field label border">
+  <div class="field label border" class:invalid={submitted && !appName}>
     <input type="text" bind:value={appName}>
     <label>App Name</label>
   </div>
@@ -57,12 +65,12 @@
     <label>Icon URL</label>
   </div>
 
-  <div class="field label border">
+  <div class="field label border" class:invalid={submitted && !appPath}>
     <input type="text" bind:value={appPath}>
     <label>Execute Command</label>
   </div>
 
-  <div class="field label border">
+  <div class="field label border" class:invalid={submitted && !appWorkingDirectory}>
     <input type="text" bind:value={appWorkingDirectory}>
     <label>Working Directory</label>
   </div>

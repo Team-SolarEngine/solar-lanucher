@@ -8,6 +8,7 @@
     let appIconURL = $state("")
     let appPath = $state("")
     let appWorkingDirectory = $state("")
+    let submitted = $state(false)
 
     $effect(() => {
         if (editingApp) {
@@ -21,9 +22,13 @@
     function close() {
         modalEdit = false;
         editingApp = null;
+        submitted = false;
     }
 
     async function saveApp() {
+        submitted = true;
+        if (!appName || !appPath || !appWorkingDirectory) return;
+
         try {
             await invoke("update_app", {
                 index: editIndex,
@@ -36,6 +41,7 @@
             });
             modalEdit = false;
             editingApp = null;
+            submitted = false;
             onAppEdited();
         } catch (e) {
             console.error("Failed to update app:", e);
@@ -48,7 +54,7 @@
   <h5>Edit App</h5>
   <span></span>
 
-  <div class="field label border">
+  <div class="field label border" class:invalid={submitted && !appName}>
     <input type="text" bind:value={appName}>
     <label>App Name</label>
   </div>
@@ -58,12 +64,12 @@
     <label>Icon URL</label>
   </div>
 
-  <div class="field label border">
+  <div class="field label border" class:invalid={submitted && !appPath}>
     <input type="text" bind:value={appPath}>
     <label>Execute Command</label>
   </div>
 
-  <div class="field label border">
+  <div class="field label border" class:invalid={submitted && !appWorkingDirectory}>
     <input type="text" bind:value={appWorkingDirectory}>
     <label>Working Directory</label>
   </div>
