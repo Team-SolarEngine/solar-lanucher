@@ -2,30 +2,31 @@
     import { invoke } from "@tauri-apps/api/core";
     import CardApp from "../CardApp.svelte";
 
-    let { modalNew = $bindable(), onAppAdded = () => {} } = $props()
+    let { modalEdit = $bindable(), editingApp = $bindable(), editIndex = -1, onAppEdited = () => {} } = $props()
 
     let appName = $state("")
     let appIconURL = $state("")
     let appPath = $state("")
     let appWorkingDirectory = $state("")
 
-    function clearInputs() {
-        setTimeout(() => {
-            appName = ""
-            appIconURL = ""
-            appPath = ""
-            appWorkingDirectory = ""
-        }, 500)
-    }
+    $effect(() => {
+        if (editingApp) {
+            appName = editingApp.name
+            appIconURL = editingApp.icon_url
+            appPath = editingApp.execute_command
+            appWorkingDirectory = editingApp.working_directory
+        }
+    })
 
     function close() {
-        modalNew = false;
-        clearInputs();
+        modalEdit = false;
+        editingApp = null;
     }
 
-    async function addApp() {
+    async function saveApp() {
         try {
-            await invoke("add_app", {
+            await invoke("update_app", {
+                index: editIndex,
                 app: {
                     name: appName,
                     icon_url: appIconURL,
@@ -33,18 +34,18 @@
                     working_directory: appWorkingDirectory,
                 }
             });
-            modalNew = false;
-            clearInputs();
-            onAppAdded();
+            modalEdit = false;
+            editingApp = null;
+            onAppEdited();
         } catch (e) {
-            console.error("Failed to add app:", e);
+            console.error("Failed to update app:", e);
         }
     }
 </script>
 
-<div class="overlay" class:active={modalNew} onclick={() => modalNew = false}></div>
-<dialog class="right" class:active={modalNew}>
-  <h5>Add a New App</h5>
+<div class="overlay" class:active={modalEdit} onclick={close}></div>
+<dialog class="right" class:active={modalEdit}>
+  <h5>Edit App</h5>
   <span></span>
 
   <div class="field label border">
@@ -76,7 +77,7 @@
   />
 
   <nav class="right-align no-space">
-    <button class="transparent link" onclick={close}>Close</button>
-    <button class="primary link" onclick={addApp}>Add App</button>
+    <button class="transparent link" onclick={close}>Cancel</button>
+    <button class="primary link" onclick={saveApp}>Save</button>
   </nav>
 </dialog>

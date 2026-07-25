@@ -1,19 +1,17 @@
 <script lang="ts">
     import Settings from "./Popup/Settings.svelte"
-    import AddNew from "./Popup/AddNew.svelte"
-    
+
+    let { onOpenAdd = () => {} }: { onOpenAdd: () => void } = $props()
+
     const listsOfOptions = [
         {name: "Settings", icon: "settings", action: () => {openModal("settings")}},
     ]
 
-    let modalSettings = false
-    let modalNew = false
+    let modalSettings = $state(false)
 
     function openModal(modal: string) {
         if (modal === "settings") {
             modalSettings = true
-        } else if (modal === "new") {
-            modalNew = true
         }
     }
 </script>
@@ -39,7 +37,7 @@
         </div>
 
         <div>
-            <button onclick={() => {openModal("new")}}>
+            <button onclick={onOpenAdd}>
                 <i>add</i>
             </button>
         </div>
@@ -47,4 +45,3 @@
 </footer>
 
 <Settings bind:modalSettings />
-<AddNew bind:modalNew />

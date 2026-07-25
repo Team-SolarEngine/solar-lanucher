@@ -1,0 +1,74 @@
+use std::process::Command;
+#[cfg(unix)]
+use std::os::unix::process::CommandExt;
+
+#[tauri::command]
+pub fn start_app(working_dir: String, command_exec: String, sudo: bool) -> Result<String, String> {
+    #[cfg(windows)]
+    let mut cmd = if sudo {
+        let mut c = Command::new("powershell");
+        c.args(["-Command", &format!("Start-Process -FilePath '{}' -Verb RunAs", command_exec)]);
+        c
+    } else {
+        let mut c = Command::new("cmd");
+        c.args(["/C", &command_exec]);
+        c
+    };
+
+    #[cfg(unix)]
+    let mut cmd = if sudo {
+        let mut c = Command::new("sudo");
+        c.args(["sh", "-c", &command_exec]);
+        c
+    } else {
+        let mut c = Command::new("sh");
+        c.args(["-c", &command_exec]);
+        c
+    };
+
+    cmd.current_dir(&working_dir);
+
+    #[cfg(unix)]
+    if !sudo {
+        unsafe {
+            cmd.pre_exec(|| {
+                libc::setpgid(0, 0);
+                Ok(())
+            });
+        }
+    }
+
+    cmd.spawn()
+        .map_err(|e| format!("Failed to start app: {}", e))?;
+
+    Ok("App started".to_string())
+}
+
+#[tauri::command]
+pub fn open_folder(path: String) -> Result<String, String> {
+    #[cfg(target_os = "linux")]
+    let mut cmd = {
+        let mut c = Command::new("xdg-open");
+        c.arg(&path);
+        c
+    };
+
+    #[cfg(target_os = "macos")]
+    let mut cmd = {
+        let mut c = Command::new("open");
+        c.arg(&path);
+        c
+    };
+
+    #[cfg(target_os = "windows")]
+    let mut cmd = {
+        let mut c = Command::new("explorer");
+        c.arg(&path);
+        c
+    };
+
+    cmd.spawn()
+        .map_err(|e| format!("Failed to open folder: {}", e))?;
+
+    Ok("Folder opened".to_string())
+}

@@ -1,50 +1,67 @@
-<script>
+<script lang="ts">
+    import { invoke } from "@tauri-apps/api/core";
+    import { onMount } from "svelte";
     import "beercss";
     import "material-dynamic-colors";
 
     import Topbar from '../components/Topbar.svelte';
     import CardApp from '../components/CardApp.svelte';
+    import AddNew from '../components/Popup/AddNew.svelte';
+    import EditApp from '../components/Popup/EditApp.svelte';
+
+    type AppData = {name: string, icon_url: string, execute_command: string, working_directory: string};
+
+    let apps = $state<AppData[]>([]);
+    let modalNew = $state(false);
+    let modalEdit = $state(false);
+    let editingApp = $state<AppData | null>(null);
+    let editIndex = $state(-1);
+
+    async function loadApps() {
+        try {
+            apps = await invoke("get_apps");
+        } catch (e) {
+            console.error("Failed to load apps:", e);
+        }
+    }
+
+    function openEdit(index: number) {
+        editingApp = { ...apps[index] };
+        editIndex = index;
+        modalEdit = true;
+    }
+
+    onMount(() => {
+        loadApps();
+    });
 </script>
 
 <main class="main">
     <div class="_topbarSection">
-        <Topbar />
+        <Topbar onOpenAdd={() => modalNew = true} />
     </div>
 
     <div class="_programsCard">
         <div class="_programsCardChild">
             <div style="display: none;">hi this just to fix the first-child fucking up! thanks for understanding.</div>
-            <CardApp
-                name="HostRN"
-                iconUrl="https://github.com/daveberrys/HostRN/raw/main/frontend/public/favicon.ico"
-                executeCommand="puiouiopuiop"
-                workingDirectory="asdfasdfasdf"
-                isPreview={false}
-            />
-            <CardApp
-                name="VLC.UTILS"
-                iconUrl="https://github.com/PinpointTools/VLC.UTILS/raw/main/icon/VLC.UTILS.png"
-                executeCommand="puiouiopuiop"
-                workingDirectory="asdfasdfasdf"
-                isPreview={false}
-            />
-            <CardApp
-                name="Send Your Files"
-                iconUrl="https://github.com/PinpointTools/SendYourFiles-RW/raw/main/public/icons/192/syf.png"
-                executeCommand="pouiuiopuiop"
-                workingDirectory="asdfasdfasf"
-                isPreview={false}
-            />
-            <CardApp
-                name="GUH"
-                iconUrl="https://github.com/daveberrys/guh/raw/main/.github/readme/Guh.svg"
-                executeCommand="piouuioppoi"
-                workingDirectory="asdfasdfasdf"
-                isPreview={false}
-            />
+            {#each apps as app, i}
+                <CardApp
+                    name={app.name}
+                    iconUrl={app.icon_url}
+                    executeCommand={app.execute_command}
+                    workingDirectory={app.working_directory}
+                    isPreview={false}
+                    index={i}
+                    onDeleted={loadApps}
+                    onEdit={openEdit}
+                />
+            {/each}
         </div>
     </div>
 </main>
+
+<AddNew bind:modalNew onAppAdded={loadApps} />
+<EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadApps} />
 
 <style>
     .main {
