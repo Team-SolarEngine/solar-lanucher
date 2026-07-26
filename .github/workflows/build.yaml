@@ -1,0 +1,78 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: ubuntu-latest
+            target: ""
+            bundles: "deb,rpm,pacman,appimage"
+          - platform: windows-latest
+            target: ""
+            bundles: "nsis,msi"
+          - platform: macos-latest
+            target: "aarch64-apple-darwin"
+            bundles: "dmg"
+          - platform: macos-13
+            target: "x86_64-apple-darwin"
+            bundles: "dmg"
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install dependencies (ubuntu)
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev libappindicator3-dev librsvg2-dev patchelf libssl-dev
+
+      - name: Install dependencies (windows)
+        if: matrix.platform == 'windows-latest'
+        uses: Vampire/setup-wsl@v2
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v4
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Install frontend dependencies
+        run: pnpm install
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: appshortsies-${{ matrix.platform }}-${{ matrix.target || 'native' }}
+          path: |
+            src-tauri/target/*/release/bundle/**/*
+            src-tauri/target/release/bundle/**/*
+          if-no-files-found: warn
