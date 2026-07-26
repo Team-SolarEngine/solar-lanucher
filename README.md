@@ -1,7 +1,9 @@
-# Tauri + SvelteKit + TypeScript
+# AppShortsies
+Another way to start your apps without the need to go deep in your folders.
 
-This template should help get you started developing with Tauri, SvelteKit and TypeScript in Vite.
+![AppShortsies Screenshot](.github/readme/preview.png)
 
-## Recommended IDE Setup
+## Github Workflow
+We don't have a download link yet, but we have a github action. Just click the one below, and click the one all the way above. Scroll down and download your platform.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+https://github.com/daveberrys/appshortsies/actions/workflows/build.yml
