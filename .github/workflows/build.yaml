@@ -54,7 +54,7 @@ jobs:
         uses: Vampire/setup-wsl@v2
 
       - name: Rust cache
-        uses: swatinem/rust-cache@v4
+        uses: swatinem/rust-cache@v2
         with:
           workspaces: "./src-tauri -> target"
 
