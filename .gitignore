@@ -8,3 +8,8 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# for some reason when this is included, workflows
+# just kill themselves (or pnpm, I don't know).
+# so this prevents it to kill itself. so, yay!
+pnpm-workspace.yaml

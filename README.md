@@ -1,9 +1,12 @@
-<table>
-    <tr>
-        <th><img src=".github/readme/AppShortsies.png" width="256" height="256" alt="AppShortsies"></th>
-        <th><h1>AppShortsies</h1>Another way to start your apps without the need to go deep in your folders.</th>
-    </tr>
-</table>
+<div align="center">
+    <img src=".github/readme/AppShortsies.png" width="128" height="128" alt="AppShortsies">
+    <div>
+        <h1>— AppShortsies —</h1>
+        Another way to start your apps without the need to go deep in your folders.
+    </div>
+</div>
+
+<br/>
 
 ![AppShortsies Screenshot](.github/readme/preview.png)
 
