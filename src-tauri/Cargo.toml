@@ -1,8 +1,8 @@
 [package]
 name = "appshortsies"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "An easier way to start your apps burried into the depths of folders."
+authors = ["Daveberry Cricket Blueson"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
