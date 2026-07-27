@@ -42,14 +42,14 @@
     }
 
     let extraFunctionalities = $derived([
-        { name: "Run as Admin", icon: "shield", action: () => startApp(true) },
+        { name: "Open in Terminal", icon: "terminal", action: () => startApp(true) },
         { name: "Edit", icon: "edit", action: () => onEdit(index) },
         { name: "Delete", icon: "delete", action: deleteApp },
         { name: "Open Folder", icon: "folder", action: openFolder },
     ])
 </script>
 
-<article style="height: fit-content;">
+<article style="height: fit-content; z-index: inherit;">
     <div class="row">
         <img src={iconUrl} alt={name} class="large square"/>
         <div>
@@ -68,7 +68,7 @@
             <button class="border right-round square">
               <i>keyboard_arrow_down</i>
             </button>
-            <menu class="left no-wrap">
+            <menu class="no-wrap">
                 {#each extraFunctionalities as functionality}
                   <li onclick={functionality.action}>
                       <i>{functionality.icon}</i> {functionality.name}

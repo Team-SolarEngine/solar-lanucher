@@ -4,10 +4,10 @@
     import "beercss";
     import "material-dynamic-colors";
 
-    import Topbar from '../components/Topbar.svelte';
-    import CardApp from '../components/CardApp.svelte';
+    import Sidebar from '../components/Sidebar.svelte';
     import AddNew from '../components/Popup/AddNew.svelte';
     import EditApp from '../components/Popup/EditApp.svelte';
+    import MainContent from "../components/MainContent.svelte";
 
     type AppData = {name: string, icon_url: string, execute_command: string, working_directory: string};
 
@@ -37,26 +37,12 @@
 </script>
 
 <main class="main">
-    <div class="_topbarSection">
-        <Topbar onOpenAdd={() => modalNew = true} />
+    <div class="_sidebarSection">
+        <Sidebar onOpenAdd={() => modalNew = true} />
     </div>
 
-    <div class="_programsCard">
-        <div class="_programsCardChild">
-            <div style="display: none;">hi this just to fix the first-child fucking up! thanks for understanding.</div>
-            {#each apps as app, i}
-                <CardApp
-                    name={app.name}
-                    iconUrl={app.icon_url}
-                    executeCommand={app.execute_command}
-                    workingDirectory={app.working_directory}
-                    isPreview={false}
-                    index={i}
-                    onDeleted={loadApps}
-                    onEdit={openEdit}
-                />
-            {/each}
-        </div>
+    <div class="_mainContent">
+        <MainContent/>
     </div>
 </main>
 
@@ -66,18 +52,12 @@
 <style>
     .main {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         height: 100vh;
     }
 
-    ._programsCard {
+    ._mainContent {
         height: 100dvh;
         overflow-y: auto;
-        ._programsCardChild {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            justify-content: center;
-        }
     }
 </style>

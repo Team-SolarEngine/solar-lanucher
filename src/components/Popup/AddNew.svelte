@@ -52,27 +52,43 @@
 
 <div class="overlay" class:active={modalNew} onclick={() => modalNew = false}></div>
 <dialog class="right" class:active={modalNew}>
-  <h5>Add a New App</h5>
+  <h5>Add a New FNF Instance</h5>
   <span></span>
 
   <div class="field label border" class:invalid={submitted && !appName}>
     <input type="text" bind:value={appName}>
-    <label>App Name</label>
+    <label>FNF Mod/Engine name</label>
+    <output>The FNF mod/engine name to display in the launcher.</output>
   </div>
 
   <div class="field label border">
     <input type="text" bind:value={appIconURL}>
     <label>Icon URL</label>
+    <output>Any icon your heart desires. Make sure it's 1:1.</output>
   </div>
 
   <div class="field label border" class:invalid={submitted && !appPath}>
     <input type="text" bind:value={appPath}>
     <label>Execute Command</label>
+    <output>The command to execute when launching the app. eg; <code>.\Funkin.exe</code></output>
   </div>
 
   <div class="field label border" class:invalid={submitted && !appWorkingDirectory}>
     <input type="text" bind:value={appWorkingDirectory}>
     <label>Working Directory</label>
+    <output>The working directory for the app. eg; <code>D:\Games\FNF\Funkin\</code></output>
+  </div>
+
+  <div class="field label border" class:invalid={submitted && !appWorkingDirectory}>
+    <input type="text" bind:value={appWorkingDirectory}>
+    <label>Description</label>
+    <output>The description of the app to display in the launcher. eg; <code>Base game FNF V-Slice</code></output>
+  </div>
+
+  <div class="field label border" class:invalid={submitted && !appWorkingDirectory}>
+    <input type="text" bind:value={appWorkingDirectory}>
+    <label>Banner URL</label>
+    <output>The banner image URL for the app. Aspect ratio doesn't matter. But we reccomend 16:9</output>
   </div>
 
   <CardApp

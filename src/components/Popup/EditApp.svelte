@@ -51,12 +51,12 @@
 
 <div class="overlay" class:active={modalEdit} onclick={close}></div>
 <dialog class="right" class:active={modalEdit}>
-  <h5>Edit App</h5>
+  <h5>Edit Instance</h5>
   <span></span>
 
   <div class="field label border" class:invalid={submitted && !appName}>
     <input type="text" bind:value={appName}>
-    <label>App Name</label>
+    <label>Instance Name</label>
   </div>
 
   <div class="field label border">
