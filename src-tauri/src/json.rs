@@ -10,9 +10,11 @@ pub struct App {
     pub working_directory: String,
 }
 
+const APP_ID: &str = "net.solarengine.solar-launcher";
+
 fn get_apps_path() -> PathBuf {
     let config_dir = dirs::config_dir().expect("Could not determine config directory");
-    let app_dir = config_dir.join("appshortsies");
+    let app_dir = config_dir.join(APP_ID);
     fs::create_dir_all(&app_dir).ok();
     app_dir.join("apps.json")
 }

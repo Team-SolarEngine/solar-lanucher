@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "appshortsies",
+  "productName": "solar-launcher",
   "version": "0.1.0",
-  "identifier": "dev.pages.codedave.appshortsies",
+  "identifier": "net.solarengine.solar-launcher",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "appshortsies",
+        "title": "Solar Launcher",
         "width": 800,
         "height": 600
       }
