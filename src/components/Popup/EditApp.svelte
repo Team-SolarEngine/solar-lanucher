@@ -8,6 +8,9 @@
     let appIconURL = $state("")
     let appPath = $state("")
     let appWorkingDirectory = $state("")
+    let appDescription = $state("")
+    let bannerURL = $state("")
+
     let submitted = $state(false)
 
     $effect(() => {
@@ -16,6 +19,8 @@
             appIconURL = editingApp.icon_url
             appPath = editingApp.execute_command
             appWorkingDirectory = editingApp.working_directory
+            appDescription = editingApp.description
+            bannerURL = editingApp.banner_url
         }
     })
 
@@ -36,6 +41,8 @@
                     name: appName,
                     icon_url: appIconURL,
                     execute_command: appPath,
+                    description: appDescription,
+                    banner_url: bannerURL,
                     working_directory: appWorkingDirectory,
                 }
             });
@@ -51,27 +58,43 @@
 
 <div class="overlay" class:active={modalEdit} onclick={close}></div>
 <dialog class="right" class:active={modalEdit}>
-  <h5>Edit Instance</h5>
+  <h5>Edit {appName} Instance</h5>
   <span></span>
 
   <div class="field label border" class:invalid={submitted && !appName}>
     <input type="text" bind:value={appName}>
-    <label>Instance Name</label>
+    <label>FNF Mod/Engine name <span style="color: red;">*</span></label>
+    <output>The FNF mod/engine name to display in the launcher.</output>
   </div>
 
   <div class="field label border">
     <input type="text" bind:value={appIconURL}>
     <label>Icon URL</label>
+    <output>Any icon your heart desires. Make sure it's 1:1.</output>
   </div>
 
   <div class="field label border" class:invalid={submitted && !appPath}>
     <input type="text" bind:value={appPath}>
-    <label>Execute Command</label>
+    <label>Execute Command <span style="color: red;">*</span></label>
+    <output>The command to execute when launching the app. eg; <code>.\Funkin.exe</code></output>
   </div>
 
   <div class="field label border" class:invalid={submitted && !appWorkingDirectory}>
     <input type="text" bind:value={appWorkingDirectory}>
-    <label>Working Directory</label>
+    <label>Working Directory <span style="color: red;">*</span></label>
+    <output>The working directory for the app. eg; <code>D:\Games\FNF\Funkin\</code></output>
+  </div>
+
+  <div class="field label border">
+    <input type="text" bind:value={appDescription}>
+    <label>Description</label>
+    <output>The description of the app to display in the launcher. eg; <code>Base game FNF V-Slice</code></output>
+  </div>
+
+  <div class="field label border">
+    <input type="text" bind:value={bannerURL}>
+    <label>Banner URL</label>
+    <output>The banner image URL for the app. Aspect ratio doesn't matter. But we reccomend 16:9</output>
   </div>
 
   <CardApp
