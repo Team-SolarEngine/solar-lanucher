@@ -1,13 +1,15 @@
 use std::process::Command;
-#[cfg(unix)]
-use std::os::unix::process::CommandExt;
+
+#[cfg(windows)]
+const CREATE_NO_WINDOW: u32 = 0x08000000;
 
 #[tauri::command]
-pub fn start_app(working_dir: String, command_exec: String, sudo: bool) -> Result<String, String> {
+pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool) -> Result<String, String> {
     #[cfg(windows)]
-    let mut cmd = if sudo {
-        let mut c = Command::new("powershell");
-        c.args(["-Command", &format!("Start-Process -FilePath '{}' -Verb RunAs", command_exec)]);
+    let mut cmd = if _open_terminal {
+        let mut c = Command::new("cmd");
+        c.args(["/C", &command_exec]);
+        c.creation_flags(CREATE_NO_WINDOW);
         c
     } else {
         let mut c = Command::new("cmd");
@@ -16,27 +18,13 @@ pub fn start_app(working_dir: String, command_exec: String, sudo: bool) -> Resul
     };
 
     #[cfg(unix)]
-    let mut cmd = if sudo {
-        let mut c = Command::new("sudo");
-        c.args(["sh", "-c", &command_exec]);
-        c
-    } else {
+    let mut cmd = {
         let mut c = Command::new("sh");
         c.args(["-c", &command_exec]);
         c
     };
 
     cmd.current_dir(&working_dir);
-
-    #[cfg(unix)]
-    if !sudo {
-        unsafe {
-            cmd.pre_exec(|| {
-                libc::setpgid(0, 0);
-                Ok(())
-            });
-        }
-    }
 
     cmd.spawn()
         .map_err(|e| format!("Failed to start app: {}", e))?;

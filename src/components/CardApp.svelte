@@ -14,12 +14,12 @@
       onEdit = () => {},
     } = $props()
 
-    async function startApp(sudo = false) {
+    async function startApp(openTerminal = false) {
         try {
             await invoke("start_app", {
                 workingDir: workingDirectory,
                 commandExec: executeCommand,
-                sudo,
+                openTerminal,
             });
         } catch (e) {
             console.error("Failed to start app:", e);
