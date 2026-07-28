@@ -8,11 +8,13 @@
         apps = [],
         onEdit = () => {},
         onDelete = () => {},
+        onSelect = () => {},
     }: {
         onOpenAdd: () => void;
         apps: any[];
         onEdit: (index: number) => void;
         onDelete: () => void;
+        onSelect: (index: number) => void;
     } = $props()
 
     let modalSettings = $state(false)
@@ -28,7 +30,7 @@
     }
 </script>
 
-<article style="height: 100%; overflow: hidden; min-width: 25rem;">
+<article style="height: 100%; overflow: hidden; min-width: 25rem; max-width: 25rem;">
     <nav style="position: sticky; top: 0; z-index: 1">
         <span>Solar Launcher</span>
         <div class="max"></div>
@@ -67,7 +69,9 @@
                     isPreview={false}
                     index={i}
                     onDeleted={onDelete}
+                    bannerUrl={app.banner_url}
                     onEdit={() => onEdit(i)}
+                    onSelect={onSelect}
                 />
             {/each}
         {:else}

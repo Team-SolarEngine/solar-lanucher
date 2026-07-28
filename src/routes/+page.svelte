@@ -16,6 +16,7 @@
     let modalEdit = $state(false);
     let editingApp = $state<AppData | null>(null);
     let editIndex = $state(-1);
+    let selectedIndex = $state(-1);
 
     async function loadApps() {
         try {
@@ -38,11 +39,20 @@
 
 <main class="main">
     <div class="_sidebarSection">
-        <Sidebar {apps} onOpenAdd={() => modalNew = true} onEdit={handleEdit} onDelete={loadApps} />
+        <Sidebar {apps} onOpenAdd={() => modalNew = true} onEdit={handleEdit} onDelete={loadApps} onSelect={(i) => selectedIndex = i} />
     </div>
 
     <div class="_mainContent">
-        <MainContent />
+        {#if selectedIndex >= 0 && apps[selectedIndex]}
+            <MainContent
+                name={apps[selectedIndex].name}
+                logoUrl={apps[selectedIndex].icon_url}
+                bannerUrl={apps[selectedIndex].banner_url}
+                description={apps[selectedIndex].description}
+            />
+        {:else}
+            <MainContent />
+        {/if}
     </div>
 </main>
 
@@ -57,6 +67,7 @@
     }
 
     ._mainContent {
+        flex: 1;
         height: 100dvh;
         overflow-y: auto;
     }

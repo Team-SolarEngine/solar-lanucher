@@ -8,16 +8,18 @@
       workingDirectory,
       isPreview,
       description,
+      bannerUrl = "",
       index = -1,
       onDeleted = () => {},
       onEdit = () => {},
+      onSelect = () => {},
     } = $props()
 </script>
 
-<article style="height: fit-content; z-index: inherit;">
-    <div class="row">
+<article style="height: fit-content; z-index: inherit; cursor: pointer;" onclick={() => onSelect(index)}>
+    <div class="row" style="white-space: normal; gap: 0.5rem;">
         <img src={iconUrl || "https://placehold.co/128x128"} alt={name} class="large square"/>
-        <div>
+        <div style="min-width: 0; flex: 1; overflow-wrap: break-word;">
             <h5>{name}</h5>
             <span class="_desc">{description}</span>
         </div>
