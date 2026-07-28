@@ -102,6 +102,8 @@
       iconUrl={appIconURL || "https://placehold.co/128x128"}
       executeCommand=""
       workingDirectory={appWorkingDirectory || "/"}
+      description={appDescription || ""}
+      bannerUrl={bannerURL || ""}
       isPreview={true}
   />
 

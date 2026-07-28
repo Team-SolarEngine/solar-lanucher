@@ -53,10 +53,10 @@
 
 <article style="height: fit-content; z-index: inherit;">
     <div class="row">
-        <img src={iconUrl} alt={name} class="large square"/>
+        <img src={iconUrl || "https://placehold.co/128x128"} alt={name} class="large square"/>
         <div>
             <h5>{name}</h5>
-            <span class="_desc">{workingDirectory}</span>
+            <span class="_desc">{description}</span>
         </div>
     </div>
 
