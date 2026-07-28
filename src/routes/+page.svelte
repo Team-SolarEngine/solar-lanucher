@@ -42,7 +42,7 @@
     </div>
 
     <div class="_mainContent">
-        <MainContent/>
+        <MainContent />
     </div>
 </main>
 

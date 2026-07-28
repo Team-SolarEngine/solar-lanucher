@@ -64,7 +64,6 @@
                     executeCommand={app.execute_command}
                     workingDirectory={app.working_directory}
                     description={app.description}
-                    bannerUrl={app.banner_url}
                     isPreview={false}
                     index={i}
                     onDeleted={onDelete}

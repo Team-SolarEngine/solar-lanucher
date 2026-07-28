@@ -103,7 +103,6 @@
       executeCommand=""
       workingDirectory={appWorkingDirectory || "/"}
       description={appDescription || ""}
-      bannerUrl={bannerURL || ""}
       isPreview={true}
   />
 
