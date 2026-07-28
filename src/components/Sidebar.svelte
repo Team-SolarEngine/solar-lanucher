@@ -1,14 +1,25 @@
 <script lang="ts">
     import Settings from "./Popup/Settings.svelte"
     import CardApp from "./CardApp.svelte";
+    import { openUrl } from "@tauri-apps/plugin-opener";
 
-    let { onOpenAdd = () => {} }: { onOpenAdd: () => void } = $props()
-
-    const listsOfOptions = [
-        {name: "Settings", icon: "settings", action: () => {openModal("settings")}},
-    ]
+    let {
+        onOpenAdd = () => {},
+        apps = [],
+        onEdit = () => {},
+        onDelete = () => {},
+    }: {
+        onOpenAdd: () => void;
+        apps: any[];
+        onEdit: (index: number) => void;
+        onDelete: () => void;
+    } = $props()
 
     let modalSettings = $state(false)
+    const listsOfOptions = [
+        {name: "Settings", icon: "settings", action: () => {openModal("settings")}},
+        {name: "Github", icon: "commit", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher")},
+    ]
 
     function openModal(modal: string) {
         if (modal === "settings") {
@@ -17,7 +28,7 @@
     }
 </script>
 
-<article style="height: 100%; overflow: hidden;">
+<article style="height: 100%; overflow: hidden; min-width: 25rem;">
     <nav style="position: sticky; top: 0; z-index: 1">
         <span>Solar Launcher</span>
         <div class="max"></div>
@@ -45,16 +56,24 @@
     </nav>
 
     <div style="z-index: 0; overflow-y: auto; height: 100dvh">
-        <CardApp
-            name="asaasdasdasdasdd"
-            iconUrl="asd"
-            executeCommand="aasdasdasdsd"
-            workingDirectory="aasdasdassd"
-            isPreview={false}
-            index={0}
-            onDeleted={() => {}}
-            onEdit={() => {}}
-        />
+        {#if apps.length > 0}
+            {#each apps as app, i}
+                <CardApp
+                    name={app.name}
+                    iconUrl={app.icon_url}
+                    executeCommand={app.execute_command}
+                    workingDirectory={app.working_directory}
+                    description={app.description}
+                    bannerUrl={app.banner_url}
+                    isPreview={false}
+                    index={i}
+                    onDeleted={onDelete}
+                    onEdit={() => onEdit(i)}
+                />
+            {/each}
+        {:else}
+            <span style="display: flex; align-items: center; justify-content: center; height: 100%;">No instances found. Maybe try adding one?</span>
+        {/if}
     </div>
 </article>
 

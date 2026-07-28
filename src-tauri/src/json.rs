@@ -8,6 +8,8 @@ pub struct App {
     pub icon_url: String,
     pub execute_command: String,
     pub working_directory: String,
+    pub description: String,
+    pub banner_url: String,
 }
 
 const APP_ID: &str = "net.solarengine.solar-launcher";

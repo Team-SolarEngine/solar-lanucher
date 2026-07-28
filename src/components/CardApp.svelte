@@ -7,6 +7,8 @@
       executeCommand,
       workingDirectory,
       isPreview,
+      description,
+      bannerUrl,
       index = -1,
       onDeleted = () => {},
       onEdit = () => {},

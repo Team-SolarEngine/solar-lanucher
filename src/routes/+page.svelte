@@ -9,7 +9,7 @@
     import EditApp from '../components/Popup/EditApp.svelte';
     import MainContent from "../components/MainContent.svelte";
 
-    type AppData = {name: string, icon_url: string, execute_command: string, working_directory: string};
+    type AppData = {name: string, icon_url: string, execute_command: string, working_directory: string, description: string, banner_url: string};
 
     let apps = $state<AppData[]>([]);
     let modalNew = $state(false);
@@ -25,7 +25,7 @@
         }
     }
 
-    function openEdit(index: number) {
+    function handleEdit(index: number) {
         editingApp = { ...apps[index] };
         editIndex = index;
         modalEdit = true;
@@ -38,7 +38,7 @@
 
 <main class="main">
     <div class="_sidebarSection">
-        <Sidebar onOpenAdd={() => modalNew = true} />
+        <Sidebar {apps} onOpenAdd={() => modalNew = true} onEdit={handleEdit} onDelete={loadApps} />
     </div>
 
     <div class="_mainContent">
