@@ -73,7 +73,7 @@
 
     {#if showPet}
         <div class="_funnylol">
-            <img class="" width="128" src={petIconUrl} alt="imposter!!"/>
+            <img width="128" src={petIconUrl} alt="imposter!!"/>
         </div>
     {/if}
 </main>
@@ -100,9 +100,9 @@
         bottom: 0;
         right: 0;
         transform: translate(-40px, -40px);
-        img {
-            animation: 1s linear spin infinite;
-        }
+        transition: opacity 0.5s;
+        img { animation: 1s linear spin infinite; }
+        &:hover { opacity: 0.5 }
     }
 
     @keyframes spin {
