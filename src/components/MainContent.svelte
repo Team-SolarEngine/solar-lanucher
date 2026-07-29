@@ -13,9 +13,11 @@
         <div style="padding: 1rem;">
             <div class="row">
                 <img src={logoUrl} alt={name} style="width: 128px; height: 128px; border-radius: 20px;" />
-                <div>
+                <div style="flex: 1; min-width: 0;">
                     <h2>{name}</h2>
-                    <span>{description}</span>
+                    <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;">
+                        {description}
+                    </span>
                 </div>
             </div>
         </div>

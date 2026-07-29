@@ -54,6 +54,10 @@
             <MainContent />
         {/if}
     </div>
+
+    <div class="_funnylol">
+        <img class="" src="images/sussy.png" alt="imposter!!"/>
+    </div>
 </main>
 
 <AddNew bind:modalNew onAppAdded={loadApps} />
@@ -70,5 +74,24 @@
         flex: 1;
         height: 100dvh;
         overflow-y: auto;
+    }
+
+    ._funnylol {
+        position: absolute;
+        scale: 0.1;
+        bottom: 0;
+        right: 0;
+        transform: translate(400%, 420%);
+        img {
+            animation: 1s linear spin infinite;
+        }
+    }
+
+    @keyframes spin {
+        from {
+            rotate: 0deg;
+        } to {
+            rotate: 360deg;
+        }
     }
 </style>
