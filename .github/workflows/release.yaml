@@ -112,10 +112,10 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ inputs.version }}
           prerelease: ${{ inputs.prerelease }}
-          title: 'Solar Launcher: ${{ inputs.version }}'
+          name: 'Solar Launcher: ${{ inputs.version }}'
           body: |
             # Solar Launcher version ${{ inputs.version }}.
             Check out the summarized updates in [CHANGELOG.md](https://github.com/SolarLauncher/solar-lanucher/blob/main/CHANGELOG.md)
@@ -124,4 +124,4 @@ jobs:
 
             ## Commits
             ${{ steps.commits.outputs.COMMITS }}
-          files: artifacts/*
+          files: artifacts/**/*
