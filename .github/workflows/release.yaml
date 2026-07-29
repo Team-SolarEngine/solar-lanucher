@@ -1,0 +1,127 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., `0.1.0-alpha.1`, `0.1.0-beta.1`, `0.1.0`.)'
+        required: true
+      prerelease:
+        description: 'Mark as prerelease?'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: ubuntu-latest
+            target: "x86_64-unknown-linux-gnu"
+          - platform: windows-latest
+            target: "x86_64-pc-windows-msvc"
+          - platform: macos-latest
+            target: "aarch64-apple-darwin"
+          - platform: macos-latest
+            target: "x86_64-apple-darwin"
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install dependencies (ubuntu)
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev libappindicator3-dev librsvg2-dev patchelf libssl-dev
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Install frontend dependencies
+        run: pnpm install
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: --target ${{ matrix.target }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: solarlauncher-${{ matrix.platform }}-${{ matrix.target || 'native' }}
+          path: |
+            src-tauri/target/*/release/bundle/**/*
+            src-tauri/target/release/bundle/**/*
+          if-no-files-found: warn
+  finalize:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+  
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+
+      - name: Generate commit list
+        id: commits
+        run: |
+          echo 'COMMITS<<EOF' >> $GITHUB_OUTPUT
+          git log --format="%h | %an | %ar | %s" --no-merges >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+
+      - name: Create Git Tag (if not exists)
+        run: |
+          git fetch --tags
+          if git rev-parse "${{ inputs.version }}" >/dev/null 2>&1; then
+            echo "Tag already exists"
+          else
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git tag -a ${{ inputs.version }} -m "Release ${{ inputs.version }}"
+            git push origin ${{ inputs.version }}
+          fi
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ inputs.version }}
+          prerelease: ${{ inputs.prerelease }}
+          title: 'Solar Launcher: ${{ inputs.version }}'
+          body: |
+            # Solar Launcher version ${{ inputs.version }}.
+            Check out the summarized updates in [CHANGELOG.md](https://github.com/SolarLauncher/solar-lanucher/blob/main/CHANGELOG.md)
+
+            ---
+
+            ## Commits
+            ${{ steps.commits.outputs.COMMITS }}
+          files: artifacts/*
