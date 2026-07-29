@@ -18,6 +18,15 @@
     let editIndex = $state(-1);
     let selectedIndex = $state(-1);
 
+    let showPet = $state(false);
+    let petIconUrl = $state("images/sussy.png");
+
+    async function loadSettings() {
+        const data = await invoke("get_keys", { collection: "settings" }) as any;
+        showPet = data?.addPet === true;
+        petIconUrl = data?.petIconUrl || "images/sussy.png";
+    }
+
     async function loadApps() {
         try {
             apps = await invoke("get_keys", { collection: "apps" });
@@ -34,6 +43,11 @@
 
     onMount(() => {
         loadApps();
+
+        // to be honest, I don't really know how to refresh
+        // every time it's been changed in ../components/Popup/Settings.svelte
+        // so this is our workaround
+        setInterval(loadSettings, 1000);
     });
 </script>
 
@@ -57,9 +71,11 @@
         {/if}
     </div>
 
-    <div class="_funnylol">
-        <img class="" src="images/sussy.png" alt="imposter!!"/>
-    </div>
+    {#if showPet}
+        <div class="_funnylol">
+            <img class="" width="128" src={petIconUrl} alt="imposter!!"/>
+        </div>
+    {/if}
 </main>
 
 <AddNew bind:modalNew onAppAdded={loadApps} />
@@ -80,10 +96,10 @@
 
     ._funnylol {
         position: absolute;
-        scale: 0.1;
+        scale: 1;
         bottom: 0;
         right: 0;
-        transform: translate(400%, 420%);
+        transform: translate(-40px, -40px);
         img {
             animation: 1s linear spin infinite;
         }
