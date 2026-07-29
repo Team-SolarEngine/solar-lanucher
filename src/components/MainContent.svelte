@@ -1,5 +1,7 @@
 <script lang="ts">
     import StartExtra from "./StartExtra.svelte";
+    import { marked } from "marked";
+    import { invoke } from "@tauri-apps/api/core";
 
     let {
         bannerUrl = "",
@@ -9,6 +11,23 @@
         executeCommand,
         workingDirectory,
     } = $props();
+
+    let readme = $state("");
+    let changelog = $state("");
+    async function loadMarkdowns() {
+        try {
+            readme = await invoke("get_markdown", { path: `${workingDirectory}/README.md` });
+            changelog = await invoke("get_markdown", { path: `${workingDirectory}/Changelog.md` });
+        } catch (e) {
+            console.error("Failed to load markdowns:", e);
+            readme = "";
+            changelog = "";
+        }
+    }
+
+    $effect(() => {
+        loadMarkdowns();
+    });
 </script>
 
 {#if name}
@@ -33,6 +52,27 @@
                 stretch={true}
             />
         </div>
+
+        {#if readme && changelog}
+            <div style="display: flex; gap: 0.5rem;">
+                <span style="display: none;">fixes the first child being taller yeah yeah whatever</span>
+                {#if readme}
+                    <article style="flex: 1;">
+                        <h6 style="font-weight: bold;">README.md</h6>
+                        <hr class="medium" />
+                        {@html marked(readme)}
+                    </article>
+                {/if}
+
+                {#if changelog}
+                    <article style="flex: 1;">
+                        <h6 style="font-weight: bold;">Changelog.md</h6>
+                        <hr class="medium" />
+                        {@html marked(changelog)}
+                    </article>
+                {/if}
+            </div>
+        {/if}
     </main>
 {:else}
     <div style="text-align: center; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">

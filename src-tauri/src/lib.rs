@@ -18,6 +18,7 @@ pub fn run() {
             json::delete_key,
             apps::start_app,
             apps::open_folder,
+            apps::get_markdown,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -60,3 +60,10 @@ pub fn open_folder(path: String) -> Result<String, String> {
 
     Ok("Folder opened".to_string())
 }
+
+#[tauri::command]
+pub fn get_markdown(path: String) -> Result<String, String> {
+    let content = std::fs::read_to_string(&path)
+        .map_err(|e| format!("Failed to read markdown file: {}", e))?;
+    Ok(content)
+}
