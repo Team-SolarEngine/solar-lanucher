@@ -1,9 +1,13 @@
 <script lang="ts">
+    import StartExtra from "./StartExtra.svelte";
+
     let {
         bannerUrl = "",
         logoUrl = "",
         description = "",
         name = "",
+        executeCommand,
+        workingDirectory,
     } = $props();
 </script>
 
@@ -20,6 +24,14 @@
                     </span>
                 </div>
             </div>
+        </div>
+
+        <div style="display: flex; justify-content: center;">
+            <StartExtra
+                workingDirectory={workingDirectory}
+                executeCommand={executeCommand}
+                stretch={true}
+            />
         </div>
     </main>
 {:else}

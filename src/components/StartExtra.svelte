@@ -7,13 +7,14 @@
         onDeleted = () => {},
         onEdit = () => {},
         index = -1,
+        stretch = false,
     } = $props();
 
     let extraFunctionalities = $derived([
         { name: "Open in Terminal", icon: "terminal", action: () => startApp(true) },
         { name: "Edit", icon: "edit", action: () => onEdit(index) },
+        { name: "Open Folder", icon: "folder", action: openFolder, extra: "right-round" },
         { name: "Delete", icon: "delete", action: deleteApp },
-        { name: "Open Folder", icon: "folder", action: openFolder },
     ])
 
     async function startApp(openTerminal = false) {
@@ -51,16 +52,27 @@
       <i>play_arrow</i>
       <span>Start</span>
     </button>
-    <div>
-        <button class="border right-round square">
-          <i>keyboard_arrow_down</i>
-        </button>
-        <menu class="no-wrap">
-            {#each extraFunctionalities as functionality}
-              <li onclick={functionality.action}>
-                  <i>{functionality.icon}</i> {functionality.name}
-              </li>
-            {/each}
-        </menu>
-    </div>
+    {#if !stretch}
+        <div>
+            <button class="border right-round square">
+            <i>keyboard_arrow_down</i>
+            </button>
+            <menu class="no-wrap">
+                {#each extraFunctionalities as functionality}
+                <li onclick={functionality.action}>
+                    <i>{functionality.icon}</i> {functionality.name}
+                </li>
+                {/each}
+            </menu>
+        </div>
+    {:else}
+        {#each extraFunctionalities as functionality}
+            {#if functionality.name != "Delete" && functionality.name != "Edit"}
+                <button class="border no-round {functionality.extra}" onclick={functionality.action}>
+                    <i>{functionality.icon}</i>
+                    <span>{functionality.name}</span>
+                </button>
+            {/if}
+        {/each}
+    {/if}
 </nav>

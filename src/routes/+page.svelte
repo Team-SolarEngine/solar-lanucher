@@ -49,6 +49,8 @@
                 logoUrl={apps[selectedIndex].icon_url}
                 bannerUrl={apps[selectedIndex].banner_url}
                 description={apps[selectedIndex].description}
+                workingDirectory={apps[selectedIndex].working_directory}
+                executeCommand={apps[selectedIndex].execute_command}
             />
         {:else}
             <MainContent />
