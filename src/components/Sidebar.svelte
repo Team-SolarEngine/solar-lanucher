@@ -53,7 +53,7 @@
         <div>
             <button onclick={onOpenAdd} oncontextmenu={() => openUrl("https://solarengine.net/shares")}>
                 <i>add</i>
-                <span class="tooltip right">
+                <span class="tooltip left">
                     Left click to add a new app<br>
                     Right click to open the Solar Engine share page
                 </span>

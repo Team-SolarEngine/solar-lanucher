@@ -12,11 +12,11 @@ pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool
     let mut cmd = if _open_terminal {
         let mut c = Command::new("cmd");
         c.args(["/C", &command_exec]);
-        c.creation_flags(CREATE_NO_WINDOW);
         c
     } else {
         let mut c = Command::new("cmd");
         c.args(["/C", &command_exec]);
+        c.creation_flags(CREATE_NO_WINDOW);
         c
     };
 
