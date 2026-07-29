@@ -35,9 +35,10 @@
         if (!appName || !appPath || !appWorkingDirectory) return;
 
         try {
-            await invoke("update_app", {
-                index: editIndex,
-                app: {
+            await invoke("update_key", {
+                collection: "apps",
+                key: editIndex,
+                value: {
                     name: appName,
                     icon_url: appIconURL,
                     execute_command: appPath,

@@ -20,7 +20,7 @@
 
     async function loadApps() {
         try {
-            apps = await invoke("get_apps");
+            apps = await invoke("get_keys", { collection: "apps" });
         } catch (e) {
             console.error("Failed to load apps:", e);
         }

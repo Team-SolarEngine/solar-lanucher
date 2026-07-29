@@ -1,70 +1,97 @@
-use serde::{Deserialize, Serialize};
+use serde_json::Value;
 use std::fs;
 use std::path::PathBuf;
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct App {
-    pub name: String,
-    pub icon_url: String,
-    pub execute_command: String,
-    pub working_directory: String,
-    pub description: String,
-    pub banner_url: String,
-}
-
 const APP_ID: &str = "net.solarengine.solar-launcher";
 
-fn get_apps_path() -> PathBuf {
+fn get_data_path() -> PathBuf {
     let config_dir = dirs::config_dir().expect("Could not determine config directory");
     let app_dir = config_dir.join(APP_ID);
     fs::create_dir_all(&app_dir).ok();
-    app_dir.join("apps.json")
+    app_dir.join("data.json")
 }
 
-fn read_apps() -> Vec<App> {
-    let path = get_apps_path();
+fn read_all() -> Value {
+    let path = get_data_path();
     if !path.exists() {
-        return Vec::new();
+        return Value::Object(serde_json::Map::new());
     }
-    let data = fs::read_to_string(&path).unwrap_or_else(|_| "[]".to_string());
-    serde_json::from_str(&data).unwrap_or_default()
+    let data = fs::read_to_string(&path).unwrap_or_else(|_| "{}".to_string());
+    serde_json::from_str(&data).unwrap_or(Value::Object(serde_json::Map::new()))
 }
 
-fn write_apps(apps: &[App]) {
-    let path = get_apps_path();
-    let json = serde_json::to_string_pretty(apps).unwrap();
-    fs::write(&path, json).expect("Failed to write apps.json");
-}
-
-#[tauri::command]
-pub fn get_apps() -> Vec<App> {
-    read_apps()
+fn write_all(data: &Value) {
+    let path = get_data_path();
+    let json = serde_json::to_string_pretty(data).unwrap();
+    fs::write(&path, json).expect("Failed to write data.json");
 }
 
 #[tauri::command]
-pub fn add_app(app: App) -> Vec<App> {
-    let mut apps = read_apps();
-    apps.push(app);
-    write_apps(&apps);
-    apps
+pub fn get_keys(collection: String) -> Value {
+    let data = read_all();
+    data.get(&collection).cloned().unwrap_or(Value::Null)
 }
 
 #[tauri::command]
-pub fn delete_app(index: usize) -> Vec<App> {
-    let mut apps = read_apps();
-    if index < apps.len() {
-        apps.remove(index);
-        write_apps(&apps);
+pub fn add_key(collection: String, value: Value) -> Value {
+    let mut data = read_all();
+    let entry = data.get_mut(&collection);
+    match entry {
+        Some(Value::Array(arr)) => {
+            arr.push(value);
+        }
+        _ => {
+            data.as_object_mut()
+                .unwrap()
+                .insert(collection.clone(), Value::Array(vec![value]));
+        }
     }
-    apps
+    write_all(&data);
+    data.get(&collection).cloned().unwrap_or(Value::Null)
 }
 
 #[tauri::command]
-pub fn update_app(index: usize, app: App) -> Vec<App> {
-    let mut apps = read_apps();
-    if index < apps.len() {
-        apps[index] = app;
-        write_apps(&apps);
+pub fn update_key(collection: String, key: Value, value: Value) -> Value {
+    let mut data = read_all();
+    match data.get_mut(&collection) {
+        Some(Value::Array(arr)) => {
+            if let Some(idx) = key.as_u64() {
+                let i = idx as usize;
+                if i < arr.len() {
+                    arr[i] = value;
+                }
+            }
+        }
+        Some(Value::Object(obj)) => {
+            if let Some(k) = key.as_str() {
+                obj.insert(k.to_string(), value);
+            }
+        }
+        _ => {}
     }
-    apps
+    write_all(&data);
+    data.get(&collection).cloned().unwrap_or(Value::Null)
+}
+
+#[tauri::command]
+pub fn delete_key(collection: String, key: Value) -> Value {
+    let mut data = read_all();
+    match data.get_mut(&collection) {
+        Some(Value::Array(arr)) => {
+            if let Some(idx) = key.as_u64() {
+                let i = idx as usize;
+                if i < arr.len() {
+                    arr.remove(i);
+                }
+            }
+        }
+        Some(Value::Object(obj)) => {
+            if let Some(k) = key.as_str() {
+                obj.remove(k);
+            }
+        }
+        _ => {}
+    }
+    write_all(&data);
+    data.get(&collection).cloned().unwrap_or(Value::Null)
 }

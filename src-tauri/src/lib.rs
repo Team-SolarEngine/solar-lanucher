@@ -12,10 +12,10 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             greet,
-            json::get_apps,
-            json::add_app,
-            json::delete_app,
-            json::update_app,
+            json::get_keys,
+            json::add_key,
+            json::update_key,
+            json::delete_key,
             apps::start_app,
             apps::open_folder,
         ])

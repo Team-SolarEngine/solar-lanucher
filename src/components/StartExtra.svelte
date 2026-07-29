@@ -39,7 +39,7 @@
 
     async function deleteApp() {
         try {
-            await invoke("delete_app", { index });
+            await invoke("delete_key", { collection: "apps", key: index });
             onDeleted();
         } catch (e) {
             console.error("Failed to delete app:", e);

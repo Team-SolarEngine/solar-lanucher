@@ -31,8 +31,9 @@
         if (!appName || !appPath || !appWorkingDirectory) return;
 
         try {
-            await invoke("add_app", {
-                app: {
+            await invoke("add_key", {
+                collection: "apps",
+                value: {
                     name: appName,
                     icon_url: appIconURL,
                     execute_command: appPath,
