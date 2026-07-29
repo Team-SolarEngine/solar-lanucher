@@ -30,7 +30,7 @@
     }
 </script>
 
-<article style="height: 100%; overflow: hidden; min-width: 25rem; max-width: 25rem;">
+<article style="height: 100%; overflow-y: hidden; min-width: 25rem; max-width: 25rem;">
     <nav style="position: sticky; top: 0; z-index: 1">
         <span>Solar Launcher</span>
         <div class="max"></div>
@@ -51,8 +51,12 @@
         </div>
 
         <div>
-            <button onclick={onOpenAdd}>
+            <button onclick={onOpenAdd} oncontextmenu={() => openUrl("https://solarengine.net/shares")}>
                 <i>add</i>
+                <span class="tooltip right">
+                    Left click to add a new app<br>
+                    Right click to open the Solar Engine share page
+                </span>
             </button>
         </div>
     </nav>
