@@ -2,13 +2,16 @@
     import { invoke } from "@tauri-apps/api/core";
 
     let { modalSettings = $bindable() } = $props()
+    let settings = $state({} as any)
 
-    let addPet = $state(false)
-    let petIconUrl = $state("")
+    const settingFields = [
+        { title: "Add Pet", key: "addPet", desc: "Have sussy amogus on the bottom right!\nKeeps you company.", type: "toggle", default: false },
+        { title: "Pet Icon URL", key: "petIconUrl", desc: "Don't like sussy amogus? Use a URL to a custom icon!", type: "text", default: "" },
+    ]
 
     async function loadSetting(key: string) {
         const data = await invoke("get_keys", { collection: "settings" }) as any;
-        return data?.[key] ?? "";
+        return data?.[key];
     }
 
     async function saveSetting(key: string, value: string | boolean) {
@@ -21,8 +24,12 @@
 
     $effect(() => {
         if (modalSettings) {
-            loadSetting("addPet").then(v => addPet = v === true || v === "true");
-            loadSetting("petIconUrl").then(v => petIconUrl = v);
+            for (const field of settingFields) {
+                loadSetting(field.key).then(v => {
+                    if (field.type === "toggle") settings[field.key] = v === true || v === "true";
+                    else settings[field.key] = v ?? field.default;
+                });
+            }
         }
     })
 </script>
@@ -31,26 +38,36 @@
 <dialog class="right" class:active={modalSettings}>
     <h5>Settings</h5>
 
-    <div class="field middle-align">
-        <nav>
-            <div class="max">
-                <h6>Funny little pet</h6>
-                <div>Have sussy amogus on the bottom right!<br/>Keeps you company.</div>
+    {#each settingFields as field}
+        {#if field.type === "toggle"}
+            <div class="field middle-align">
+                <nav>
+                    <div class="max">
+                        <h6>{field.title}</h6>
+                        {#if field.desc}
+                            <div>{@html field.desc.replace(/\n/g, "<br/>")}</div>
+                        {/if}
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked={settings[field.key]} onchange={() => { settings[field.key] = !settings[field.key]; saveSetting(field.key, settings[field.key]); }}>
+                        <span></span>
+                    </label>
+                </nav>
             </div>
-            <label class="switch">
-                <input type="checkbox" checked={addPet} onchange={() => { addPet = !addPet; saveSetting("addPet", addPet); }}>
-                <span></span>
-            </label>
-        </nav>
-    </div>
+        {:else if field.type === "text"}
+            <div class="field label border">
+                <input type="text" bind:value={settings[field.key]} onchange={() => saveSetting(field.key, settings[field.key])}>
+                <label>{field.title}</label>
+                {#if field.desc}
+                    <output>{field.desc}</output>
+                {/if}
+            </div>
+        {/if}
 
-    <hr class="medium"/>
-
-    <div class="field label border">
-        <input type="text" bind:value={petIconUrl} onchange={() => saveSetting("petIconUrl", petIconUrl)}>
-        <label>Pet icon URL</label>
-        <output>Don't like sussy amogus? Use a URL to a custom icon!</output>
-    </div>
+        {#if field !== settingFields[settingFields.length - 1]}
+            <hr class="medium"/>
+        {/if}
+    {/each}
 
     <nav class="right-align no-space">
         <button class="transparent link" onclick={() => modalSettings = false}>Close</button>
