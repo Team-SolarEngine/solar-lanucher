@@ -21,14 +21,22 @@ pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool
     };
 
     #[cfg(unix)]
-    let mut cmd = {
+    let mut cmd = if !_open_terminal {
         let mut c = Command::new("sh");
         c.args(["-c", &command_exec]);
         c
+    } else {
+        for &emulator in &["alacritty", "gnome-terminal", "xfce4-terminal", "terminator", "foot", "konsole", "kitty"] {
+            let mut c = Command::new(emulator);
+            c.args(["-e", &command_exec]).current_dir(&working_dir);
+            if c.spawn().is_ok() {
+                return Ok("App started".to_string());
+            }
+        }
+        return Err("No terminal emulator found".to_string());
     };
 
     cmd.current_dir(&working_dir);
-
     cmd.spawn()
         .map_err(|e| format!("Failed to start app: {}", e))?;
 
