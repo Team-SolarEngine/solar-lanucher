@@ -87,7 +87,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: artifacts/
-          merge-multiple: true
 
       - name: Create Git Tag (if not exists)
         run: |
@@ -113,13 +112,22 @@ jobs:
             Check out the summarized updates in [CHANGELOG.md](https://github.com/SolarLauncher/solar-lanucher/blob/main/CHANGELOG.md)
 
             ## Depending on your platform, download the appropriate file below.
-            | Platform                                              | Architecture  |                          Filename                           |
-            |-------------------------------------------------------|---------------|-------------------------------------------------------------|
-            | solarlauncher-macos-latest-aarch64-apple-darwin       | Apple Silicon | solarlauncher-macos-latest-aarch64-apple-darwin.tar.gz      |
-            | solarlauncher-macos-latest-x86_64-apple-darwin        |     Intel     | solarlauncher-macos-latest-x86_64-apple-darwin.tar.gz       |
-            | solarlauncher-ubuntu-latest-x86_64-unknown-linux-gnu  |     Intel     | solarlauncher-ubuntu-latest-x86_64-unknown-linux-gnu.tar.gz |
-            | solarlauncher-windows-latest-x86_64-pc-windows-msvc   |     Intel     | solarlauncher-windows-latest-x86_64-pc-windows-msvc.tar.gz  |
+            | Platform                                              | Architecture  |        Filename       |
+            |-------------------------------------------------------|---------------|-----------------------|
+            | solarlauncher-macos-latest-aarch64-apple-darwin       | Apple Silicon | .dmg                  |
+            | solarlauncher-macos-latest-x86_64-apple-darwin        | Intel         | .dmg                  |
+            | solarlauncher-ubuntu-latest-x86_64-unknown-linux-gnu  | Intel         | .deb, .AppImage, .rpm |
+            | solarlauncher-windows-latest-x86_64-pc-windows-msvc   | Intel         | .msi, .exe            |
+
+            Optionally, you can also download the .tar.gz file for manual installation.
 
             ## If you need help...
             Please file a [Github Issue here](https://github.com/Team-SolarEngine/solar-lanucher/issues) or join our [Discord server](https://discord.gg/RaHmP5fgyA). Please do not resist to talk to us, we're available to help you with the problems you're having. Any type of help can improve what we can make in the future!
-          files: artifacts/*
+          files: |
+            artifacts/**/*.tar.gz
+            artifacts/**/*.AppImage
+            artifacts/**/*.deb
+            artifacts/**/*.dmg
+            artifacts/**/*.msi
+            artifacts/**/*.exe
+            artifacts/**/*.rpm
