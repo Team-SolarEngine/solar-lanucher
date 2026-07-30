@@ -15,14 +15,10 @@
     let readme = $state("");
     let changelog = $state("");
     async function loadMarkdowns() {
-        try {
-            readme = await invoke("get_markdown", { path: `${workingDirectory}/README.md` });
-            changelog = await invoke("get_markdown", { path: `${workingDirectory}/Changelog.md` });
-        } catch (e) {
-            console.error("Failed to load markdowns:", e);
-            readme = "";
-            changelog = "";
-        }
+        try { readme = await invoke("get_markdown", { path: `${workingDirectory}/README.md` }); }
+        catch { readme = ""; }
+        try { changelog = await invoke("get_markdown", { path: `${workingDirectory}/Changelog.md` }); }
+        catch { changelog = ""; }
     }
 
     $effect(() => {
@@ -53,7 +49,7 @@
             />
         </div>
 
-        {#if readme && changelog}
+        {#if readme || changelog}
             <div style="display: flex; gap: 0.5rem;">
                 <span style="display: none;">fixes the first child being taller yeah yeah whatever</span>
                 {#if readme}
