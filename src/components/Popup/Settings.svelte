@@ -1,5 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
+    import Version from "../Misc/Version.svelte";
 
     let { modalSettings = $bindable() } = $props()
     let settings = $state({} as any)
@@ -68,6 +69,9 @@
             <hr class="medium"/>
         {/if}
     {/each}
+
+    <hr class="medium"/>
+    <Version />
 
     <nav class="right-align no-space">
         <button class="transparent link" onclick={() => modalSettings = false}>Close</button>

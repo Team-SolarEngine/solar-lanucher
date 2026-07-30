@@ -71,7 +71,9 @@ pub fn update_key(collection: String, key: Value, value: Value) -> Value {
             if let Some(k) = key.as_str() {
                 let mut map = serde_json::Map::new();
                 map.insert(k.to_string(), value);
-                data.as_object_mut().unwrap().insert(collection.clone(), Value::Object(map));
+                data.as_object_mut()
+                    .unwrap()
+                    .insert(collection.clone(), Value::Object(map));
             }
         }
     }

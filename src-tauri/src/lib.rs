@@ -6,6 +6,11 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
+#[tauri::command]
+fn get_current_ver(app: tauri::AppHandle) -> String {
+    app.package_info().version.to_string()
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -19,6 +24,7 @@ pub fn run() {
             apps::start_app,
             apps::open_folder,
             apps::get_markdown,
+            get_current_ver,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
