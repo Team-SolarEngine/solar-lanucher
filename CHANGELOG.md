@@ -1,5 +1,14 @@
 # Solar Launcher Changelog
 
+## 0.1.1
+
+### Added
+- Version checker to check your version against the latest tag release.
+
+### Fixed
+- Last class of CardApp goes up instead of down
+- Fix z-index StartExtra goes below CardApp
+
 ## 0.1.0
 Initial release
 
