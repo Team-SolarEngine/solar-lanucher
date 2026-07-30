@@ -65,8 +65,6 @@ jobs:
 
       - name: Build Tauri app
         uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: --target ${{ matrix.target }}
 
@@ -89,6 +87,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: artifacts/
+          merge-multiple: true
 
       - name: Create Git Tag (if not exists)
         run: |
@@ -123,4 +122,4 @@ jobs:
 
             ## If you need help...
             Please file a [Github Issue here](https://github.com/Team-SolarEngine/solar-lanucher/issues) or join our [Discord server](https://discord.gg/RaHmP5fgyA). Please do not resist to talk to us, we're available to help you with the problems you're having. Any type of help can improve what we can make in the future!
-          files: artifacts/**/*
+          files: artifacts/*

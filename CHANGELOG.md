@@ -6,7 +6,7 @@
 - Version checker to check your version against the latest tag release.
 
 ### Fixed
-- Last class of CardApp goes up instead of down
+- Last child of CardApp menu goes up instead of down
 - Fix z-index StartExtra goes below CardApp
 
 ## 0.1.0
