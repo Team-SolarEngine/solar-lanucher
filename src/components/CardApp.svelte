@@ -10,6 +10,7 @@
       description,
       bannerUrl = "",
       index = -1,
+      isLast = false,
       onDeleted = () => {},
       onEdit = () => {},
       onSelect = () => {},
@@ -32,6 +33,7 @@
             onDeleted={onDeleted}
             onEdit={onEdit}
             index={index}
+            isLast={isLast}
         />
     {/if}
 </article>

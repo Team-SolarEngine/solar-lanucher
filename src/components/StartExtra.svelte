@@ -7,6 +7,7 @@
         onDeleted = () => {},
         onEdit = () => {},
         index = -1,
+        isLast = false,
         stretch = false,
     } = $props();
 
@@ -55,9 +56,13 @@
     {#if !stretch}
         <div>
             <button class="border right-round square">
-            <i>keyboard_arrow_down</i>
+                {#if isLast}
+                    <i>keyboard_arrow_up</i>
+                {:else}
+                    <i>keyboard_arrow_down</i>
+                {/if}
             </button>
-            <menu class="no-wrap">
+            <menu class="no-wrap" class:top={isLast}>
                 {#each extraFunctionalities as functionality}
                 <li onclick={functionality.action}>
                     <i>{functionality.icon}</i> {functionality.name}

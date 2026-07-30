@@ -72,6 +72,7 @@
                     description={app.description}
                     isPreview={false}
                     index={i}
+                    isLast={i === apps.length - 1 && apps.length > 1}
                     onDeleted={onDelete}
                     bannerUrl={app.banner_url}
                     onEdit={() => onEdit(i)}
