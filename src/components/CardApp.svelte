@@ -16,7 +16,7 @@
     } = $props()
 </script>
 
-<article style="height: fit-content; z-index: inherit; cursor: pointer;" onclick={() => onSelect(index)}>
+<article style="height: fit-content; cursor: pointer;" onclick={() => onSelect(index)}>
     <div class="row" style="white-space: normal; gap: 0.5rem;">
         <img src={iconUrl || "https://placehold.co/128x128"} alt={name} class="large square"/>
         <div style="min-width: 0; flex: 1; overflow-wrap: break-word;">
