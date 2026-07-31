@@ -1,8 +1,10 @@
 # Solar Launcher
-A fork of [AppShortsies](https://github.com/daveberrys/appshortsies) made for Solar Engine, Solar Website, and FNF exectuables because we're not only restricting it to only solar engine.
+A fork of [AppShortsies](https://github.com/daveberrys/appshortsies) made for Solar Engine, Solar Website, and FNF exectuables because we're not only restricting it to only solar engine. Available for **Windows**, **macOS**, and **Linux**.
+
+![Solar Launcher](./.github/readme/preview.png)
 
 ## Development Phase
-Check out our [discord server](https://discord.com/channels/1354112944442704013/1531292722743349379) for our development updates. Every commit or every development phase will be there, (almost) every time we make a change.
+Check out our [discord server](https://discord.gg/RaHmP5fgyA) for our development updates. Every commit or every development phase will be there, (almost) every time we make a change.
 
 ## Downloads
 You can get the **latest stable version** of Solar Launcher [here](https://github.com/solar-engine/solar-launcher/releases).
