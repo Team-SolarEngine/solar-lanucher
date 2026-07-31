@@ -71,7 +71,7 @@
   <div class="field label border">
     <input type="text" bind:value={appIconURL}>
     <label>Icon URL</label>
-    <output>Any icon your heart desires. Make sure it's 1:1.</output>
+    <output>Any icon your heart desires. Make sure it's 1:1. It can be URL or Path.</output>
   </div>
 
   <div class="field label border" class:invalid={submitted && !appPath}>
@@ -83,7 +83,7 @@
   <div class="field label border" class:invalid={submitted && !appWorkingDirectory}>
     <input type="text" bind:value={appWorkingDirectory}>
     <label>Working Directory <span style="color: red;">*</span></label>
-    <output>The working directory for the app. eg; <code>D:\Games\FNF\Funkin\</code></output>
+    <output>The working directory for the app. eg; <code>D:\Games\FNF\Funkin</code></output>
   </div>
 
   <div class="field label border">
@@ -95,7 +95,7 @@
   <div class="field label border">
     <input type="text" bind:value={bannerURL}>
     <label>Banner URL</label>
-    <output>The banner image URL for the app. Aspect ratio doesn't matter. But we reccomend 16:9</output>
+    <output>The banner image URL or Path for the app. Aspect ratio doesn't matter. But we reccomend 16:9.</output>
   </div>
 
   <CardApp

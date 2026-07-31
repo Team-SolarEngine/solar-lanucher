@@ -85,7 +85,7 @@
   <div class="field label border" class:invalid={submitted && !appWorkingDirectory}>
     <input type="text" bind:value={appWorkingDirectory}>
     <label>Working Directory <span style="color: red;">*</span></label>
-    <output>The working directory for the app. eg; <code>D:\Games\FNF\Funkin\</code></output>
+    <output>The working directory for the app. eg; <code>D:\Games\FNF\Funkin</code></output>
   </div>
 
   <div class="field label border">
