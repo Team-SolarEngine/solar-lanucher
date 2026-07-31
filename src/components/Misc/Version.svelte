@@ -24,9 +24,10 @@
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
     {#if version == latest}
         <span>Your version is; {version}, <span style="color: green">which is up to date!</span></span>
-        <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>Open releases</button>
-    {:else}
+    {:else if version != latest}
         <span>Your version is; {version}, <span style="color: red">which is not up to date...</span></span>
-        <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>Open releases</button>
+    {:else}
+        <span>Loading version...</span>
     {/if}
+    <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>Open releases</button>
 </div>
