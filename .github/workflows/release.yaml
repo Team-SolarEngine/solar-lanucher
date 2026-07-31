@@ -109,7 +109,7 @@ jobs:
           name: 'Solar Launcher: ${{ inputs.version }}'
           body: |
             # Solar Launcher version ${{ inputs.version }}.
-            Check out the summarized updates in [CHANGELOG.md](https://github.com/SolarLauncher/solar-lanucher/blob/main/CHANGELOG.md)
+            Check out the summarized updates in [CHANGELOG.md](https://github.com/Team-SolarEngine/solar-lanucher/blob/main/CHANGELOG.md).
 
             ## Depending on your platform, download the appropriate file below.
             | Platform                                              | Architecture  |        Filename       |
