@@ -1,5 +1,14 @@
 # Solar Launcher Changelog
 
+## 0.2.0
+
+### Added
+- Local icon, banner and pet via path instead of using URLs
+- Unix `Open in Terminal` now actually functions with specific supported terminal
+
+### Fixes
+- README.md and Changelog.md is now dependent. When one is missing and the other is present, only the present one is rendered.
+
 ## 0.1.1
 
 ### Added
