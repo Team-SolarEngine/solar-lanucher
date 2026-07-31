@@ -5,3 +5,5 @@ export function imageSrc(path: string): string {
     if (path.startsWith("http://") || path.startsWith("https://")) return path;
     return convertFileSrc(path);
 }
+
+export default imageSrc;

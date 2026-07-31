@@ -1,6 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
-    import { imageSrc } from "../lib/imageSrc";
+    import imageSrc from "../lib/imageSrc";
     import { onMount } from "svelte";
     import "beercss";
     import "material-dynamic-colors";
