@@ -23,7 +23,7 @@ pub fn run() {
             json::delete_key,
             apps::start_app,
             apps::open_folder,
-            apps::get_markdown,
+            apps::get_file_content,
             get_current_ver,
         ])
         .run(tauri::generate_context!())

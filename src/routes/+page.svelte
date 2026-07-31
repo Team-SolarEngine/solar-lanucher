@@ -1,5 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
+    import { imageSrc } from "../lib/imageSrc";
     import { onMount } from "svelte";
     import "beercss";
     import "material-dynamic-colors";
@@ -73,7 +74,7 @@
 
     {#if showPet}
         <div class="_funnylol">
-            <img width="128" src={petIconUrl} alt="imposter!!"/>
+            <img width="128" src={imageSrc(petIconUrl)} alt="imposter!!"/>
         </div>
     {/if}
 </main>

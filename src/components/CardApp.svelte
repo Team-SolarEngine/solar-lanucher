@@ -1,5 +1,6 @@
 <script lang="ts">
     import StartExtra from "./StartExtra.svelte";
+    import { imageSrc } from "../lib/imageSrc";
 
     let {
       name,
@@ -19,7 +20,7 @@
 
 <article style="height: fit-content; cursor: pointer;" onclick={() => onSelect(index)}>
     <div class="row" style="white-space: normal; gap: 0.5rem;">
-        <img src={iconUrl || "https://placehold.co/128x128"} alt={name} class="large square"/>
+        <img src={imageSrc(iconUrl) || "https://placehold.co/128x128"} alt={name} class="large square"/>
         <div style="min-width: 0; flex: 1; overflow-wrap: break-word;">
             <h5>{name}</h5>
             <span class="_desc">{description}</span>

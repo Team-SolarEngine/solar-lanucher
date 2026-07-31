@@ -7,7 +7,7 @@
 
     const settingFields = [
         { title: "Add Pet", key: "addPet", desc: "Have sussy amogus on the bottom right!\nKeeps you company.", type: "toggle", default: false },
-        { title: "Pet Icon URL", key: "petIconUrl", desc: "Don't like sussy amogus? Use a URL to a custom icon!", type: "text", default: "" },
+        { title: "Pet Icon URL", key: "petIconUrl", desc: "Don't like sussy amogus? Use a URL or Path to a custom icon!", type: "text", default: "" },
     ]
 
     async function loadSetting(key: string) {

@@ -2,6 +2,7 @@
     import StartExtra from "./StartExtra.svelte";
     import { marked } from "marked";
     import { invoke } from "@tauri-apps/api/core";
+    import { imageSrc } from "../lib/imageSrc";
 
     let {
         bannerUrl = "",
@@ -15,9 +16,9 @@
     let readme = $state("");
     let changelog = $state("");
     async function loadMarkdowns() {
-        try { readme = await invoke("get_markdown", { path: `${workingDirectory}/README.md` }); }
+        try { readme = await invoke("get_file_content", { path: `${workingDirectory}/README.md` }); }
         catch { readme = ""; }
-        try { changelog = await invoke("get_markdown", { path: `${workingDirectory}/Changelog.md` }); }
+        try { changelog = await invoke("get_file_content", { path: `${workingDirectory}/Changelog.md` }); }
         catch { changelog = ""; }
     }
 
@@ -28,10 +29,10 @@
 
 {#if name}
     <main style="height: 100dvh; width: 100%;">
-        <img src={bannerUrl} alt={name} style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px;" />
+        <img src={imageSrc(bannerUrl)} alt={name} style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px;" />
         <div style="padding: 1rem;">
             <div class="row">
-                <img src={logoUrl} alt={name} style="width: 128px; height: 128px; border-radius: 20px;" />
+                <img src={imageSrc(logoUrl)} alt={name} style="width: 128px; height: 128px; border-radius: 20px;" />
                 <div style="flex: 1; min-width: 0;">
                     <h2>{name}</h2>
                     <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;">
