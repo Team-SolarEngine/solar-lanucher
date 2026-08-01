@@ -15,8 +15,8 @@ importers:
         specifier: ^2
         version: 2.5.4
       beercss:
-        specifier: ^4.0.23
-        version: 4.0.23
+        specifier: ^5.0.1
+        version: 5.0.1
       marked:
         specifier: ^18.0.7
         version: 18.0.7
@@ -519,8 +519,8 @@ packages:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
     engines: {node: '>= 0.4'}
 
-  beercss@4.0.23:
-    resolution: {integrity: sha512-NFG3ZP1zmLkSGrA22GjvR/bftvzzxffhoTxEZz6uRvKZHJSRaH5mKQ4yY6bLdD76cQ3oZHX8ci6SDbjXsIsz3g==}
+  beercss@5.0.1:
+    resolution: {integrity: sha512-Z6/a+1osE8KGIPT0r6ibaEPXhhFH3cm1Or7AAqcJhi5whQP7dC1Pv0jkh5Ah4fy6nnwVExtwAaRv1ShmJTE8Nw==}
 
   chokidar@4.0.3:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
@@ -1026,7 +1026,7 @@ snapshots:
 
   axobject-query@4.1.0: {}
 
-  beercss@4.0.23:
+  beercss@5.0.1:
     dependencies:
       material-dynamic-colors: 1.1.4
 

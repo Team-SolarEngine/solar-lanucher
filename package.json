@@ -15,7 +15,7 @@
   "dependencies": {
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-opener": "^2",
-    "beercss": "^4.0.23",
+    "beercss": "^5.0.1",
     "marked": "^18.0.7",
     "material-dynamic-colors": "^1.1.4"
   },
