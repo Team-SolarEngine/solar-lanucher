@@ -1,5 +1,11 @@
 # Solar Launcher Changelog
 
+## 0.2.1
+
+### Fixed
+- Default pet icon now uses `images/sussy.png` when no icon URL is provided
+- Windows's `C:\` path in case of future breaks
+
 ## 0.2.0
 
 ### Added
