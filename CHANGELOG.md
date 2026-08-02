@@ -5,6 +5,7 @@
 ### Fixed
 - Default pet icon now uses `images/sussy.png` when no icon URL is provided
 - Windows's `C:\` path in case of future breaks
+- Made README.md and Changelog.md scrollable.
 
 ## 0.2.0
 

@@ -28,7 +28,7 @@
 </script>
 
 {#if name}
-    <main style="height: 100dvh; width: 100%;">
+    <main style="width: 100%; overflow-y: auto;">
         <img src={imageSrc(bannerUrl)} alt={name} style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px;" />
         <div style="padding: 1rem;">
             <div class="row">
@@ -54,17 +54,21 @@
             <div style="display: flex; gap: 0.5rem;">
                 <span style="display: none;">fixes the first child being taller yeah yeah whatever</span>
                 {#if readme}
-                    <article style="flex: 1;">
-                        <h6 style="font-weight: bold;">README.md</h6>
-                        <hr class="medium" />
+                    <article style="flex: 1; height: 25rem; overflow-y: auto;">
+                        <div>
+                            <h6 style="font-weight: bold;">README.md</h6>
+                            <hr class="medium" />
+                        </div>
                         {@html marked(readme)}
                     </article>
                 {/if}
 
                 {#if changelog}
-                    <article style="flex: 1;">
-                        <h6 style="font-weight: bold;">Changelog.md</h6>
-                        <hr class="medium" />
+                    <article style="flex: 1; height: 25rem; overflow-y: auto;">
+                        <div>
+                            <h6 style="font-weight: bold;">Changelog.md</h6>
+                            <hr class="medium" />
+                        </div>
                         {@html marked(changelog)}
                     </article>
                 {/if}
