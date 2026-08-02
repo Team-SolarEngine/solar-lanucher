@@ -22,12 +22,12 @@
 </script>
 
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
-    {#if version == latest}
+    {#if version && latest && version == latest}
         <span>Your version is; {version}, <span style="color: green">which is up to date!</span></span>
-    {:else if version != latest}
+    {:else if version && latest && version != latest}
         <span>Your version is; {version}, <span style="color: red">which is not up to date...</span></span>
     {:else}
-        <span>Loading version...</span>
+        <span>It either could be loading, or you've hit github's rate limit!</span>
     {/if}
     <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>Open releases</button>
 </div>

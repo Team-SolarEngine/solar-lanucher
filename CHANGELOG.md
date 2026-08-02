@@ -7,6 +7,9 @@
 - Windows's `C:\` path in case of future breaks
 - Made README.md and Changelog.md scrollable.
 
+### Misc
+- Changed Version.svelte's `else` to something sensible.
+
 ## 0.2.0
 
 ### Added
@@ -44,4 +47,7 @@ For **developers**, please use this format;
 
 ### Removed
 - {lists of removed}
+
+### Misc
+- {lists of misc}
 ```
