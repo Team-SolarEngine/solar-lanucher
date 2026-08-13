@@ -1,5 +1,17 @@
 # Solar Launcher Changelog
 
+## 0.3.0
+
+### Added
+- A way to download engines!
+  - Currently supports;
+    - Solar Engine
+    - Codename Engine
+    - Psych Engine
+    - Funkin
+- Option to use `Local` for putting in your FNF instance, or `Download` to download FNF Engines.
+- Added a GitHub Token option.
+
 ## 0.2.2
 
 ### Fixed
