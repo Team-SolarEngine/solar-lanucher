@@ -16,6 +16,10 @@
     let readme = $state("");
     let changelog = $state("");
     async function loadMarkdowns() {
+        /*
+         * This function loads the README and Changelog markdown
+         * from the app's working directory so they can be shown.
+         */
         try { readme = await invoke("get_file_content", { path: `${workingDirectory}/README.md` }); }
         catch { readme = ""; }
         try { changelog = await invoke("get_file_content", { path: `${workingDirectory}/Changelog.md` }); }

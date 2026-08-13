@@ -14,6 +14,9 @@
     let submitted = $state(false)
 
     function close() {
+        /*
+         * This function closes the popup and clears all the form fields.
+         */
         modalNew = false;
         submitted = false;
         setTimeout(() => {
@@ -27,6 +30,10 @@
     }
 
     async function addApp() {
+        /*
+         * This function adds a new app by sending the form values
+         * to the backend, then closes the popup and refreshes the list.
+         */
         submitted = true;
         if (!appName || !appPath || !appWorkingDirectory) return;
 

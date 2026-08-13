@@ -25,12 +25,19 @@
     })
 
     function close() {
+        /*
+         * This function closes the edit popup and clears the edited app.
+         */
         modalEdit = false;
         editingApp = null;
         submitted = false;
     }
 
     async function saveApp() {
+        /*
+         * This function saves the edited app by sending
+         * the form values to the backend, then closes the popup.
+         */
         submitted = true;
         if (!appName || !appPath || !appWorkingDirectory) return;
 

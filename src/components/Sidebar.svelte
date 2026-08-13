@@ -24,6 +24,12 @@
     ]
 
     function openModal(modal: string) {
+        /*
+         * This function opens a modal based on the given name.
+         *
+         * Arguments:
+         *    modal: string -> the name of the modal to open
+         */
         if (modal === "settings") {
             modalSettings = true
         }

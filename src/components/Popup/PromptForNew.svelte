@@ -12,6 +12,13 @@
     ]
 
     function close(type: string = "") {
+        /*
+         * This function closes the dialog and, depending on the type,
+         * opens the matching popup or a browser page.
+         *
+         * Arguments:
+         *    type: string -> the type of the chosen option
+         */
         promptForNew = false;
 
         if (type === "local") {

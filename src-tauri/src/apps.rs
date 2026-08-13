@@ -8,6 +8,18 @@ const CREATE_NO_WINDOW: u32 = 0x08000000;
 
 #[tauri::command]
 pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool) -> Result<String, String> {
+    /*
+     * This function starts an app by running a command in the given directory.
+     * It opens a terminal emulator if requested, otherwise it runs in the background.
+     *
+     * Arguments:
+     *    working_dir: string -> the directory to run the command in
+     *    command_exec: string -> the command to execute
+     *    _open_terminal: bool -> whether to open a terminal emulator or not
+     *
+     * Returns:
+     *    Result<String, String> -> a success message or an error message
+     */
     #[cfg(windows)]
     let mut cmd = if _open_terminal {
         let mut c = Command::new("cmd");
@@ -45,6 +57,15 @@ pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool
 
 #[tauri::command]
 pub fn open_folder(path: String) -> Result<String, String> {
+    /*
+     * This function opens a folder in the file explorer of the current OS.
+     *
+     * Arguments:
+     *    path: string -> the path to the folder to open
+     *
+     * Returns:
+     *    Result<String, String> -> a success message or an error message
+     */
     #[cfg(target_os = "linux")]
     let mut cmd = {
         let mut c = Command::new("xdg-open");
@@ -74,6 +95,15 @@ pub fn open_folder(path: String) -> Result<String, String> {
 
 #[tauri::command]
 pub fn get_file_content(path: String) -> Result<String, String> {
+    /*
+     * This function reads the content of a file and returns it as a string.
+     *
+     * Arguments:
+     *    path: string -> the path to the file to read
+     *
+     * Returns:
+     *    Result<String, String> -> the file content or an error message
+     */
     let content = std::fs::read_to_string(&path)
         .map_err(|e| format!("Failed to read markdown file: {}", e))?;
     Ok(content)

@@ -30,12 +30,20 @@
     let petIconUrl = $state("images/sussy.png");
 
     async function loadSettings() {
+        /*
+         * This function loads the settings from the backend.
+         * It updates the pet and its icon based on what's stored.
+         */
         const data = await invoke("get_keys", { collection: "settings" }) as any;
         showPet = data?.addPet === true;
         petIconUrl = data?.petIconUrl || "images/sussy.png";
     }
 
     async function loadApps() {
+        /*
+         * This function loads the list of apps from the backend.
+         * It stores them so the sidebar and main content can render them.
+         */
         try {
             apps = await invoke("get_keys", { collection: "apps" });
         } catch (e) {
@@ -44,6 +52,14 @@
     }
 
     function handleEdit(index: number) {
+        /*
+         * This function prepares the app to be edited.
+         * It copies the chosen app into a fresh object,
+         * remembers its index, and opens the edit popup.
+         *
+         * Arguments:
+         *    index: number -> the index of the app to edit
+         */
         editingApp = { ...apps[index] };
         editIndex = index;
         modalEdit = true;

@@ -8,6 +8,12 @@ fn greet(name: &str) -> String {
 
 #[tauri::command]
 fn get_current_ver(app: tauri::AppHandle) -> String {
+    /*
+     * This function returns the current version of the application.
+     *
+     * Returns:
+     *    string -> the current version of the application
+     */
     app.package_info().version.to_string()
 }
 

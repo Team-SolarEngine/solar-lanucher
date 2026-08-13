@@ -7,6 +7,13 @@
     let latest: string;
 
     async function getVersion() {
+        /*
+         * This function gets the current version from the backend
+         * and the latest version from the GitHub releases page.
+         *
+         * Returns:
+         *    Promise -> an object with the current and latest versions
+         */
         const curVersion = await invoke<string>("get_current_ver");
         const repo = await fetch("https://api.github.com/repos/Team-SolarEngine/solar-lanucher/tags");
         const tags = await repo.json();

@@ -19,6 +19,13 @@
     ])
 
     async function startApp(openTerminal = false) {
+        /*
+         * This function starts the app by telling the backend to run
+         * its execute command in its working directory.
+         *
+         * Arguments:
+         *    openTerminal: boolean -> whether to open a terminal or run hidden
+         */
         try {
             await invoke("start_app", {
                 workingDir: workingDirectory,
@@ -31,6 +38,10 @@
     }
 
     async function openFolder() {
+        /*
+         * This function tells the backend to open the app's
+         * working directory in the system file explorer.
+         */
         try {
             await invoke("open_folder", { path: workingDirectory });
         } catch (e) {
@@ -39,6 +50,10 @@
     }
 
     async function deleteApp() {
+        /*
+         * This function removes the app from the collection
+         * and tells the parent to refresh the app list.
+         */
         try {
             await invoke("delete_key", { collection: "apps", key: index });
             onDeleted();
