@@ -4,13 +4,13 @@
 
     let { modalDownload = $bindable() } = $props();
 
-    let engines = $state<Array<{ name: string; releases: Array<{ tag: string; author: string; downloads: Array<{ name: string; url: string; uploadedAt: string }> }> }>>([]);
+    let engines = $state<Array<{ name: string; imageUrl: string; releases: Array<{ tag: string; author: string; avatarUrl: string; downloads: Array<{ name: string; url: string; uploadedAt: string }> }> }>>([]);
 
     const FNF_Engines = [
-        { name: "Solar Engine", url: "Team-SolarEngine/Solar-Engine-Archive" },
-        { name: "Codename Engine", url: "CodenameCrew/CodenameEngine" },
-        { name: "Psych Engine", url: "ShadowMario/FNF-PsychEngine" },
-        { name: "Funkin", url: "FunkinCrew/Funkin" }
+        { name: "Solar Engine", url: "Team-SolarEngine/Solar-Engine-Archive", imageUrl: "https://github.com/Team-SolarEngine/Solar-Engine-Archive/raw/main/assets/exclude/images/universe.png" },
+        { name: "Codename Engine", url: "CodenameCrew/CodenameEngine", imageUrl: "https://avatars.githubusercontent.com/u/122549339?s=200&v=4" },
+        { name: "Psych Engine", url: "ShadowMario/FNF-PsychEngine", imageUrl: "https://shadowmario.github.io/psychengine.lua/assets/icon.ico" },
+        { name: "Funkin", url: "FunkinCrew/Funkin", imageUrl: "https://avatars.githubusercontent.com/u/117059284?s=200&v=4" }
     ];
 
     async function loadSetting(key: string) {
@@ -22,7 +22,7 @@
         engines = [];
 
         const token = await loadSetting("githubToken");
-        for (const { name, url } of FNF_Engines) {
+        for (const { name, url, imageUrl } of FNF_Engines) {
             try {
                 const headers: Record<string, string> = {};
                 if (token) headers["Authorization"] = `Bearer ${token}`;
@@ -34,10 +34,12 @@
 
                 engines.push({
                     name,
+                    imageUrl,
                     releases: releases.map((release: any) => ({
                         name: release.name,
                         tag: release.tag_name,
                         author: release.author?.login ?? "unknown",
+                        avatarUrl: release.author?.avatar_url ?? "",
                         downloads: (release.assets ?? []).map((asset: any) => ({
                             name: asset.name,
                             url: asset.browser_download_url,
@@ -61,6 +63,17 @@
     <h5>Download an engine!</h5>
     <div>Whether that's Solar, Codename, Psych or Vanilla Funkin, we support it!</div>
 
+    <hr class="medium" />
+
+    <div style="margin-top: 5px;">
+        <b style="font-size: 1.1rem">NOTE</b>; This will open a browser and download the engine from GitHub. <br/>
+        You will have to manually put it in your preferred folder and extract it. <br/>
+        I'm sorry, I can't find another way, I'm exhausted. <br/>
+        <span style="font-size: 0.6rem; opacity: 0.8">- daveberry.</span>
+    </div>
+
+    <hr class="medium" />
+
     {#if engines.length === 0}
         <p>Loading...</p>
     {:else}
@@ -68,7 +81,10 @@
             <article>
                 <details>
                     <summary style="margin: 10px 0; display: flex; justify-content: space-between; align-items: center; ">
-                        <h5>{engine.name}</h5>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <img style="width: 64px; height: 64px; border-radius: 5px;" src={engine.imageUrl} alt={engine.name}/>
+                            <span style="font-size: 2rem;">{engine.name}</span>
+                        </div>
                         <i>arrow_drop_down</i>
                     </summary>
                     <div style="display: flex; flex-direction: column; gap: 10px">
@@ -76,9 +92,12 @@
                             <details>
                                 <summary>
                                     <article style="display: flex; justify-content: space-between; align-items: center; ">
-                                        <div>
-                                            <h6 style="font-weight: bold">{release.tag}</h6>
-                                            Published by - {release.author}
+                                        <div style="display: flex; gap: 10px; align-items: center;">
+                                            <img style="width: 50px; height: 50px; border-radius: 5px;" src={release.avatarUrl} alt={engine.name}/>
+                                            <div>
+                                                <h6 style="font-weight: bold">{release.tag}</h6>
+                                                Published by - {release.author}
+                                            </div>
                                         </div>
                                         <i>arrow_drop_down</i>
                                     </article>
