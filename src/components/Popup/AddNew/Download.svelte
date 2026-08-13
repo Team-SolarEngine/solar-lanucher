@@ -4,7 +4,24 @@
 
     let { modalDownload = $bindable() } = $props();
 
-    let engines = $state<Array<{ name: string; imageUrl: string; releases: Array<{ tag: string; author: string; avatarUrl: string; downloads: Array<{ name: string; url: string; uploadedAt: string }> }> }>>([]);
+    let engines = $state<Array<{
+      name: string;
+      imageUrl: string;
+      releases: Array<{
+        tag: string;
+        author: string;
+        avatarUrl: string;
+        downloads: Array<{
+          name: string;
+          url: string;
+          uploadedAt: string
+          uploader: Array<{
+            login: string,
+            avatarUrl: string,
+          }>
+        }>
+      }>
+    }>>([]);
 
     const FNF_Engines = [
         { name: "Solar Engine", url: "Team-SolarEngine/Solar-Engine-Archive", imageUrl: "https://github.com/Team-SolarEngine/Solar-Engine-Archive/raw/main/assets/exclude/images/universe.png" },
@@ -44,6 +61,10 @@
                             name: asset.name,
                             url: asset.browser_download_url,
                             uploadedAt: asset.created_at,
+                            uploader: ({
+                              login: asset.uploader?.login,
+                              avatarUrl: asset.uploader?.avatar_url,
+                            })
                         })),
                     })),
                 });
@@ -107,8 +128,15 @@
                                         <p>No download assets on this release.</p>
                                     {:else}
                                         {#each release.downloads as download}
-                                            <article onclick={() => openUrl(download.url)} style="cursor: pointer">
-                                                <i>download</i> <span><b>{download.name}</b> - {new Date(download.uploadedAt).toLocaleString()}</span>
+                                            <article onclick={() => openUrl(download.url)} style="cursor: pointer; display: flex; gap: 10px; align-items: center;">
+                                                <!-- <img style="width: 35px; height: 35px; border-radius: 5px;" src={download.uploader.avatarUrl} alt={download.uploader.login}/> -->
+                                                <div>
+                                                    <div>
+                                                        <i>download</i>
+                                                        <span><b>{download.name}</b></span>
+                                                    </div>
+                                                    <span>Uploaded by; <b>{download.uploader.login}</b> @ {new Date(download.uploadedAt).toLocaleString()}</span>
+                                                </div>
                                             </article>
                                         {/each}
                                     {/if}
