@@ -1,6 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
-    import CardApp from "../CardApp.svelte";
+    import CardApp from "../../CardApp.svelte";
 
     let { modalNew = $bindable(), onAppAdded = () => {} } = $props()
 

@@ -6,14 +6,21 @@
     import "material-dynamic-colors";
 
     import Sidebar from '../components/Sidebar.svelte';
-    import AddNew from '../components/Popup/AddNew.svelte';
+    import PromptForNew from '../components/Popup/PromptForNew.svelte';
     import EditApp from '../components/Popup/EditApp.svelte';
     import MainContent from "../components/MainContent.svelte";
+
+    import Local from "../components/Popup/AddNew/Local.svelte";
+    import Download from "../components/Popup/AddNew/Download.svelte";
 
     type AppData = {name: string, icon_url: string, execute_command: string, working_directory: string, description: string, banner_url: string};
 
     let apps = $state<AppData[]>([]);
+
+    let promptForNew = $state(false);
     let modalNew = $state(false);
+    let modalDownload = $state(false);
+
     let modalEdit = $state(false);
     let editingApp = $state<AppData | null>(null);
     let editIndex = $state(-1);
@@ -54,7 +61,7 @@
 
 <main class="main">
     <div class="_sidebarSection">
-        <Sidebar {apps} onOpenAdd={() => modalNew = true} onEdit={handleEdit} onDelete={loadApps} onSelect={(i) => selectedIndex = i} />
+        <Sidebar {apps} onOpenAdd={() => promptForNew = true} onEdit={handleEdit} onDelete={loadApps} onSelect={(i) => selectedIndex = i} />
     </div>
 
     <div class="_mainContent">
@@ -79,8 +86,11 @@
     {/if}
 </main>
 
-<AddNew bind:modalNew onAppAdded={loadApps} />
+<PromptForNew bind:promptForNew bind:modalNew bind:modalDownload />
 <EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadApps} />
+
+<Local bind:modalNew onAppAdded={loadApps}/>
+<Download bind:modalDownload />
 
 <style>
     .main {
