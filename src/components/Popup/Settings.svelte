@@ -8,6 +8,7 @@
     const settingFields = [
         { title: "Add Pet", key: "addPet", desc: "Have sussy amogus on the bottom right!\nKeeps you company.", type: "toggle", default: false },
         { title: "Pet Icon URL", key: "petIconUrl", desc: "Don't like sussy amogus? Use a URL or Path to a custom icon!", type: "text", default: "" },
+        { title: "Github Token", key: "githubToken", desc: "Tired of rate limits? Create your own token for GitHub and use it!", type: "text", default: "", hidden: true },
     ]
 
     async function loadSetting(key: string) {
@@ -57,7 +58,7 @@
             </div>
         {:else if field.type === "text"}
             <div class="field label border">
-                <input type="text" bind:value={settings[field.key]} onchange={() => saveSetting(field.key, settings[field.key])}>
+                <input type={field.hidden ? "password" : "text"} bind:value={settings[field.key]} onchange={() => saveSetting(field.key, settings[field.key])}>
                 <label>{field.title}</label>
                 {#if field.desc}
                     <output>{field.desc}</output>
