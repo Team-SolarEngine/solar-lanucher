@@ -61,7 +61,7 @@
         </div>
     </nav>
 
-    <div style="z-index: 0; overflow-y: auto; height: 100dvh">
+    <div class="scroll" style="z-index: 0; height: 100%">
         {#if apps.length > 0}
             {#each apps as app, i}
                 <CardApp
@@ -79,6 +79,7 @@
                     onSelect={onSelect}
                 />
             {/each}
+            <div style="min-height: 40px; width: 100%;"></div>
         {:else}
             <span style="display: flex; align-items: center; justify-content: center; height: 100%;">No instances found. Maybe try adding one?</span>
         {/if}

@@ -1,5 +1,10 @@
 # Solar Launcher Changelog
 
+## 0.2.2
+
+### Fixed
+- Sidebar being all janky and not wanting to scroll at the bottom.
+
 ## 0.2.1
 
 ### Fixed
