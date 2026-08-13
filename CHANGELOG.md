@@ -1,5 +1,10 @@
 # Solar Launcher Changelog
 
+## 0.3.1
+
+### Added
+- Icons and GameBanana in the PromptForNew popup.
+
 ## 0.3.0
 
 ### Added
