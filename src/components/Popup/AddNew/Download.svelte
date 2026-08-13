@@ -148,4 +148,10 @@
             </article>
         {/each}
     {/if}
+
+    <!--
+    this basically prevents it where it would keep on moving the characters
+    for the description and the note.
+    -->
+    <hr style="margin-right: 600px"/>
 </dialog>
