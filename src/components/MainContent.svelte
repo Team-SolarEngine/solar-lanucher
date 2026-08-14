@@ -33,7 +33,11 @@
 
 {#if name}
     <main style="width: 100%; overflow-y: auto;">
-        <img src={imageSrc(bannerUrl)} alt={name} style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px;" />
+        {#if bannerUrl}
+            <img src={imageSrc(bannerUrl)} alt={name} style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px;" />
+        {:else if !bannerUrl && !readme && !changelog}
+            <div style="height: 35%;"></div>
+        {/if}
         <div style="padding: 1rem;">
             <div class="row">
                 <img src={imageSrc(logoUrl)} alt={name} style="width: 128px; height: 128px; border-radius: 20px;" />
@@ -46,7 +50,7 @@
             </div>
         </div>
 
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; margin-left: 30px;">
             <StartExtra
                 workingDirectory={workingDirectory}
                 executeCommand={executeCommand}
