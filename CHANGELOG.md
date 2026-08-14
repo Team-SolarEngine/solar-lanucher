@@ -1,9 +1,16 @@
 # Solar Launcher Changelog
 
-## 0.3.1
+## 0.4.0
 
 ### Added
 - Icons and GameBanana in the PromptForNew popup.
+- Deeplinks with `solar-launch://` protocol support.
+  - Usage; `solar-launch://mods/{gamebanana-mod-id}`
+- Automatically downloading in the app and putting it in your preferred folder.
+
+### Changed
+- Rendering w/o banner in the Main content would center the thing you'd see to launch the game.
+  - With README.md and Changelog.md alongside, the content is rendered but not being centered y-axis.
 
 ## 0.3.0
 
