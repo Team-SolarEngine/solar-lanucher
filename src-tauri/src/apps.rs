@@ -23,11 +23,11 @@ pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool
     #[cfg(windows)]
     let mut cmd = if _open_terminal {
         let mut c = Command::new("cmd");
-        c.args(["/C", &command_exec]);
+        c.args(["/C", &command_exec.replace("/", "\\").to_string()]);
         c
     } else {
         let mut c = Command::new("cmd");
-        c.args(["/C", &command_exec]);
+        c.args(["/C", &command_exec.replace("/", "\\").to_string()]);
         c.creation_flags(CREATE_NO_WINDOW);
         c
     };
@@ -82,8 +82,9 @@ pub fn open_folder(path: String) -> Result<String, String> {
 
     #[cfg(target_os = "windows")]
     let mut cmd = {
+
         let mut c = Command::new("explorer");
-        c.arg(&path);
+        c.arg(path.replace("/", "\\").to_string());
         c
     };
 

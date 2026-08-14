@@ -1,7 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import { openUrl } from "@tauri-apps/plugin-opener";
-    import { useSnackbarError, type Snackbar, joinPath } from "../../lib/interface";
+    import { useSnackbarError, type Snackbar } from "../../lib/interface";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
 
@@ -118,7 +118,7 @@
 
         modalGameBanana = false;
         modalDownload = true;
-        const finalDownloadPath = joinPath(downloadPath, name);
+        const finalDownloadPath = downloadPath + "/" + name;
 
         try {
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });

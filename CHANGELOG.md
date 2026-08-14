@@ -1,5 +1,10 @@
 # Solar Launcher Changelog
 
+## 0.4.1
+
+### Fixed
+- Windows' path issue with backslashes and forwardslashes.
+
 ## 0.4.0
 
 ### Added
