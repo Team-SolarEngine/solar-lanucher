@@ -165,8 +165,9 @@
         <p>Loading mod...</p>
     {:else if name}
         {#if downloads.length > 0}
-            <h6 style="margin-bottom: 10px;">Downloads for {name}</h6>
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <h6 style="margin-bottom: 10px;">Downloads for <b>{name}</b></h6>
+            <img src={bannerUrl} alt={name} style="width: 100%; height: 200px; object-fit: cover;" class="round" />
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 10px;">
                 {#each downloads as download}
                     <article onclick={() => openSelected(download.url)} style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
                         <div style="min-width: 0; overflow-wrap: break-word;">
