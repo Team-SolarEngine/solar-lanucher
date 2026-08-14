@@ -1,6 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import { openUrl } from "@tauri-apps/plugin-opener";
+    import { useSnackbarError, type Snackbar } from "../../lib/interface";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
 
@@ -12,6 +13,16 @@
     let loading = $state(false);
     let downloadPath = $state("");
     let modalDownload = $state(false);
+
+    let snackbar = $state<Snackbar>({
+        snackbarError: false,
+        snackbarTime: 0,
+        givenError: "",
+    })
+
+    function useComponentSnackbarError(message: string) {
+        useSnackbarError(message, snackbar);
+    }
 
     $effect(() => {
         if (modalGameBanana) loadMod();
@@ -50,7 +61,7 @@
                 size: formatBytes(file._nFilesize),
             }));
         } catch (e) {
-            console.error("Failed to fetch mod:", e);
+            useComponentSnackbarError(`Failed to fetch mod: ${e}`);
         }
 
         loading = false;
@@ -86,7 +97,7 @@
         try {
             await invoke("open_folder", { path: workingDirectory });
         } catch (e) {
-            console.error("Failed to open folder:", e);
+            useComponentSnackbarError(`Failed to open folder: ${e}`);
         }
     }
 
@@ -126,7 +137,7 @@
                 workingDirectory: finalDownloadPath,
             });
         } catch (e) {
-            console.error("Failed to download mod:", e);
+            useComponentSnackbarError(`Failed to download mod: ${e}`);
             modalDownload = false;
         }
     }
@@ -190,3 +201,5 @@
     <span>This may take a long time depending where you live or your connection!</span>
     <progress class="wavy indeterminate" value="100" max="100"></progress>
 </dialog>
+
+<div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>

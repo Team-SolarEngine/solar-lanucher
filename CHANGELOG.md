@@ -7,6 +7,7 @@
 - Deeplinks with `solar-launch://` protocol support.
   - Usage; `solar-launch://mods/{gamebanana-mod-id}`
 - Automatically downloading in the app and putting it in your preferred folder.
+- Use snackbars for error messages.
 
 ### Changed
 - Rendering w/o banner in the Main content would center the thing you'd see to launch the game.

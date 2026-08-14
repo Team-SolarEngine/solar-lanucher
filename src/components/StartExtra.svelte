@@ -1,5 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
+    import { useSnackbarError, type Snackbar } from "../lib/interface";
 
     let {
         executeCommand,
@@ -10,6 +11,16 @@
         isLast = false,
         stretch = false,
     } = $props();
+
+    let snackbar = $state<Snackbar>({
+        snackbarError: false,
+        snackbarTime: 0,
+        givenError: "",
+    })
+
+    function useComponentSnackbarError(message: string) {
+        useSnackbarError(message, snackbar);
+    }
 
     let extraFunctionalities = $derived([
         { name: "Open in Terminal", icon: "terminal", action: () => startApp(true) },
@@ -33,7 +44,7 @@
                 openTerminal,
             });
         } catch (e) {
-            console.error("Failed to start app:", e);
+            useComponentSnackbarError(`Failed to start app: ${e}`);
         }
     }
 
@@ -45,7 +56,7 @@
         try {
             await invoke("open_folder", { path: workingDirectory });
         } catch (e) {
-            console.error("Failed to open folder:", e);
+            useComponentSnackbarError(`Failed to open folder: ${e}`);
         }
     }
 
@@ -58,7 +69,7 @@
             await invoke("delete_key", { collection: "apps", key: index });
             onDeleted();
         } catch (e) {
-            console.error("Failed to delete app:", e);
+            useComponentSnackbarError(`Failed to delete app: ${e}`);
         }
     }
 </script>
@@ -96,3 +107,5 @@
         {/each}
     {/if}
 </nav>
+
+<div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>

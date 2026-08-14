@@ -1,13 +1,16 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
+    import { useSnackbarError, type Snackbar } from "../../../lib/interface";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
     let modalDownloading = $state(false);
     let pathToDownload = $state("");
-    let downloadError = $state(false);
-    let snackbarTime = $state(0);
-    let givenError = $state("");
+    let snackbar = $state<Snackbar>({
+        snackbarError: false,
+        snackbarTime: 0,
+        givenError: "",
+    });
 
     let engines = $state<Array<{
       name: string;
@@ -34,6 +37,10 @@
         { name: "Psych Engine", url: "ShadowMario/FNF-PsychEngine", imageUrl: "https://shadowmario.github.io/psychengine.lua/assets/icon.ico" },
         { name: "Funkin", url: "FunkinCrew/Funkin", imageUrl: "https://avatars.githubusercontent.com/u/117059284?s=200&v=4" }
     ];
+
+    function useComponentSnackbarError(message: string) {
+        useSnackbarError(message, snackbar);
+    }
 
     async function loadSetting(key: string) {
         /*
@@ -87,7 +94,7 @@
                     })),
                 });
             } catch (e) {
-                givenError = `Failed to fetch ${name}: ${e}`;
+                useComponentSnackbarError(`Failed to fetch ${name}: ${e}`);
             }
         }
     }
@@ -101,7 +108,7 @@
         try {
             await invoke("open_folder", { path: workingDirectory });
         } catch (e) {
-            givenError = `Failed to open folder: ${e}`;
+            useComponentSnackbarError(`Failed to open folder: ${e}`);
         }
     }
 
@@ -121,13 +128,7 @@
          */
 
         if (!pathToDownload) {
-            clearInterval(snackbarTime);
-            downloadError = true;
-            givenError = "Missing input for download path.";
-
-            snackbarTime = setInterval(() => {
-                downloadError = false;
-            }, 5000);
+            useComponentSnackbarError("Missing input for download path.");
             return;
         }
 
@@ -148,7 +149,7 @@
                 workingDirectory: finalDownloadPath,
             });
         } catch (e) {
-            givenError = `Failed to download mod: ${e}`;
+            useComponentSnackbarError(`Failed to download mod: ${e}`);
             modalDownload = false;
         }
     }
@@ -248,4 +249,4 @@
     <progress class="wavy indeterminate" value="100" max="100"></progress>
 </dialog>
 
-<div class="snackbar error" class:active={downloadError}>{givenError}</div>
+<div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>

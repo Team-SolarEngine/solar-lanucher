@@ -5,6 +5,7 @@
     import { onMount } from "svelte";
     import "beercss";
     import "material-dynamic-colors";
+    import { useSnackbarError, type Snackbar } from "../lib/interface";
 
     import Sidebar from '../components/Sidebar.svelte';
     import PromptForNew from '../components/Popup/PromptForNew.svelte';
@@ -35,6 +36,16 @@
     let gameBananaModId = $state(0);
     let newAppPrefill = $state({});
 
+    let snackbar = $state<Snackbar>({
+        snackbarError: false,
+        snackbarTime: 0,
+        givenError: "",
+    })
+
+    function useComponentSnackbarError(message: string) {
+        useSnackbarError(message, snackbar);
+    }
+
     function handleModDownloaded(mod: any) {
         /*
          * This function opens the AddNew popup pre-filled with
@@ -64,7 +75,7 @@
                 modalGameBanana = true;
             }
         } catch (e) {
-            console.error("Failed to handle deep link:", e);
+            useComponentSnackbarError(`Failed to handle deep link: ${e}`);
         }
     }
 
@@ -86,7 +97,7 @@
         try {
             apps = await invoke("get_keys", { collection: "apps" });
         } catch (e) {
-            console.error("Failed to load apps:", e);
+            useComponentSnackbarError(`Failed to load apps: ${e}`);
         }
     }
 
@@ -157,6 +168,8 @@
 <Local bind:modalNew onAppAdded={loadApps} prefill={newAppPrefill}/>
 <Download bind:modalDownload onDownloaded={handleModDownloaded} />
 <GameBananaMod bind:modalGameBanana modId={gameBananaModId} onDownloaded={handleModDownloaded} />
+
+<div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
 
 <style>
     .main {

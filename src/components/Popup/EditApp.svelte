@@ -1,6 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import CardApp from "../CardApp.svelte";
+    import { useSnackbarError, type Snackbar } from "../../lib/interface";
 
     let { modalEdit = $bindable(), editingApp = $bindable(), editIndex = -1, onAppEdited = () => {} } = $props()
 
@@ -12,6 +13,16 @@
     let bannerURL = $state("")
 
     let submitted = $state(false)
+
+    let snackbar = $state<Snackbar>({
+        snackbarError: false,
+        snackbarTime: 0,
+        givenError: "",
+    })
+
+    function useComponentSnackbarError(message: string) {
+        useSnackbarError(message, snackbar);
+    }
 
     $effect(() => {
         if (editingApp) {
@@ -39,7 +50,7 @@
          * the form values to the backend, then closes the popup.
          */
         submitted = true;
-        if (!appName || !appPath || !appWorkingDirectory) return;
+        if (!appName || !appPath || !appWorkingDirectory) return useComponentSnackbarError(`Please fill in all fields.`);
 
         try {
             await invoke("update_key", {
@@ -59,7 +70,7 @@
             submitted = false;
             onAppEdited();
         } catch (e) {
-            console.error("Failed to update app:", e);
+            useComponentSnackbarError(`Failed to update app: ${e}`);
         }
     }
 </script>
@@ -119,3 +130,5 @@
     <button class="primary link" onclick={saveApp}>Save</button>
   </nav>
 </dialog>
+
+<div class="snackbar error" class:active={snackbar.snackbarError || submitted && !appName}>{snackbar.givenError}</div>
