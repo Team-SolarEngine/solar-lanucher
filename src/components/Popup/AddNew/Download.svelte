@@ -128,7 +128,7 @@
          */
 
         if (!pathToDownload) return useComponentSnackbarError("Missing input for download path.");
-t
+
         modalDownload = false;
         modalDownloading = true;
         const finalDownloadPath = joinPath(pathToDownload, passthrough[0].name);
