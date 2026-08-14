@@ -5,6 +5,9 @@
 
     let modalDownloading = $state(false);
     let pathToDownload = $state("");
+    let downloadError = $state(false);
+    let snackbarTime = $state(0);
+    let givenError = $state("");
 
     let engines = $state<Array<{
       name: string;
@@ -84,7 +87,7 @@
                     })),
                 });
             } catch (e) {
-                console.error(`Failed to fetch ${name}:`, e);
+                givenError = `Failed to fetch ${name}: ${e}`;
             }
         }
     }
@@ -98,12 +101,35 @@
         try {
             await invoke("open_folder", { path: workingDirectory });
         } catch (e) {
-            console.error("Failed to open folder:", e);
+            givenError = `Failed to open folder: ${e}`;
         }
     }
 
     async function handleDownload(url: string, passthrough: Array<{ name: string, iconUrl: string, description: string }>) {
-        if (!pathToDownload) return;
+        /*
+         * This function handles downloading a file from a given URL and saving it to the specified path.
+         * If pathToDownload is not set, it displays an error message and returns early.
+         * Otherwise, it hides the modal, sets the downloading state, and invokes the download_to_custom_dir backend function to save the file.
+         * 
+         * Arguments:
+         *     url: string -> the URL of the file to download
+         *     passthrough: Array<{
+         *         name: string,
+         *         iconUrl: string,
+         *         description: string
+         *     }> -> an array of objects containing the file's name, icon URL, and description
+         */
+
+        if (!pathToDownload) {
+            clearInterval(snackbarTime);
+            downloadError = true;
+            givenError = "Missing input for download path.";
+
+            snackbarTime = setInterval(() => {
+                downloadError = false;
+            }, 5000);
+            return;
+        }
 
         modalDownload = false;
         modalDownloading = true;
@@ -122,7 +148,7 @@
                 workingDirectory: finalDownloadPath,
             });
         } catch (e) {
-            console.error("Failed to download mod:", e);
+            givenError = `Failed to download mod: ${e}`;
             modalDownload = false;
         }
     }
@@ -221,3 +247,5 @@
     <span>This may take a long time depending where you live or your connection!</span>
     <progress class="wavy indeterminate" value="100" max="100"></progress>
 </dialog>
+
+<div class="snackbar error" class:active={downloadError}>{givenError}</div>
