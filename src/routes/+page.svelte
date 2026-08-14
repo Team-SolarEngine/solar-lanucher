@@ -70,7 +70,7 @@
         try {
             const parsed = new URL(url);
             const path = parsed.pathname.split("/").filter(Boolean);
-            if (parsed.protocol === "solar-launch:" && parsed.host === "mods") {
+            if (parsed.protocol === "solar-launch:" && parsed.host === "gb-mods") {
                 gameBananaModId = Number(path[0]);
                 modalGameBanana = true;
             }

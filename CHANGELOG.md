@@ -5,7 +5,7 @@
 ### Added
 - Icons and GameBanana in the PromptForNew popup.
 - Deeplinks with `solar-launch://` protocol support.
-  - Usage; `solar-launch://mods/{gamebanana-mod-id}`
+  - Usage; `solar-launch://gb-mods/{gamebanana-mod-id}`
 - Automatically downloading in the app and putting it in your preferred folder.
 - Use snackbars for error messages.
 

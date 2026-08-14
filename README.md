@@ -15,5 +15,9 @@ If you want **nightly**, here's the link for each platform.
 - [solarlauncher-ubuntu-latest-x86_64-unknown-linux-gnu](https://nightly.link/Team-SolarEngine/solar-lanucher/workflows/build.yaml/main/solarlauncher-ubuntu-latest-x86_64-unknown-linux-gnu.zip)
 - [solarlauncher-windows-latest-x86_64-pc-windows-msvc](https://nightly.link/Team-SolarEngine/solar-lanucher/workflows/build.yaml/main/solarlauncher-windows-latest-x86_64-pc-windows-msvc.zip)
 
+## External Usage
+### Deep Links
+You can use deep links to open Solar Launcher with a specific mod from GameBanana. The format is `solar-launch://gb-mods/{gamebanana-mod-id}`.
+
 # License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
