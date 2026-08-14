@@ -2,7 +2,7 @@
     import { invoke } from "@tauri-apps/api/core";
     import CardApp from "../../CardApp.svelte";
 
-    let { modalNew = $bindable(), onAppAdded = () => {} } = $props()
+    let { modalNew = $bindable(), onAppAdded = () => {}, prefill = {} } = $props()
 
     let appName = $state("")
     let appIconURL = $state("")
@@ -12,6 +12,17 @@
     let bannerURL = $state("")
 
     let submitted = $state(false)
+
+    $effect(() => {
+        if (modalNew && prefill && Object.keys(prefill).length > 0) {
+            appName = prefill.name ?? "";
+            appIconURL = prefill.iconUrl ?? "";
+            appPath = prefill.executeCommand ?? "";
+            appWorkingDirectory = prefill.workingDirectory ?? "";
+            appDescription = prefill.description ?? "";
+            bannerURL = prefill.bannerUrl ?? "";
+        }
+    })
 
     function close() {
         /*

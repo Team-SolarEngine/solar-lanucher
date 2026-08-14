@@ -1,5 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
+    import { onOpenUrl, getCurrent } from "@tauri-apps/plugin-deep-link";
     import imageSrc from "../lib/imageSrc";
     import { onMount } from "svelte";
     import "beercss";
@@ -12,6 +13,7 @@
 
     import Local from "../components/Popup/AddNew/Local.svelte";
     import Download from "../components/Popup/AddNew/Download.svelte";
+    import GameBananaMod from "../components/Popup/GameBananaMod.svelte";
 
     type AppData = {name: string, icon_url: string, execute_command: string, working_directory: string, description: string, banner_url: string};
 
@@ -28,6 +30,43 @@
 
     let showPet = $state(false);
     let petIconUrl = $state("images/sussy.png");
+
+    let modalGameBanana = $state(false);
+    let gameBananaModId = $state(0);
+    let newAppPrefill = $state({});
+
+    function handleModDownloaded(mod: any) {
+        /*
+         * This function opens the AddNew popup pre-filled with
+         * the downloaded mod's info so the user can finish adding it.
+         *
+         * Arguments:
+         *    mod: object -> the name, icon, banner, description and path
+         */
+        newAppPrefill = mod;
+        modalNew = true;
+    }
+
+    async function handleDeepLink(url: string) {
+        /*
+         * This function handles a solar-launch:// deep link.
+         * It expects links like solar-launch://mods/<id>,
+         * then opens the GameBanana mod popup with that id.
+         *
+         * Arguments:
+         *    url: string -> the full deep link url
+         */
+        try {
+            const parsed = new URL(url);
+            const path = parsed.pathname.split("/").filter(Boolean);
+            if (parsed.protocol === "solar-launch:" && parsed.host === "mods") {
+                gameBananaModId = Number(path[0]);
+                modalGameBanana = true;
+            }
+        } catch (e) {
+            console.error("Failed to handle deep link:", e);
+        }
+    }
 
     async function loadSettings() {
         /*
@@ -68,6 +107,16 @@
     onMount(() => {
         loadApps();
 
+        // listen for deep links while the app is running
+        onOpenUrl((urls) => {
+            for (const url of urls) handleDeepLink(url);
+        });
+
+        // if the app was opened via a deep link, handle it too
+        getCurrent().then((urls) => {
+            if (urls) for (const url of urls) handleDeepLink(url);
+        });
+
         // to be honest, I don't really know how to refresh
         // every time it's been changed in ../components/Popup/Settings.svelte
         // so this is our workaround
@@ -105,8 +154,9 @@
 <PromptForNew bind:promptForNew bind:modalNew bind:modalDownload />
 <EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadApps} />
 
-<Local bind:modalNew onAppAdded={loadApps}/>
+<Local bind:modalNew onAppAdded={loadApps} prefill={newAppPrefill}/>
 <Download bind:modalDownload />
+<GameBananaMod bind:modalGameBanana modId={gameBananaModId} onDownloaded={handleModDownloaded} />
 
 <style>
     .main {
