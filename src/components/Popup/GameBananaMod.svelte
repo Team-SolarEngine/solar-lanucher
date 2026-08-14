@@ -169,7 +169,11 @@
             <div class="border field label">
                 <input type="text" bind:value={downloadPath} />
                 <label>Path to download <span style="color: red;">*</span></label>
-                <output>A path to download the mod. Example; <code>C:\Games\FNF\</code></output>
+                <output> A path to download the mod. Example; <code>C:\Games\FNF\</code> </output>
+                <output>
+                    Just a note, if your path ends with <code>../mods</code> or <code>../addons</code>, the mod<br/>
+                    will be treated as an engine mod and the AddNew dialog will be skipped.
+                </output>
             </div>
         {:else}
             <p>No download assets on this mod.</p>
