@@ -139,15 +139,6 @@
 
     <hr class="medium" />
 
-    <div style="margin-top: 5px;">
-        <b style="font-size: 1.1rem">NOTE</b>; This will open a browser and download the engine from GitHub. <br/>
-        You will have to manually put it in your preferred folder and extract it. <br/>
-        I'm sorry, I can't find another way, I'm exhausted. <br/>
-        <span style="font-size: 0.6rem; opacity: 0.8">- daveberry.</span>
-    </div>
-
-    <hr class="medium" />
-
     <div class="border field label">
         <input type="text" bind:value={pathToDownload} />
         <label>Path to download <span style="color: red;">*</span></label>
