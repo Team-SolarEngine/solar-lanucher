@@ -112,6 +112,7 @@
         try {
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
             modalDownloading = false;
+            openFolder(finalDownloadPath);
 
             onDownloaded({
                 name: passthrough[0].name,

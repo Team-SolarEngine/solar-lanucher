@@ -111,13 +111,13 @@
 
         try {
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
-
             modalDownload = false;
 
             // if the path is a mods/addons folder, it's a mod for an engine,
             // not a standalone instance, so skip the AddNew dialog
             if (isModForEngine(downloadPath)) return;
 
+            openFolder(finalDownloadPath);
             onDownloaded({
                 name,
                 iconUrl: bannerUrl,
