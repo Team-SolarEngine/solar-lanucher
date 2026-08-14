@@ -1,6 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
-    import { useSnackbarError, type Snackbar } from "../../../lib/interface";
+    import { useSnackbarError, type Snackbar, joinPath } from "../../../lib/interface";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
@@ -128,10 +128,10 @@
          */
 
         if (!pathToDownload) return useComponentSnackbarError("Missing input for download path.");
-
+t
         modalDownload = false;
         modalDownloading = true;
-        const finalDownloadPath = pathToDownload + "/" + passthrough[0].name;
+        const finalDownloadPath = joinPath(pathToDownload, passthrough[0].name);
 
         try {
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
