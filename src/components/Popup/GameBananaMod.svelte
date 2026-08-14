@@ -114,7 +114,7 @@
          *     url: string -> the url pass through to download the mod
          * 
          */
-        if (!downloadPath) return;
+        if (!downloadPath) return useComponentSnackbarError("Please input a download path.");
 
         modalGameBanana = false;
         modalDownload = true;

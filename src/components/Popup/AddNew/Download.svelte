@@ -127,10 +127,7 @@
          *     }> -> an array of objects containing the file's name, icon URL, and description
          */
 
-        if (!pathToDownload) {
-            useComponentSnackbarError("Missing input for download path.");
-            return;
-        }
+        if (!pathToDownload) return useComponentSnackbarError("Missing input for download path.");
 
         modalDownload = false;
         modalDownloading = true;
