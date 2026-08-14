@@ -155,7 +155,7 @@
 <EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadApps} />
 
 <Local bind:modalNew onAppAdded={loadApps} prefill={newAppPrefill}/>
-<Download bind:modalDownload />
+<Download bind:modalDownload onDownloaded={handleModDownloaded} />
 <GameBananaMod bind:modalGameBanana modId={gameBananaModId} onDownloaded={handleModDownloaded} />
 
 <style>

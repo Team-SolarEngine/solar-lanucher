@@ -1,8 +1,10 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
-    import { openUrl } from "@tauri-apps/plugin-opener";
 
-    let { modalDownload = $bindable() } = $props();
+    let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
+
+    let modalDownloading = $state(false);
+    let pathToDownload = $state("");
 
     let engines = $state<Array<{
       name: string;
@@ -87,6 +89,43 @@
         }
     }
 
+    async function openFolder(workingDirectory: string) {
+        /*
+         * This function tells the backend to open the app's
+         * working directory in the system file explorer.
+         * Inherited from @Settings.svelte
+         */
+        try {
+            await invoke("open_folder", { path: workingDirectory });
+        } catch (e) {
+            console.error("Failed to open folder:", e);
+        }
+    }
+
+    async function handleDownload(url: string, passthrough: Array<{ name: string, iconUrl: string, description: string }>) {
+        if (!pathToDownload) return;
+
+        modalDownload = false;
+        modalDownloading = true;
+        const finalDownloadPath = pathToDownload + "/" + passthrough[0].name;
+
+        try {
+            await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
+            modalDownloading = false;
+
+            onDownloaded({
+                name: passthrough[0].name,
+                iconUrl: passthrough[0].iconUrl,
+                bannerUrl: "",
+                description: passthrough[0].description,
+                workingDirectory: finalDownloadPath,
+            });
+        } catch (e) {
+            console.error("Failed to download mod:", e);
+            modalDownload = false;
+        }
+    }
+
     $effect(() => {
         if (modalDownload) getAllEngines();
     });
@@ -104,6 +143,14 @@
         You will have to manually put it in your preferred folder and extract it. <br/>
         I'm sorry, I can't find another way, I'm exhausted. <br/>
         <span style="font-size: 0.6rem; opacity: 0.8">- daveberry.</span>
+    </div>
+
+    <hr class="medium" />
+
+    <div class="border field label">
+        <input type="text" bind:value={pathToDownload} />
+        <label>Path to download <span style="color: red;">*</span></label>
+        <output> A path to download the mod. Example; <code>C:\Games\FNF\</code> </output>
     </div>
 
     <hr class="medium" />
@@ -141,7 +188,13 @@
                                         <p>No download assets on this release.</p>
                                     {:else}
                                         {#each release.downloads as download}
-                                            <article onclick={() => openUrl(download.url)} style="cursor: pointer; display: flex; gap: 10px; align-items: center;">
+                                            <article onclick={() => handleDownload(download.url, [
+                                              {
+                                                name: download.name,
+                                                iconUrl: engine.imageUrl,
+                                                description: "Sickass engine called " + engine.name,
+                                              }
+                                            ])} style="cursor: pointer; display: flex; gap: 10px; align-items: center;">
                                                 <!-- <img style="width: 35px; height: 35px; border-radius: 5px;" src={download.uploader.avatarUrl} alt={download.uploader.login}/> -->
                                                 <div>
                                                     <div>
@@ -167,4 +220,12 @@
     for the description and the note.
     -->
     <hr style="margin-right: 600px"/>
+</dialog>
+
+<div class="overlay" class:active={modalDownloading}></div>
+<dialog class:active={modalDownloading} style="width: 600px;">
+    <h5>Please wait while we do the magic...</h5>
+    <span>For you to wait, why don't you watch YouTube? Massive time killer by the way.</span>
+    <span>This may take a long time depending where you live or your connection!</span>
+    <progress class="wavy indeterminate" value="100" max="100"></progress>
 </dialog>
