@@ -1,7 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import CardApp from "../../CardApp.svelte";
-    import { useSnackbarError, type Snackbar } from "../../../lib/interface";
+    import { useSnackbarError, type Snackbar, pickFile } from "../../../lib/interface";
 
     let { modalNew = $bindable(), onAppAdded = () => {}, prefill = {} } = $props()
 
@@ -64,7 +64,7 @@
                 value: {
                     name: appName,
                     icon_url: appIconURL,
-                    execute_command: appPath,
+                    execute_command: appPath.replace("C:\\fakepath\\", "./"),
                     working_directory: appWorkingDirectory,
                     description: appDescription,
                     banner_url: bannerURL,
@@ -75,7 +75,7 @@
             setTimeout(() => {
                 appName = ""
                 appIconURL = ""
-                appPath = ""
+                appPath = "".replace("C:\\fakepath\\", "./")
                 appWorkingDirectory = ""
                 appDescription = ""
                 bannerURL = ""
@@ -90,7 +90,7 @@
 <div class="overlay" class:active={modalNew} onclick={() => modalNew = false}></div>
 <dialog class="right" class:active={modalNew}>
   <h5>Add a New FNF Instance</h5>
-  <span></span>
+  <span><b>Pro tip</b>; Click on the clip icon for a file explorer!</span>
 
   <div class="field label border" class:invalid={submitted && !appName}>
     <input type="text" bind:value={appName}>
@@ -98,9 +98,10 @@
     <output>The FNF mod/engine name to display in the launcher.</output>
   </div>
 
-  <div class="field label border">
+  <div class="field label prefix border">
+    <a onclick={async () => appIconURL = await pickFile(["png", "gif", "jpeg"], "Icon")}> <i>attach_file</i> </a>
     <input type="text" bind:value={appIconURL}>
-    <label>Icon URL</label>
+    <label>Icon Path</label>
     <output>Any icon your heart desires. Make sure it's 1:1. It can be URL or Path.</output>
   </div>
 
@@ -110,7 +111,8 @@
     <output>The command to execute when launching the app. eg; <code>.\Funkin.exe</code></output>
   </div>
 
-  <div class="field label border" class:invalid={submitted && !appWorkingDirectory}>
+  <div class="field label prefix border" class:invalid={submitted && !appWorkingDirectory}>
+    <a onclick={async () => appWorkingDirectory = await pickFile([], "Folder", true)}> <i>attach_file</i> </a>
     <input type="text" bind:value={appWorkingDirectory}>
     <label>Working Directory <span style="color: red;">*</span></label>
     <output>The working directory for the app. eg; <code>D:\Games\FNF\Funkin</code></output>
@@ -122,7 +124,8 @@
     <output>The description of the app to display in the launcher. eg; <code>Base game FNF V-Slice</code></output>
   </div>
 
-  <div class="field label border">
+  <div class="field label prefix border">
+    <a onclick={async () => bannerURL = await pickFile(["png", "gif", "jpeg"], "Folder")}> <i>attach_file</i> </a>
     <input type="text" bind:value={bannerURL}>
     <label>Banner URL</label>
     <output>The banner image URL or Path for the app. Aspect ratio doesn't matter. But we reccomend 16:9.</output>
