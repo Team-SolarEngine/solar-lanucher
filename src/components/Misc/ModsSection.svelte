@@ -148,7 +148,10 @@
 </script>
 
 <article>
-    <h5>Mods</h5>
+    <div class="row">
+        <h5>Mods</h5>
+        <button class="transparent circle" onclick={() => openFolder(`${workingDirectory}/${modsFolder}`)}><i>folder</i></button>
+    </div>
     {#if mods.length > 0}
         {#each mods as mod}
             <article style={mod.enabled ? "" : "opacity: 0.5;"}>
