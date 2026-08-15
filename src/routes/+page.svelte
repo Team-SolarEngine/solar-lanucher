@@ -11,6 +11,7 @@
     import PromptForNew from '../components/Popup/PromptForNew.svelte';
     import EditApp from '../components/Popup/EditApp.svelte';
     import MainContent from "../components/MainContent.svelte";
+    import DragAndDrop from "../components/Misc/DragAndDrop.svelte";
 
     import Local from "../components/Popup/AddNew/Local.svelte";
     import Download from "../components/Popup/AddNew/Download.svelte";
@@ -167,6 +168,7 @@
 
 <PromptForNew bind:promptForNew bind:modalNew bind:modalDownload />
 <EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadApps} />
+<DragAndDrop/>
 
 <Local bind:modalNew onAppAdded={loadApps} prefill={newAppPrefill}/>
 <Download bind:modalDownload onDownloaded={handleModDownloaded} />

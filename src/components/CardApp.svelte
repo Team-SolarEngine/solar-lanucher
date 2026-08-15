@@ -20,12 +20,12 @@
     }
 
     let {
-      name,
-      iconUrl,
-      executeCommand,
-      workingDirectory,
-      isPreview,
-      description,
+      name = "",
+      iconUrl = "",
+      executeCommand = "",
+      workingDirectory = "",
+      isPreview = false,
+      description = "",
       bannerUrl = "",
       index = -1,
       isLast = false,

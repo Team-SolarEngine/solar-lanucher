@@ -2,6 +2,7 @@ mod apps;
 mod json;
 mod downloading;
 mod mods_togglers;
+mod misc;
 
 use tauri::Manager;
 
@@ -100,6 +101,7 @@ pub fn run() {
             mods_togglers::list_mods,
             mods_togglers::toggle_mod,
             mods_togglers::trash_folder,
+            misc::paste_to_dir,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
