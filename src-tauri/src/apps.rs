@@ -106,6 +106,6 @@ pub fn get_file_content(path: String) -> Result<String, String> {
      *    Result<String, String> -> the file content or an error message
      */
     let content = std::fs::read_to_string(&path)
-        .map_err(|e| format!("Failed to read markdown file: {}", e))?;
+        .map_err(|e| format!("Failed to read {}: {}", path, e))?;
     Ok(content)
 }

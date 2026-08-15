@@ -173,8 +173,8 @@
 
 <style>
     .main {
-        display: flex;
-        flex-direction: row;
+        display: flex !important;
+        flex-direction: row !important;
         height: 100vh;
     }
 

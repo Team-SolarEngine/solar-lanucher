@@ -3,6 +3,7 @@
     import { marked } from "marked";
     import { invoke } from "@tauri-apps/api/core";
     import imageSrc from "../lib/imageSrc";
+    import ModsSection from "./Misc/ModsSection.svelte";
 
     let {
         bannerUrl = "",
@@ -58,6 +59,8 @@
             />
         </div>
 
+        <ModsSection workingDirectory={workingDirectory} />
+
         {#if readme || changelog}
             <div style="display: flex; gap: 0.5rem;">
                 <span style="display: none;">fixes the first child being taller yeah yeah whatever</span>
@@ -82,6 +85,8 @@
                 {/if}
             </div>
         {/if}
+
+        <div style="margin-bottom: 8px;"></div>
     </main>
 {:else}
     <div style="text-align: center; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
