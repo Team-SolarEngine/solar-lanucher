@@ -1,6 +1,5 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
-    import { openUrl } from "@tauri-apps/plugin-opener";
     import { useSnackbarError, type Snackbar } from "../../lib/interface";
     import { pickFile } from "../../lib/interface";
 
