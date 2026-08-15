@@ -1,0 +1,50 @@
+name: Bug report
+description: Report bugs with the launcher here
+labels: [bug]
+body:
+  - type: checkboxes
+    id: checkotherissues
+    attributes:
+      label: "Are you sure that this isn't a duplicate issue from another person?"
+      description: "You will agree that; if there's another duplicate issue from another person, this issue form will be closed without planned."
+      options:
+      - label: "I have searched existing issues and confirmed this is not a duplicate."
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Describe your bug here."
+      description: "If possible, provide a video or a screenshot."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: btarget
+    attributes:
+      label: "What is your target?"
+      options:
+        - "Windows"
+        - "Linux"
+        - "Mac"
+        - "Other"
+    validations:
+      required: true
+
+  - type: input
+    id: buildsummary
+    attributes:
+      label: "Did you edit anything in this build? If so, mention or summarize your changes."
+      placeholder: "Yes, I edited MainContent.svelte"
+    validations:
+      required: true
+
+  - type: input
+    id: reprodbug
+    attributes:
+      label: "Steps on how to reproduce the bug"
+      description: "If possible, provide a video"
+      placeholder: "Go into an entry, press edit, and do something funny"
+    validations:
+      required: true
