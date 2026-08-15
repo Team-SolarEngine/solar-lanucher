@@ -14,6 +14,7 @@
         workingDirectory,
     } = $props();
 
+    let oneOfTwo = $state(true);
     let readme = $state("");
     let changelog = $state("");
     async function loadMarkdowns() {
@@ -62,7 +63,7 @@
         <ModsSection workingDirectory={workingDirectory} />
 
         {#if readme || changelog}
-            <div style="display: flex; gap: 0.5rem;">
+            <!-- <div style="display: flex; gap: 0.5rem;">
                 <span style="display: none;">fixes the first child being taller yeah yeah whatever</span>
                 {#if readme}
                     <article style="flex: 1; height: 25rem; overflow-y: auto;">
@@ -83,6 +84,25 @@
                         {@html marked(changelog)}
                     </article>
                 {/if}
+            </div> -->
+
+            <div style="margin-top: 8px;">
+                <div class="tabs">
+                    <a class:active={oneOfTwo} onclick={() => oneOfTwo = true}>
+                        <i>book</i>
+                        <span>README</span>
+                    </a>
+                    <a class:active={!oneOfTwo} onclick={() => oneOfTwo = false}>
+                        <i>change_circle</i>
+                        <span>Changelog</span>
+                    </a>
+                </div>
+                <div class="page padding" class:active={oneOfTwo}>
+                    {#if readme} {@html marked(readme)} {:else} <p style="opacity: 0.5;">No README.md found.</p> {/if}
+                </div>
+                <div class="page padding" class:active={!oneOfTwo}>
+                    {#if changelog} {@html marked(changelog)} {:else} <p style="opacity: 0.5;">No Changelog.md found.</p> {/if}
+                </div>
             </div>
         {/if}
 
