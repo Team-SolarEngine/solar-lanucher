@@ -159,11 +159,14 @@
                     {#if mod.icon}
                         <img src={imageSrc(mod.icon)} class="large" />
                     {/if}
-                    <div>
+                    <div style="flex: 1; min-width: 0;">
                         <h6>{mod.name}</h6>
-                        <span>{mod.description}</span>
+                        {#if mod.description}
+                            <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;">
+                                {mod.description}
+                            </span>
+                        {/if}
                     </div>
-                    <div class="max"></div>
 
                     <div class="no-space row">
                         <button class="transparent circle" onclick={() => trashMod(mod.folder)}><i>delete</i></button>
