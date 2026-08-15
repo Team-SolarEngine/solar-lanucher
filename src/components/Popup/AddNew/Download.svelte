@@ -1,6 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "../../../lib/interface";
+    import { pickFile } from "../../../lib/interface";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
@@ -163,7 +164,8 @@
 
     <hr class="medium" />
 
-    <div class="border field label">
+    <div class="border field prefix label">
+        <a onclick={async () => pathToDownload = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
         <input type="text" bind:value={pathToDownload} />
         <label>Path to download <span style="color: red;">*</span></label>
         <output> A path to download the Engine. Example; <code>C:\Games\FNF\</code> </output>

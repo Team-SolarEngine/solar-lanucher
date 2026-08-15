@@ -2,6 +2,7 @@
     import { invoke } from "@tauri-apps/api/core";
     import { openUrl } from "@tauri-apps/plugin-opener";
     import { useSnackbarError, type Snackbar } from "../../lib/interface";
+    import { pickFile } from "../../lib/interface";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
 
@@ -178,7 +179,8 @@
                     </article>
                 {/each}
             </div>
-            <div class="border field label">
+            <div class="border field prefix label">
+                <a onclick={async () => downloadPath = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
                 <input type="text" bind:value={downloadPath} />
                 <label>Path to download <span style="color: red;">*</span></label>
                 <output> A path to download the mod. Example; <code>C:\Games\FNF\</code> </output>
