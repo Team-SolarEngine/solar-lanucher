@@ -32,6 +32,17 @@ pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool
         c
     };
 
+    #[cfg(target_os = "linux")]
+    fn trust_exec(command_exec: &str, working_dir: &str) -> Result<String, String> {
+        Command::new("chmod")
+            .arg("+x")
+            .arg(command_exec)
+            .current_dir(working_dir)
+            .status()
+            .map_err(|e| format!("Failed to trust executable: {}", e))?;
+        Ok("Trusted executable.".to_string())
+    }
+
     #[cfg(unix)]
     let mut cmd = if !_open_terminal {
         let mut c = Command::new("sh");
@@ -47,6 +58,9 @@ pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool
         }
         return Err("No terminal emulator found".to_string());
     };
+
+    #[cfg(target_os = "linux")]
+    trust_exec(&command_exec, &working_dir)?;
 
     cmd.current_dir(&working_dir);
     cmd.spawn()
