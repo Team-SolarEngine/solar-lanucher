@@ -166,7 +166,7 @@
     <div class="border field label">
         <input type="text" bind:value={pathToDownload} />
         <label>Path to download <span style="color: red;">*</span></label>
-        <output> A path to download the mod. Example; <code>C:\Games\FNF\</code> </output>
+        <output> A path to download the Engine. Example; <code>C:\Games\FNF\</code> </output>
     </div>
 
     <hr class="medium" />
