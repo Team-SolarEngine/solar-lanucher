@@ -2,6 +2,7 @@
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "../../lib/interface";
     import { pickFile } from "../../lib/interface";
+    import { sendNotif } from "../../lib/sys";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
 
@@ -123,6 +124,18 @@
         try {
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
             modalDownload = false;
+
+            if (isModForEngine(downloadPath)) {
+                await sendNotif(
+                    "GameBanana Mod",
+                    "We're done downloading!"
+                );
+            } else {
+                await sendNotif(
+                    "GameBanana Mod",
+                    "We're done downloading! We just need you to input the executable file, and you should be all set!"
+                );
+            }
 
             // if the path is a mods/addons folder, it's a mod for an engine,
             // not a standalone instance, so skip the AddNew dialog

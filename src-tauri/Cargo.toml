@@ -30,6 +30,7 @@ tokio = { version = "1", features = ["fs", "rt-multi-thread"] }
 zip = "8.6.0"
 futures-util = "0.3.34"
 tauri-plugin-dialog = "2.7.2"
+tauri-plugin-notification = "2"
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"

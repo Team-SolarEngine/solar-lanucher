@@ -2,6 +2,7 @@
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "../../../lib/interface";
     import { pickFile } from "../../../lib/interface";
+    import { sendNotif } from "../../../lib/sys";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
@@ -138,6 +139,10 @@
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
             modalDownloading = false;
             openFolder(finalDownloadPath);
+            await sendNotif(
+                "Engine Downloading",
+                "We're done downloading! We just need you to input the executable file, and you should be all set!"
+            );
 
             onDownloaded({
                 name: passthrough[0].name,
