@@ -3,8 +3,17 @@
     import { useSnackbarError, type Snackbar } from "../../lib/interface";
     import { pickFile } from "../../lib/interface";
     import { sendNotif } from "../../lib/sys";
+    import CardApp from "../CardApp.svelte";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
+    type AppData = {
+        name: string;
+        icon_url: string;
+        execute_command: string;
+        working_directory: string;
+        description: string;
+        banner_url: string;
+    };
 
     let name = $state("");
     let description = $state("");
@@ -14,6 +23,7 @@
     let loading = $state(false);
     let downloadPath = $state("");
     let modalDownload = $state(false);
+    let apps = $state<AppData[]>([]);
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -170,6 +180,22 @@
         const normalized = path.replace(/\\/g, "/").toLowerCase();
         return /\/mods\/?$/.test(normalized) || /\/addons\/?$/.test(normalized);
     }
+
+    async function loadApps() {
+        /*
+         * This function loads the list of apps from the backend
+         * so the CardApp components have all the data they need.
+         */
+        try {
+            apps = await invoke("get_keys", { collection: "apps" });
+        } catch (e) {
+            console.error("Failed to load apps:", e);
+        }
+    }
+
+    $effect(() => {
+        loadApps();
+    })
 </script>
 
 <div class="overlay" class:active={modalGameBanana} onclick={() => modalGameBanana = false}></div>
@@ -191,16 +217,39 @@
                     </article>
                 {/each}
             </div>
+
+            <hr class="medium"/>
+
+            <h6>Importing a mod that's not engine modded?</h6>
+            <span>Put your path where you wanna put it here!</span>
+
             <div class="border field prefix label">
                 <a onclick={async () => downloadPath = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
                 <input type="text" bind:value={downloadPath} />
                 <label>Path to download <span style="color: red;">*</span></label>
                 <output> A path to download the mod. Example; <code>C:\Games\FNF\</code> </output>
-                <output>
-                    Just a note, if your path ends with <code>../mods</code> or <code>../addons</code>, the mod<br/>
-                    will be treated as an engine mod and the AddNew dialog will be skipped.
-                </output>
             </div>
+
+            <hr class="medium"/>
+        
+            <h6>Importing a mod that's engine modded?</h6>
+            <span>Select one of these instances!</span>
+        
+            {#if apps.length > 0}
+                {#each apps as app}
+                    <section onclick={() => downloadPath = app.working_directory + "/mods"}>
+                        <CardApp
+                            name={app.name}
+                            iconUrl={app.icon_url}
+                            description={app.description}
+                            isPreview={false}
+                        />
+                    </section>
+                {/each}
+            {:else}
+                <span>No instances found.</span>
+            {/if}
+
         {:else}
             <p>No download assets on this mod.</p>
         {/if}
