@@ -149,6 +149,9 @@
                 description={apps[selectedIndex].description}
                 workingDirectory={apps[selectedIndex].working_directory}
                 executeCommand={apps[selectedIndex].execute_command}
+                index={selectedIndex}
+                onEdit={handleEdit}
+                onDelete={loadApps}
             />
         {:else}
             <MainContent />

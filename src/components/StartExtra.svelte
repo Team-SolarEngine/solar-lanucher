@@ -25,8 +25,8 @@
     let extraFunctionalities = $derived([
         { name: "Open in Terminal", icon: "terminal", action: () => startApp(true) },
         { name: "Edit", icon: "edit", action: () => onEdit(index) },
-        { name: "Open Folder", icon: "folder", action: openFolder, extra: "right-round" },
-        { name: "Delete", icon: "delete", action: deleteApp },
+        { name: "Open Folder", icon: "folder", action: openFolder },
+        { name: "Delete", icon: "delete", action: deleteApp, extra: "right-round" },
     ])
 
     async function startApp(openTerminal = false) {
@@ -98,12 +98,12 @@
         </div>
     {:else}
         {#each extraFunctionalities as functionality}
-            {#if functionality.name != "Delete" && functionality.name != "Edit"}
+            <!-- {#if functionality.name != "Delete" && functionality.name != "Edit"} -->
                 <button class="border no-round {functionality.extra}" onclick={functionality.action}>
                     <i>{functionality.icon}</i>
                     <span>{functionality.name}</span>
                 </button>
-            {/if}
+            <!-- {/if} -->
         {/each}
     {/if}
 </nav>

@@ -12,6 +12,9 @@
         name = "",
         executeCommand,
         workingDirectory,
+        index = -1,
+        onEdit = () => {},
+        onDelete = () => {},
     } = $props();
 
     let oneOfTwo = $state(true);
@@ -57,6 +60,9 @@
                 workingDirectory={workingDirectory}
                 executeCommand={executeCommand}
                 stretch={true}
+                index={index}
+                onEdit={onEdit}
+                onDeleted={onDelete}
             />
         </div>
 
