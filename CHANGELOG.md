@@ -1,5 +1,25 @@
 # Solar Launcher Changelog
 
+## 0.5.0
+
+### Added
+- Native folder/file selection for GameBanana and GitHub.
+- Mod sections in the main content.
+  - Supports multiple engines by detecting `pack.json`.
+  - Toggle mods on and off with a checkbox.
+  - Move mods to `disabled-mods` when toggled off.
+- Drag-and-drop feature to copy mods into your instances.
+  - Shows an overlay while dragging.
+  - Lets you pick a custom folder or one of your instances.
+- Compact mode for the sidebar.
+
+### Changed
+- Full start extras in the main content.
+- Cleaner implementation for README and Changelog rendering.
+
+### Fixed
+- TS errors and unneeded imports.
+
 ## 0.4.1
 
 ### Fixed
