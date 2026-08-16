@@ -4,6 +4,8 @@
 
 ### Added
 - System notification when a download finishes.
+- Instance selection for GameBanana mods.
+  - Pick which instance's mods folder the mod gets downloaded into.
 - Folder/file explorer when adding or editing an instance.
 
 ### Fixed
