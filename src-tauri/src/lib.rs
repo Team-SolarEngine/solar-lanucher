@@ -99,7 +99,7 @@ pub fn run() {
             apps::get_file_content,
             get_current_ver,
             downloading::download_to_custom_dir,
-            mods_togglers::list_mods,
+            mods_togglers::list_folder,
             mods_togglers::toggle_mod,
             mods_togglers::trash_folder,
             misc::paste_to_dir,

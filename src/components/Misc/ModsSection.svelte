@@ -51,14 +51,16 @@
         try {
             mods = [];
 
-            const enabledFolders: Array<string> = await invoke("list_mods", { workingDirectory, modsFolder });
+            const enabledFolderFinal = `${workingDirectory}/mods`
+            const enabledFolders: Array<{ path: string; is_folder: boolean }> = await invoke("list_folder", { workingDirectory: enabledFolderFinal, showFoldersOnly: true });
             for (const modFolder of enabledFolders) {
-                mods.push({ ...(await readMod(modFolder)), enabled: true });
+                mods.push({ ...(await readMod(modFolder.path)), enabled: true });
             }
 
-            const disabledFolders: Array<string> = await invoke("list_mods", { workingDirectory, modsFolder: "disabled-mods" });
+            let disabledFolderFinal = `${workingDirectory}/disabled-mods`;
+            const disabledFolders: Array<{ path: string; is_folder: boolean }> = await invoke("list_folder", { workingDirectory: disabledFolderFinal, showFoldersOnly: true });
             for (const modFolder of disabledFolders) {
-                mods.push({ ...(await readMod(modFolder)), enabled: false });
+                mods.push({ ...(await readMod(modFolder.path)), enabled: false });
             }
         } catch (error) {
             useComponentSnackbarError(`Failed to list mods: ${error}`);

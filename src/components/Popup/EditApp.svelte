@@ -13,6 +13,8 @@
     let bannerURL = $state("")
 
     let submitted = $state(false)
+    let showExplorer = $state(false)
+    let folderContents: Array<{ path: string; is_folder: boolean }> = $state([])
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -42,6 +44,7 @@
         modalEdit = false;
         editingApp = null;
         submitted = false;
+        showExplorer = false;
     }
 
     async function saveApp() {
@@ -72,6 +75,44 @@
         } catch (e) {
             useComponentSnackbarError(`Failed to update app: ${e}`);
         }
+    }
+
+    async function showFolderContents() {
+        /*
+         * This function lists the contents of the current working
+         * directory and stores them so the explorer can show them.
+         */
+        if (!appWorkingDirectory) return;
+        folderContents = [];
+        try {
+            folderContents = await invoke("list_folder", { workingDirectory: appWorkingDirectory, showFoldersOnly: false });
+        } catch (e) {
+            useComponentSnackbarError(`Failed to list contents: ${e}`)
+        }
+    }
+
+    function getItemName(path: string) {
+        /*
+         * This function extracts the name of a file or folder
+         * by grabbing everything after the last slash or backslash.
+         *
+         * Arguments:
+         *    path: string -> the full path
+         *
+         * Returns:
+         *    string -> just the name at the end of the path
+         */
+        const match = path.match(/[^/\\]+$/);
+        return match ? match[0] : path;
+    }
+
+    function toggleExplorer() {
+        /*
+         * This function opens or closes the folder explorer,
+         * loading the current folder's contents when it opens.
+         */
+        showExplorer = !showExplorer;
+        if (showExplorer) showFolderContents();
     }
 </script>
 
@@ -127,8 +168,37 @@
 
   <nav class="right-align no-space">
     <button class="transparent link" onclick={close}>Cancel</button>
+    <button class="transparent link" onclick={toggleExplorer}>Explorer</button>
     <button class="primary link" onclick={saveApp}>Save</button>
   </nav>
 </dialog>
 
+<article class:active={showExplorer} class="_explorer scroll" style="max-width: 600px; position: absolute; top: 0; bottom: 0; left: 0; z-index: 999; margin-bottom: 12px; margin-left: 18px;">
+    <h6>Folder Contents</h6>
+    {#if folderContents.length === 0}
+        <span>No folders found here.</span>
+    {:else}
+        <div>
+            {#each folderContents as folder}
+                <div style="margin-top: 10px;">
+                    <i>{folder.is_folder ? "folder" : "description"}</i>
+                    <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;">{getItemName(folder.path)}</span>
+                </div>
+                <hr class="small"/>
+            {/each}
+        </div>
+    {/if}
+</article>
+
 <div class="snackbar error" class:active={snackbar.snackbarError || submitted && !appName}>{snackbar.givenError}</div>
+
+<style>
+    ._explorer {
+        transform: translateX(-620px);
+        transition: transform 200ms ease-out;
+
+        &.active {
+            transform: translateX(0px);
+        }
+    }
+</style>

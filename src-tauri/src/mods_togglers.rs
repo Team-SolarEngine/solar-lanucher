@@ -1,32 +1,45 @@
+use serde::Serialize;
 use std::fs;
 
+#[derive(Serialize)]
+pub struct FolderItem {
+    pub path: String,
+    pub is_folder: bool,
+}
+
 #[tauri::command]
-pub fn list_mods(working_directory: &str, mods_folder: &str) -> Vec<String> {
+pub fn list_folder(working_directory: &str, show_folders_only: bool) -> Vec<FolderItem> {
     /*
-     * This function lists all the mod folders inside the engine's mods folder.
-     * Each mod is expected to be a folder that contains a pack.json.
+     * This function lists all the files and folders inside the
+     * given working directory. When show_folders_only is true,
+     * it only lists the folders inside.
      *
      * Arguments:
-     *    working_directory: string -> the path to the engine's folder
-     *    mods_folder: string -> the name of the mods folder for this engine
-     *                           (Psych Engine uses "mods", others may differ)
+     *    working_directory: string -> the path to the working directory
+     *    show_folders_only: bool -> true lists folders only,
+     *                               false lists files and folders
      *
      * Returns:
-     *    Vec<String> -> a list of full paths to each mod folder
+     *    Vec<FolderItem> -> a list of paths with a folder/file flag
      */
-    let mut mods = Vec::new();
-    let mods_path = format!("{working_directory}/{mods_folder}");
+    let mut contents = Vec::new();
+    let working_path = format!("{working_directory}");
 
-    if let Ok(entries) = fs::read_dir(&mods_path) {
+    if let Ok(entries) = fs::read_dir(&working_path) {
         for entry in entries.flatten() {
             let path = entry.path();
-            if path.is_dir() {
-                mods.push(path.to_str().unwrap().to_string());
+            let is_folder = path.is_dir();
+
+            if !show_folders_only || is_folder {
+                contents.push(FolderItem {
+                    path: path.to_str().unwrap().to_string(),
+                    is_folder,
+                });
             }
         }
     }
 
-    mods
+    contents
 }
 
 #[tauri::command]
