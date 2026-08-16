@@ -102,19 +102,6 @@
         return `${value.toFixed(1)} ${units[i]}`;
     }
 
-    async function openFolder(workingDirectory: string) {
-        /*
-         * This function tells the backend to open the app's
-         * working directory in the system file explorer.
-         * Inherited from @Settings.svelte
-         */
-        try {
-            await invoke("open_folder", { path: workingDirectory });
-        } catch (e) {
-            useComponentSnackbarError(`Failed to open folder: ${e}`);
-        }
-    }
-
     async function openSelected(url: string) {
         /*
          * This function opens the modal for the loading state
@@ -153,8 +140,6 @@
             // if the path is a mods/addons folder, it's a mod for an engine,
             // not a standalone instance, so skip the AddNew dialog
             if (isModForEngine(downloadPath)) return;
-
-            openFolder(finalDownloadPath);
             onDownloaded({
                 name,
                 iconUrl: bannerUrl,

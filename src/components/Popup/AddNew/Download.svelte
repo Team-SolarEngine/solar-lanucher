@@ -101,19 +101,6 @@
         }
     }
 
-    async function openFolder(workingDirectory: string) {
-        /*
-         * This function tells the backend to open the app's
-         * working directory in the system file explorer.
-         * Inherited from @Settings.svelte
-         */
-        try {
-            await invoke("open_folder", { path: workingDirectory });
-        } catch (e) {
-            useComponentSnackbarError(`Failed to open folder: ${e}`);
-        }
-    }
-
     async function handleDownload(url: string, passthrough: Array<{ name: string, iconUrl: string, description: string, tag: string }>) {
         /*
          * This function handles downloading a file from a given URL and saving it to the specified path.
@@ -142,7 +129,6 @@
         try {
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
             modalDownloading = false;
-            openFolder(finalDownloadPath);
             await sendNotif(
                 "Engine Downloading",
                 "We're done downloading! We just need you to input the executable file, and you should be all set!"
