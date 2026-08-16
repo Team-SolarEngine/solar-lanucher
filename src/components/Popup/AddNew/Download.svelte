@@ -114,7 +114,7 @@
         }
     }
 
-    async function handleDownload(url: string, passthrough: Array<{ name: string, iconUrl: string, description: string }>) {
+    async function handleDownload(url: string, passthrough: Array<{ name: string, iconUrl: string, description: string, tag: string }>) {
         /*
          * This function handles downloading a file from a given URL and saving it to the specified path.
          * If pathToDownload is not set, it displays an error message and returns early.
@@ -133,7 +133,11 @@
 
         modalDownload = false;
         modalDownloading = true;
-        const finalDownloadPath = pathToDownload + "/" + passthrough[0].name;
+        const finalDownloadPath = `${pathToDownload}/${passthrough[0].name.slice(0, -4)}-${formatDate()}_${passthrough[0].tag}`;
+        /* should be just like; /home/daveberrys/FNF/Codename.Engine-linux.zip-2026-08-16_07-49-00_1.1.0-rc1
+         *                      ^--------------------------------------------------------------------------^
+         *                                                  THIS IS AN EXAMPLE.
+         */
 
         try {
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
@@ -145,7 +149,7 @@
             );
 
             onDownloaded({
-                name: passthrough[0].name,
+                name: `${passthrough[0].name.slice(0, -4)} - ${passthrough[0].tag}`,
                 iconUrl: passthrough[0].iconUrl,
                 bannerUrl: "",
                 description: passthrough[0].description,
@@ -155,6 +159,28 @@
             useComponentSnackbarError(`Failed to download mod: ${e}`);
             modalDownload = false;
         }
+    }
+
+    function formatDate() {
+        /* 
+         * This function formats the date and time using your
+         * local time zone. This is needed in case of a accidental
+         * folder confliction when the mods have same names.
+         * 
+         * Return:
+         *    String -> The formatted date. eg; 2026-08-16_07-49-00
+         * 
+         */
+
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        return `${year}-${month}-${day}_${hours}-${minutes}-${seconds}`;
     }
 
     $effect(() => {
@@ -216,6 +242,7 @@
                                                 name: download.name,
                                                 iconUrl: engine.imageUrl,
                                                 description: "Sickass engine called " + engine.name,
+                                                tag: release.tag,
                                               }
                                             ])} style="cursor: pointer; display: flex; gap: 10px; align-items: center;">
                                                 <!-- <img style="width: 35px; height: 35px; border-radius: 5px;" src={download.uploader.avatarUrl} alt={download.uploader.login}/> -->
