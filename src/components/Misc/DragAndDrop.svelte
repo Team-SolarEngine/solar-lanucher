@@ -60,8 +60,6 @@
     }
 
     onMount(() => {
-        loadApps();
-
         let unlisten: () => void = () => {};
 
         getCurrentWebview().onDragDropEvent((event) => {
@@ -77,6 +75,7 @@
                 console.log("Dropping files");
                 pathToCopy = event.payload.paths[0];
                 openDialogForInstances = true;
+                loadApps();
                 hoveringDrag = false;
             } else {
                 if (hoveringDrag) {

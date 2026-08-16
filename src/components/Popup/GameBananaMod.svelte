@@ -36,7 +36,10 @@
     }
 
     $effect(() => {
-        if (modalGameBanana) loadMod();
+        if (modalGameBanana) {
+            loadMod();
+            loadApps();
+        }
     });
 
     async function loadMod() {
@@ -192,10 +195,6 @@
             console.error("Failed to load apps:", e);
         }
     }
-
-    $effect(() => {
-        loadApps();
-    })
 </script>
 
 <div class="overlay" class:active={modalGameBanana} onclick={() => modalGameBanana = false}></div>
