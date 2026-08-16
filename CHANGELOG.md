@@ -1,5 +1,23 @@
 # Solar Launcher Changelog
 
+## 0.5.1
+
+### Added
+- System notification when a download finishes.
+- Instance selection for GameBanana mods.
+  - Pick which instance's mods folder the mod gets downloaded into.
+- Folder/file explorer when adding or editing an instance.
+
+### Fixed
+- Mods section overflowing.
+- Linux launches failing when the executable lacked permissions.
+- Engine folder conflicts when downloading.
+  - Folders are now date-stamped to avoid clashing with existing ones.
+- GameBanana and drag-and-drop not showing newly added instances.
+
+### Removed
+- Native file explorer opening when Engine Downloads or Gamebanana are done.
+
 ## 0.5.0
 
 ### Added
