@@ -1,13 +1,47 @@
 # Solar Launcher
-A fork of [AppShortsies](https://github.com/daveberrys/appshortsies) made for Solar Engine, Solar Website, and FNF exectuables because we're not only restricting it to only solar engine. Available for **Windows**, **macOS**, and **Linux**.
+A fork of [AppShortsies](https://github.com/daveberrys/appshortsies) made for launching FNF and non-FNF executable. Available for **Windows**, **macOS**, and **Linux**.
 
-![Solar Launcher](./.github/readme/preview.png)
+# Preview
+> These screenshots may be outdated. But nontheless, still the same interface.
+
+<table align="center">
+    <tr>
+        <td style="width: 50%;">
+            <img src="./.github/readme/1.png", alt="Empty Screen"/>
+            <sub>Empty Screen</sub>
+        </td>
+        <td style="width: 50%;">
+            <img src="./.github/readme/2.png", alt="Main Content with banner, README and Changelog"/>
+            <sub>Main Content with banner, README and Changelog</sub>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 50%;">
+            <img src="./.github/readme/3.png", alt="Main Content without banner, README and Changelog"/>
+            <sub>Main Content without banner, README and Changelog</sub>
+        </td>
+        <td style="width: 50%;">
+            <img src="./.github/readme/4.png", alt="Download an engine in the launcher"/>
+            <sub>Download an engine in the launcher</sub>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 50%;">
+            <img src="./.github/readme/5.png", alt="GameBanana Integration with Deeplinks"/>
+            <sub>GameBanana Integration with Deeplinks</sub>
+        </td>
+        <td style="width: 50%;">
+            <img src="./.github/readme/6.png", alt="Settings Menu"/>
+            <sub>Settings Menu</sub>
+        </td>
+    </tr>
+</table>
 
 # Development Phase
 Check out our [discord server](https://discord.gg/RaHmP5fgyA) for our development updates. Every commit or every development phase will be there, (almost) every time we make a change.
 
 # Downloads
-You can get the **latest stable version** of Solar Launcher [here](https://github.com/Team-SolarEngine/solar-launcher/releases).
+You can get the **latest stable version** of Solar Launcher [here](https://github.com/Team-SolarEngine/solar-launcher/releases). We recommend you to download the latest stable version.
 
 If you want **nightly**, here's the link for each platform.
 - [solarlauncher-macos-latest-aarch64-apple-darwin](https://nightly.link/Team-SolarEngine/solar-lanucher/workflows/build.yaml/main/solarlauncher-macos-latest-aarch64-apple-darwin.zip)
