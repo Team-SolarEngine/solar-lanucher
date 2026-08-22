@@ -20,6 +20,8 @@
     let oneOfTwo = $state(true);
     let readme = $state("");
     let changelog = $state("");
+    let splash = $state("");
+
     async function loadMarkdowns() {
         /*
          * This function loads the README and Changelog markdown
@@ -31,8 +33,24 @@
         catch { changelog = ""; }
     }
 
+    async function getSplashes() {
+        try {
+            const response = await fetch("./misc/splash.txt");
+            const text = await response.text();
+
+            const splashes = text
+                .split(/\r?\n/)
+                .map((line) => line.trim())
+                .filter(Boolean);
+            splash = splashes[Math.floor(Math.random() * splashes.length)];
+        } catch (e) {
+            splash = "Well, something went wrong I guess.";
+        }
+    }
+
     $effect(() => {
         loadMarkdowns();
+        getSplashes();
     });
 </script>
 
@@ -116,8 +134,34 @@
     </main>
 {:else}
     <div style="text-align: center; height: 100dvh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <img src="images/Solar Icon.png" alt="Solar Launcher" style="width: 128px; height: 128px;" />
-        <h3>Solar Launcher</h3>
-        <span>Your new, lightweight FNF launcher. All in one place.</span>
+        <!--
+            so for some reason, splashText only renders when
+            it's a nested div. probably because of the
+            overwhelming syles lmao!!
+        -->
+        <div>
+            <img src="images/Solar Icon.png" alt="Solar Launcher" style="width: 128px; height: 128px;" />
+            <h3>Solar Launcher</h3>
+            <span>Your new, lightweight FNF launcher. All in one place.</span>
+            <span class="_splashText">{splash}</span>
+        </div>
     </div>
 {/if}
+
+<style>
+    ._splashText {
+        position: absolute;
+        right: -6rem;
+        bottom: -1rem;
+        rotate: -4deg;
+        color: yellow;
+        animation: scaleInOut 1.5s ease-in-out infinite alternate;
+        text-align: center;
+    }
+
+    @keyframes scaleInOut {
+        0% { transform: scale(0.85); }
+        50% { transform: scale(1); }
+        100% { transform: scale(0.85); }
+    }
+</style>

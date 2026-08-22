@@ -19,9 +19,9 @@ Solar Launcher's TODO. You can keep track with development!
 - [ ] GameBanana in-engine Browsing
   - [ ] Add a hamburger menu for Main launcher interface, and browsing GameBanana
   - [ ] Actually creating the interface for browsing GameBanana
-- [ ] Splash screen like minecraft :D
-  - [ ] Read the file from [@static/misc/splash.txt](./static/misc/splash.txt)
-  - [ ] Add it in the empty state
+- [x] Splash screen like minecraft :D
+  - [x] Read the file from [@static/misc/splash.txt](./static/misc/splash.txt)
+  - [x] Add it in the empty state
 
 ***
 
