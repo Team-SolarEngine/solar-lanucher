@@ -2,7 +2,7 @@
     import StartExtra from "./StartExtra.svelte";
     import { marked } from "marked";
     import { invoke } from "@tauri-apps/api/core";
-    import imageSrc from "../lib/imageSrc";
+    import { imageSrc } from "$lib/sys";
     import ModsSection from "./Misc/ModsSection.svelte";
 
     let {

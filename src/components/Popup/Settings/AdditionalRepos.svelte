@@ -1,6 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
-    import { useSnackbarError, type Snackbar } from "../../../lib/interface";
+    import { useSnackbarError, type Snackbar } from "$lib/interface";
 
     let { currentlyOpen = $bindable() } = $props();
 

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
-    import imageSrc from "$lib/imageSrc";
+    import { imageSrc } from "$lib/sys";
 
     let {
         workingDirectory,

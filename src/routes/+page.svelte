@@ -1,11 +1,11 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import { onOpenUrl, getCurrent } from "@tauri-apps/plugin-deep-link";
-    import imageSrc from "../lib/imageSrc";
+    import { imageSrc } from "$lib/sys";
     import { onMount } from "svelte";
     import "beercss";
     import "material-dynamic-colors";
-    import { useSnackbarError, type Snackbar } from "../lib/interface";
+    import { useSnackbarError, type Snackbar } from "$lib/interface";
 
     import Sidebar from '../components/Sidebar.svelte';
     import PromptForNew from '../components/Popup/PromptForNew.svelte';

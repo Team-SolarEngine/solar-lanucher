@@ -1,6 +1,6 @@
 <script lang="ts">
     import StartExtra from "./StartExtra.svelte";
-    import imageSrc from "../lib/imageSrc";
+    import { imageSrc } from "$lib/sys";
     import { invoke } from "@tauri-apps/api/core";
 
     let compactMode = $state(false)

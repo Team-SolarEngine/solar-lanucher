@@ -1,8 +1,8 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
-    import { useSnackbarError, type Snackbar } from "../../../lib/interface";
-    import { pickFile } from "../../../lib/interface";
-    import { sendNotif } from "../../../lib/sys";
+    import { useSnackbarError, type Snackbar } from "$lib/interface";
+    import { pickFile } from "$lib/interface";
+    import { sendNotif } from "$lib/sys";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 

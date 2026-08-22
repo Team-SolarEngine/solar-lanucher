@@ -1,7 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import CardApp from "../../CardApp.svelte";
-    import { useSnackbarError, type Snackbar, pickFile } from "../../../lib/interface";
+    import { useSnackbarError, type Snackbar, pickFile } from "$lib/interface";
 
     let { modalNew = $bindable(), onAppAdded = () => {}, prefill = {} } = $props()
 

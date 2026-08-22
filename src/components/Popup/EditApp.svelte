@@ -1,7 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import CardApp from "../CardApp.svelte";
-    import { useSnackbarError, type Snackbar } from "../../lib/interface";
+    import { useSnackbarError, type Snackbar } from "$lib/interface";
 
     let { modalEdit = $bindable(), editingApp = $bindable(), editIndex = -1, onAppEdited = () => {} } = $props()
 
