@@ -3,7 +3,6 @@
     import { useSnackbarError, type Snackbar } from "../../../lib/interface";
     import { pickFile } from "../../../lib/interface";
     import { sendNotif } from "../../../lib/sys";
-    import { onMount } from "svelte";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
@@ -65,12 +64,18 @@
          * from GitHub and stores them so the list can be rendered.
          * 
          * Additionally, if you have additional repositories configured,
-         * they will be added to the list.
+         * they will be added to the list. They are re-loaded every time
+         * this function runs, so new repos show up without a restart.
          */
         engines = [];
 
         const token = await loadSetting("githubToken");
-        for (const { name, url, imageUrl } of FNF_Engines) {
+
+        const settingsData = await invoke("get_keys", { collection: "settings" }) as any;
+        const additionalRepos = Array.isArray(settingsData?.additionalRepos) ? settingsData.additionalRepos : [];
+        const allEngines = [...FNF_Engines, ...additionalRepos];
+
+        for (const { name, url, imageUrl } of allEngines) {
             try {
                 const headers: Record<string, string> = {};
                 if (token) headers["Authorization"] = `Bearer ${token}`;
@@ -176,11 +181,6 @@
     $effect(() => {
         if (modalDownload) getAllEngines();
     });
-
-    onMount(async () => {
-        const additionalRepos = await invoke("get_keys", { collection: "settings" }) as any;
-        FNF_Engines.push(...(Array.isArray(additionalRepos?.additionalRepos) ? additionalRepos.additionalRepos : []));
-    })
 </script>
 
 <div class="overlay" class:active={modalDownload} onclick={() => modalDownload = false}></div>
