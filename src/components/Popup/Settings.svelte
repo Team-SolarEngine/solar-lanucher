@@ -2,8 +2,12 @@
     import { invoke } from "@tauri-apps/api/core";
     import Version from "../Misc/Version.svelte";
 
+    import AdditionalRepos from "./Settings/AdditionalRepos.svelte";
+
     let { modalSettings = $bindable() } = $props()
     let settings = $state({} as any)
+
+    let toggleAddRepos = $state(false);
 
     const settingFields = [
         { title: "Add Pet", key: "addPet", desc: "Have sussy amogus on the bottom right!\nKeeps you company.", type: "toggle", default: false },
@@ -11,6 +15,7 @@
         { title: "Github Token", key: "githubToken", desc: "Tired of rate limits? Create your own token for GitHub and use it!", type: "text", default: "", hidden: true },
         { title: "Compact Mode", key: "compactMode", desc: "Too spaced out and too much content? Turn this on!", type: "toggle", default: "", hidden: true },
         // { title: "Path To Downloaded", key: "pathToDownloaded", desc: "When using the download options, files will be saved to this path.", type: "text", default: "" },
+        { title: "Additional Engine Repositories", key: "additionalRepos", desc: "Tired of the current engine selection? You can add more!", type: "array", default: [] },
     ]
 
     async function loadSetting(key: string) {
@@ -27,7 +32,7 @@
         return data?.[key];
     }
 
-    async function saveSetting(key: string, value: string | boolean) {
+    async function saveSetting(key: string, value: any) {
         /*
          * This function saves a single setting value to the backend.
          *
@@ -47,6 +52,7 @@
             for (const field of settingFields) {
                 loadSetting(field.key).then(v => {
                     if (field.type === "toggle") settings[field.key] = v === true || v === "true";
+                    else if (field.type === "array") settings[field.key] = Array.isArray(v) ? v : (field.default as any[]);
                     else settings[field.key] = v ?? field.default;
                 });
             }
@@ -82,6 +88,17 @@
                     <output>{field.desc}</output>
                 {/if}
             </div>
+        {:else if field.type === "array"}
+            <div class="field label border">
+                <h6>{field.title}</h6>
+                {#if field.desc}
+                    <div>{field.desc}</div>
+                {/if}
+
+                <button onclick={() => toggleAddRepos = true}>
+                    Manage
+                </button>
+            </div>
         {/if}
 
         {#if field !== settingFields[settingFields.length - 1]}
@@ -96,3 +113,5 @@
         <button class="transparent link" onclick={() => modalSettings = false}>Close</button>
     </nav>
 </dialog>
+
+<AdditionalRepos bind:currentlyOpen={toggleAddRepos} />

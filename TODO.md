@@ -10,9 +10,9 @@ Solar Launcher's TODO. You can keep track with development!
 - [ ] Add Favourite Path.
   - [ ] Implement in settings with a dropdown.
   - [ ] Implement in Download Engine and GameBanana Dialog.
-- [ ] Add extra repositories for Download Engine
-  - [ ] Implement in settings with a dialog.
-  - [ ] Implement the full feature in the Download Engine Dialog.
+- [x] Add extra repositories for Download Engine
+  - [x] Implement in settings with a dialog.
+  - [x] Implement the full feature in the Download Engine Dialog.
 
 ## Low Priority
 

@@ -3,6 +3,7 @@
     import { useSnackbarError, type Snackbar } from "../../../lib/interface";
     import { pickFile } from "../../../lib/interface";
     import { sendNotif } from "../../../lib/sys";
+    import { onMount } from "svelte";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
@@ -62,6 +63,9 @@
         /*
          * This function fetches the latest releases of every known engine
          * from GitHub and stores them so the list can be rendered.
+         * 
+         * Additionally, if you have additional repositories configured,
+         * they will be added to the list.
          */
         engines = [];
 
@@ -172,6 +176,11 @@
     $effect(() => {
         if (modalDownload) getAllEngines();
     });
+
+    onMount(async () => {
+        const additionalRepos = await invoke("get_keys", { collection: "settings" }) as any;
+        FNF_Engines.push(...(Array.isArray(additionalRepos?.additionalRepos) ? additionalRepos.additionalRepos : []));
+    })
 </script>
 
 <div class="overlay" class:active={modalDownload} onclick={() => modalDownload = false}></div>
@@ -198,7 +207,7 @@
                 <details>
                     <summary style="margin: 10px 0; display: flex; justify-content: space-between; align-items: center; ">
                         <div style="display: flex; gap: 10px; align-items: center;">
-                            <img style="width: 64px; height: 64px; border-radius: 5px;" src={engine.imageUrl} alt={engine.name}/>
+                            {#if engine.imageUrl}<img style="width: 64px; height: 64px; border-radius: 5px;" src={engine.imageUrl} alt={engine.name}/>{/if}
                             <span style="font-size: 2rem;">{engine.name}</span>
                         </div>
                         <i>arrow_drop_down</i>
