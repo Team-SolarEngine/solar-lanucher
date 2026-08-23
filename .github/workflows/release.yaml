@@ -11,6 +11,9 @@ on:
         type: boolean
         default: false
 
+env:
+  python-version: 3.14.5
+
 permissions:
   contents: write
 
@@ -83,6 +86,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Set up Python (${{ env.python-version }})
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.python-version }}
   
       - uses: actions/download-artifact@v4
         with:
@@ -130,3 +138,10 @@ jobs:
             artifacts/**/*.msi
             artifacts/**/*.exe
             artifacts/**/*.rpm
+
+      - name: Push Discord Webhoook
+        run: |
+            python push_announcement.py \
+              ${{ secrets.DISCORD_WEBHOOK_URL }} \
+              ${{ inputs.version }} \
+              false
