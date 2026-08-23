@@ -21,6 +21,7 @@
     let readme = $state("");
     let changelog = $state("");
     let splash = $state("");
+    let solarLauncherTitle = $state("Solar Launcher")
 
     async function loadMarkdowns() {
         /*
@@ -51,6 +52,13 @@
     $effect(() => {
         loadMarkdowns();
         getSplashes();
+
+        let rand = Math.random();
+
+        if (rand * 100 <= 10)
+        {
+            solarLauncherTitle = "Solar Lanucher";
+        }
     });
 </script>
 
@@ -141,7 +149,7 @@
         -->
         <div>
             <img src="images/Solar Icon.png" alt="Solar Launcher" style="width: 128px; height: 128px;" />
-            <h3>Solar Launcher</h3>
+            <h3>{solarLauncherTitle}</h3>
             <span>Your new, lightweight FNF launcher. All in one place.</span>
             <span class="_splashText">{splash}</span>
         </div>
