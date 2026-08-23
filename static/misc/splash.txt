@@ -4,6 +4,7 @@ fable 5 slop model 🥱
 made with Tauri, Svelte and 🍻CSS
 "make me a launcher, make no mistakes"
 remember kids, don't do `sudo rm -rf /*`
+remember kids, do `sudo rm -rf /*`
 DnB mods should never exist
 oh cool funkin' had a update.
 oh cool codename had a update.
