@@ -28,6 +28,20 @@ if not args.webhook or not args.tag:
     sys.exit(1)
 
 # create the data to send
+# this creates the data for;
+#   content:
+#     if it's a test;
+#        "This is a test."
+#     if it's not a test;
+#        "<@&1531292825071653035> <@&1354140261294280798>" -----> pings @Solar Pings @Development Updates
+#   embeds:
+#     description:
+#       Solar Launcher; <giventag>
+#       A new Solar Launcher version has been dropped!
+#                                       v------------------------
+#       Download the new version of the launcher here           ^ gives the download link for the relases
+#       Check out CHANGELOG.md to check out what we changed!    v gives the changelog link with tag but filter `.`
+#                 ^----------------------------------------------
 data = json.dumps({
     "content": (
         "<@&1531292825071653035> <@&1354140261294280798>"
@@ -47,7 +61,12 @@ data = json.dumps({
     ],
 }).encode("utf-8")
 
-# create the request
+# send the request
+# uses the urllib.request module to send a POST request to the webhook URL
+#   args.webhook     <- the url of the webhook to send the request to - passthrough by argparse
+#   method="POST"    <- the request method to use
+#   headers={...}    <- the headers to send with the request
+#   data=data        <- the data we created to send with the request
 request = urllib.request.Request(
     args.webhook,
     method="POST",
