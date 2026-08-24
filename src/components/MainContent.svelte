@@ -53,9 +53,7 @@
         loadMarkdowns();
         getSplashes();
 
-        let rand = Math.random();
-
-        if (rand * 100 <= 10)
+        if (Math.random() <= 0.1)
         {
             solarLauncherTitle = "Solar Lanucher";
         }
