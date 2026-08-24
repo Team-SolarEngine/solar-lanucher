@@ -52,11 +52,7 @@
     $effect(() => {
         loadMarkdowns();
         getSplashes();
-
-        if (Math.random() <= 0.1)
-        {
-            solarLauncherTitle = "Solar Lanucher";
-        }
+        if (Math.random() <= 0.1) solarLauncherTitle = "Solar Lanucher";
     });
 </script>
 
