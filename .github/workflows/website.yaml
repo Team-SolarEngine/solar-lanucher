@@ -1,0 +1,52 @@
+name: Make GitHub Pages - READMEtoWebsite
+
+on:
+  push:
+    paths:
+      - README.md
+  workflow_dispatch:
+
+env:
+  python-version: 3.14.5
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python (${{ env.python-version }})
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.python-version }}
+
+      - name: Get Python files
+        run: |
+          wget https://raw.githubusercontent.com/daveberrys/READMEtoWebsite/refs/heads/main/src/main.py
+          wget https://raw.githubusercontent.com/daveberrys/READMEtoWebsite/refs/heads/main/src/HTML.py
+          wget https://raw.githubusercontent.com/daveberrys/READMEtoWebsite/refs/heads/main/src/convert.py
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Python script
+        run: |
+          python main.py ${{ github.repository }}
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
