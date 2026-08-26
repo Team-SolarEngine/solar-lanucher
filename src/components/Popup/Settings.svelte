@@ -1,7 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import Version from "../Misc/Version.svelte";
-
+    import { pickFile } from "$lib/interface";
     import AdditionalRepos from "./Settings/AdditionalRepos.svelte";
 
     let { modalSettings = $bindable() } = $props()
@@ -16,6 +16,7 @@
         { title: "Compact Mode", key: "compactMode", desc: "Too spaced out and too much content? Turn this on!", type: "toggle", default: "", hidden: true },
         // { title: "Path To Downloaded", key: "pathToDownloaded", desc: "When using the download options, files will be saved to this path.", type: "text", default: "" },
         { title: "Additional Engine Repositories", key: "additionalRepos", desc: "Tired of the current engine selection? You can add more!", type: "array", default: [] },
+        { title: "Favourite Path", key: "favouritePath", desc: "Have a path that you use frequently? Set it here! We only have one slot, but we plan to add more in the future.", type: "text", default: "" },
     ]
 
     async function loadSetting(key: string) {
@@ -40,6 +41,8 @@
          *    key: string -> the name of the setting to save
          *    value: string or boolean -> the new value of the setting
          */
+
+        console.log("Saving setting:", key, value);
         await invoke("update_key", {
             collection: "settings",
             key: key,
@@ -61,7 +64,7 @@
 </script>
 
 <div class="overlay" class:active={modalSettings} onclick={() => modalSettings = false}></div>
-<dialog class="right" class:active={modalSettings}>
+<dialog class="right" class:active={modalSettings} style="max-width: 500px;">
     <h5>Settings</h5>
 
     {#each settingFields as field}

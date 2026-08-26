@@ -3,6 +3,7 @@
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { pickFile } from "$lib/interface";
     import { sendNotif } from "$lib/sys";
+    import { onMount } from "svelte";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
@@ -180,6 +181,13 @@
 
     $effect(() => {
         if (modalDownload) getAllEngines();
+
+        // only loads ONCE. if we added interval, it would repeatedly be loaded
+        // which if the user wants to change the path, it would get overrided.
+        const loadedFavouritePath = async () => {
+            const path = await loadSetting("favouritePath") as any;
+            if (path) pathToDownload = path;
+        }; loadedFavouritePath();
     });
 </script>
 
