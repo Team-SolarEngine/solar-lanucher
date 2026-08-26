@@ -10,6 +10,8 @@
 - Splash text just like minecraft!
 - A 10% chance of having a funny misspelled word in the empty main content.
 - Extra repositories for installing your preferred engine.
+- If your description it will be displayed as HTML in a card below the mods section.
+  - This only works IF README.md and Changelog.md doesn't exist in that working directory
 
 ## Misc
 - Combine `imagesrc.ts` with `sys.ts`

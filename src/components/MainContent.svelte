@@ -68,9 +68,11 @@
                 <img src={imageSrc(logoUrl)} alt={name} style="width: 128px; height: 128px; border-radius: 20px;" />
                 <div style="flex: 1; min-width: 0;">
                     <h2>{name}</h2>
+                    {#if readme || changelog}
                     <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;">
                         {description}
                     </span>
+                    {/if}
                 </div>
             </div>
         </div>
@@ -130,6 +132,16 @@
                     {#if changelog} {@html marked(changelog)} {:else} <p style="opacity: 0.5;">No Changelog.md found.</p> {/if}
                 </div>
             </div>
+        {:else}
+            <article>
+                <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;">
+                    {#if description}
+                        {@html description}
+                    {:else}
+                        <p style="opacity: 0.5;">No description found.</p>
+                    {/if}
+                </span>
+            </article>
         {/if}
 
         <div style="margin-bottom: 8px;"></div>
