@@ -1,5 +1,21 @@
 # Solar Launcher Changelog
 
+## 0.6.0
+
+### Added
+- Sidebar collapsing
+  - PSA: please for the love of god don't make a issue that the text on the sidebar fucks up. I KNOW IT DOES.
+- Favourite path saving
+  - Saves the favourite path for each instance so it can be restored on the component being mounted.
+- Splash text just like minecraft!
+- A 10% chance of having a funny misspelled word in the empty main content.
+- Extra repositories for installing your preferred engine.
+
+## Misc
+- Combine `imagesrc.ts` with `sys.ts`
+- A dedicated website for Solar Launcher; https://team-solarengine.github.io/solar-lanucher/
+  - self promo teehee https://github.com/daveberrys/READMEtoWebsite
+
 ## 0.5.1
 
 ### Added
