@@ -13,8 +13,8 @@ Solar Launcher's TODO. You can keep track with development!
 - [x] Add extra repositories for Download Engine
   - [x] Implement in settings with a dialog.
   - [x] Implement the full feature in the Download Engine Dialog.
-- [ ] Sidebar collapse
-  - [ ] A button to collapse the sidebar
+- [x] Sidebar collapse
+  - [x] A button to collapse the sidebar
 
 ## Low Priority
 
