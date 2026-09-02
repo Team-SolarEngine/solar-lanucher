@@ -41,7 +41,7 @@ A fork of [AppShortsies](https://github.com/daveberrys/appshortsies) made for la
 Check out our [discord server](https://discord.gg/RaHmP5fgyA) for our development updates. Every commit or every development phase will be there, (almost) every time we make a change.
 
 # Downloads
-You can get the **latest stable version** of Solar Launcher [here](https://github.com/Team-SolarEngine/solar-launcher/releases). We recommend you to download the latest stable version.
+You can get the **latest stable version** of Solar Launcher [here](https://github.com/Team-SolarEngine/solar-lanucher/releases). We recommend you to download the latest stable version.
 
 If you want **nightly**, here's the link for each platform.
 - [solarlauncher-macos-latest-aarch64-apple-darwin](https://nightly.link/Team-SolarEngine/solar-lanucher/workflows/build.yaml/main/solarlauncher-macos-latest-aarch64-apple-darwin.zip)
