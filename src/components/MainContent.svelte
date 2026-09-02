@@ -3,7 +3,7 @@
     import { marked } from "marked";
     import { invoke } from "@tauri-apps/api/core";
     import { imageSrc } from "$lib/sys";
-    import ModsSection from "./Misc/ModsSection.svelte";
+    import Sections from "./Misc/Sections.svelte";
     import { fly } from "svelte/transition";
     import { cubicInOut } from "svelte/easing";
 
@@ -103,7 +103,7 @@ okay real shit talk;
                 />
             </div>
     
-            <ModsSection workingDirectory={workingDirectory} />
+            <Sections workingDirectory={workingDirectory} />
     
             {#if readme || changelog}
                 <!-- <div style="display: flex; gap: 0.5rem;">

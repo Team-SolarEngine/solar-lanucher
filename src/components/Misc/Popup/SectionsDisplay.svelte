@@ -6,6 +6,8 @@
     let {
         workingDirectory,
         modsFolder = "mods",
+        moduleOpen = false,
+        onclose = () => {},
     } = $props()
 
     let mods = $state<Array<{
@@ -51,19 +53,19 @@
         try {
             mods = [];
 
-            const enabledFolderFinal = `${workingDirectory}/mods`
+            const enabledFolderFinal = `${workingDirectory}/${modsFolder}`
             const enabledFolders: Array<{ path: string; is_folder: boolean }> = await invoke("list_folder", { workingDirectory: enabledFolderFinal, showFoldersOnly: true });
             for (const modFolder of enabledFolders) {
                 mods.push({ ...(await readMod(modFolder.path)), enabled: true });
             }
 
-            let disabledFolderFinal = `${workingDirectory}/disabled-mods`;
+            let disabledFolderFinal = `${workingDirectory}/disabled-${modsFolder}`;
             const disabledFolders: Array<{ path: string; is_folder: boolean }> = await invoke("list_folder", { workingDirectory: disabledFolderFinal, showFoldersOnly: true });
             for (const modFolder of disabledFolders) {
                 mods.push({ ...(await readMod(modFolder.path)), enabled: false });
             }
         } catch (error) {
-            useComponentSnackbarError(`Failed to list mods: ${error}`);
+            useComponentSnackbarError(`Failed to list ${modsFolder}: ${error}`);
         }
     }
 
@@ -150,9 +152,11 @@
     });
 </script>
 
-<article>
+<div class="overlay" class:active={moduleOpen} onclick={onclose}></div>
+<dialog class="left" class:active={moduleOpen}>
     <div class="row">
-        <h5>Mods</h5>
+        <!-- sourcery shit what the FUCK -->
+        <h5>{modsFolder.charAt(0).toUpperCase() + modsFolder.slice(1)}</h5>
         <button class="transparent circle" onclick={() => openFolder(`${workingDirectory}/${modsFolder}`)}><i>folder</i></button>
     </div>
     {#if mods.length > 0}
@@ -185,6 +189,6 @@
     {:else}
         <span>Empty...</span>
     {/if}
-</article>
+</dialog>
 
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
