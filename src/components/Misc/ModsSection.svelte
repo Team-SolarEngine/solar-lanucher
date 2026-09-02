@@ -120,6 +120,7 @@
                 workingDirectory,
                 modsFolder,
                 enable,
+                typeOf: "mods",
             });
             await listMods();
         } catch (error) {

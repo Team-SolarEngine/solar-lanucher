@@ -48,6 +48,7 @@ pub fn toggle_mod(
     working_directory: String,
     mods_folder: String,
     enable: bool,
+    type_of: String,
 ) -> Result<String, String> {
     /*
      * This function toggles a mod between enabled and disabled.
@@ -60,11 +61,12 @@ pub fn toggle_mod(
      *    working_directory: string -> the path to the engine's folder
      *    mods_folder: string -> the name of the mods folder for this engine
      *    enable: bool -> true moves the mod into mods, false moves it to disabled-mods
+     *    type_of: string -> the type of mod to toggle (e.g. "mod", "addons", "content")
      *
      * Returns:
      *    Result<String, String> -> a message or an error message
      */
-    let disabled_folder = format!("{working_directory}/disabled-mods");
+    let disabled_folder = format!("{working_directory}/disabled-{type_of}");
     fs::create_dir_all(&disabled_folder)
         .map_err(|e| format!("Failed to create disabled-mods folder: {e}"))?;
 
