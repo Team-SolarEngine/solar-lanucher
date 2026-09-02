@@ -102,10 +102,14 @@ pub fn open_folder(path: String) -> Result<String, String> {
         c
     };
 
-    cmd.spawn()
+    let status = cmd.status()
         .map_err(|e| format!("Failed to open folder: {}", e))?;
 
-    Ok("Folder opened".to_string())
+    if status.success() {
+        Ok("Folder opened".to_string())
+    } else {
+        Err("Folder may not exist.".to_string())
+    }
 }
 
 #[tauri::command]
