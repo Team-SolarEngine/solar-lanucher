@@ -27,4 +27,4 @@
 
 <SectionDisplay {workingDirectory} modsFolder="mods" moduleOpen={modsOpen} onclose={() => modsOpen = false}/>
 <SectionDisplay {workingDirectory} modsFolder="addons" moduleOpen={addonsOpen} onclose={() => addonsOpen = false}/>
-<SectionDisplay {workingDirectory} modsFolder="contents" moduleOpen={contentOpen} onclose={() => contentOpen = false}/>
+<SectionDisplay {workingDirectory} modsFolder="content" moduleOpen={contentOpen} onclose={() => contentOpen = false}/>
