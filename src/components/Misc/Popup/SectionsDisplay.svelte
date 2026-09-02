@@ -122,7 +122,7 @@
                 workingDirectory,
                 modsFolder,
                 enable,
-                typeOf: "mods",
+                typeOf: modsFolder,
             });
             await listMods();
         } catch (error) {
@@ -158,6 +158,7 @@
         <!-- sourcery shit what the FUCK -->
         <h5>{modsFolder.charAt(0).toUpperCase() + modsFolder.slice(1)}</h5>
         <button class="transparent circle" onclick={() => openFolder(`${workingDirectory}/${modsFolder}`)}><i>folder</i></button>
+        <button class="transparent circle" onclick={() => listMods()}><i>refresh</i></button>
     </div>
     {#if mods.length > 0}
         {#each mods as mod}
