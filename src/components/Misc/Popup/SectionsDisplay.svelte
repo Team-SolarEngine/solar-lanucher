@@ -153,12 +153,16 @@
 </script>
 
 <div class="overlay" class:active={moduleOpen} onclick={onclose}></div>
-<dialog class="left" class:active={moduleOpen}>
+<dialog class="left" class:active={moduleOpen} style="max-width: 50rem">
     <div class="row">
         <!-- sourcery shit what the FUCK -->
         <h5>{modsFolder.charAt(0).toUpperCase() + modsFolder.slice(1)}</h5>
-        <button class="transparent circle" onclick={() => openFolder(`${workingDirectory}/${modsFolder}`)}><i>folder</i></button>
-        <button class="transparent circle" onclick={() => listMods()}><i>refresh</i></button>
+        <div class="row no-space">
+            <button class="transparent circle" onclick={() => openFolder(`${workingDirectory}/${modsFolder}`)}><i>folder</i></button>
+            <button class="transparent circle" onclick={() => listMods()}><i>refresh</i></button>
+        </div>
+        <div class="max"></div>
+        <button class="transparent circle" onclick={() => onclose()}><i>close</i></button>
     </div>
     {#if mods.length > 0}
         {#each mods as mod}
