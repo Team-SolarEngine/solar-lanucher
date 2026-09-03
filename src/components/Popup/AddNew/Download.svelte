@@ -3,7 +3,6 @@
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { pickFile } from "$lib/interface";
     import { sendNotif } from "$lib/sys";
-    import { onMount } from "svelte";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 

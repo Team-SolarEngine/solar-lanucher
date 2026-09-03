@@ -1,7 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import Version from "../Misc/Version.svelte";
-    import { pickFile } from "$lib/interface";
     import AdditionalRepos from "./Settings/AdditionalRepos.svelte";
 
     let { modalSettings = $bindable() } = $props()
