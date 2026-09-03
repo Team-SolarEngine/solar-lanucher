@@ -23,6 +23,7 @@
     let loading = $state(false);
     let downloadPath = $state("");
     let modalDownload = $state(false);
+    let validForFNF = $state(false);
     let apps = $state<AppData[]>([]);
 
     let snackbar = $state<Snackbar>({
@@ -82,6 +83,7 @@
 
             name = mod._sName || "Unknown mod";
             description = mod._sText || "";
+            validForFNF = mod._aGame._idRow == 8694;
 
             const media = mod._aPreviewMedia?._aImages || [];
             const urls = media
@@ -204,10 +206,24 @@
 </script>
 
 <div class="overlay" class:active={modalGameBanana} onclick={() => modalGameBanana = false}></div>
-<dialog class="right" class:active={modalGameBanana}>
+<dialog class="right" class:active={modalGameBanana} style="max-width: 40rem;">
     {#if loading}
         <p>Loading mod...</p>
     {:else if name}
+        {#if !validForFNF}
+            <article class="tertiary">
+                <div class="row">
+                    <i>warning</i>
+                    <h4>Not for FNF</h4>
+                </div>
+                <span>
+                    This mod seems like it is not compatible with FNF.
+                    Please do not report this to the GitHub repository.
+                </span>
+            </article>
+            <hr class="medium">
+        {/if}
+
         {#if downloads.length > 0}
             <h6 style="margin-bottom: 10px;">Downloads for <b>{name}</b></h6>
             <img src={bannerUrl} alt={name} style="width: 100%; height: 200px; object-fit: cover;" class="round" />
