@@ -62,7 +62,7 @@ This is probably obvious, but we support desktop cross platform for <u>Windows</
 ## Deep Links
 Solar Launcher supports deeplinks, that means, you can install mods and whatnot directly to the launcher easily! To call it, just do `solar-launch://gb-mods/{gamebanana-game-id}`. We directly support GameBanana.
 
-Wanna try it out? [Click here](solar-launch://gb-mods/618481)
+Wanna try it out? [Click here](solar-launch://gb-mods/618481) - [Use the website instead](https://team-solarengine.github.io/solar-lanucher/). Github doesn't allow deep links.
 
 ## In-App Engine Downloading
 Leaving the Launcher just to get a specific launcher takes too long. We've made it where you can download Solar, Codename, Psych and Funkin directly in the launcher w/o leaving the launcher!
