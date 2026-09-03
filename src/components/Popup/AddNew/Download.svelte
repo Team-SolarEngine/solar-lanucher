@@ -9,6 +9,7 @@
 
     let modalDownloading = $state(false);
     let pathToDownload = $state("");
+    let path = $state("");
     let snackbar = $state<Snackbar>({
         snackbarError: false,
         snackbarTime: 0,
@@ -185,8 +186,7 @@
         // only loads ONCE. if we added interval, it would repeatedly be loaded
         // which if the user wants to change the path, it would get overrided.
         const loadedFavouritePath = async () => {
-            const path = await loadSetting("favouritePath") as any;
-            if (path) pathToDownload = path;
+            path = await loadSetting("favouritePath") as any;
         }; loadedFavouritePath();
     });
 </script>
@@ -203,6 +203,18 @@
         <input type="text" bind:value={pathToDownload} />
         <label>Path to download <span style="color: red;">*</span></label>
         <output> A path to download the Engine. Example; <code>C:\Games\FNF\</code> </output>
+
+        <!--
+            now I KNOW you want me to say the same thing for @GameBananaMod.svelte,
+            but really... you're not putting an engine in a `mods/`, `addons/` or `content/`
+            path, are you?
+
+            until further thinking and code cleanups, this will stay. but this probably
+            will be removed in a future commit and use $effect() instead.
+        -->
+        <button onclick={async () => pathToDownload = path} style="margin-top: 4px;">
+            Use favorite path
+        </button>
     </div>
 
     <hr class="medium" />

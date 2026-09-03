@@ -25,6 +25,7 @@
     let modalDownload = $state(false);
     let validForFNF = $state(false);
     let apps = $state<AppData[]>([]);
+    let path = $state("");
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -45,8 +46,7 @@
         // only loads ONCE. if we added interval, it would repeatedly be loaded
         // which if the user wants to change the path, it would get overrided.
         const loadedFavouritePath = async () => {
-            const path = await loadSetting("favouritePath") as any;
-            if (path) downloadPath = path;
+            path = await loadSetting("favouritePath") as any;
         }; loadedFavouritePath();
     });
 
@@ -189,7 +189,8 @@
          *    boolean -> true if the path is a mods or addons folder
          */
         const normalized = path.replace(/\\/g, "/").toLowerCase();
-        return /\/mods\/?$/.test(normalized) || /\/addons\/?$/.test(normalized);
+        console.log(`given path: ${path}\nnormalized: ${normalized}\nis mods path: ${/\/(mods|addons|content)\/?$/.test(normalized)}`)
+        return /\/(mods|addons|content)\/?$/.test(normalized);
     }
 
     async function loadApps() {
@@ -249,6 +250,18 @@
                 <input type="text" bind:value={downloadPath} />
                 <label>Path to download <span style="color: red;">*</span></label>
                 <output> A path to download the mod. Example; <code>C:\Games\FNF\</code> </output>
+
+                <!--
+                    if we use $effect, the downloadPath would be overridden when the component
+                    is re-used (in some way), so we use a button to prevent it to override
+                    because button only triggers when clicked, not when the component is re-used
+
+                    this is for the `mods/` or `addons/` or `content/` path detection because
+                    you don't need a @Local.svelte popup when you're adding a mod.
+                -->
+                <button onclick={async () => downloadPath = path} style="margin-top: 4px;">
+                    Use favorite path
+                </button>
             </div>
 
             <hr class="medium"/>
