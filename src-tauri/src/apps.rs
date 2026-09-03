@@ -105,10 +105,16 @@ pub fn open_folder(path: String) -> Result<String, String> {
     let status = cmd.status()
         .map_err(|e| format!("Failed to open folder: {}", e))?;
 
+    #[cfg(target_os = "windows")]
+    let addition = "- If this keeps popping up frequently even though File Explorer opens,
+                    please ignore it. You're in Windows, blame Microsoft. Not us.";
+    #[cfg(not(target_os = "windows"))]
+    let addition = "";
+
     if status.success() {
         Ok("Folder opened".to_string())
     } else {
-        Err("Folder may not exist.".to_string())
+        Err(format!("Folder may not exist. {addition}"))
     }
 }
 
