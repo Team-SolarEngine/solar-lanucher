@@ -103,6 +103,7 @@ pub fn run() {
             mods_togglers::toggle_mod,
             mods_togglers::trash_folder,
             misc::paste_to_dir,
+            misc::get_os,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

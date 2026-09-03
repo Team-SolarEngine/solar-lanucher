@@ -2,6 +2,7 @@
     import Settings from "./Popup/Settings.svelte"
     import CardApp from "./CardApp.svelte";
     import { openUrl } from "@tauri-apps/plugin-opener";
+    import { invoke } from "@tauri-apps/api/core";
 
     let {
         onOpenAdd = () => {},
@@ -19,10 +20,25 @@
 
     let modalSettings = $state(false)
     let sidebarOpen = $state(true)
+    let os = $state("")
     const listsOfOptions = [
         {name: "Settings", icon: "settings", action: () => {openModal("settings")}},
         {name: "Github", icon: "commit", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher")},
     ]
+
+    async function getOS() {
+        /*
+         * This function returns the operating system of the user.
+         * 
+         * Returns:
+         *    string -> the operating system of the user
+         */
+        try {
+            os = await invoke("get_os");
+        } catch (e) {
+            console.error(`Failed to get OS name: ${e}`);
+        }
+    }
 
     function openModal(modal: string) {
         /*
@@ -53,20 +69,12 @@
         </div>
         <div class="max"></div>
         <div class:_sidebarElementClose={!sidebarOpen} class="row" style="transition: all 0.3s ease-in-out;">
-            <div>
-                <button class="transparent small">
-                    <i>more_horiz</i>
-                </button>
-                <menu class="no-wrap">
-                    {#each listsOfOptions as op}
-                        <li>
-                            <section onclick={op.action} class="transparent">
-                                <i>{op.icon}</i>
-                                <span>{op.name}</span>
-                            </section>
-                        </li>
-                    {/each}
-                </menu>
+            <div class="no-space">
+                {#each listsOfOptions as op}
+                    <button onclick={op.action} class="transparent circle">
+                        <i>{op.icon}</i>
+                    </button>
+                {/each}
             </div>
     
             <div>
