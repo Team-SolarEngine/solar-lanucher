@@ -60,7 +60,9 @@ Literally supports any executables. This gives you flexibility for... something 
 This is probably obvious, but we support desktop cross platform for <u>Windows</u>, <u>Linux</u>, and <u>macOS</u>. No, Android will not come soon. iOS is a big massive no.
 
 ## Deep Links
-Solar Launcher supports deeplinks, that means, you can install mods and whatnot directly to the launcher easily! To call it, just do solar-launch://gb-mods/{gamebanana-game-id}. We directly support GameBanana.
+Solar Launcher supports deeplinks, that means, you can install mods and whatnot directly to the launcher easily! To call it, just do `solar-launch://gb-mods/{gamebanana-game-id}`. We directly support GameBanana.
+
+Wanna try it out? [Click here](solar-launch://gb-mods/618481)
 
 ## In-App Engine Downloading
 Leaving the Launcher just to get a specific launcher takes too long. We've made it where you can download Solar, Codename, Psych and Funkin directly in the launcher w/o leaving the launcher!
