@@ -1,4 +1,4 @@
-# Contributing for solar-pending-shares
+# Contributing for Solar Launcher
 Thank you for your time for contributing! Here's guidelines we appricate you to follow.
 
 ## Submitting a Pull Request
