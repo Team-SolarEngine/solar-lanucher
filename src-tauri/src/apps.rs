@@ -150,6 +150,7 @@ pub fn run_command(command: String) -> Result<String, String> {
     let mut cmd = {
         let mut c = Command::new("cmd");
         c.args(["/C", &command.replace("/", "\\").to_string()]);
+        c.creation_flags(CREATE_NO_WINDOW);
         c
     };
 
