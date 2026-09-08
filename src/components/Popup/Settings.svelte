@@ -16,6 +16,7 @@
         // { title: "Path To Downloaded", key: "pathToDownloaded", desc: "When using the download options, files will be saved to this path.", type: "text", default: "" },
         { title: "Additional Engine Repositories", key: "additionalRepos", desc: "Tired of the current engine selection? You can add more!", type: "array", default: [] },
         { title: "Favourite Path", key: "favouritePath", desc: "Have a path that you use frequently? Set it here! We only have one slot, but we plan to add more in the future.", type: "text", default: "" },
+        { title: "Code Editor", key: "codeEditor", desc: "You're a developer? Here's a shortcut for you!", type: "text", default: "code" },
     ]
 
     async function loadSetting(key: string) {

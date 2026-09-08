@@ -133,3 +133,39 @@ pub fn get_file_content(path: String) -> Result<String, String> {
         .map_err(|e| format!("Failed to read {}: {}", path, e))?;
     Ok(content)
 }
+
+#[tauri::command]
+pub fn run_command(command: String) -> Result<String, String> {
+    /*
+     * This function runs a command in the specified working directory and returns the output.
+     *
+     * Arguments:
+     *    command: string -> the command to run
+     *    working_dir: string -> the working directory to run the command in
+     *
+     * Returns:
+     *    Result<String, String> -> the command output or an error message
+     */
+    #[cfg(windows)]
+    let mut cmd = {
+        let mut c = Command::new("cmd");
+        c.args(["/C", &command.replace("/", "\\").to_string()]);
+        c
+    };
+
+    #[cfg(unix)]
+    let mut cmd = {
+        let mut c = Command::new("sh");
+        c.args(["-c", &command]);
+        c
+    };
+
+    let status = cmd.status()
+        .map_err(|e| format!("{}", e))?;
+
+    if status.success() {
+        Ok("Command executed successfully".to_string())
+    } else {
+        Err("Command failed".to_string())
+    }
+}

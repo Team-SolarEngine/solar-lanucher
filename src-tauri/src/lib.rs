@@ -114,6 +114,7 @@ pub fn run() {
             mods_togglers::trash_folder,
             misc::paste_to_dir,
             misc::get_os,
+            apps::run_command,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

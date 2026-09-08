@@ -27,6 +27,20 @@
         useSnackbarError(message, snackbar);
     }
 
+    async function loadSetting(key: string) {
+        /*
+         * This function loads a single setting value from the backend.
+         *
+         * Arguments:
+         *    key: string -> the name of the setting to load
+         *
+         * Returns:
+         *    Promise -> the value of the setting, or null
+         */
+        const data = await invoke("get_keys", { collection: "settings" }) as any;
+        return data?.[key];
+    }
+
     async function openFolder(workingDirectory: string) {
         /*
          * This function tells the backend to open the app's
@@ -147,6 +161,18 @@
         }
     }
 
+    async function openEditor(workingDirectory: string) {
+        try {
+            let editorCMD = await loadSetting("codeEditor")
+            let command = `${editorCMD} "${workingDirectory}"`
+            console.log(command)
+
+            await invoke("run_command", { command })
+        } catch(e) {
+            useComponentSnackbarError(`Failed to open editor: ${e}`)
+        }
+    }
+
     $effect(() => {
         listMods();
     });
@@ -180,9 +206,10 @@
                         {/if}
                     </div>
 
-                    <div class="no-space row">
+                    <div class="no-space row" style="margin-left: 12px;">
                         <button class="transparent circle" onclick={() => trashMod(mod.folder)}><i>delete</i></button>
                         <button class="transparent circle" onclick={() => openFolder(mod.folder)}><i>folder</i></button>
+                        <button class="transparent circle" onclick={() => openEditor(mod.folder)}><i>code</i></button>
                         <label class="checkbox large">
                             <input type="checkbox" checked={mod.enabled} onchange={() => toggleMod(mod, !mod.enabled)} />
                             <span></span>
