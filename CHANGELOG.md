@@ -1,5 +1,24 @@
 # Solar Launcher Changelog
 
+## 0.7.0
+
+### Added
+- Animations transitions between pages.
+- Added refresh to mods section.
+- Dedicated dialog for Mods, Addons, and Content.
+- Warning label if the mod is uncompatible for FNF from GameBanana.
+- Switched the overflow menu for Settings and GitHub to just buttons.
+- Added a editor shortcut if you're a FNF modder.
+
+### Fixed
+- Favourite Path uses a Button to fill the input field.
+
+### Misc
+- Flexible `toggle_mod` for other future added engines.
+- Added error return if anything goes wrong.
+- Added OS detection.
+- Code cleanup
+
 ## 0.6.0
 
 ### Added
