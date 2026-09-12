@@ -22,11 +22,12 @@
         useSnackbarError(message, snackbar);
     }
 
+    let deleteInstancePopup = $state(false);
     let extraFunctionalities = $derived([
         { name: "Open in Terminal", icon: "terminal", action: () => startApp(true) },
         { name: "Edit", icon: "edit", action: () => onEdit(index) },
         { name: "Open Folder", icon: "folder", action: openFolder },
-        { name: "Delete", icon: "delete", action: deleteApp, extra: "right-round" },
+        { name: "Delete", icon: "delete", action: () => deleteInstancePopup = true, extra: "right-round" },
     ])
 
     async function startApp(openTerminal = false) {
@@ -72,6 +73,19 @@
             useComponentSnackbarError(`Failed to delete app: ${e}`);
         }
     }
+
+    async function deleteInstance() {
+        /*
+         * This function deletes the instance from the working directory
+         * and removes it from the collection.
+         */
+        try {
+            await invoke("trash_folder", { modFolder: workingDirectory });
+            await deleteApp();
+        } catch (e) {
+            useComponentSnackbarError(`Failed to delete instance: ${e}`);
+        }
+    }
 </script>
 
 <nav class="group split">
@@ -107,5 +121,24 @@
         {/each}
     {/if}
 </nav>
+
+<div class="overlay" class:active={deleteInstancePopup} onclick={() => deleteInstancePopup = false}></div>
+<dialog class:active={deleteInstancePopup} style="overflow: visible !important;">
+    <h3>Delete Instance</h3>
+    <span>You're deleting a instance! Click outside this modal, or pick one of these.</span>
+
+    <div class="row right-align">
+        <button class="border no-round" onclick={() => deleteApp()}>
+            <i>delete</i>
+            <span>Delete Shortcut</span>
+            <span class="tooltip bottom">This deletes the shortcut to open the app. Not the instance itself.</span>
+        </button>
+        <button class="border no-round" onclick={() => deleteInstance()}>
+            <i>delete</i>
+            <span>Delete Instance & Shortcut</span>
+            <span class="tooltip bottom">This deletes the instance and its shortcut. Use with caution.</span>
+        </button>
+    </div>
+</dialog>
 
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
