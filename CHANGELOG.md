@@ -8,7 +8,10 @@
 - Dedicated dialog for Mods, Addons, and Content.
 - Warning label if the mod is uncompatible for FNF from GameBanana.
 - Switched the overflow menu for Settings and GitHub to just buttons.
+  - This fixes the issue with macOS.
 - Added a editor shortcut if you're a FNF modder.
+- Option to delete a shortcut, or the shortcut and instance together.
+- Ability to transfer mod to another instance.
 
 ### Fixed
 - Favourite Path uses a Button to fill the input field.
