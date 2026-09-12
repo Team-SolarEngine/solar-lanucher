@@ -11,7 +11,7 @@
   - This fixes the issue with macOS.
 - Added a editor shortcut if you're a FNF modder.
 - Option to delete a shortcut, or the shortcut and instance together.
-- Ability to transfer mod to another instance.
+- Ability to transfer mods to another instance.
 
 ### Fixed
 - Favourite Path uses a Button to fill the input field.
