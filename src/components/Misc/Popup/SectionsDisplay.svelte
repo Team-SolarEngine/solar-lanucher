@@ -1,6 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
+    import CardApp from "../../../components/CardApp.svelte";
     import { imageSrc } from "$lib/sys";
 
     let {
@@ -26,6 +27,10 @@
     }); function useComponentSnackbarError(message: string) {
         useSnackbarError(message, snackbar);
     }
+
+    let instancesOfInstnaces = $state([]);
+    let instancesDialog = $state(false);
+    let selectedModFolder = $state("");
 
     async function loadSetting(key: string) {
         /*
@@ -173,8 +178,51 @@
         }
     }
 
+    async function transferToInstance(modFolder: string, destToPaste: string) {
+        /*
+         * Transfers a mod to the specified instance
+         * 
+         * Arguments:
+         *    modFolder: string -> The folder you want to transfer
+         *    destToPaste: string -> The destination folder to paste the mod into
+         */
+        try {
+            await invoke("paste_to_dir", { toCopy: modFolder, destToPaste})
+            await trashMod(modFolder)
+            instancesDialog = false;
+        } catch(e) {
+            useComponentSnackbarError(`Failed to transfer mod folder: ${e}`)
+            console.error(e)
+        }
+    }
+
+    function openInstancesDialog(modFolder: string) {
+        /*
+         * Opens the instnaces dialog and sets a valid variable for
+         * `selectedModFolder`. This is mainly for passthrough.
+         * 
+         * Arguments:
+         *    modFolder: string -> The folder you want to transfer
+         */
+        selectedModFolder = modFolder;
+        instancesDialog = true;
+    }
+
+    async function loadApps() {
+        /*
+         * This function loads the list of apps from the backend
+         * so the CardApp components have all the data they need.
+         */
+        try {
+            instancesOfInstnaces = await invoke("get_keys", { collection: "apps" });
+        } catch (e) {
+            console.error("Failed to load apps:", e);
+        }
+    }
+
     $effect(() => {
         listMods();
+        loadApps();
     });
 </script>
 
@@ -210,6 +258,7 @@
                         <button class="transparent circle" onclick={() => trashMod(mod.folder)}><i>delete</i></button>
                         <button class="transparent circle" onclick={() => openFolder(mod.folder)}><i>folder</i></button>
                         <button class="transparent circle" onclick={() => openEditor(mod.folder)}><i>code</i></button>
+                        <button class="transparent circle" onclick={() => openInstancesDialog(mod.folder)}><i>compare_arrows</i></button>
                         <label class="checkbox large">
                             <input type="checkbox" checked={mod.enabled} onchange={() => toggleMod(mod, !mod.enabled)} />
                             <span></span>
@@ -223,4 +272,41 @@
     {/if}
 </dialog>
 
+<div class="overlay" class:active={instancesDialog} onclick={() => instancesDialog = false}></div>
+<dialog class:active={instancesDialog} class="right" style="max-width: 750px">
+    <h4>Select an instance to transfer!</h4>
+    <article class="tertiary">
+        <h3>Please note;</h3>
+        <span>
+            This will transfer the <span class="code">{selectedModFolder}</span> folder to the selected instance.
+            If you're transferring to <span class="code">mods</span>, you will have to transfer it yourself.
+        </span>
+    </article>
+
+    <hr class="medium" />
+
+    {#if instancesOfInstnaces.length > 0}
+        {#each instancesOfInstnaces as app}
+            <section onclick={() => transferToInstance(selectedModFolder, app.working_directory + "/" + modsFolder)}>
+                <CardApp
+                    name={app.name}
+                    iconUrl={app.icon_url}
+                    description={app.description}
+                    isPreview={false}
+                />
+            </section>
+        {/each}
+    {:else}
+        <span>No instances found.</span>
+    {/if}
+</dialog>
+
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
+
+<style>
+    .code {
+        background-color: rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+        padding: 0 0.25rem
+    }
+</style>
