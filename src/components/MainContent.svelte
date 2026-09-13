@@ -68,11 +68,11 @@ okay real shit talk;
   non-empty state dosen't actually animate. so the best way
   to fix this is to have duplicate arguments.
 -->
-<main in:fly={flyIn} out:fly={flyOut}>
+<main in:fly={flyIn} out:fly={flyOut} style="height: 100%;">
 {#key name}
-<div in:fly={flyIn} out:fly={flyOut} style="position: relative;">
+<div in:fly={flyIn} out:fly={flyOut} style="position: relative; height: 100%;">
     {#if name}
-        <div style="width: 100%; overflow-y: auto; position: absolute;">
+        <div style="width: 100%; height: 100%; overflow-y: auto; position: absolute;">
             {#if bannerUrl}
                 <img src={imageSrc(bannerUrl)} alt={name} style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px;" />
             {:else if !bannerUrl && !readme && !changelog}
