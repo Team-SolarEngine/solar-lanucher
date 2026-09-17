@@ -1,5 +1,4 @@
 use std::process::Command;
-use tauri::path::BaseDirectory;
 
 #[cfg(windows)]
 use std::os::windows::process::CommandExt;
@@ -8,7 +7,7 @@ use std::os::windows::process::CommandExt;
 const CREATE_NO_WINDOW: u32 = 0x08000000;
 
 #[tauri::command]
-pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool) -> Result<String, String> {
+pub async fn start_app(working_dir: String, command_exec: String, _open_terminal: bool) -> Result<String, String> {
     /*
      * This function starts an app by running a command in the given directory.
      * It opens a terminal emulator if requested, otherwise it runs in the background.
@@ -22,50 +21,26 @@ pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(windows)]
-    let mut cmd = if _open_terminal {
-        let mut c = Command::new("cmd");
-        c.args(["/C", &command_exec.replace("/", "\\").to_string()]);
-        c
-    } else {
-        let mut c = Command::new("cmd");
-        c.args(["/C", &command_exec.replace("/", "\\").to_string()]);
-        c.creation_flags(CREATE_NO_WINDOW);
-        c
-    };
+    let _ = run_command(command_exec, _open_terminal, working_dir).await;
 
     #[cfg(target_os = "linux")]
-    fn trust_exec(command_exec: &str, working_dir: &str) -> Result<String, String> {
-        Command::new("chmod")
-            .arg("+x")
-            .arg(command_exec)
-            .current_dir(working_dir)
-            .status()
-            .map_err(|e| format!("Failed to trust executable: {}", e))?;
+    async fn trust_exec(command_exec: &str, working_dir: &str) -> Result<String, String> {
+        let _ = run_command(format!("chmod +x '{}'", command_exec), false, working_dir.to_string()).await;
         Ok("Trusted executable.".to_string())
     }
 
+    #[cfg(target_os = "linux")]
+    let _ = trust_exec(&command_exec, &working_dir).await?;
+
     #[cfg(unix)]
-    let mut cmd = if !_open_terminal {
-        let mut c = Command::new("sh");
-        c.args(["-c", &command_exec]);
-        c
+    if !_open_terminal {
+        let _ = run_command(command_exec, false, working_dir.to_string()).await;
     } else {
         for &emulator in &["alacritty", "gnome-terminal", "xfce4-terminal", "terminator", "foot", "konsole", "kitty"] {
-            let mut c = Command::new(emulator);
-            c.args(["-e", &command_exec]).current_dir(&working_dir);
-            if c.spawn().is_ok() {
-                return Ok("App started".to_string());
-            }
+            let _ = run_command(format!("{emulator} -e {command_exec}"), false, working_dir.to_string()).await;
         }
         return Err("No terminal emulator found".to_string());
     };
-
-    #[cfg(target_os = "linux")]
-    trust_exec(&command_exec, &working_dir)?;
-
-    cmd.current_dir(&working_dir);
-    cmd.spawn()
-        .map_err(|e| format!("Failed to start app: {}", e))?;
 
     Ok("App started".to_string())
 }
@@ -116,7 +91,7 @@ pub fn get_file_content(path: String) -> Result<String, String> {
 }
 
 #[tauri::command]
-pub async fn run_command(command: String, create_terminal_window: bool, working_dir: String) -> Result<String, String> {
+pub async fn run_command(command: String, _create_terminal_window: bool, working_dir: String) -> Result<String, String> {
     /*
      * This function runs a command in the specified working directory and returns the output.
      * Note:
@@ -136,7 +111,7 @@ pub async fn run_command(command: String, create_terminal_window: bool, working_
         {
             let mut cmd = Command::new("cmd");
             cmd.args(["/C", &command.replace('/', "\\")]);
-            cmd.creation_flags(if create_terminal_window { CREATE_NO_WINDOW } else { 0 });
+            cmd.creation_flags(if _create_terminal_window { CREATE_NO_WINDOW } else { 0 });
             cmd.current_dir(working_dir);
             cmd.spawn()
         }
