@@ -23,13 +23,13 @@ pub async fn start_app(working_dir: String, command_exec: String, _open_terminal
     #[cfg(windows)]
     let _ = run_command(command_exec, _open_terminal, working_dir).await;
 
-    #[cfg(target_os = "linux")]
+    #[cfg(unix)]
     async fn trust_exec(command_exec: &str, working_dir: &str) -> Result<String, String> {
         let _ = run_command(format!("chmod +x '{}'", command_exec), false, working_dir.to_string()).await;
         Ok("Trusted executable.".to_string())
     }
 
-    #[cfg(target_os = "linux")]
+    #[cfg(unix)]
     let _ = trust_exec(&command_exec, &working_dir).await?;
 
     #[cfg(unix)]
