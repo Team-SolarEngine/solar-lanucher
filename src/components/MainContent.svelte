@@ -22,6 +22,8 @@
     let oneOfTwo = $state(true);
     let readme = $state("");
     let changelog = $state("");
+    let openDescription = $state(false);
+
     let splash = $state("");
     let solarLauncherTitle = $state("Solar Launcher")
 
@@ -89,7 +91,7 @@ okay real shit talk;
                     <div style="flex: 1; min-width: 0;">
                         <h2>{name}</h2>
                         {#if readme || changelog}
-                        <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;" class="_desc">
+                        <span class="_desc" onclick={() => openDescription = true}>
                             {@html truncateString(description)}
                         </span>
                         {/if}
@@ -185,6 +187,11 @@ okay real shit talk;
 {/key}
 </main>
 
+<div class="overlay" class:active={openDescription} onclick={() => openDescription = false}></div>
+<dialog class:active={openDescription}>
+    {@html description}
+</dialog>
+
 <style>
     ._splashText {
         position: absolute;
@@ -197,11 +204,24 @@ okay real shit talk;
     }
 
     ._desc {
+        overflow-wrap: break-word;
+        word-break: break-word;
+        display: inline-block;
         font-size: 0.8rem;
         opacity: 50%;
+        border-radius: 8px;
+
         :global(h1, h2, h3, h4, h5, h6) {
             font-size: 1.2rem;
             font-weight: bold;
+        }
+
+        transition: all 0.1s ease-in-out;
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.025);
+            padding: 4px;
+            opacity: 75%;
         }
     }
 
