@@ -11,6 +11,7 @@
 - Scrolling in main content
 - `CardApp.svelte` in `GameBananaMod.svelte` and `DragAndDrop.svelte` no longer has a button to start
 - Added `max-width` of 600px to `DragAndDrop.svelte`
+- Deleting shortcut and/or instance at the dropdown works as expected.
 
 ## 0.7.0
 
