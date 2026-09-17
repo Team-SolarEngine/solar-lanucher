@@ -101,7 +101,7 @@
 </div>
 
 <div class="overlay" class:active={openDialogForInstances} onclick={() => openDialogForInstances = false}></div>
-<dialog class="right" class:active={openDialogForInstances}>
+<dialog class="right" class:active={openDialogForInstances} style="width">
     <h6>The folder you are trying to paste is</h6>
     <span>{pathToCopy}</span>
 
