@@ -1,5 +1,17 @@
 # Solar Launcher Changelog
 
+## 0.7.1
+
+### Added
+- Click-to-preview description
+
+### Fixed
+- Cleaner overflow word wrapping in description
+- Cleaner description rendering (tranctuate, HTML rendering)
+- Scrolling in main content
+- `CardApp.svelte` in `GameBananaMod.svelte` and `DragAndDrop.svelte` no longer has a button to start
+- Added `max-width` of 600px to `DragAndDrop.svelte`
+
 ## 0.7.0
 
 ### Added
