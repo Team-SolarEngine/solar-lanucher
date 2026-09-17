@@ -1,4 +1,5 @@
 use std::process::Command;
+use tauri::path::BaseDirectory;
 
 #[cfg(windows)]
 use std::os::windows::process::CommandExt;
@@ -70,7 +71,7 @@ pub fn start_app(working_dir: String, command_exec: String, _open_terminal: bool
 }
 
 #[tauri::command]
-pub fn open_folder(path: String) -> Result<String, String> {
+pub async fn open_folder(path: String) -> Result<String, String> {
     /*
      * This function opens a folder in the file explorer of the current OS.
      *
@@ -81,41 +82,21 @@ pub fn open_folder(path: String) -> Result<String, String> {
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(target_os = "linux")]
-    let mut cmd = {
-        let mut c = Command::new("xdg-open");
-        c.arg(&path);
-        c
-    };
+    run_command(format!("xdg-open '{}'", path), false, ".".to_string())
+        .await
+        .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "macos")]
-    let mut cmd = {
-        let mut c = Command::new("open");
-        c.arg(&path);
-        c
-    };
+    run_command(format!("open '{}'", path), false, ".".to_string())
+        .await
+        .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "windows")]
-    let mut cmd = {
+    run_command(format!("explorer '{}'", path.replace('/', "\\")), false, ".".to_string())
+        .await
+        .map_err(|e| format!("{} - If you frequently see this, ignore it.", e))?;
 
-        let mut c = Command::new("explorer");
-        c.arg(path.replace("/", "\\").to_string());
-        c
-    };
-
-    let status = cmd.status()
-        .map_err(|e| format!("Failed to open folder: {}", e))?;
-
-    #[cfg(target_os = "windows")]
-    let addition = "- If this keeps popping up frequently even though File Explorer opens,
-                    please ignore it. You're in Windows, blame Microsoft. Not us.";
-    #[cfg(not(target_os = "windows"))]
-    let addition = "";
-
-    if status.success() {
-        Ok("Folder opened".to_string())
-    } else {
-        Err(format!("Folder may not exist. {addition}"))
-    }
+    Ok("Folder opened".to_string())
 }
 
 #[tauri::command]
@@ -135,7 +116,7 @@ pub fn get_file_content(path: String) -> Result<String, String> {
 }
 
 #[tauri::command]
-pub async fn run_command(command: String) -> Result<String, String> {
+pub async fn run_command(command: String, create_terminal_window: bool, working_dir: String) -> Result<String, String> {
     /*
      * This function runs a command in the specified working directory and returns the output.
      * Note:
@@ -144,6 +125,7 @@ pub async fn run_command(command: String) -> Result<String, String> {
      *
      * Arguments:
      *    command: string -> the command to run
+     *    create_terminal_window: bool -> whether to create a terminal window for the command
      *    working_dir: string -> the working directory to run the command in
      *
      * Returns:
@@ -154,7 +136,8 @@ pub async fn run_command(command: String) -> Result<String, String> {
         {
             let mut cmd = Command::new("cmd");
             cmd.args(["/C", &command.replace('/', "\\")]);
-            cmd.creation_flags(CREATE_NO_WINDOW);
+            cmd.creation_flags(if create_terminal_window { CREATE_NO_WINDOW } else { 0 });
+            cmd.current_dir(working_dir);
             cmd.spawn()
         }
 
@@ -162,6 +145,7 @@ pub async fn run_command(command: String) -> Result<String, String> {
         {
             let mut cmd = Command::new("sh");
             cmd.args(["-c", &command]);
+            cmd.current_dir(working_dir);
             cmd.spawn()
         }
     }

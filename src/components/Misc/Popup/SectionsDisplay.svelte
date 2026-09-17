@@ -172,7 +172,7 @@
             let command = `${editorCMD} "${workingDirectory}"`
             console.log(command)
 
-            await invoke("run_command", { command })
+            await invoke("run_command", { command, createTerminalWindow: false, workingDir: "." })
         } catch(e) {
             useComponentSnackbarError(`Failed to open editor: ${e}`)
         }
