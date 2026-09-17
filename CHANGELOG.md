@@ -6,6 +6,8 @@
 - Click-to-preview description
 
 ### Fixed
+- Running apps (explorer, editor, etc...) shouldn't freeze the app
+- 
 - Cleaner overflow word wrapping in description
 - Cleaner description rendering (tranctuate, HTML rendering)
 - Scrolling in main content

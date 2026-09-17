@@ -292,7 +292,7 @@
                     name={app.name}
                     iconUrl={app.icon_url}
                     description={app.description}
-                    isPreview={false}
+                    isPreview={true}
                 />
             </section>
         {/each}
