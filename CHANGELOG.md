@@ -7,11 +7,10 @@
 
 ### Fixed
 - Running apps (explorer, editor, etc...) shouldn't freeze the app
-- 
 - Cleaner overflow word wrapping in description
 - Cleaner description rendering (tranctuate, HTML rendering)
 - Scrolling in main content
-- `CardApp.svelte` in `GameBananaMod.svelte` and `DragAndDrop.svelte` no longer has a button to start
+- `CardApp.svelte` in `GameBananaMod.svelte`, `DragAndDrop.svelte`, and `SectionsDisplay.svelte` no longer has a button to start
 - Added `max-width` of 600px to `DragAndDrop.svelte`
 - Deleting shortcut and/or instance at the dropdown works as expected.
 
