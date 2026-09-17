@@ -79,7 +79,7 @@ okay real shit talk;
 {#key name}
 <div in:fly={flyIn} out:fly={flyOut} style="position: relative; height: 100%;">
     {#if name}
-        <div style="width: 100%; height: 100%; overflow-y: auto; position: absolute;">
+        <div style="width: 100%; height: 100%; overflow-y: auto; position: absolute; overflow-x: hidden;">
             {#if bannerUrl}
                 <img src={imageSrc(bannerUrl)} alt={name} style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px;" />
             {:else if !bannerUrl && !readme && !changelog}
@@ -91,7 +91,7 @@ okay real shit talk;
                     <div style="flex: 1; min-width: 0;">
                         <h2>{name}</h2>
                         {#if readme || changelog}
-                        <span class="_desc" onclick={() => openDescription = true}>
+                        <span class="_desc _breakword" onclick={() => openDescription = true}>
                             {@html truncateString(description)}
                         </span>
                         {/if}
@@ -147,10 +147,10 @@ okay real shit talk;
                             <span>Changelog</span>
                         </a>
                     </div>
-                    <div class="page padding" class:active={oneOfTwo}>
+                    <div class="page padding _breakword" class:active={oneOfTwo}>
                         {#if readme} {@html marked(readme)} {:else} <p style="opacity: 0.5;">No README.md found.</p> {/if}
                     </div>
-                    <div class="page padding" class:active={!oneOfTwo}>
+                    <div class="page padding _breakword" class:active={!oneOfTwo}>
                         {#if changelog} {@html marked(changelog)} {:else} <p style="opacity: 0.5;">No Changelog.md found.</p> {/if}
                     </div>
                 </div>
@@ -204,9 +204,6 @@ okay real shit talk;
     }
 
     ._desc {
-        overflow-wrap: break-word;
-        word-break: break-word;
-        display: inline-block;
         font-size: 0.8rem;
         opacity: 50%;
         border-radius: 8px;
@@ -223,6 +220,12 @@ okay real shit talk;
             padding: 4px;
             opacity: 75%;
         }
+    }
+
+    ._breakword {
+        overflow-wrap: break-word;
+        word-break: break-word;
+        display: inline-block;
     }
 
     @keyframes scaleInOut {
