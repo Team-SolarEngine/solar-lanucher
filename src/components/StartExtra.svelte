@@ -27,7 +27,12 @@
         { name: "Open in Terminal", icon: "terminal", action: () => startApp(true) },
         { name: "Edit", icon: "edit", action: () => onEdit(index) },
         { name: "Open Folder", icon: "folder", action: openFolder },
-        { name: "Delete", icon: "delete", action: () => deleteInstancePopup = true, extra: "right-round" },
+        { name: "Delete", icon: "delete", action: () => deleteInstancePopup = true, extra: "right-round tertiary-text" },
+    ])
+
+    let deleteTypes = $derived([
+        { name: "Delete Shortcut", action: () => deleteApp() },
+        { name: "Delete Instance", action: () => deleteInstance() },
     ])
 
     async function startApp(openTerminal = false) {
@@ -104,9 +109,19 @@
             </button>
             <menu class="no-wrap" class:top={isLast}>
                 {#each extraFunctionalities as functionality}
-                <li onclick={functionality.action}>
-                    <i>{functionality.icon}</i> {functionality.name}
-                </li>
+                    {#if functionality.name != "Delete"}
+                        <li onclick={functionality.action}>
+                            <i>{functionality.icon}</i> {functionality.name}
+                        </li>
+                    {/if}
+                {/each}
+
+                <hr class="small" />
+
+                {#each deleteTypes as deleteType}
+                    <li onclick={deleteType.action} class="tertiary-text">
+                        <i>delete</i> {deleteType.name}
+                    </li>
                 {/each}
             </menu>
         </div>
@@ -128,12 +143,12 @@
     <span>You're deleting a instance! Click outside this modal, or pick one of these.</span>
 
     <div class="row right-align">
-        <button class="border no-round" onclick={() => deleteApp()}>
+        <button class="border no-round tertiary-text" onclick={() => deleteApp()}>
             <i>delete</i>
             <span>Delete Shortcut</span>
             <span class="tooltip bottom">This deletes the shortcut to open the app. Not the instance itself.</span>
         </button>
-        <button class="border no-round" onclick={() => deleteInstance()}>
+        <button class="border no-round tertiary-text" onclick={() => deleteInstance()}>
             <i>delete</i>
             <span>Delete Instance & Shortcut</span>
             <span class="tooltip bottom">This deletes the instance and its shortcut. Use with caution.</span>
