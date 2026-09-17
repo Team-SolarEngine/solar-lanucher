@@ -54,6 +54,11 @@
         }
     }
 
+    function truncateString(str: string) {
+        const maxLength = 250;
+        return str.length > maxLength ? str.slice(0, maxLength).trimEnd() + '...' : str;
+    }
+
     $effect(() => {
         loadMarkdowns();
         getSplashes();
@@ -84,8 +89,8 @@ okay real shit talk;
                     <div style="flex: 1; min-width: 0;">
                         <h2>{name}</h2>
                         {#if readme || changelog}
-                        <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;">
-                            {description}
+                        <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;" class="_desc">
+                            {@html truncateString(description)}
                         </span>
                         {/if}
                     </div>
@@ -189,6 +194,15 @@ okay real shit talk;
         color: yellow;
         animation: scaleInOut 1.5s ease-in-out infinite alternate;
         text-align: center;
+    }
+
+    ._desc {
+        font-size: 0.8rem;
+        opacity: 50%;
+        :global(h1, h2, h3, h4, h5, h6) {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
     }
 
     @keyframes scaleInOut {

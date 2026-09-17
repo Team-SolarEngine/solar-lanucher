@@ -34,6 +34,11 @@
       onSelect = () => {},
     } = $props()
 
+    function truncateString(str: string) {
+        const maxLength = 250;
+        return str.length > maxLength ? str.slice(0, maxLength).trimEnd() + '...' : str;
+    }
+
     $effect(() => {
         const refreshCompactMode = async () => {
             compactMode = await loadSetting("compactMode") === true;
@@ -52,7 +57,7 @@
             <img src={imageSrc(iconUrl) || "https://placehold.co/128x128"} alt={name} class="large square"/>
             <div style="min-width: 0; flex: 1; overflow-wrap: break-word;">
                 <h5>{name}</h5>
-                <span class="_desc">{description}</span>
+                <span class="_desc">{@html truncateString(description)}</span>
             </div>
         </div>
 
@@ -80,5 +85,10 @@
     ._desc {
         font-size: 0.8rem;
         opacity: 50%;
+
+        :global(h1, h2, h3, h4, h5, h6) {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
     }
 </style>
