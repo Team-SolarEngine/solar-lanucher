@@ -135,9 +135,12 @@ pub fn get_file_content(path: String) -> Result<String, String> {
 }
 
 #[tauri::command]
-pub fn run_command(command: String) -> Result<String, String> {
+pub async fn run_command(command: String) -> Result<String, String> {
     /*
      * This function runs a command in the specified working directory and returns the output.
+     * Note:
+     *   We can't use `cmd.spawn()` or `cmd.status()` because they make the app unresponsive.
+     *   So, we use `tokio::task::spawn_blocking` to run the command in a blocking thread.
      *
      * Arguments:
      *    command: string -> the command to run
@@ -146,27 +149,34 @@ pub fn run_command(command: String) -> Result<String, String> {
      * Returns:
      *    Result<String, String> -> the command output or an error message
      */
-    #[cfg(windows)]
-    let mut cmd = {
-        let mut c = Command::new("cmd");
-        c.args(["/C", &command.replace("/", "\\").to_string()]);
-        c.creation_flags(CREATE_NO_WINDOW);
-        c
-    };
+     let child = {
+        #[cfg(windows)]
+        {
+            let mut cmd = Command::new("cmd");
+            cmd.args(["/C", &command.replace('/', "\\")]);
+            cmd.creation_flags(CREATE_NO_WINDOW);
+            cmd.spawn()
+        }
 
-    #[cfg(unix)]
-    let mut cmd = {
-        let mut c = Command::new("sh");
-        c.args(["-c", &command]);
-        c
-    };
+        #[cfg(unix)]
+        {
+            let mut cmd = Command::new("sh");
+            cmd.args(["-c", &command]);
+            cmd.spawn()
+        }
+    }
+    .map_err(|e| e.to_string())?;
 
-    let status = cmd.status()
-        .map_err(|e| format!("{}", e))?;
+    let result = tokio::task::spawn_blocking(move || {
+        child.wait_with_output()
+    })
+    .await
+    .map_err(|e| e.to_string())?
+    .map_err(|e| e.to_string())?;
 
-    if status.success() {
-        Ok("Command executed successfully".to_string())
+    if result.status.success() {
+        Ok(String::from_utf8_lossy(&result.stdout).to_string())
     } else {
-        Err("Command failed".to_string())
+        Err(String::from_utf8_lossy(&result.stderr).to_string())
     }
 }
