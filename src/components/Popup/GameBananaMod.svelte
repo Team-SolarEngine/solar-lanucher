@@ -143,6 +143,8 @@
 
         modalGameBanana = false;
         modalDownload = true;
+
+        // TODO: place this at @downloading.rs later on in development
         if (await getOS() == "windows") {
             sanitzedName = name
               .replaceAll("<", "")
