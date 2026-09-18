@@ -111,7 +111,7 @@ pub async fn run_command(command: String, _create_terminal_window: bool, working
         {
             let mut cmd = Command::new("cmd");
             cmd.args(["/C", &command.replace('/', "\\")]);
-            cmd.creation_flags(if _create_terminal_window { CREATE_NO_WINDOW } else { 0 });
+            cmd.creation_flags(if _create_terminal_window { 0 } else { CREATE_NO_WINDOW });
             cmd.current_dir(working_dir);
             cmd.spawn()
         }
