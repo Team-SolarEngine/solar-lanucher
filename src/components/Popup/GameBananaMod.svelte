@@ -2,7 +2,7 @@
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { pickFile } from "$lib/interface";
-    import { sendNotif } from "$lib/sys";
+    import { sendNotif, getOS } from "$lib/sys";
     import CardApp from "../CardApp.svelte";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
@@ -16,6 +16,7 @@
     };
 
     let name = $state("");
+    let sanitzedName = $state("");
     let description = $state("");
     let bannerUrl = $state("");
     let images = $state<string[]>([]);
@@ -142,10 +143,32 @@
 
         modalGameBanana = false;
         modalDownload = true;
-        const finalDownloadPath = downloadPath + "/" + name;
+        if (await getOS() == "windows") {
+            sanitzedName = name
+              .replaceAll("<", "")
+              .replaceAll(">", "")
+              .replaceAll(":", "")
+              .replaceAll("\"", "")
+              .replaceAll("/", "")
+              .replaceAll("\\", "")
+              .replaceAll("?", "")
+              .replaceAll("*", "")
+              .replaceAll("CON", "")
+              .replaceAll("PRN", "")
+              .replaceAll("AUX", "")
+              .replaceAll("NUL", "")
+
+            for (let i = 0; i <= 9; i++) {
+                sanitzedName
+                  .replaceAll(`COM${i}`, "")
+                  .replaceAll(`LPT${i}`, "")
+            }
+        }
+        let finalDownloadPath = downloadPath + "/" + sanitzedName;
+        console.log(finalDownloadPath)
 
         try {
-            await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
+            await invoke("download_to_custom_dir", { url, filePath: finalDownloadPath });
             modalDownload = false;
 
             if (isModForEngine(downloadPath)) {

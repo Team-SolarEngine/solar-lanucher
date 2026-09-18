@@ -1,10 +1,12 @@
 <script lang="ts">
+    import { getOS } from "$lib/sys";
     import { invoke } from "@tauri-apps/api/core";
     import { openUrl } from "@tauri-apps/plugin-opener";
     import { onMount } from "svelte";
 
     let version: string;
     let latest: string;
+    let os: string;
 
     async function getVersion() {
         /*
@@ -25,14 +27,15 @@
         const { curVersion, curLatest } = await getVersion();
         version = curVersion;
         latest = curLatest;
+        os = await getOS();
     })
 </script>
 
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
     {#if version && latest && version == latest}
-        <span>Your version is; {version}, <span style="color: green">which is up to date!</span></span>
+        <span>Your version is; {os}-{version}, <span style="color: green">which is up to date!</span></span>
     {:else if version && latest && version != latest}
-        <span>Your version is; {version}, <span style="color: red">which is not up to date...</span></span>
+        <span>Your version is; {os}-{version}, <span style="color: red">which is not up to date...</span></span>
     {:else}
         <span>It either could be loading, or you've hit github's rate limit!</span>
     {/if}
