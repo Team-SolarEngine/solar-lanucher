@@ -144,9 +144,10 @@
         modalGameBanana = false;
         modalDownload = true;
 
+        sanitzedName = name
         // TODO: place this at @downloading.rs later on in development
         if (await getOS() == "windows") {
-            sanitzedName = name
+            sanitzedName = sanitzedName
               .replaceAll("<", "")
               .replaceAll(">", "")
               .replaceAll(":", "")
@@ -161,7 +162,7 @@
               .replaceAll("NUL", "")
 
             for (let i = 0; i <= 9; i++) {
-                sanitzedName
+                sanitzedName = sanitzedName
                   .replaceAll(`COM${i}`, "")
                   .replaceAll(`LPT${i}`, "")
             }
