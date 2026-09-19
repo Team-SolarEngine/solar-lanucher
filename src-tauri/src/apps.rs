@@ -67,7 +67,7 @@ pub async fn open_folder(path: String) -> Result<String, String> {
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "windows")]
-    run_command(format!("explorer '{}'", path.replace('/', "\\")), false, ".".to_string())
+    run_command(format!("explorer {}", path.replace('/', "\\")), false, ".".to_string())
         .await
         .map_err(|e| format!("{} - If you frequently see this, ignore it.", e))?;
 
