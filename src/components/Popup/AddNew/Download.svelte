@@ -154,6 +154,7 @@
         } catch (e) {
             useComponentSnackbarError(`Failed to download mod: ${e}`);
             modalDownload = false;
+            modalDownloading = false;
         }
     }
 
