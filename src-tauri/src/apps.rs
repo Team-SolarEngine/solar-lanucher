@@ -57,12 +57,12 @@ pub async fn open_folder(path: String) -> Result<String, String> {
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(target_os = "linux")]
-    run_command(format!("xdg-open '{}'", path), false, ".".to_string())
+    run_command(format!("xdg-open \"{}\"", path), false, ".".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "macos")]
-    run_command(format!("open '{}'", path), false, ".".to_string())
+    run_command(format!("open \"{}\"", path), false, ".".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
