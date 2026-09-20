@@ -57,7 +57,7 @@
             <img src={imageSrc(iconUrl) || "https://placehold.co/128x128"} alt={name} class="large square"/>
             <div style="min-width: 0; flex: 1; overflow-wrap: break-word;">
                 <h5>{name}</h5>
-                <span class="_desc">{@html truncateString(description)}</span>
+                <span class="_desc_CA">{@html truncateString(description)}</span>
             </div>
         </div>
 
@@ -82,7 +82,7 @@
 </article>
 
 <style>
-    ._desc {
+    ._desc_CA {
         font-size: 0.8rem;
         opacity: 50%;
 

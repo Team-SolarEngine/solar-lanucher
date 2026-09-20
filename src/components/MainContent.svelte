@@ -91,7 +91,7 @@ okay real shit talk;
                     <div style="flex: 1; min-width: 0;">
                         <h2>{name}</h2>
                         {#if readme || changelog}
-                        <span class="_desc _breakword" onclick={() => openDescription = true}>
+                        <span class="_desc_MC _breakword" onclick={() => openDescription = true}>
                             {@html truncateString(description)}
                         </span>
                         {/if}
@@ -203,7 +203,7 @@ okay real shit talk;
         text-align: center;
     }
 
-    ._desc {
+    ._desc_MC {
         font-size: 0.8rem;
         opacity: 50%;
         border-radius: 8px;
