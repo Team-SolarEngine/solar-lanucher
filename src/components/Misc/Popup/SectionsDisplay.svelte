@@ -2,7 +2,7 @@
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import CardApp from "../../../components/CardApp.svelte";
-    import { imageSrc } from "$lib/sys";
+    import { imageSrc, getOS } from "$lib/sys";
 
     let {
         workingDirectory,
@@ -169,10 +169,8 @@
     async function openEditor(workingDirectory: string) {
         try {
             let editorCMD = await loadSetting("codeEditor")
-            let command = `${editorCMD} "${workingDirectory}"`
-            console.log(command)
-
-            await invoke("run_command", { command, createTerminalWindow: false, workingDir: "." })
+            if (await getOS() == "windows") workingDirectory.replaceAll("/", "\\")
+            await invoke("pure_run_command", { command: editorCMD, args: [workingDirectory] })
         } catch(e) {
             useComponentSnackbarError(`Failed to open editor: ${e}`)
         }

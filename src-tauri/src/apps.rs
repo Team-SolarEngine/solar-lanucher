@@ -91,6 +91,35 @@ pub fn get_file_content(path: String) -> Result<String, String> {
 }
 
 #[tauri::command]
+pub fn pure_run_command(command: String, args: Vec<String>) -> Result<String, String> {
+    /*
+     * This function spawns a command directly instead of wrapping it
+     * in a cmd/sh shell.
+     *
+     * Arguments:
+     *    command: string       -> the executable to run
+     *    args: array of strings -> the arguments to pass to the executable
+     *
+     * Returns:
+     *    Result<String, String> -> a success message or an error message
+     */
+    let mut cmd = Command::new(command);
+    cmd.args(&args);
+
+    #[cfg(windows)]
+    cmd.creation_flags(CREATE_NO_WINDOW);
+
+    let status = cmd.status()
+        .map_err(|e| format!("{}", e))?;
+
+    if status.success() {
+        Ok("Command executed successfully".to_string())
+    } else {
+        Err("Command failed".to_string())
+    }
+}
+
+#[tauri::command]
 pub async fn run_command(command: String, _create_terminal_window: bool, working_dir: String) -> Result<String, String> {
     /*
      * This function runs a command in the specified working directory and returns the output.
