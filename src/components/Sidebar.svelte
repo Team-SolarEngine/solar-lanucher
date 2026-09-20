@@ -26,20 +26,6 @@
         {name: "Github", icon: "commit", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher")},
     ]
 
-    async function getOS() {
-        /*
-         * This function returns the operating system of the user.
-         * 
-         * Returns:
-         *    string -> the operating system of the user
-         */
-        try {
-            os = await invoke("get_os");
-        } catch (e) {
-            console.error(`Failed to get OS name: ${e}`);
-        }
-    }
-
     function openModal(modal: string) {
         /*
          * This function opens a modal based on the given name.
@@ -78,7 +64,10 @@
             </div>
     
             <div>
-                <button onclick={onOpenAdd} oncontextmenu={() => openUrl("https://solarengine.net/shares")}>
+                <button onclick={onOpenAdd} oncontextmenu={(event) => {
+                  event.preventDefault();
+                  openUrl("https://solarengine.net/shares");
+                }}>
                     <i>add</i>
                     <span class="tooltip left">
                         Left click to add a new app<br>
