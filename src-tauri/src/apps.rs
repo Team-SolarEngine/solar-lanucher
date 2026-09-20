@@ -91,7 +91,7 @@ pub fn get_file_content(path: String) -> Result<String, String> {
 }
 
 #[tauri::command]
-pub fn pure_run_command(command: String, args: Vec<String>) -> Result<String, String> {
+pub async fn pure_run_command(command: String, args: Vec<String>) -> Result<String, String> {
     /*
      * This function spawns a command directly instead of wrapping it
      * in a cmd/sh shell.
@@ -103,19 +103,28 @@ pub fn pure_run_command(command: String, args: Vec<String>) -> Result<String, St
      * Returns:
      *    Result<String, String> -> a success message or an error message
      */
-    let mut cmd = Command::new(command);
-    cmd.args(&args);
+    let child = {
+        let mut cmd = Command::new(&command);
 
-    #[cfg(windows)]
-    cmd.creation_flags(CREATE_NO_WINDOW);
+        #[cfg(windows)]
+        cmd.creation_flags(CREATE_NO_WINDOW);
 
-    let status = cmd.status()
-        .map_err(|e| format!("{}", e))?;
+        cmd.args(&args);
+        cmd.spawn()
+    }
+    .map_err(|e| e.to_string())?;
 
-    if status.success() {
-        Ok("Command executed successfully".to_string())
+    let result = tokio::task::spawn_blocking(move || {
+        child.wait_with_output()
+    })
+    .await
+    .map_err(|e| e.to_string())?
+    .map_err(|e| e.to_string())?;
+
+    if result.status.success() {
+        Ok(String::from_utf8_lossy(&result.stdout).to_string())
     } else {
-        Err("Command failed".to_string())
+        Err(String::from_utf8_lossy(&result.stderr).to_string())
     }
 }
 
