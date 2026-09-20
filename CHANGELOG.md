@@ -1,5 +1,17 @@
 # Solar Launcher Changelog
 
+## 0.7.2
+
+### Fixed
+- **[ WINDOWS ]** Fixed opening folder
+- Fixed "Open Editor" in all platforms
+- Classes overlap for `CardApp.svelte` and `MainContent.svelte`
+- Fix download modal not closing after error
+
+### Removed
+- Removed `codeEditor` default value
+- Webview popup for right clicking the `+` button
+
 ## 0.7.1
 
 ### Added
@@ -12,8 +24,8 @@
 - `CardApp.svelte` in `GameBananaMod.svelte`, `DragAndDrop.svelte`, and `SectionsDisplay.svelte` no longer has a button to start
 - Added `max-width` of 600px to `DragAndDrop.svelte`
 - Deleting shortcut and/or instance at the dropdown works as expected.
-- [ LINUX ] Running apps (explorer, editor, etc...) shouldn't freeze the app
-- [ WINDOWS ] Mods with special characters gets filtered for folder name
+- **[ LINUX ]** Running apps (explorer, editor, etc...) shouldn't freeze the app
+- **[ WINDOWS ]** Mods with special characters gets filtered for folder name
 
 ## 0.7.0
 
