@@ -44,6 +44,7 @@ Check out our [discord server](https://discord.gg/RaHmP5fgyA) for our developmen
 You can get the **latest stable version** of Solar Launcher [here](https://github.com/Team-SolarEngine/solar-lanucher/releases). We recommend you to download the latest stable version.
 
 If you want **nightly**, here's the link for each platform.
+
 - [solarlauncher-macos-latest-aarch64-apple-darwin](https://nightly.link/Team-SolarEngine/solar-lanucher/workflows/build.yaml/main/solarlauncher-macos-latest-aarch64-apple-darwin.zip)
 - [solarlauncher-macos-latest-x86_64-apple-darwin](https://nightly.link/Team-SolarEngine/solar-lanucher/workflows/build.yaml/main/solarlauncher-macos-latest-x86_64-apple-darwin.zip)
 - [solarlauncher-ubuntu-latest-x86_64-unknown-linux-gnu](https://nightly.link/Team-SolarEngine/solar-lanucher/workflows/build.yaml/main/solarlauncher-ubuntu-latest-x86_64-unknown-linux-gnu.zip)
@@ -57,7 +58,7 @@ Drag and drop mods. Either that's from a non-engine or a engine. Select if you w
 Literally supports any executables. This gives you flexibility for... something I guess? We don't have any advantages on this, other than running for bottles or wine in Linux.
 
 ## Cross Platform
-This is probably obvious, but we support desktop cross platform for <u>Windows</u>, <u>Linux</u>, and <u>macOS</u>. No, Android will not come soon. iOS is a big massive no.
+This is probably obvious, but we support desktop cross platform for <u>Windows</u>, <u>Linux</u>, and <u>macOS</u>. Sadly, we do not plan to make Android and iOS.
 
 ## Deep Links
 Solar Launcher supports deeplinks, that means, you can install mods and whatnot directly to the launcher easily! To call it, just do `solar-launch://gb-mods/{gamebanana-game-id}`. We directly support GameBanana.
@@ -65,10 +66,10 @@ Solar Launcher supports deeplinks, that means, you can install mods and whatnot 
 Wanna try it out? [Click here](solar-launch://gb-mods/618481) - [Use the website instead](https://team-solarengine.github.io/solar-lanucher/). Github doesn't allow deep links.
 
 ## In-App Engine Downloading
-Leaving the Launcher just to get a specific launcher takes too long. We've made it where you can download Solar, Codename, Psych and Funkin directly in the launcher w/o leaving the launcher!
+Leaving the Launcher just to get a specific engine takes too long. We've made it where you can download Solar, Codename, Psych, Funkin, and more (if you decide to add more via settings) directly in the launcher!
 
 ## Mods Section
-Deleting and disabling mods are now easier than ever! Just click on a checkbox to toggle, and click on the trash button to delete that mod forever. There's also a folder button if you need it.
+Deleting and disabling mods are now easier than ever! Just click on a checkbox to toggle, and click on the trash button to delete that mod forever. A folder button to open explorer, a transfer button to transfer the mod to another instance, and a editor button to open your editor in that mod!
 
 # License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
