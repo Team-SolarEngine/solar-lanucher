@@ -1,4 +1,5 @@
 name: Bug report
+title: [BUG]: 
 description: Report bugs with the launcher here
 labels: [bug]
 body:
