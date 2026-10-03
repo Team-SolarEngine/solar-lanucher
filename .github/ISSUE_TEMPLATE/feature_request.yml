@@ -23,7 +23,7 @@ body:
       required: true
 
   - type: textarea
-    id: description
+    id: realworld
     attributes:
       label: "How will this be helpful in a real world?"
       placeholder: "This would make it easier to..."
