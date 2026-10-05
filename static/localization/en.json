@@ -1,3 +1,105 @@
 {
-  "main_screen.empty_screen.header": "Your new, lightweight FNF launcher. All in one place."
+  "            //-- GLOBAL SECTION --//            ": "",
+  "global.close": "Close",
+  "global.cancel": "Cancel",
+  "global.done": "Done",
+  "global.save": "Save",
+  "global.confirm": "Confirm",
+  "global.explorer": "Explorer",
+  "global.delete": "Delete",
+
+  "            //-- MAIN SCREEN SECTION --//            ": "",
+  "main_screen.empty_screen.header": "Your new, lightweight FNF launcher. All in one place.",
+
+  "            //-- SETTINGS SECTION --//            ": "",
+  "settings.global.Manage": "Manage",
+
+  "settings.add_pet.title": "Add Pet",
+  "settings.add_pet.description": "Have sussy amongus on the bottom right! Keeps you company.",
+
+  "settings.pet_icon_url.title": "Pet Icon URL",
+  "settings.pet_icon_url.description": "Don't like sussy amogus? Use a URL or Path to a custom icon!",
+
+  "settings.github_token.title": "GitHub Token",
+  "settings.github_token.description": "Tired of rate limits? Create your own token for GitHub and use it!",
+
+  "settings.compact_mode.title": "Compact Mode",
+  "settings.compact_mode.description": "Too spaced out and too much content? Turn this on!",
+
+  "settings.additional_engine_repositories.title": "Additional Engine Repositories",
+  "settings.additional_engine_repositories.description": "Tired of the curent engine selection? You can add more!",
+  "settings.additional_engine_repositories.manage_submenu.title": "Additional Repositories",
+  "settings.additional_engine_repositories.manage_submenu.description": "Add custom entine repositories to download from. Make sure they have releases!",
+  "settings.additional_engine_repositories.manage_submenu.button.add_repo": "Add Repository",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title": "Whatcha' thinkin?",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title": "Repository Name",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.description": "The name of the repository shown in the UI. eg; <code>Solar Engine</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title": "GitHub URL (owner/repo)",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.description": "The GitHub URL of the repository. eg; <code>Team-SolarEngine/Solar-Engine-Archived</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title": "Icon",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.description": "The icon of the repository shown in the UI. eg; <code>https://</code>",
+
+  "settings.favourite_path.title": "Favourite Path",
+  "settings.favourite_path.description": "Have a path that you use frequently? Set it here! We only have one slot, but we plan to add more in the future.",
+
+  "settings.code_editor.title": "Code Editor",
+  "settings.code_editor.description": "You're a developer? Here's a shortcut for you!",
+
+  "settings.localization.title": "Localization",
+  "settings.localization.description": "Don't want to use english? Use other languages!",
+  "settings.localization.manage_submenu.title": "Pick a language!",
+  "settings.localization.manage_submenu.description": "Can't find your language? You can contribute for your langauge for free!",
+  "settings.localization.manage_submenu.translated_by": "Translated by ",
+
+  "settings.version.section1": "Your version of Solar Launcher is;",
+  "settings.version.section2.up_to_date": "which is up to date!",
+  "settings.version.section2.out_of_date": "which is out of date...",
+  "settings.version.section2.limited": "and we can't check because you're limited...",
+
+  "            //-- ADD NEW INSTANCE SECTION --//            ": "",
+  "prompt_for_new.title": "Adding a new instance for FNF...",
+  "prompt_for_new.description": "You can either download a new instance, or add in your already-downloaded ones!",
+  "prompt_for_new.button.local": "Local",
+  "prompt_for_new.button.download_engines": "Download Engines",
+
+  "            //-- ADD LOCAL/EDIT INSTANCE SECTION --//            ": "",
+  "local_or_edit.title": "Add/Edit a New FNF Instance",
+  "local_or_edit.description": "<b>Pro tip</b>; Click on the clip icon for a file explorer...",
+  "local_or_edit.global.temp_name": "Instance Name",
+
+  "local_or_edit.field.mod_or_engine_name.title": "FNF Mod/Engine name",
+  "local_or_edit.field.mod_or_engine_name.description": "The FNF mod/engine name to display in the launcher.",
+
+  "local_or_edit.field.icon_path.title": "Icon Path",
+  "local_or_edit.field.icon_path.description": "Any icon your hear desires. Make sure it's 1:1. It can be URL or Path.",
+
+  "local_or_edit.field.execute_command.title": "Execute Command",
+  "local_or_edit.field.execute_command.description": "The command to execute to launch the instance. eg; <code>.\\Funkin.exe</code>",
+
+  "local_or_edit.field.working_directory.title": "Working Directory",
+  "local_or_edit.field.working_directory.description": "The working directory for the instance. eg; <code>D:\\Games\\FNF\\Funkin</code>",
+
+  "local_or_edit.field.description.title": "Description",
+  "local_or_edit.field.description.description": "The description of the app to display in the launcher. eg; <code>Base game FNF V-slice</code>",
+
+  "local_or_edit.field.banner_url.title": "Banner URL",
+  "local_or_edit.field.banner_url.description": "The banner image URL or Path for the instance. Aspect ratio shouldn't matter, but we reccomend 16:9.",
+
+  "            //-- START EXTRA SECTION --//            ": "",
+  "start_extra.button.start": "Start",
+  "start_extra.button.submenu.open_in_terminal": "Open in Terminal",
+  "start_extra.button.submenu.edit": "Edit",
+  "start_extra.button.submenu.open_folder": "Open Folder",
+  "start_extra.button.submenu.delete_shortcut": "Delete Shortcut",
+  "start_extra.button.submenu.delete_instance": "Delete Instance",
+
+  "            //-- DELETE INSTANCE SECTION --//            ": "",
+  "delete_instance.title": "Delete Instance",
+  "delete_instance.description": "You're deleting a instance! Click outside this modal, or pick one of either.",
+
+  "delete_instance.button.delete_shortcut": "Delete Shortcut",
+  "delete_instance.button.delete_shortcut.tooltip": "This deletes the shortcut to open the app. Not the instance itself.",
+
+  "delete_instance.button.delete_instance": "Delete Instance",
+  "delete_instance.button.delete_instance.tooltip": "This deletes the instance and the it's shortcut. Use with caution.",
 }
