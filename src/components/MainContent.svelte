@@ -6,6 +6,7 @@
     import Sections from "./Misc/Sections.svelte";
     import { fly } from "svelte/transition";
     import { cubicInOut } from "svelte/easing";
+    import { getWord } from "$lib/localization";
 
     let {
         bannerUrl = "",
@@ -178,7 +179,7 @@ okay real shit talk;
             <div>
                 <img src="images/Solar Icon.png" alt="Solar Launcher" style="width: 128px; height: 128px;" />
                 <h3>{solarLauncherTitle}</h3>
-                <span>Your new, lightweight FNF launcher. All in one place.</span>
+                <span>{#await getWord("main_screen.empty_screen.header") then word}{word}{/await}</span>
                 <span class="_splashText">{splash}</span>
             </div>
         </div>
