@@ -2,11 +2,13 @@
     import { invoke } from "@tauri-apps/api/core";
     import Version from "../Misc/Version.svelte";
     import AdditionalRepos from "./Settings/AdditionalRepos.svelte";
+    import LocalizationMenu from "./Settings/LocalizationMenu.svelte";
 
     let { modalSettings = $bindable() } = $props()
     let settings = $state({} as any)
 
     let toggleAddRepos = $state(false);
+    let toggleLocalizationMenu = $state(false);
 
     const settingFields = [
         { title: "Add Pet", key: "addPet", desc: "Have sussy amogus on the bottom right!\nKeeps you company.", type: "toggle", default: false },
@@ -14,9 +16,10 @@
         { title: "Github Token", key: "githubToken", desc: "Tired of rate limits? Create your own token for GitHub and use it!", type: "text", default: "", hidden: true },
         { title: "Compact Mode", key: "compactMode", desc: "Too spaced out and too much content? Turn this on!", type: "toggle", default: "", hidden: true },
         // { title: "Path To Downloaded", key: "pathToDownloaded", desc: "When using the download options, files will be saved to this path.", type: "text", default: "" },
-        { title: "Additional Engine Repositories", key: "additionalRepos", desc: "Tired of the current engine selection? You can add more!", type: "array", default: [] },
+        { title: "Additional Engine Repositories", key: "additionalRepos", desc: "Tired of the current engine selection? You can add more!", type: "menu", default: "", call: () => toggleAddRepos = true },
         { title: "Favourite Path", key: "favouritePath", desc: "Have a path that you use frequently? Set it here! We only have one slot, but we plan to add more in the future.", type: "text", default: "" },
         { title: "Code Editor", key: "codeEditor", desc: "You're a developer? Here's a shortcut for you!", type: "text", default: "" },
+        { title: "Localization", key: "currentLanguage", desc: "Don't want to use english? Use other languages!", type: "menu", default: "", call: () => toggleLocalizationMenu = true},
     ]
 
     async function loadSetting(key: string) {
@@ -91,14 +94,14 @@
                     <output>{field.desc}</output>
                 {/if}
             </div>
-        {:else if field.type === "array"}
+        {:else if field.type === "menu"}
             <div class="field label border">
                 <h6>{field.title}</h6>
                 {#if field.desc}
                     <div>{field.desc}</div>
                 {/if}
 
-                <button onclick={() => toggleAddRepos = true}>
+                <button onclick={field.call}>
                     Manage
                 </button>
             </div>
@@ -118,3 +121,4 @@
 </dialog>
 
 <AdditionalRepos bind:currentlyOpen={toggleAddRepos} />
+<LocalizationMenu bind:currentlyOpen={toggleLocalizationMenu} />
