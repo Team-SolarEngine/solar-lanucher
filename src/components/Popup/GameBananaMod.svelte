@@ -177,13 +177,13 @@
 
             if (isModForEngine(downloadPath)) {
                 await sendNotif(
-                    "GameBanana Mod",
-                    "We're done downloading!"
+                    await getWord("notification.download.title.gamebanana"),
+                    await getWord("notification.download.description.soft_coded")
                 );
             } else {
                 await sendNotif(
-                    "GameBanana Mod",
-                    "We're done downloading! We just need you to input the executable file, and you should be all set!"
+                    await getWord("notification.download.title.gamebanana"),
+                    await getWord("notification.download.description.hard_coded")
                 );
             }
 

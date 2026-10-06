@@ -141,8 +141,8 @@
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
             modalDownloading = false;
             await sendNotif(
-                "Engine Downloading",
-                "We're done downloading! We just need you to input the executable file, and you should be all set!"
+                await getWord("notification.download.title.engine"),
+                await getWord("notification.download.description.hard_coded")
             );
 
             onDownloaded({

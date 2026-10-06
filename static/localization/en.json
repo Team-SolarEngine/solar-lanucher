@@ -158,5 +158,12 @@
   "gamebanana.importing_hard_coded.field.button": "Use favourite path",
 
   "gamebanana.instances.title": "Importing a mod that's soft modded?",
-  "gamebanana.instances.description": "Select one of these instances!"
+  "gamebanana.instances.description": "Select one of these instances!",
+
+  "            //-- NOTIFICATION SECTION --//            ": "",
+  "notification.download.title.gamebanana": "GameBanana Mod",
+  "notification.download.title.engine": "Engine Downloading",
+
+  "notification.download.description.hard_coded": "We're done downloading!",
+  "notification.download.description.soft_coded": "We're done downloading! We just need you to input the executable file, and you should be all set!"
 }
