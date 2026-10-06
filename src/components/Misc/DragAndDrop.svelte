@@ -97,35 +97,35 @@
 <div class="_overlay" class:active={hoveringDrag}>
     <div class="_child">
         <i class="extra">download</i>
-        <span>{#await getWord("drag_and_drop.overlay.text") then word}{word}{/await}</span>
+        <span>{#await getWord("drag_and_drop.overlay.text") then word}{@html word}{/await}</span>
     </div>
 </div>
 
 <div class="overlay" class:active={openDialogForInstances} onclick={() => openDialogForInstances = false}></div>
 <dialog class="right" class:active={openDialogForInstances} style="max-width: 600px;">
-    <h6>{#await getWord("drag_and_drop.title") then word}{word}{/await}</h6>
+    <h6>{#await getWord("drag_and_drop.title") then word}{@html word}{/await}</h6>
     <span>{pathToCopy}</span>
 
     <hr class="medium"/>
 
-    <h6>{#await getWord("drag_and_drop.path_to_paste.title") then word}{word}{/await}</h6>
-    <span>{#await getWord("drag_and_drop.path_to_paste.description") then word}{word}{/await}</span>
+    <h6>{#await getWord("drag_and_drop.path_to_paste.title") then word}{@html word}{/await}</h6>
+    <span>{#await getWord("drag_and_drop.path_to_paste.description") then word}{@html word}{/await}</span>
 
     <div class="field label prefix border">
         <a onclick={async () => pathToPaste = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
         <input type="text" bind:value={pathToPaste}>
-        <label>{#await getWord("drag_and_drop.path_to_paste.field.title") then word}{word}{/await}</label>
+        <label>{#await getWord("drag_and_drop.path_to_paste.field.title") then word}{@html word}{/await}</label>
     </div>
 
     <button style="margin-top: 8px;" onclick={() => copyFolderToDest()}>
         <i>check</i>
-        {#await getWord("global.confirm") then word}{word}{/await}
+        {#await getWord("global.confirm") then word}{@html word}{/await}
     </button>
 
     <hr class="medium"/>
 
-    <h6>{#await getWord("drag_and_drop.instances.title") then word}{word}{/await}</h6>
-    <span>{#await getWord("drag_and_drop.instances.description") then word}{word}{/await}</span>
+    <h6>{#await getWord("drag_and_drop.instances.title") then word}{@html word}{/await}</h6>
+    <span>{#await getWord("drag_and_drop.instances.description") then word}{@html word}{/await}</span>
 
     {#if apps.length > 0}
         {#each apps as app}
@@ -139,7 +139,7 @@
             </section>
         {/each}
     {:else}
-        <span>{#await getWord("global.no_instances_found") then word}{word}{/await}</span>
+        <span>{#await getWord("global.no_instances_found") then word}{@html word}{/await}</span>
     {/if}
 </dialog>
 

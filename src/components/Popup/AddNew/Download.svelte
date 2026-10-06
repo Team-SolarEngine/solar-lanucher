@@ -194,15 +194,15 @@
 
 <div class="overlay" class:active={modalDownload} onclick={() => modalDownload = false}></div>
 <dialog class="right" class:active={modalDownload}>
-    <h5>{#await getWord("download.title") then word}{word}{/await}</h5>
-    <div>{#await getWord("download.description") then word}{word}{/await}</div>
+    <h5>{#await getWord("download.title") then word}{@html word}{/await}</h5>
+    <div>{#await getWord("download.description") then word}{@html word}{/await}</div>
 
     <hr class="medium" />
 
     <div class="border field prefix label">
         <a onclick={async () => pathToDownload = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
         <input type="text" bind:value={pathToDownload} />
-        <label>{#await getWord("download.path_to_download.title") then word}{word}{/await} <span style="color: red;">*</span></label>
+        <label>{#await getWord("download.path_to_download.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
         <output> {#await getWord("download.path_to_download.description") then word}{@html word}{/await} </output>
 
         <!--
@@ -214,14 +214,14 @@
             will be removed in a future commit and use $effect() instead.
         -->
         <button onclick={async () => pathToDownload = path} style="margin-top: 4px;">
-            {#await getWord("global.use_favourite_path") then word}{word}{/await}
+            {#await getWord("global.use_favourite_path") then word}{@html word}{/await}
         </button>
     </div>
 
     <hr class="medium" />
 
     {#if engines.length === 0}
-        <p>{#await getWord("download.loading") then word}{word}{/await}</p>
+        <p>{#await getWord("download.loading") then word}{@html word}{/await}</p>
     {:else}
         {#each engines as engine}
             <article>
@@ -242,7 +242,7 @@
                                             <img style="width: 50px; height: 50px; border-radius: 5px;" src={release.avatarUrl} alt={engine.name}/>
                                             <div>
                                                 <h6 style="font-weight: bold">{release.tag}</h6>
-                                                {#await getWord("download.section_engine.published_by") then word}{word}{/await}- {release.author}
+                                                {#await getWord("download.section_engine.published_by") then word}{@html word}{/await}- {release.author}
                                             </div>
                                         </div>
                                         <i>arrow_drop_down</i>
@@ -250,7 +250,7 @@
                                 </summary>
                                 <div style="margin-left: 20px; margin-top: 10px;">
                                     {#if release.downloads.length === 0}
-                                        <p>{#await getWord("download.section_engine.empty_download_assets") then word}{word}{/await}</p>
+                                        <p>{#await getWord("download.section_engine.empty_download_assets") then word}{@html word}{/await}</p>
                                     {:else}
                                         {#each release.downloads as download}
                                             <article onclick={() => handleDownload(download.url, [

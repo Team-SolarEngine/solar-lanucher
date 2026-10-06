@@ -69,14 +69,14 @@
 
 <div class="overlay" class:active={modalSettings} onclick={() => modalSettings = false}></div>
 <dialog class="right" class:active={modalSettings} style="max-width: 500px;">
-    <h5>{#await getWord("settings.global.Settings") then word}{word}{/await}</h5>
+    <h5>{#await getWord("settings.global.Settings") then word}{@html word}{/await}</h5>
 
     {#each settingFields as field}
         {#if field.type === "toggle"}
             <div class="field middle-align">
                 <nav>
                     <div class="max">
-                        <h6>{#await getWord(field.title) then word}{word}{/await}</h6>
+                        <h6>{#await getWord(field.title) then word}{@html word}{/await}</h6>
                         {#if field.desc}
                             <div>{#await getWord(field.desc) then word}{@html word.replace(/\n/g, "<br/>")}{/await}</div>
                         {/if}
@@ -90,20 +90,20 @@
         {:else if field.type === "text"}
             <div class="field label border">
                 <input type={field.hidden ? "password" : "text"} bind:value={settings[field.key]} onchange={() => saveSetting(field.key, settings[field.key])}>
-                <label>{#await getWord(field.title) then word}{word}{/await}</label>
+                <label>{#await getWord(field.title) then word}{@html word}{/await}</label>
                 {#if field.desc}
-                    <output>{#await getWord(field.desc) then word}{word}{/await}</output>
+                    <output>{#await getWord(field.desc) then word}{@html word}{/await}</output>
                 {/if}
             </div>
         {:else if field.type === "menu"}
             <div class="field label border">
-                <h6>{#await getWord(field.title) then word}{word}{/await}</h6>
+                <h6>{#await getWord(field.title) then word}{@html word}{/await}</h6>
                 {#if field.desc}
-                    <div>{#await getWord(field.desc) then word}{word}{/await}</div>
+                    <div>{#await getWord(field.desc) then word}{@html word}{/await}</div>
                 {/if}
 
                 <button onclick={field.call}>
-                    {#await getWord("settings.global.Manage") then word}{word}{/await}
+                    {#await getWord("settings.global.Manage") then word}{@html word}{/await}
                 </button>
             </div>
         {/if}
@@ -117,7 +117,7 @@
     <Version />
 
     <nav class="right-align no-space">
-        <button class="transparent link" onclick={() => modalSettings = false}>{#await getWord("global.close") then word}{word}{/await}</button>
+        <button class="transparent link" onclick={() => modalSettings = false}>{#await getWord("global.close") then word}{@html word}{/await}</button>
     </nav>
 </dialog>
 

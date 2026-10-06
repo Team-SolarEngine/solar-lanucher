@@ -34,13 +34,13 @@
 
 <div class="overlay" class:active={promptForNew} onclick={() => close("")}></div>
 <dialog class:active={promptForNew} style="width: 500px;">
-  <h5>{#await getWord("prompt_for_new.title") then word}{word}{/await}</h5>
+  <h5>{#await getWord("prompt_for_new.title") then word}{@html word}{/await}</h5>
   <div>
-      {#await getWord("prompt_for_new.description") then word}{word}{/await}
+      {#await getWord("prompt_for_new.description") then word}{@html word}{/await}
   </div>
   <nav class="no-space center-align" style="display: flex; flex-wrap: wrap;">
     {#each options as option}
-        <button onclick={() => close(option.type)} class:transparent={!option.primary}><i>{option.icon}</i>{#if option.word}{#await getWord(option.word) then word}{word}{/await}{:else}{option.name}{/if}</button>
+        <button onclick={() => close(option.type)} class:transparent={!option.primary}><i>{option.icon}</i>{#if option.word}{#await getWord(option.word) then word}{@html word}{/await}{:else}{option.name}{/if}</button>
     {/each}
   </nav>
 </dialog>

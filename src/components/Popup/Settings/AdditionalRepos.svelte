@@ -81,11 +81,11 @@
 
 <div class="overlay" class:active={currentlyOpen} onclick={() => currentlyOpen = false}></div>
 <dialog class:active={currentlyOpen} class="left">
-    <h5>{#await getWord("settings.additional_engine_repositories.manage_submenu.title") then word}{word}{/await}</h5>
-    <div>{#await getWord("settings.additional_engine_repositories.manage_submenu.description") then word}{word}{/await}</div>
+    <h5>{#await getWord("settings.additional_engine_repositories.manage_submenu.title") then word}{@html word}{/await}</h5>
+    <div>{#await getWord("settings.additional_engine_repositories.manage_submenu.description") then word}{@html word}{/await}</div>
 
     {#if repos.length === 0}
-        <p>{#await getWord("settings.additional_engine_repositories.manage_submenu.empty") then word}{word}{/await}</p>
+        <p>{#await getWord("settings.additional_engine_repositories.manage_submenu.empty") then word}{@html word}{/await}</p>
     {:else}
         {#each repos as repo, index}
             <article>
@@ -108,33 +108,33 @@
     <nav class="right-align no-space">
         <button onclick={() => isAdding = true}>
             <i>add</i>
-            {#await getWord("settings.additional_engine_repositories.manage_submenu.button.add_repo") then word}{word}{/await}
+            {#await getWord("settings.additional_engine_repositories.manage_submenu.button.add_repo") then word}{@html word}{/await}
         </button>
-        <button class="transparent link" onclick={() => currentlyOpen = false}>{#await getWord("global.close") then word}{word}{/await}</button>
+        <button class="transparent link" onclick={() => currentlyOpen = false}>{#await getWord("global.close") then word}{@html word}{/await}</button>
     </nav>
 </dialog>
 
 <div class="overlay" class:active={isAdding} onclick={() => isAdding = false}></div>
 <dialog class:active={isAdding}>
-    <h5>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title") then word}{word}{/await}</h5>
+    <h5>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title") then word}{@html word}{/await}</h5>
     <div class="field label border">
         <input type="text" bind:value={newRepo.name} />
-        <label>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title") then word}{word}{/await} <span style="color: red;">*</span></label>
+        <label>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
         <output>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.description") then word}{@html word}{/await}</output>
     </div>
     <div class="field label border">
         <input type="text" bind:value={newRepo.url} />
-        <label>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title") then word}{word}{/await} <span style="color: red;">*</span></label>
+        <label>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
         <output>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.description") then word}{@html word}{/await}</output>
     </div>
     <div class="field label border">
         <input type="text" bind:value={newRepo.imageUrl} />
-        <label>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title") then word}{word}{/await}</label>
+        <label>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title") then word}{@html word}{/await}</label>
         <output>{#await getWord("settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.description") then word}{@html word}{/await}</output>
     </div>
     <nav class="right-align no-space">
-        <button class="transparent" onclick={() => isAdding = false}>{#await getWord("global.cancel") then word}{word}{/await}</button>
-        <button onclick={() => { addRepo(); isAdding = false; }}>{#await getWord("global.save") then word}{word}{/await}</button>
+        <button class="transparent" onclick={() => isAdding = false}>{#await getWord("global.cancel") then word}{@html word}{/await}</button>
+        <button onclick={() => { addRepo(); isAdding = false; }}>{#await getWord("global.save") then word}{@html word}{/await}</button>
     </nav>
 </dialog>
 

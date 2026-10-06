@@ -242,15 +242,15 @@
             <article class="tertiary">
                 <div class="row">
                     <i>warning</i>
-                    <h4>{#await getWord("gamebanana.warning.title") then word}{word}{/await}</h4>
+                    <h4>{#await getWord("gamebanana.warning.title") then word}{@html word}{/await}</h4>
                 </div>
-                <span> {#await getWord("gamebanana.warning.description") then word}{word}{/await} </span>
+                <span> {#await getWord("gamebanana.warning.description") then word}{@html word}{/await} </span>
             </article>
             <hr class="medium">
         {/if}
 
         {#if downloads.length > 0}
-            <h6 style="margin-bottom: 10px;">{#await getWord("gamebanana.title") then word}{word}{/await} <b>{name}</b>...</h6>
+            <h6 style="margin-bottom: 10px;">{#await getWord("gamebanana.title") then word}{@html word}{/await} <b>{name}</b>...</h6>
             <img src={bannerUrl} alt={name} style="width: 100%; height: 200px; object-fit: cover;" class="round" />
             <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 10px;">
                 {#each downloads as download}
@@ -266,13 +266,13 @@
 
             <hr class="medium"/>
 
-            <h6>{#await getWord("gamebanana.importing_hard_coded.title") then word}{word}{/await}</h6>
-            <span>{#await getWord("gamebanana.importing_hard_coded.description") then word}{word}{/await}</span>
+            <h6>{#await getWord("gamebanana.importing_hard_coded.title") then word}{@html word}{/await}</h6>
+            <span>{#await getWord("gamebanana.importing_hard_coded.description") then word}{@html word}{/await}</span>
 
             <div class="border field prefix label">
                 <a onclick={async () => downloadPath = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
                 <input type="text" bind:value={downloadPath} />
-                <label>{#await getWord("gamebanana.importing_hard_coded.field.title") then word}{word}{/await}<span style="color: red;">*</span></label>
+                <label>{#await getWord("gamebanana.importing_hard_coded.field.title") then word}{@html word}{/await}<span style="color: red;">*</span></label>
                 <output>{#await getWord("gamebanana.importing_hard_coded.field.description") then word}{@html word}{/await}</output>
 
                 <!--
@@ -284,14 +284,14 @@
                     you don't need a @Local.svelte popup when you're adding a mod.
                 -->
                 <button onclick={async () => downloadPath = path} style="margin-top: 4px;">
-                    {#await getWord("gamebanana.importing_hard_coded.field.button") then word}{word}{/await}
+                    {#await getWord("gamebanana.importing_hard_coded.field.button") then word}{@html word}{/await}
                 </button>
             </div>
 
             <hr class="medium"/>
         
-            <h6>{#await getWord("gamebanana.instances.title") then word}{word}{/await}</h6>
-            <span>{#await getWord("gamebanana.instances.description") then word}{word}{/await}</span>
+            <h6>{#await getWord("gamebanana.instances.title") then word}{@html word}{/await}</h6>
+            <span>{#await getWord("gamebanana.instances.description") then word}{@html word}{/await}</span>
         
             {#if apps.length > 0}
                 {#each apps as app}
@@ -317,8 +317,8 @@
 
 <div class="overlay" class:active={modalDownload}></div>
 <dialog class:active={modalDownload} style="width: 600px;">
-    <h5>{#await getWord("download_waiting.title") then word}{word}{/await}</h5>
-    <span>{#await getWord("download_waiting.description") then word}{word}{/await}</span>
+    <h5>{#await getWord("download_waiting.title") then word}{@html word}{/await}</h5>
+    <span>{#await getWord("download_waiting.description") then word}{@html word}{/await}</span>
     <progress class="wavy indeterminate" value="100" max="100"></progress>
 </dialog>
 

@@ -179,7 +179,7 @@ okay real shit talk;
             <div>
                 <img src="images/Solar Icon.png" alt="Solar Launcher" style="width: 128px; height: 128px;" />
                 <h3>{solarLauncherTitle}</h3>
-                <span>{#await getWord("main_screen.empty_screen.header") then word}{word}{/await}</span>
+                <span>{#await getWord("main_screen.empty_screen.header") then word}{@html word}{/await}</span>
                 <span class="_splashText">{splash}</span>
             </div>
         </div>

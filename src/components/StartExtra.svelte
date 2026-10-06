@@ -97,7 +97,7 @@
 <nav class="group split">
     <button class="border left-round primary" onclick={() => startApp()}>
       <i>play_arrow</i>
-      <span>{#await getWord("start_extra.button.start") then word}{word}{/await}</span>
+      <span>{#await getWord("start_extra.button.start") then word}{@html word}{/await}</span>
     </button>
     {#if !stretch}
         <div>
@@ -112,7 +112,7 @@
                 {#each extraFunctionalities as functionality}
                     {#if functionality.name != "Delete"}
                         <li onclick={functionality.action}>
-                            <i>{functionality.icon}</i> {#await getWord(functionality.key) then word}{word}{/await}
+                            <i>{functionality.icon}</i> {#await getWord(functionality.key) then word}{@html word}{/await}
                         </li>
                     {/if}
                 {/each}
@@ -121,7 +121,7 @@
 
                 {#each deleteTypes as deleteType}
                     <li onclick={deleteType.action} class="tertiary-text">
-                        <i>delete</i> {#await getWord(deleteType.key) then word}{word}{/await}
+                        <i>delete</i> {#await getWord(deleteType.key) then word}{@html word}{/await}
                     </li>
                 {/each}
             </menu>
@@ -131,7 +131,7 @@
             <!-- {#if functionality.name != "Delete" && functionality.name != "Edit"} -->
                 <button class="border no-round {functionality.extra}" onclick={functionality.action}>
                     <i>{functionality.icon}</i>
-                    <span>{#await getWord(functionality.key) then word}{word}{/await}</span>
+                    <span>{#await getWord(functionality.key) then word}{@html word}{/await}</span>
                 </button>
             <!-- {/if} -->
         {/each}
@@ -140,19 +140,19 @@
 
 <div class="overlay" class:active={deleteInstancePopup} onclick={() => deleteInstancePopup = false}></div>
 <dialog class:active={deleteInstancePopup} style="overflow: visible !important;">
-    <h3>{#await getWord("delete_instance.title") then word}{word}{/await}</h3>
-    <span>{#await getWord("delete_instance.description") then word}{word}{/await}</span>
+    <h3>{#await getWord("delete_instance.title") then word}{@html word}{/await}</h3>
+    <span>{#await getWord("delete_instance.description") then word}{@html word}{/await}</span>
 
     <div class="row right-align">
         <button class="border no-round tertiary-text" onclick={() => deleteApp()}>
             <i>delete</i>
-            <span>{#await getWord("delete_instance.button.delete_shortcut") then word}{word}{/await}</span>
-            <span class="tooltip bottom">{#await getWord("delete_instance.button.delete_shortcut.tooltip") then word}{word}{/await}</span>
+            <span>{#await getWord("delete_instance.button.delete_shortcut") then word}{@html word}{/await}</span>
+            <span class="tooltip bottom">{#await getWord("delete_instance.button.delete_shortcut.tooltip") then word}{@html word}{/await}</span>
         </button>
         <button class="border no-round tertiary-text" onclick={() => deleteInstance()}>
             <i>delete</i>
-            <span>{#await getWord("delete_instance.button.delete_instance") then word}{word}{/await}</span>
-            <span class="tooltip bottom">{#await getWord("delete_instance.button.delete_instance.tooltip") then word}{word}{/await}</span>
+            <span>{#await getWord("delete_instance.button.delete_instance") then word}{@html word}{/await}</span>
+            <span class="tooltip bottom">{#await getWord("delete_instance.button.delete_instance.tooltip") then word}{@html word}{/await}</span>
         </button>
     </div>
 </dialog>

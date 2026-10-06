@@ -132,46 +132,46 @@
 
 <div class="overlay" class:active={modalNew} onclick={close}></div>
 <dialog class="right" class:active={modalNew}>
-  <h5>{#await getWord("local.title") then word}{word}{/await}</h5>
+  <h5>{#await getWord("local.title") then word}{@html word}{/await}</h5>
   <span>{#await getWord("local.description") then word}{@html word}{/await}</span>
 
   <div class="field label border" class:invalid={submitted && !appName}>
     <input type="text" bind:value={appName}>
-    <label>{#await getWord("local_or_edit.field.mod_or_engine_name.title") then word}{word}{/await} <span style="color: red;">*</span></label>
-    <output>{#await getWord("local_or_edit.field.mod_or_engine_name.description") then word}{word}{/await}</output>
+    <label>{#await getWord("local_or_edit.field.mod_or_engine_name.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
+    <output>{#await getWord("local_or_edit.field.mod_or_engine_name.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label prefix border">
     <a onclick={async () => appIconURL = await pickFile(["png", "gif", "jpeg"], "Icon")}> <i>attach_file</i> </a>
     <input type="text" bind:value={appIconURL}>
-    <label>{#await getWord("local_or_edit.field.icon_path.title") then word}{word}{/await}</label>
-    <output>{#await getWord("local_or_edit.field.icon_path.description") then word}{word}{/await}</output>
+    <label>{#await getWord("local_or_edit.field.icon_path.title") then word}{@html word}{/await}</label>
+    <output>{#await getWord("local_or_edit.field.icon_path.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label border" class:invalid={submitted && !appPath}>
     <input type="text" bind:value={appPath}>
-    <label>{#await getWord("local_or_edit.field.execute_command.title") then word}{word}{/await} <span style="color: red;">*</span></label>
+    <label>{#await getWord("local_or_edit.field.execute_command.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
     <output>{#await getWord("local_or_edit.field.execute_command.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label prefix border" class:invalid={submitted && !appWorkingDirectory}>
     <a onclick={async () => appWorkingDirectory = await pickFile([], "Folder", true)}> <i>attach_file</i> </a>
     <input type="text" bind:value={appWorkingDirectory}>
-    <label>{#await getWord("local_or_edit.field.working_directory.title") then word}{word}{/await} <span style="color: red;">*</span></label>
+    <label>{#await getWord("local_or_edit.field.working_directory.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
     <output>{#await getWord("local_or_edit.field.working_directory.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label border">
     <input type="text" bind:value={appDescription}>
-    <label>{#await getWord("local_or_edit.field.description.title") then word}{word}{/await}</label>
+    <label>{#await getWord("local_or_edit.field.description.title") then word}{@html word}{/await}</label>
     <output>{#await getWord("local_or_edit.field.description.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label prefix border">
     <a onclick={async () => bannerURL = await pickFile(["png", "gif", "jpeg"], "Folder")}> <i>attach_file</i> </a>
     <input type="text" bind:value={bannerURL}>
-    <label>{#await getWord("local_or_edit.field.banner_url.title") then word}{word}{/await}</label>
-    <output>{#await getWord("local_or_edit.field.banner_url.description") then word}{word}{/await}</output>
+    <label>{#await getWord("local_or_edit.field.banner_url.title") then word}{@html word}{/await}</label>
+    <output>{#await getWord("local_or_edit.field.banner_url.description") then word}{@html word}{/await}</output>
   </div>
 
   <CardApp
@@ -184,16 +184,16 @@
   />
 
   <nav class="right-align no-space">
-    <button class="primary link" onclick={addApp}>{#await getWord("local.button.add_app") then word}{word}{/await}</button>
-    <button class="transparent link" onclick={toggleExplorer}>{#await getWord("global.explorer") then word}{word}{/await}</button>
-    <button class="transparent link" onclick={close}>{#await getWord("global.close") then word}{word}{/await}</button>
+    <button class="primary link" onclick={addApp}>{#await getWord("local.button.add_app") then word}{@html word}{/await}</button>
+    <button class="transparent link" onclick={toggleExplorer}>{#await getWord("global.explorer") then word}{@html word}{/await}</button>
+    <button class="transparent link" onclick={close}>{#await getWord("global.close") then word}{@html word}{/await}</button>
   </nav>
 </dialog>
 
 <article class:active={showExplorer} class="_explorer scroll" style="max-width: 600px; position: absolute; top: 0; bottom: 0; left: 0; z-index: 999; margin-bottom: 12px; margin-left: 18px;">
-    <h6>{#await getWord("local_or_edit.explorer.title") then word}{word}{/await}</h6>
+    <h6>{#await getWord("local_or_edit.explorer.title") then word}{@html word}{/await}</h6>
     {#if folderContents.length === 0}
-        <span>{#await getWord("local_or_edit.explorer.empty") then word}{word}{/await}</span>
+        <span>{#await getWord("local_or_edit.explorer.empty") then word}{@html word}{/await}</span>
     {:else}
         <div>
             {#each folderContents as folder}

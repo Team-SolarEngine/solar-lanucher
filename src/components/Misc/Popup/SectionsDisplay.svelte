@@ -273,9 +273,9 @@
 
 <div class="overlay" class:active={instancesDialog} onclick={() => instancesDialog = false}></div>
 <dialog class:active={instancesDialog} class="right" style="max-width: 750px">
-    <h4>{#await getWord("section_display.transfer.title") then word}{word}{/await}</h4>
+    <h4>{#await getWord("section_display.transfer.title") then word}{@html word}{/await}</h4>
     <article class="tertiary">
-        <h3>{#await getWord("section_display.transfer.warning.title") then word}{word}{/await}</h3>
+        <h3>{#await getWord("section_display.transfer.warning.title") then word}{@html word}{/await}</h3>
         <span>
             {#await getWord("section_display.transfer.warning.description") then word}{@html word.replace("{path}", selectedModFolder)}{/await}
         </span>
@@ -295,7 +295,7 @@
             </section>
         {/each}
     {:else}
-        <span>{#await getWord("global.no_instances_found") then word}{word}{/await}</span>
+        <span>{#await getWord("global.no_instances_found") then word}{@html word}{/await}</span>
     {/if}
 </dialog>
 

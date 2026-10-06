@@ -51,7 +51,7 @@
                 {/if}
             </button>
             <span class="tooltip right" class:_sidebarElementClose={!sidebarOpen}>
-                {#await getWord("sidebar.button.collapse_sidebar.tooltip") then word}{word}{/await}
+                {#await getWord("sidebar.button.collapse_sidebar.tooltip") then word}{@html word}{/await}
             </span>
         </div>
         <div class="max"></div>
@@ -98,7 +98,7 @@
             {/each}
             <div style="min-height: 40px; width: 100%;"></div>
         {:else}
-            <span style="display: flex; align-items: center; justify-content: center; height: 100%;">{#await getWord("sidebar.empty.no_instances") then word}{word}{/await}</span>
+            <span style="display: flex; align-items: center; justify-content: center; height: 100%;">{#await getWord("sidebar.empty.no_instances") then word}{@html word}{/await}</span>
         {/if}
     </div>
 
@@ -111,7 +111,7 @@
             transform: rotate(180deg) translateX(70%);
             transition: all 0.3s ease-in-out;
         ">
-        <span>{#await getWord("sidebar.slogan") then word}{word}{/await}</span>
+        <span>{#await getWord("sidebar.slogan") then word}{@html word}{/await}</span>
     </div>
 </article>
 
