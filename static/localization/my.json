@@ -1,0 +1,169 @@
+{
+  "            //-- GLOBAL SECTION --//            ": "",
+  "global.close": "Tutup",
+  "global.cancel": "Batal",
+  "global.done": "Selesai",
+  "global.save": "Simpan",
+  "global.confirm": "Konfirmasi",
+  "global.explorer": "Explorer",
+  "global.delete": "Padam",
+  "global.use_favourite_path": "Guna path kegemaran",
+  "global.not_found": "{type} tidak jumpa.",
+
+  "            //-- MAIN SCREEN SECTION --//            ": "",
+  "main_screen.empty_screen.header": "Awak punya baru, ringan FNF launcher, dalam satu tempat.",
+
+  "            //-- SETTINGS SECTION --//            ": "",
+  "settings.global.Manage": "Urus",
+
+  "settings.add_pet.title": "Tambah haiwan peliharaan",
+  "settings.add_pet.description": "Letakkan Among Us di kenan bawah! Ia akan menamani awak.",
+
+  "settings.pet_icon_url.title": "Haiwan peliharaan URL",
+  "settings.pet_icon_url.description": "Tidak suka sussy amogus? Gunakan URL atau jalur ke ikon kustom!",
+
+  "settings.github_token.title": "GitHub Token",
+  "settings.github_token.description": "Tidak suka Rate Limit? Buatkan token GitHub anda sendiri dan gunakan!",
+
+  "settings.compact_mode.title": "Mod Ringkas",
+  "settings.compact_mode.description": "Tidak suka ruang kosong dan konten terlalu banyak? Aktifkan mode ringkas!",
+
+  "settings.additional_engine_repositories.title": "Tambahan Engine Repositories",
+  "settings.additional_engine_repositories.description": "Tidak suka pilihan engine yang saat ini? Tambahkan lebih banyak!",
+  "settings.additional_engine_repositories.manage_submenu.title": "Repositories Tambahan",
+  "settings.additional_engine_repositories.manage_submenu.description": "Tambahkan repositori engine kustom untuk didownload. Pastikan mereka mempunyai rilis!",
+  "settings.additional_engine_repositories.manage_submenu.button.add_repo": "Tambahkan Repo",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title": "Apa yang kamu pikirin?",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title": "Nama Repository",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.description": "Nama yang ditampilkan di UI. Contoh: <code>Solar Engine</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title": "GitHub URL (owner/repo)",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.description": "GitHub URL repositori. Contoh: <code>Team-SolarEngine/Solar-Engine-Archived</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title": "Icon",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.description": "Icon yang ditampilkan di UI. Contoh: <code>https://</code>",
+
+  "settings.favourite_path.title": "Favorit path",
+  "settings.favourite_path.description": "Ada path yang sering kamu gunakan? Atur di sini! Kami hanya memiliki satu slot, tetapi kami berencana menambahnya di masa depan.",
+
+  "settings.code_editor.title": "Code Editor",
+  "settings.code_editor.description": "Awak developer? Taruh awak punya code editor dalam sini!",
+
+  "settings.localization.title": "Localization",
+  "settings.localization.description": "Tidak mau guna melayu? Guna bahasa lain yang tersedia!",
+  "settings.localization.manage_submenu.title": "Pilih language!",
+  "settings.localization.manage_submenu.description": "Tidak jumpa bahasa yang kamu pilih? Kamu bisa berkontribusi untuk bahasa yang kamu pilih secara gratis!",
+  "settings.localization.manage_submenu.translated_by": "Jemahkan oleh ",
+  "settings.localization.manage_submenu.restart.title": "Ini perlu restart!",
+  "settings.localization.manage_submenu.restart.description": "Saya tahu, saya tahu. Tukar setting dan mau restart untuk semua efek? Susah. Tapi, kita ada bagus alasan. Semua tidak akan update secara automatik. Jadi, ini kita punya pilihan terbaik. Terima kasih!",
+
+  "settings.version.section1": "Awak punya versi untuk Solar Launcher ialah",
+  "settings.version.section2.up_to_date": "yang sudah up to date!",
+  "settings.version.section2.out_of_date": "yang masih out of date...",
+  "settings.version.section2.limited": "yang kita tidak bisa check karena kamu limited...",
+  "settings.version.button": "Buka releases",
+
+  "            //-- ADD NEW INSTANCE SECTION --//            ": "",
+  "prompt_for_new.title": "Tambah Instance untuk FNF...",
+  "prompt_for_new.description": "Awak bisa download instance baru, atau tambah instance yang sudah ada!",
+  "prompt_for_new.button.local": "Local",
+  "prompt_for_new.button.download_engines": "Memuat Turun Engines",
+
+  "            //-- ADD LOCAL/EDIT INSTANCE SECTION --//            ": "",
+  "local.title": "Tambah Instance untuk FNF",
+  "local.description": "<b>Pro tip</b>; Klik pada ikon clip untuk file explorer...",
+
+  "edit.title": "Edit {instance} Instance.",
+
+  "local_or_edit.field.mod_or_engine_name.title": "Nama FNF Mod/Engine",
+  "local_or_edit.field.mod_or_engine_name.description": "Nama FNF Mod/Engine yang akan ditampilkan di launcher.",
+
+  "local_or_edit.field.icon_path.title": "Ikon Path",
+  "local_or_edit.field.icon_path.description": "Icon yang akan ditampilkan di launcher. Harus 1:1. Bisa URL atau Path.",
+
+  "local_or_edit.field.execute_command.title": "Laksanakan Perintah",
+  "local_or_edit.field.execute_command.description": "Command yang akan dieksekusi untuk menjalankan instance. Contoh: <code>.\\Funkin.exe</code>",
+
+  "local_or_edit.field.working_directory.title": "Direktori Kerja",
+  "local_or_edit.field.working_directory.description": "Working directory untuk instance. Contoh: <code>D:\\Games\\FNF\\Funkin</code>",
+
+  "local_or_edit.field.description.title": "Perihalan",
+  "local_or_edit.field.description.description": "Deskripsi aplikasi yang akan ditampilkan di launcher. Contoh: <code>Base game FNF V-slice</code>",
+
+  "local_or_edit.field.banner_url.title": "Sepanduk URL",
+  "local_or_edit.field.banner_url.description": "Banner image URL atau Path untuk instance. Aspect ratio tidak penting, tapi disarankan 16:9.",
+
+  "            //-- START EXTRA SECTION --//            ": "",
+  "start_extra.button.start": "Mula",
+  "start_extra.button.submenu.open_in_terminal": "Buka dalam Terminal",
+  "start_extra.button.submenu.edit": "Edit",
+  "start_extra.button.submenu.open_folder": "Buka dalam Folder",
+  "start_extra.button.submenu.delete_shortcut": "Hapus Shortcut",
+  "start_extra.button.submenu.delete_instance": "Hapus Instance",
+
+  "            //-- DELETE INSTANCE SECTION --//            ": "",
+  "delete_instance.title": "Hapus Instance",
+  "delete_instance.description": "Awak delete instance! Klik di luar modal ini atau pilih salah satu opsi di bawah.",
+
+  "delete_instance.button.delete_shortcut": "Hapus Shortcut",
+  "delete_instance.button.delete_shortcut.tooltip": "",
+
+  "delete_instance.button.delete_instance": "Hapus Instance",
+  "delete_instance.button.delete_instance.tooltip": "",
+
+  "            //-- DOWNLOAD ENGINES SECTION --//            ": "",
+  "download.title": "",
+  "download.description": "",
+
+  "download.path_to_download.title": "",
+  "download.path_to_download.description": "",
+
+  "download.section_engine.published_by": "",
+  "download.section_engine.uploaded_by": "",
+  "download.section_engine.empty_download_assets": "",
+
+  "            //-- SECTION DISPLAY SECTION --//            ": "",
+  "section_display.empty": "",
+
+  "section_display.transfer.title": "",
+  "section_display.transfer.warning.title": "",
+  "section_display.transfer.warning.description": "",
+
+  "            //-- SIDEBAR SECTION --//            ": "",
+  "sidebar.button.collapse_sidebar.tooltip": "",
+  "sidebar.button.add.tooltip": "",
+
+  "            //-- DRAG AND DROP SECTION --//            ": "",
+  "drag_and_drop.title": "",
+
+  "drag_and_drop.path_to_paste.title": "",
+  "drag_and_drop.path_to_paste.description": "",
+  "drag_and_drop.path_to_paste.field.title": "",
+
+  "drag_and_drop.instances.title": "",
+  "drag_and_drop.instances.description": "",
+
+  "            //-- DOWNLOAD WAITING SECTION --//            ": "",
+  "download_waiting.title": "",
+  "download_waiting.description": "",
+
+  "            //-- GAMEBANANA SECTION --//            ": "",
+  "gamebanana.title": "",
+
+  "gamebanana.warning.title": "",
+  "gamebanana.warning.description": "",
+
+  "gamebanana.importing_hard_coded.title": "",
+  "gamebanana.importing_hard_coded.description": "",
+  "gamebanana.importing_hard_coded.field.title": "",
+  "gamebanana.importing_hard_coded.field.description": "",
+  "gamebanana.importing_hard_coded.field.button": "",
+
+  "gamebanana.instances.title": "",
+  "gamebanana.instances.description": "",
+
+  "            //-- NOTIFICATION SECTION --//            ": "",
+  "notification.download.title.gamebanana": "",
+  "notification.download.title.engine": "",
+
+  "notification.download.description.hard_coded": "",
+  "notification.download.description.soft_coded": ""
+}
