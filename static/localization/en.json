@@ -71,8 +71,6 @@
 
   "edit.title": "Edit {instance} Instance.",
 
-  "local_or_edit.global.temp_name": "Instance Name",
-
   "local_or_edit.field.mod_or_engine_name.title": "FNF Mod/Engine name",
   "local_or_edit.field.mod_or_engine_name.description": "The FNF mod/engine name to display in the launcher.",
 
@@ -125,7 +123,7 @@
 
   "section_display.transfer.title": "Select an instance to transfer!",
   "section_display.transfer.warning.title": "Please note;",
-  "section_display.transfer.warning.description": "This will transfer the {path} folder to the selected instance. If you are transferring to <code>addons</code> from <code>mods</code>, you will have to transfer it yourself.",
+  "section_display.transfer.warning.description": "This will transfer the <code>{path}</code> folder to the selected instance. If you are transferring to <code>addons</code> from <code>mods</code>, you will have to transfer it yourself.",
 
   "            //-- SIDEBAR SECTION --//            ": "",
   "sidebar.button.collapse_sidebar.tooltip": "Collapse Sidebar",

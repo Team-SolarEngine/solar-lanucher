@@ -302,7 +302,7 @@
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
 
 <style>
-    .code {
+    :global(code) {
         background-color: rgba(0, 0, 0, 0.25);
         border-radius: 4px;
         padding: 0 0.25rem

@@ -184,7 +184,7 @@
   />
 
   <nav class="right-align no-space">
-    <button class="primary link" onclick={addApp}>{#await getWord("local.button.add_app") then word}{@html word}{/await}</button>
+    <button class="primary link" onclick={addApp}>{#await getWord("global.confirm") then word}{@html word}{/await}</button>
     <button class="transparent link" onclick={toggleExplorer}>{#await getWord("global.explorer") then word}{@html word}{/await}</button>
     <button class="transparent link" onclick={close}>{#await getWord("global.close") then word}{@html word}{/await}</button>
   </nav>
