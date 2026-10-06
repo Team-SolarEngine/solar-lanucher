@@ -1,0 +1,169 @@
+{
+  "            //-- GLOBAL SECTION --//            ": "",
+  "global.close": "",
+  "global.cancel": "",
+  "global.done": "",
+  "global.save": "",
+  "global.confirm": "",
+  "global.explorer": "",
+  "global.delete": "",
+  "global.use_favourite_path": "",
+  "global.not_found": "",
+
+  "            //-- MAIN SCREEN SECTION --//            ": "",
+  "main_screen.empty_screen.header": "",
+
+  "            //-- SETTINGS SECTION --//            ": "",
+  "settings.global.Manage": "",
+
+  "settings.add_pet.title": "",
+  "settings.add_pet.description": "",
+
+  "settings.pet_icon_url.title": "",
+  "settings.pet_icon_url.description": "",
+
+  "settings.github_token.title": "",
+  "settings.github_token.description": "",
+
+  "settings.compact_mode.title": "",
+  "settings.compact_mode.description": "",
+
+  "settings.additional_engine_repositories.title": "",
+  "settings.additional_engine_repositories.description": "",
+  "settings.additional_engine_repositories.manage_submenu.title": "",
+  "settings.additional_engine_repositories.manage_submenu.description": "",
+  "settings.additional_engine_repositories.manage_submenu.button.add_repo": "",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title": "",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title": "",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.description": "",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title": "",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.description": "",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title": "",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.description": "",
+
+  "settings.favourite_path.title": "",
+  "settings.favourite_path.description": "",
+
+  "settings.code_editor.title": "",
+  "settings.code_editor.description": "",
+
+  "settings.localization.title": "",
+  "settings.localization.description": "",
+  "settings.localization.manage_submenu.title": "",
+  "settings.localization.manage_submenu.description": "",
+  "settings.localization.manage_submenu.translated_by": "",
+  "settings.localization.manage_submenu.restart.title": "",
+  "settings.localization.manage_submenu.restart.description": "",
+
+  "settings.version.section1": "",
+  "settings.version.section2.up_to_date": "",
+  "settings.version.section2.out_of_date": "",
+  "settings.version.section2.limited": "",
+  "settings.version.button": "",
+
+  "            //-- ADD NEW INSTANCE SECTION --//            ": "",
+  "prompt_for_new.title": "",
+  "prompt_for_new.description": "",
+  "prompt_for_new.button.local": "",
+  "prompt_for_new.button.download_engines": "",
+
+  "            //-- ADD LOCAL/EDIT INSTANCE SECTION --//            ": "",
+  "local.title": "",
+  "local.description": "",
+
+  "edit.title": "",
+
+  "local_or_edit.field.mod_or_engine_name.title": "",
+  "local_or_edit.field.mod_or_engine_name.description": "",
+
+  "local_or_edit.field.icon_path.title": "",
+  "local_or_edit.field.icon_path.description": "",
+
+  "local_or_edit.field.execute_command.title": "",
+  "local_or_edit.field.execute_command.description": "",
+
+  "local_or_edit.field.working_directory.title": "",
+  "local_or_edit.field.working_directory.description": "",
+
+  "local_or_edit.field.description.title": "",
+  "local_or_edit.field.description.description": "",
+
+  "local_or_edit.field.banner_url.title": "",
+  "local_or_edit.field.banner_url.description": "",
+
+  "            //-- START EXTRA SECTION --//            ": "",
+  "start_extra.button.start": "",
+  "start_extra.button.submenu.open_in_terminal": "",
+  "start_extra.button.submenu.edit": "",
+  "start_extra.button.submenu.open_folder": "",
+  "start_extra.button.submenu.delete_shortcut": "",
+  "start_extra.button.submenu.delete_instance": "",
+
+  "            //-- DELETE INSTANCE SECTION --//            ": "",
+  "delete_instance.title": "",
+  "delete_instance.description": "",
+
+  "delete_instance.button.delete_shortcut": "",
+  "delete_instance.button.delete_shortcut.tooltip": "",
+
+  "delete_instance.button.delete_instance": "",
+  "delete_instance.button.delete_instance.tooltip": "",
+
+  "            //-- DOWNLOAD ENGINES SECTION --//            ": "",
+  "download.title": "",
+  "download.description": "",
+
+  "download.path_to_download.title": "",
+  "download.path_to_download.description": "",
+
+  "download.section_engine.published_by": "",
+  "download.section_engine.uploaded_by": "",
+  "download.section_engine.empty_download_assets": "",
+
+  "            //-- SECTION DISPLAY SECTION --//            ": "",
+  "section_display.empty": "",
+
+  "section_display.transfer.title": "",
+  "section_display.transfer.warning.title": "",
+  "section_display.transfer.warning.description": "",
+
+  "            //-- SIDEBAR SECTION --//            ": "",
+  "sidebar.button.collapse_sidebar.tooltip": "",
+  "sidebar.button.add.tooltip": "",
+
+  "            //-- DRAG AND DROP SECTION --//            ": "",
+  "drag_and_drop.title": "",
+
+  "drag_and_drop.path_to_paste.title": "",
+  "drag_and_drop.path_to_paste.description": "",
+  "drag_and_drop.path_to_paste.field.title": "",
+
+  "drag_and_drop.instances.title": "",
+  "drag_and_drop.instances.description": "",
+
+  "            //-- DOWNLOAD WAITING SECTION --//            ": "",
+  "download_waiting.title": "",
+  "download_waiting.description": "",
+
+  "            //-- GAMEBANANA SECTION --//            ": "",
+  "gamebanana.title": "",
+
+  "gamebanana.warning.title": "",
+  "gamebanana.warning.description": "",
+
+  "gamebanana.importing_hard_coded.title": "",
+  "gamebanana.importing_hard_coded.description": "",
+  "gamebanana.importing_hard_coded.field.title": "",
+  "gamebanana.importing_hard_coded.field.description": "",
+  "gamebanana.importing_hard_coded.field.button": "",
+
+  "gamebanana.instances.title": "",
+  "gamebanana.instances.description": "",
+
+  "            //-- NOTIFICATION SECTION --//            ": "",
+  "notification.download.title.gamebanana": "",
+  "notification.download.title.engine": "",
+
+  "notification.download.description.hard_coded": "",
+  "notification.download.description.soft_coded": ""
+}
