@@ -7,6 +7,7 @@
   "global.confirm": "Confirm",
   "global.explorer": "Explorer",
   "global.delete": "Delete",
+  "global.use_favourite_path": "Use Favourite Path",
 
   "            //-- MAIN SCREEN SECTION --//            ": "",
   "main_screen.empty_screen.header": "Your new, lightweight FNF launcher. All in one place.",
@@ -55,6 +56,7 @@
   "settings.version.section2.up_to_date": "which is up to date!",
   "settings.version.section2.out_of_date": "which is out of date...",
   "settings.version.section2.limited": "and we can't check because you're limited...",
+  "settings.version.button": "Open releases",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "Adding a new instance for FNF...",
@@ -63,8 +65,11 @@
   "prompt_for_new.button.download_engines": "Download Engines",
 
   "            //-- ADD LOCAL/EDIT INSTANCE SECTION --//            ": "",
-  "local_or_edit.title": "Add/Edit a New FNF Instance",
-  "local_or_edit.description": "<b>Pro tip</b>; Click on the clip icon for a file explorer...",
+  "local.title": "Add a New FNF Instance",
+  "local.description": "<b>Pro tip</b>; Click on the clip icon for a file explorer...",
+
+  "edit.title": "Edit {instance} Instance.",
+
   "local_or_edit.global.temp_name": "Instance Name",
 
   "local_or_edit.field.mod_or_engine_name.title": "FNF Mod/Engine name",
@@ -102,4 +107,36 @@
 
   "delete_instance.button.delete_instance": "Delete Instance",
   "delete_instance.button.delete_instance.tooltip": "This deletes the instance and the it's shortcut. Use with caution.",
+
+  "            //-- DOWNLOAD ENGINES SECTION --//            ": "",
+  "download.title": "Download Engines",
+  "download.description": "Whether that's Solar, Codename, Psych or Vanilla Funkin, we support it!",
+
+  "download.path_to_download.title": "Path to download",
+  "download.path_to_download.description": "A path to download the Engine. e.g; <code>C:\\Games\\FNF</code>",
+
+  "download.section_engine.published_by": "Published by; ",
+  "download.section_engine.uploaded_by": "Uploaded by; ",
+  "download.section_engine.empty_download_assets": "No download assets available.",
+
+  "            //-- SECTION DISPLAY SECTION --//            ": "",
+  "section_display.empty": "{section} is empty. Try adding one by clicking the folder on the top, and press the refresh button!",
+
+  "section_display.transfer.title": "Select an instance to transfer!",
+  "section_display.transfer.warning.title": "Please note;",
+  "section_display.transfer.warning.description": "This will transfer the {path} folder to the selected instance. If you are transferring to <code>addons</code> from <code>mods</code>, you will have to transfer it yourself.",
+
+  "            //-- SIDEBAR SECTION --//            ": "",
+  "sidebar.button.collapse_sidebar.tooltip": "Collapse Sidebar",
+  "sidebar.button.add.tooltip": "Left click to add a new app <br/> Right click to open the Solar Team share page.",
+
+  "            //-- DRAG AND DROP SECTION --//            ": "",
+  "drag_and_drop.title": "The folder you are trying to paste is",
+
+  "drag_and_drop.path_to_paste.title": "Importing a mod that's not soft modded?",
+  "drag_and_drop.path_to_paste.description": "Put your path where you wanna put it here!",
+  "drag_and_drop.path_to_paste.field.title": "Path to paste",
+
+  "drag_and_drop.instances.title": "Importing a mod that's soft modded?",
+  "drag_and_drop.instances.description": "Select one of these instances!"
 }
