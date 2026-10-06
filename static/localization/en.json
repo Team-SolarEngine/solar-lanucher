@@ -52,6 +52,8 @@
   "settings.localization.manage_submenu.title": "Pick a language!",
   "settings.localization.manage_submenu.description": "Can't find your language? You can contribute for your langauge for free!",
   "settings.localization.manage_submenu.translated_by": "Translated by ",
+  "settings.localization.manage_submenu.restart.title": "This requires a restart!",
+  "settings.localization.manage_submenu.restart.description": "I know, I know. Changing a setting and requires a restart to take effect? Annoying. But, we have a good reason. Everything won't update automatically. So this is our best bet. Thank you for understanding!",
 
   "settings.version.section1": "Your version of Solar Launcher is;",
   "settings.version.section2.up_to_date": "which is up to date!",

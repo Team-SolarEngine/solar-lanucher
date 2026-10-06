@@ -5,11 +5,13 @@
     import { onMount } from "svelte";
 
     let { currentlyOpen = $bindable() } = $props();
+    let requireRestart = $state(false);
 
     let localization = $state("");
 
     let allLocalization = $state([
-      { name: "English", code: "en", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/250px-Flag_of_the_United_Kingdom_%281-2%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry" },
+      { name: "English", code: "en", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/250px-Flag_of_the_United_Kingdom_%281-2%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry", percent: 100 },
+      { name: "Malay", code: "my", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/Flag_of_Malaysia.svg/250px-Flag_of_Malaysia.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry", percent: 5 },
     ]);
 
     let snackbar = $state<Snackbar>({
@@ -27,6 +29,7 @@
          */
 
         console.log("Saving language:", value);
+        requireRestart = true;
         await invoke("update_key", {
             collection: "settings",
             key: "currentLanguage",
@@ -51,7 +54,7 @@
         >
             <img src={locale.flag} alt={locale.name} width="100px"/>
             <div style="display: flex; flex-direction: column; ">
-                <span style="font-size: 1.4rem">{locale.name}</span>
+                <span style="font-size: 1.4rem;">{locale.name} <span style="opacity: 0.5; font-size: 0.85rem;">{locale.percent}%</span></span>
                 <span>{#await getWord("settings.localization.manage_submenu.translated_by") then word}{@html word}{/await}<b>{locale.translator}</b></span>
             </div>
         </article>
@@ -59,6 +62,21 @@
 
     <div class="right-align no-space" style="margin-top: 12px;">
         <button onclick={() => currentlyOpen = false} class="transparent">
+            {#await getWord("global.close") then word}{@html word}{/await}
+        </button>
+    </div>
+</dialog>
+
+<div class="overlay" class:active={requireRestart} onclick={() => requireRestart = false}></div>
+<dialog class:active={requireRestart}>
+    <h3>{#await getWord("settings.localization.manage_submenu.restart.title") then word}{@html word}{/await}</h3>
+    <span>{#await getWord("settings.localization.manage_submenu.restart.description") then word}{@html word}{/await}</span>
+
+    <div class="right-align no-space">
+        <button onclick={() => window.location.reload()}>
+            {#await getWord("global.confirm") then word}{@html word}{/await}
+        </button>
+        <button onclick={() => requireRestart = false} class="transparent">
             {#await getWord("global.close") then word}{@html word}{/await}
         </button>
     </div>
