@@ -221,7 +221,7 @@
     <hr class="medium" />
 
     {#if engines.length === 0}
-        <p>{#await getWord("download.loading") then word}{@html word}{/await}</p>
+        <p>Loading...</p>
     {:else}
         {#each engines as engine}
             <article>
@@ -242,7 +242,7 @@
                                             <img style="width: 50px; height: 50px; border-radius: 5px;" src={release.avatarUrl} alt={engine.name}/>
                                             <div>
                                                 <h6 style="font-weight: bold">{release.tag}</h6>
-                                                {#await getWord("download.section_engine.published_by") then word}{@html word}{/await}- {release.author}
+                                                {#await getWord("download.section_engine.published_by") then word}{@html word}{/await} <b>{release.author}</b>
                                             </div>
                                         </div>
                                         <i>arrow_drop_down</i>
@@ -267,7 +267,7 @@
                                                         <i>download</i>
                                                         <span><b>{download.name}</b></span>
                                                     </div>
-                                                    <span>Uploaded by; <b>{download.uploader.login}</b> @ {new Date(download.uploadedAt).toLocaleString()}</span>
+                                                    <span>{#await getWord("download.section_engine.uploaded_by") then word}{@html word}{/await} <b>{download.uploader.login}</b> @ {new Date(download.uploadedAt).toLocaleString()}</span>
                                                 </div>
                                             </article>
                                         {/each}
