@@ -8,6 +8,7 @@
   "global.explorer": "Explorer",
   "global.delete": "Delete",
   "global.use_favourite_path": "Use Favourite Path",
+  "global.not_found": "{type} not found.",
 
   "            //-- MAIN SCREEN SECTION --//            ": "",
   "main_screen.empty_screen.header": "Your new, lightweight FNF launcher. All in one place.",
@@ -138,5 +139,24 @@
   "drag_and_drop.path_to_paste.field.title": "Path to paste",
 
   "drag_and_drop.instances.title": "Importing a mod that's soft modded?",
-  "drag_and_drop.instances.description": "Select one of these instances!"
+  "drag_and_drop.instances.description": "Select one of these instances!",
+
+  "            //-- DOWNLOAD WAITING SECTION --//            ": "",
+  "download_waiting.title": "Please wait while we do the magic...",
+  "download_waiting.description": "For you to wait, why don't you watch YouTube? Massive time killer by the way. <br/> This may take a long time depending where you live or your connection!",
+
+  "            //-- GAMEBANANA SECTION --//            ": "",
+  "gamebanana.title": "Downloads for",
+
+  "gamebanana.warning.title": "Not for FNF",
+  "gamebanana.warning.description": "This mod seems like it is not compatible with FNF. Please do not report this to the GitHub repository.",
+
+  "gamebanana.importing_hard_coded.title": "Putting a mod that's not soft modded?",
+  "gamebanana.importing_hard_coded.description": "Put your path where you wanna put it here!",
+  "gamebanana.importing_hard_coded.field.title": "Path to download",
+  "gamebanana.importing_hard_coded.field.description": "A path to download the mod. e.g; <code>C:\\Games\\FNF</code>",
+  "gamebanana.importing_hard_coded.field.button": "Use favourite path",
+
+  "gamebanana.instances.title": "Importing a mod that's soft modded?",
+  "gamebanana.instances.description": "Select one of these instances!"
 }

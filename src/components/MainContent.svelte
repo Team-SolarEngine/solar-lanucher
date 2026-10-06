@@ -149,10 +149,10 @@ okay real shit talk;
                         </a>
                     </div>
                     <div class="page padding _breakword" class:active={oneOfTwo}>
-                        {#if readme} {@html marked(readme)} {:else} <p style="opacity: 0.5;">No README.md found.</p> {/if}
+                        {#if readme} {@html marked(readme)} {:else} <p style="opacity: 0.5;">{#await getWord("global.not_found") then word}{word.replace("{type}", "README.md")}{/await}</p> {/if}
                     </div>
                     <div class="page padding _breakword" class:active={!oneOfTwo}>
-                        {#if changelog} {@html marked(changelog)} {:else} <p style="opacity: 0.5;">No Changelog.md found.</p> {/if}
+                        {#if changelog} {@html marked(changelog)} {:else} <p style="opacity: 0.5;">{#await getWord("global.not_found") then word}{word.replace("{type}", "Changelog.md")}{/await}</p> {/if}
                     </div>
                 </div>
             {:else}
@@ -161,7 +161,7 @@ okay real shit talk;
                         {#if description}
                             {@html description}
                         {:else}
-                            <p style="opacity: 0.5;">No description found.</p>
+                            <p style="opacity: 0.5;">{#await getWord("global.not_found") then word}{word.replace("{type}", "Description")}{/await}</p>
                         {/if}
                     </span>
                 </article>

@@ -3,6 +3,7 @@
     import { invoke } from "@tauri-apps/api/core";
     import { openUrl } from "@tauri-apps/plugin-opener";
     import { onMount } from "svelte";
+    import { getWord } from "$lib/localization";
 
     let version: string;
     let latest: string;
@@ -33,11 +34,11 @@
 
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
     {#if version && latest && version == latest}
-        <span>Your version is; {os}-{version}, <span style="color: green">which is up to date!</span></span>
+        <span>{#await getWord("settings.version.section1") then word}{word}{/await} {os}-{version}, <span style="color: green">{#await getWord("settings.version.section2.up_to_date") then word}{word}{/await}</span></span>
     {:else if version && latest && version != latest}
-        <span>Your version is; {os}-{version}, <span style="color: red">which is not up to date...</span></span>
+        <span>{#await getWord("settings.version.section1") then word}{word}{/await} {os}-{version}, <span style="color: red">{#await getWord("settings.version.section2.out_of_date") then word}{word}{/await}</span></span>
     {:else}
-        <span>It either could be loading, or you've hit github's rate limit!</span>
+        <span>{#await getWord("settings.version.section2.limited") then word}{word}{/await}</span>
     {/if}
-    <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>Open releases</button>
+    <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>{#await getWord("settings.version.button") then word}{word}{/await}</button>
 </div>

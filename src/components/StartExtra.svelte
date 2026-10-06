@@ -1,6 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
+    import { getWord } from "$lib/localization";
 
     let {
         executeCommand,
@@ -24,15 +25,15 @@
 
     let deleteInstancePopup = $state(false);
     let extraFunctionalities = $derived([
-        { name: "Open in Terminal", icon: "terminal", action: () => startApp(true) },
-        { name: "Edit", icon: "edit", action: () => onEdit(index) },
-        { name: "Open Folder", icon: "folder", action: openFolder },
-        { name: "Delete", icon: "delete", action: () => deleteInstancePopup = true, extra: "right-round tertiary-text" },
+        { name: "Open in Terminal", key: "start_extra.button.submenu.open_in_terminal", icon: "terminal", action: () => startApp(true) },
+        { name: "Edit", key: "start_extra.button.submenu.edit", icon: "edit", action: () => onEdit(index) },
+        { name: "Open Folder", key: "start_extra.button.submenu.open_folder", icon: "folder", action: openFolder },
+        { name: "Delete", key: "global.delete", icon: "delete", action: () => deleteInstancePopup = true, extra: "right-round tertiary-text" },
     ])
 
     let deleteTypes = $derived([
-        { name: "Delete Shortcut", action: () => deleteApp() },
-        { name: "Delete Instance", action: () => deleteInstance() },
+        { name: "Delete Shortcut", key: "start_extra.button.submenu.delete_shortcut", action: () => deleteApp() },
+        { name: "Delete Instance", key: "start_extra.button.submenu.delete_instance", action: () => deleteInstance() },
     ])
 
     async function startApp(openTerminal = false) {
@@ -96,7 +97,7 @@
 <nav class="group split">
     <button class="border left-round primary" onclick={() => startApp()}>
       <i>play_arrow</i>
-      <span>Start</span>
+      <span>{#await getWord("start_extra.button.start") then word}{word}{/await}</span>
     </button>
     {#if !stretch}
         <div>
@@ -111,7 +112,7 @@
                 {#each extraFunctionalities as functionality}
                     {#if functionality.name != "Delete"}
                         <li onclick={functionality.action}>
-                            <i>{functionality.icon}</i> {functionality.name}
+                            <i>{functionality.icon}</i> {#await getWord(functionality.key) then word}{word}{/await}
                         </li>
                     {/if}
                 {/each}
@@ -120,7 +121,7 @@
 
                 {#each deleteTypes as deleteType}
                     <li onclick={deleteType.action} class="tertiary-text">
-                        <i>delete</i> {deleteType.name}
+                        <i>delete</i> {#await getWord(deleteType.key) then word}{word}{/await}
                     </li>
                 {/each}
             </menu>
@@ -130,7 +131,7 @@
             <!-- {#if functionality.name != "Delete" && functionality.name != "Edit"} -->
                 <button class="border no-round {functionality.extra}" onclick={functionality.action}>
                     <i>{functionality.icon}</i>
-                    <span>{functionality.name}</span>
+                    <span>{#await getWord(functionality.key) then word}{word}{/await}</span>
                 </button>
             <!-- {/if} -->
         {/each}
@@ -139,19 +140,19 @@
 
 <div class="overlay" class:active={deleteInstancePopup} onclick={() => deleteInstancePopup = false}></div>
 <dialog class:active={deleteInstancePopup} style="overflow: visible !important;">
-    <h3>Delete Instance</h3>
-    <span>You're deleting a instance! Click outside this modal, or pick one of these.</span>
+    <h3>{#await getWord("delete_instance.title") then word}{word}{/await}</h3>
+    <span>{#await getWord("delete_instance.description") then word}{word}{/await}</span>
 
     <div class="row right-align">
         <button class="border no-round tertiary-text" onclick={() => deleteApp()}>
             <i>delete</i>
-            <span>Delete Shortcut</span>
-            <span class="tooltip bottom">This deletes the shortcut to open the app. Not the instance itself.</span>
+            <span>{#await getWord("delete_instance.button.delete_shortcut") then word}{word}{/await}</span>
+            <span class="tooltip bottom">{#await getWord("delete_instance.button.delete_shortcut.tooltip") then word}{word}{/await}</span>
         </button>
         <button class="border no-round tertiary-text" onclick={() => deleteInstance()}>
             <i>delete</i>
-            <span>Delete Instance & Shortcut</span>
-            <span class="tooltip bottom">This deletes the instance and its shortcut. Use with caution.</span>
+            <span>{#await getWord("delete_instance.button.delete_instance") then word}{word}{/await}</span>
+            <span class="tooltip bottom">{#await getWord("delete_instance.button.delete_instance.tooltip") then word}{word}{/await}</span>
         </button>
     </div>
 </dialog>

@@ -3,6 +3,7 @@
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { pickFile } from "$lib/interface";
     import { sendNotif } from "$lib/sys";
+    import { getWord } from "$lib/localization";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
@@ -193,16 +194,16 @@
 
 <div class="overlay" class:active={modalDownload} onclick={() => modalDownload = false}></div>
 <dialog class="right" class:active={modalDownload}>
-    <h5>Download an engine!</h5>
-    <div>Whether that's Solar, Codename, Psych or Vanilla Funkin, we support it!</div>
+    <h5>{#await getWord("download.title") then word}{word}{/await}</h5>
+    <div>{#await getWord("download.description") then word}{word}{/await}</div>
 
     <hr class="medium" />
 
     <div class="border field prefix label">
         <a onclick={async () => pathToDownload = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
         <input type="text" bind:value={pathToDownload} />
-        <label>Path to download <span style="color: red;">*</span></label>
-        <output> A path to download the Engine. Example; <code>C:\Games\FNF\</code> </output>
+        <label>{#await getWord("download.path_to_download.title") then word}{word}{/await} <span style="color: red;">*</span></label>
+        <output> {#await getWord("download.path_to_download.description") then word}{@html word}{/await} </output>
 
         <!--
             now I KNOW you want me to say the same thing for @GameBananaMod.svelte,
@@ -213,14 +214,14 @@
             will be removed in a future commit and use $effect() instead.
         -->
         <button onclick={async () => pathToDownload = path} style="margin-top: 4px;">
-            Use favorite path
+            {#await getWord("global.use_favourite_path") then word}{word}{/await}
         </button>
     </div>
 
     <hr class="medium" />
 
     {#if engines.length === 0}
-        <p>Loading...</p>
+        <p>{#await getWord("download.loading") then word}{word}{/await}</p>
     {:else}
         {#each engines as engine}
             <article>
@@ -241,7 +242,7 @@
                                             <img style="width: 50px; height: 50px; border-radius: 5px;" src={release.avatarUrl} alt={engine.name}/>
                                             <div>
                                                 <h6 style="font-weight: bold">{release.tag}</h6>
-                                                Published by - {release.author}
+                                                {#await getWord("download.section_engine.published_by") then word}{word}{/await}- {release.author}
                                             </div>
                                         </div>
                                         <i>arrow_drop_down</i>
@@ -249,7 +250,7 @@
                                 </summary>
                                 <div style="margin-left: 20px; margin-top: 10px;">
                                     {#if release.downloads.length === 0}
-                                        <p>No download assets on this release.</p>
+                                        <p>{#await getWord("download.section_engine.empty_download_assets") then word}{word}{/await}</p>
                                     {:else}
                                         {#each release.downloads as download}
                                             <article onclick={() => handleDownload(download.url, [
@@ -291,7 +292,6 @@
 <dialog class:active={modalDownloading} style="width: 600px;">
     <h5>Please wait while we do the magic...</h5>
     <span>For you to wait, why don't you watch YouTube? Massive time killer by the way.</span>
-    <span>This may take a long time depending where you live or your connection!</span>
     <progress class="wavy indeterminate" value="100" max="100"></progress>
 </dialog>
 

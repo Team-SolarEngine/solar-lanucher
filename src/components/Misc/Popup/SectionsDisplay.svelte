@@ -3,6 +3,7 @@
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import CardApp from "../../../components/CardApp.svelte";
     import { imageSrc, getOS } from "$lib/sys";
+    import { getWord } from "$lib/localization";
 
     let {
         workingDirectory,
@@ -266,18 +267,17 @@
             </article>
         {/each}
     {:else}
-        <span>Empty...</span>
+        <span>{#await getWord("section_display.empty") then word}{word.replace("{section}", modsFolder)}{/await}</span>
     {/if}
 </dialog>
 
 <div class="overlay" class:active={instancesDialog} onclick={() => instancesDialog = false}></div>
 <dialog class:active={instancesDialog} class="right" style="max-width: 750px">
-    <h4>Select an instance to transfer!</h4>
+    <h4>{#await getWord("section_display.transfer.title") then word}{word}{/await}</h4>
     <article class="tertiary">
-        <h3>Please note;</h3>
+        <h3>{#await getWord("section_display.transfer.warning.title") then word}{word}{/await}</h3>
         <span>
-            This will transfer the <span class="code">{selectedModFolder}</span> folder to the selected instance.
-            If you're transferring to <span class="code">mods</span>, you will have to transfer it yourself.
+            {#await getWord("section_display.transfer.warning.description") then word}{@html word.replace("{path}", selectedModFolder)}{/await}
         </span>
     </article>
 
@@ -295,7 +295,7 @@
             </section>
         {/each}
     {:else}
-        <span>No instances found.</span>
+        <span>{#await getWord("global.no_instances_found") then word}{word}{/await}</span>
     {/if}
 </dialog>
 

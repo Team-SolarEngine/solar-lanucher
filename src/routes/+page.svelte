@@ -6,6 +6,7 @@
     import "beercss";
     import "material-dynamic-colors";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
+    import { getWord } from "$lib/localization";
 
     import Sidebar from '../components/Sidebar.svelte';
     import PromptForNew from '../components/Popup/PromptForNew.svelte';

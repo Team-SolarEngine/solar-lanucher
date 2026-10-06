@@ -5,6 +5,7 @@
     import { pickFile } from "$lib/interface";
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
+    import { getWord } from "$lib/localization";
 
     let hoveringDrag = $state(false);
     let pathToCopy = $state();
@@ -96,35 +97,35 @@
 <div class="_overlay" class:active={hoveringDrag}>
     <div class="_child">
         <i class="extra">download</i>
-        <span>Drag that folder in!</span>
+        <span>{#await getWord("drag_and_drop.overlay.text") then word}{word}{/await}</span>
     </div>
 </div>
 
 <div class="overlay" class:active={openDialogForInstances} onclick={() => openDialogForInstances = false}></div>
 <dialog class="right" class:active={openDialogForInstances} style="max-width: 600px;">
-    <h6>The folder you are trying to paste is</h6>
+    <h6>{#await getWord("drag_and_drop.title") then word}{word}{/await}</h6>
     <span>{pathToCopy}</span>
 
     <hr class="medium"/>
 
-    <h6>Importing a mod that's not engine modded?</h6>
-    <span>Put your path where you wanna put it here!</span>
+    <h6>{#await getWord("drag_and_drop.path_to_paste.title") then word}{word}{/await}</h6>
+    <span>{#await getWord("drag_and_drop.path_to_paste.description") then word}{word}{/await}</span>
 
     <div class="field label prefix border">
         <a onclick={async () => pathToPaste = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
         <input type="text" bind:value={pathToPaste}>
-        <label>Path To Paste</label>
+        <label>{#await getWord("drag_and_drop.path_to_paste.field.title") then word}{word}{/await}</label>
     </div>
 
     <button style="margin-top: 8px;" onclick={() => copyFolderToDest()}>
         <i>check</i>
-        Confirm
+        {#await getWord("global.confirm") then word}{word}{/await}
     </button>
 
     <hr class="medium"/>
 
-    <h6>Importing a mod that's engine modded?</h6>
-    <span>Select one of these instances!</span>
+    <h6>{#await getWord("drag_and_drop.instances.title") then word}{word}{/await}</h6>
+    <span>{#await getWord("drag_and_drop.instances.description") then word}{word}{/await}</span>
 
     {#if apps.length > 0}
         {#each apps as app}
@@ -138,7 +139,7 @@
             </section>
         {/each}
     {:else}
-        <span>No instances found.</span>
+        <span>{#await getWord("global.no_instances_found") then word}{word}{/await}</span>
     {/if}
 </dialog>
 

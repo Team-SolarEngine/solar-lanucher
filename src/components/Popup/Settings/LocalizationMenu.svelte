@@ -1,7 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
-    import { getUserLanguage } from "$lib/localization";
+    import { getUserLanguage, getWord } from "$lib/localization";
     import { onMount } from "svelte";
 
     let { currentlyOpen = $bindable() } = $props();
@@ -41,8 +41,8 @@
 
 <div class="overlay" class:active={currentlyOpen} onclick={() => currentlyOpen = false}></div>
 <dialog class="left" class:active={currentlyOpen}>
-    <h3>Pick a language!</h3>
-    <span>Can't find your language? You can contribute for your language for free!</span>
+    <h3>{#await getWord("settings.localization.manage_submenu.title") then word}{word}{/await}</h3>
+    <span>{#await getWord("settings.localization.manage_submenu.description") then word}{word}{/await}</span>
     {#each allLocalization as locale}
         <article
             style="display: flex; align-items: center; gap: 1rem; cursor: pointer;"
@@ -52,14 +52,14 @@
             <img src={locale.flag} alt={locale.name} width="100px"/>
             <div style="display: flex; flex-direction: column; ">
                 <span style="font-size: 1.4rem">{locale.name}</span>
-                <span>Translated by <b>{locale.translator}</b></span>
+                <span>{#await getWord("settings.localization.manage_submenu.translated_by") then word}{word}{/await}<b>{locale.translator}</b></span>
             </div>
         </article>
     {/each}
 
     <div class="right-align no-space" style="margin-top: 12px;">
         <button onclick={() => currentlyOpen = false} class="transparent">
-            Close
+            {#await getWord("global.close") then word}{word}{/await}
         </button>
     </div>
 </dialog>

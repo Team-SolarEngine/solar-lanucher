@@ -3,6 +3,7 @@
     import CardApp from "./CardApp.svelte";
     import { openUrl } from "@tauri-apps/plugin-opener";
     import { invoke } from "@tauri-apps/api/core";
+    import { getWord } from "$lib/localization";
 
     let {
         onOpenAdd = () => {},
@@ -50,7 +51,7 @@
                 {/if}
             </button>
             <span class="tooltip right" class:_sidebarElementClose={!sidebarOpen}>
-                Collapse sidebar
+                {#await getWord("sidebar.button.collapse_sidebar.tooltip") then word}{word}{/await}
             </span>
         </div>
         <div class="max"></div>
@@ -70,8 +71,7 @@
                 }}>
                     <i>add</i>
                     <span class="tooltip left">
-                        Left click to add a new app<br>
-                        Right click to open the Solar Engine share page
+                        {#await getWord("sidebar.button.add.tooltip") then word}{@html word}{/await}
                     </span>
                 </button>
             </div>
@@ -98,7 +98,7 @@
             {/each}
             <div style="min-height: 40px; width: 100%;"></div>
         {:else}
-            <span style="display: flex; align-items: center; justify-content: center; height: 100%;">No instances found. Maybe try adding one?</span>
+            <span style="display: flex; align-items: center; justify-content: center; height: 100%;">{#await getWord("sidebar.empty.no_instances") then word}{word}{/await}</span>
         {/if}
     </div>
 
@@ -111,7 +111,7 @@
             transform: rotate(180deg) translateX(70%);
             transition: all 0.3s ease-in-out;
         ">
-        <span>A launcher that's honest.</span>
+        <span>{#await getWord("sidebar.slogan") then word}{word}{/await}</span>
     </div>
 </article>
 
