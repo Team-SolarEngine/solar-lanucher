@@ -267,7 +267,7 @@
             </article>
         {/each}
     {:else}
-        <span>{#await getWord("section_display.empty") then word}{word.replace("{section}", modsFolder)}{/await}</span>
+        <span>{#await getWord("section_display.empty") then word}{word.replace("{section}", modsFolder.charAt(0).toUpperCase() + modsFolder.slice(1))}{/await}</span>
     {/if}
 </dialog>
 
