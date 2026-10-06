@@ -24,13 +24,14 @@ export async function getWord(word: string) {
    *   The localized word, or the English fallback if not found.
    */
   try {
-    let localization = await getLocalization(false);
+    const language = await getUserLanguage();
+    const localization = await getLocalization(language);
 
     if (localization[word] != "") {
       return localization[word];
     }
 
-    let fallbackLocalization = await getLocalization(true);
+    const fallbackLocalization = await getLocalization("en");
     return fallbackLocalization[word];
   } catch (error) {
     console.log("Error getting word:", error);
@@ -38,11 +39,9 @@ export async function getWord(word: string) {
   }
 }
 
-async function getLocalization(fallback: boolean) {
+export async function getLocalization(language: string) {
   try {
-    const language = await getUserLanguage();
-
-    const response = await fetch(`/localization/${fallback ? "en" : language}.json`);
+    const response = await fetch(`/localization/${language}.json`);
     const data = await response.json();
 
     return data;

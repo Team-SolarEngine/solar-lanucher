@@ -1,7 +1,7 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
-    import { getUserLanguage, getWord } from "$lib/localization";
+    import { getUserLanguage, getWord, getLocalization } from "$lib/localization";
     import { onMount } from "svelte";
 
     let { currentlyOpen = $bindable() } = $props();
@@ -10,8 +10,8 @@
     let localization = $state("");
 
     let allLocalization = $state([
-      { name: "English", code: "en", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/250px-Flag_of_the_United_Kingdom_%281-2%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry", percent: 100 },
-      { name: "Malay", code: "my", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/Flag_of_Malaysia.svg/250px-Flag_of_Malaysia.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry", percent: 5 },
+      { name: "English", code: "en", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/250px-Flag_of_the_United_Kingdom_%281-2%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry" },
+      { name: "Malay", code: "my", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/Flag_of_Malaysia.svg/250px-Flag_of_Malaysia.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry" },
     ]);
 
     let snackbar = $state<Snackbar>({
@@ -37,6 +37,25 @@
         });
     }
 
+    async function totalLocalizationWord(code: string) {
+      try {
+        const localizationWords = await getLocalization(code);
+        let count = 0;
+        let totalCount = 0;
+
+        for (const key in localizationWords) {
+          if (!key.startsWith('            //-- '))
+            totalCount++;
+          if (localizationWords[key] !== "")
+            count++;
+        }
+
+        return [totalCount, count];
+      } catch (error) {
+        console.log("Error getting total localization words:", error);
+      }
+    }
+
     onMount(async () => {
         localization = await getUserLanguage()
     });
@@ -54,7 +73,13 @@
         >
             <img src={locale.flag} alt={locale.name} width="100px"/>
             <div style="display: flex; flex-direction: column; ">
-                <span style="font-size: 1.4rem;">{locale.name} <span style="opacity: 0.5; font-size: 0.85rem;">{locale.percent}%</span></span>
+                <span style="font-size: 1.4rem;">{locale.name}
+                    <span style="opacity: 0.5; font-size: 0.85rem;">
+                        {#await totalLocalizationWord(locale.code) then result}
+                            {result[1]}/{result[0]}
+                        {/await}
+                    </span>
+                </span>
                 <span>{#await getWord("settings.localization.manage_submenu.translated_by") then word}{@html word}{/await}<b>{locale.translator}</b></span>
             </div>
         </article>
