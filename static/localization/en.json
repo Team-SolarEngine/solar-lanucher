@@ -50,7 +50,7 @@
   "settings.localization.title": "Localization",
   "settings.localization.description": "Don't want to use english? Use other languages!",
   "settings.localization.manage_submenu.title": "Pick a language!",
-  "settings.localization.manage_submenu.description": "Can't find your language? You can contribute for your langauge for free!",
+  "settings.localization.manage_submenu.description": "Can't find your language? You can contribute for your language for free!",
   "settings.localization.manage_submenu.translated_by": "Translated by ",
   "settings.localization.manage_submenu.restart.title": "This requires a restart!",
   "settings.localization.manage_submenu.restart.description": "I know, I know. Changing a setting and requires a restart to take effect? Annoying. But, we have a good reason. Everything won't update automatically. So this is our best bet. Thank you for understanding!",
@@ -77,7 +77,7 @@
   "local_or_edit.field.mod_or_engine_name.description": "The FNF mod/engine name to display in the launcher.",
 
   "local_or_edit.field.icon_path.title": "Icon Path",
-  "local_or_edit.field.icon_path.description": "Any icon your hear desires. Make sure it's 1:1. It can be URL or Path.",
+  "local_or_edit.field.icon_path.description": "Any icon your heart desires. Make sure it's 1:1. It can be URL or Path.",
 
   "local_or_edit.field.execute_command.title": "Execute Command",
   "local_or_edit.field.execute_command.description": "The command to execute to launch the instance. eg; <code>.\\Funkin.exe</code>",
@@ -86,10 +86,10 @@
   "local_or_edit.field.working_directory.description": "The working directory for the instance. eg; <code>D:\\Games\\FNF\\Funkin</code>",
 
   "local_or_edit.field.description.title": "Description",
-  "local_or_edit.field.description.description": "The description of the app to display in the launcher. eg; <code>Base game FNF V-slice</code>",
+  "local_or_edit.field.description.description": "The description of the instance to display in the launcher. eg; <code>Base game FNF V-slice</code>",
 
   "local_or_edit.field.banner_url.title": "Banner URL",
-  "local_or_edit.field.banner_url.description": "The banner image URL or Path for the instance. Aspect ratio shouldn't matter, but we reccomend 16:9.",
+  "local_or_edit.field.banner_url.description": "The banner image URL or Path for the instance. Aspect ratio shouldn't matter, but we recommend 16:9.",
 
   "            //-- START EXTRA SECTION --//            ": "",
   "start_extra.button.start": "Start",
@@ -101,13 +101,13 @@
 
   "            //-- DELETE INSTANCE SECTION --//            ": "",
   "delete_instance.title": "Delete Instance",
-  "delete_instance.description": "You're deleting a instance! Click outside this modal, or pick one of either.",
+  "delete_instance.description": "You're deleting an instance! Click outside this modal, or pick one of either.",
 
   "delete_instance.button.delete_shortcut": "Delete Shortcut",
-  "delete_instance.button.delete_shortcut.tooltip": "This deletes the shortcut to open the app. Not the instance itself.",
+  "delete_instance.button.delete_shortcut.tooltip": "This deletes the shortcut to open the game. Not the instance itself.",
 
   "delete_instance.button.delete_instance": "Delete Instance",
-  "delete_instance.button.delete_instance.tooltip": "This deletes the instance and the it's shortcut. Use with caution.",
+  "delete_instance.button.delete_instance.tooltip": "This deletes the instance and the its shortcut. Use with caution.",
 
   "            //-- DOWNLOAD ENGINES SECTION --//            ": "",
   "download.title": "Download Engines",
@@ -129,7 +129,7 @@
 
   "            //-- SIDEBAR SECTION --//            ": "",
   "sidebar.button.collapse_sidebar.tooltip": "Collapse Sidebar",
-  "sidebar.button.add.tooltip": "Left click to add a new app <br/> Right click to open the Solar Team share page.",
+  "sidebar.button.add.tooltip": "Left click to add a new instance <br/> Right click to open the Solar Team share page.",
 
   "            //-- DRAG AND DROP SECTION --//            ": "",
   "drag_and_drop.title": "The folder you are trying to paste is",
