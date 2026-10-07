@@ -69,7 +69,7 @@
 
   "            //-- ADD LOCAL/EDIT INSTANCE SECTION --//            ": "",
   "local.title": "Tambah Instance untuk FNF",
-  "local.description": "<b>Pro tip</b>; Klik pada ikon clip untuk file explorer...",
+  "local.description": "<b>Pro tip</b>; Klik pada ikon clip untuk fail explorer...",
 
   "edit.title": "Edit {instance} Instance.",
 
@@ -77,7 +77,7 @@
   "local_or_edit.field.mod_or_engine_name.description": "Nama FNF Mod/Engine yang akan ditampilkan di launcher.",
 
   "local_or_edit.field.icon_path.title": "Ikon Path",
-  "local_or_edit.field.icon_path.description": "Icon yang akan ditampilkan di launcher. Harus 1:1. Bisa URL atau Path.",
+  "local_or_edit.field.icon_path.description": "Apa-apa ikon yang anda suka. Pastikan nisbahnya 1:1. Ikon itu boleh diberikan dalam bentuk URL atau laluan fail.",
 
   "local_or_edit.field.execute_command.title": "Laksanakan Perintah",
   "local_or_edit.field.execute_command.description": "Command yang akan dieksekusi untuk menjalankan instance. Contoh: <code>.\\Funkin.exe</code>",
@@ -86,7 +86,7 @@
   "local_or_edit.field.working_directory.description": "Working directory untuk instance. Contoh: <code>D:\\Games\\FNF\\Funkin</code>",
 
   "local_or_edit.field.description.title": "Perihalan",
-  "local_or_edit.field.description.description": "Deskripsi aplikasi yang akan ditampilkan di launcher. Contoh: <code>Base game FNF V-slice</code>",
+  "local_or_edit.field.description.description": "Deskripsi instance yang akan ditampilkan di launcher. Contoh: <code>Base game FNF V-slice</code>",
 
   "local_or_edit.field.banner_url.title": "Sepanduk URL",
   "local_or_edit.field.banner_url.description": "Banner image URL atau Path untuk instance. Aspect ratio tidak penting, tapi disarankan 16:9.",
@@ -104,7 +104,7 @@
   "delete_instance.description": "Awak delete instance! Klik di luar modal ini atau pilih salah satu opsi di bawah.",
 
   "delete_instance.button.delete_shortcut": "Hapus Shortcut",
-  "delete_instance.button.delete_shortcut.tooltip": "Ini hapus shortcut untuk buka aplikasi. Bukan instancenya.",
+  "delete_instance.button.delete_shortcut.tooltip": "Ini hapus shortcut untuk buka instance. Bukan instancenya.",
 
   "delete_instance.button.delete_instance": "Hapus Instance",
   "delete_instance.button.delete_instance.tooltip": "Ini hapus instance dan shortcut. Guna berhati-hati.",
@@ -165,5 +165,5 @@
   "notification.download.title.engine": "Muat turun Engine",
 
   "notification.download.description.hard_coded": "Kita sudah siap muat turun!",
-  "notification.download.description.soft_coded": "Kita sudah siap muat turun! Kita mau awak untuk input executable file, dan awak sepatutnya sudah bersedia!"
+  "notification.download.description.soft_coded": "Kita sudah siap muat turun! Kita mau awak untuk input executable fail, dan awak sepatutnya sudah bersedia!"
 }
