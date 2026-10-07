@@ -29,9 +29,9 @@
   "settings.compact_mode.description": "Too spaced out and too much content? Turn this on!",
 
   "settings.additional_engine_repositories.title": "Additional Engine Repositories",
-  "settings.additional_engine_repositories.description": "Tired of the curent engine selection? You can add more!",
+  "settings.additional_engine_repositories.description": "Tired of the current engine selection? You can add more!",
   "settings.additional_engine_repositories.manage_submenu.title": "Additional Repositories",
-  "settings.additional_engine_repositories.manage_submenu.description": "Add custom entine repositories to download from. Make sure they have releases!",
+  "settings.additional_engine_repositories.manage_submenu.description": "Add custom engine repositories to download from. Make sure they have releases!",
   "settings.additional_engine_repositories.manage_submenu.button.add_repo": "Add Repository",
   "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title": "Whatcha' thinkin?",
   "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title": "Repository Name",
