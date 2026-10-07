@@ -104,66 +104,66 @@
   "delete_instance.description": "Awak delete instance! Klik di luar modal ini atau pilih salah satu opsi di bawah.",
 
   "delete_instance.button.delete_shortcut": "Hapus Shortcut",
-  "delete_instance.button.delete_shortcut.tooltip": "",
+  "delete_instance.button.delete_shortcut.tooltip": "Ini hapus shortcut untuk buka aplikasi. Bukan instancenya.",
 
   "delete_instance.button.delete_instance": "Hapus Instance",
-  "delete_instance.button.delete_instance.tooltip": "",
+  "delete_instance.button.delete_instance.tooltip": "Ini hapus instance dan shortcut. Guna berhati-hati.",
 
   "            //-- DOWNLOAD ENGINES SECTION --//            ": "",
-  "download.title": "",
-  "download.description": "",
+  "download.title": "Memuat Turun Engine",
+  "download.description": "Daripada dia Solar, Codename Psych atau Vanilla Funkin, kita akan sokongan!",
 
-  "download.path_to_download.title": "",
-  "download.path_to_download.description": "",
+  "download.path_to_download.title": "Path tempat memuat turun.",
+  "download.path_to_download.description": "Path yang untuk memuat turun engine. contoh; <code>C:\\Games\\FNF</code>",
 
-  "download.section_engine.published_by": "",
-  "download.section_engine.uploaded_by": "",
-  "download.section_engine.empty_download_assets": "",
+  "download.section_engine.published_by": "Diterbitkan oleh",
+  "download.section_engine.uploaded_by": "Muat naik oleh",
+  "download.section_engine.empty_download_assets": "Tiada turunan engine yang dapat dimuat turun.",
 
   "            //-- SECTION DISPLAY SECTION --//            ": "",
-  "section_display.empty": "",
+  "section_display.empty": "Tiada {section} yang dapat ditampilkan. Cuba taruh sendiri oleh tekan symbol folder di atas, dan tekan symbol refresh!",
 
-  "section_display.transfer.title": "",
-  "section_display.transfer.warning.title": "",
-  "section_display.transfer.warning.description": "",
+  "section_display.transfer.title": "Pilih instance mau pindahkan!",
+  "section_display.transfer.warning.title": "Ambil Perhatian;",
+  "section_display.transfer.warning.description": "Ini akan memindahkan folder <code>{path}</code> ke instans yang dipilih. Jika anda memindahkannya daripada <code>mods</code> ke <code>addons</code>, anda perlu memindahkannya sendiri.",
 
   "            //-- SIDEBAR SECTION --//            ": "",
-  "sidebar.button.collapse_sidebar.tooltip": "",
-  "sidebar.button.add.tooltip": "",
+  "sidebar.button.collapse_sidebar.tooltip": "Tutup sidebar",
+  "sidebar.button.add.tooltip": "Kiri kilk untuk menambah instance, <br/> kanan kilk untuk buka Solar Team Share halaman.",
 
   "            //-- DRAG AND DROP SECTION --//            ": "",
-  "drag_and_drop.title": "",
+  "drag_and_drop.title": "Yang folder awak akan tampal ialah",
 
-  "drag_and_drop.path_to_paste.title": "",
-  "drag_and_drop.path_to_paste.description": "",
-  "drag_and_drop.path_to_paste.field.title": "",
+  "drag_and_drop.path_to_paste.title": "Mengimport yang mod bukan softmodded?",
+  "drag_and_drop.path_to_paste.description": "Masukkan path ke folder kau mau simpan!",
+  "drag_and_drop.path_to_paste.field.title": "Tampal path ke folder",
 
-  "drag_and_drop.instances.title": "",
-  "drag_and_drop.instances.description": "",
+  "drag_and_drop.instances.title": "Mengimport yang mod softmodded?",
+  "drag_and_drop.instances.description": "Pilih satu yang dari instance dari sini!",
 
   "            //-- DOWNLOAD WAITING SECTION --//            ": "",
-  "download_waiting.title": "",
-  "download_waiting.description": "",
+  "download_waiting.title": "Tolong tunggu sementara kami buat sihir...",
+  "download_waiting.description": "Untuk kamu menunggu, cubalah awak try tingu YouTube? Banyak makan masa. <br/> Ini boleh mengambil beberapa masa bergantung mana kau hidup atau awak punya sambungan!",
 
   "            //-- GAMEBANANA SECTION --//            ": "",
-  "gamebanana.title": "",
+  "gamebanana.title": "Muat turun untuk",
 
-  "gamebanana.warning.title": "",
-  "gamebanana.warning.description": "",
+  "gamebanana.warning.title": "Bukan untuk FNF",
+  "gamebanana.warning.description": "Ini mod macam bukan serasi dengan FNF. Jangan laporan bug ini tempat Github Repository.",
 
-  "gamebanana.importing_hard_coded.title": "",
-  "gamebanana.importing_hard_coded.description": "",
-  "gamebanana.importing_hard_coded.field.title": "",
-  "gamebanana.importing_hard_coded.field.description": "",
-  "gamebanana.importing_hard_coded.field.button": "",
+  "gamebanana.importing_hard_coded.title": "Mengimport yang mod bukan softmodded?",
+  "gamebanana.importing_hard_coded.description": "Masukkan path ke folder kau mau simpan!",
+  "gamebanana.importing_hard_coded.field.title": "Tampal path ke folder",
+  "gamebanana.importing_hard_coded.field.description": "Path yang untuk memuat turun engine. contoh; <code>C:\\Games\\FNF</code>",
+  "gamebanana.importing_hard_coded.field.button": "Guna path kegemaran",
 
-  "gamebanana.instances.title": "",
-  "gamebanana.instances.description": "",
+  "gamebanana.instances.title": "Mengimport yang mod softmodded?",
+  "gamebanana.instances.description": "Pilih satu yang dari instance dari sini!",
 
   "            //-- NOTIFICATION SECTION --//            ": "",
-  "notification.download.title.gamebanana": "",
-  "notification.download.title.engine": "",
+  "notification.download.title.gamebanana": "GameBanana Mod",
+  "notification.download.title.engine": "Muat turun Engine",
 
-  "notification.download.description.hard_coded": "",
-  "notification.download.description.soft_coded": ""
+  "notification.download.description.hard_coded": "Kita sudah siap muat turun!",
+  "notification.download.description.soft_coded": "Kita sudah siap muat turun! Kita mau awak untuk input executable file, dan awak sepatutnya sudah bersedia!"
 }
