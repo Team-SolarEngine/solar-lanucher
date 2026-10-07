@@ -49,11 +49,11 @@
 
   "settings.localization.title": "Localization (I am not translating allat - CharGoldenYT)",
   "settings.localization.description": "Don't want to use LOLcat? Use other languages!",
-  "settings.localization.manage_submenu.title": "Pick a language!",
-  "settings.localization.manage_submenu.description": "Can't find your language? You can contribute for your language for free!",
-  "settings.localization.manage_submenu.translated_by": "Translated by ",
-  "settings.localization.manage_submenu.restart.title": "This requires a restart!",
-  "settings.localization.manage_submenu.restart.description": "I know, I know. Changing a setting and requires a restart to take effect? Annoying. But, we have a good reason. Everything won't update automatically. So this is our best bet. Thank you for understanding!",
+  "settings.localization.manage_submenu.title": "",
+  "settings.localization.manage_submenu.description": "",
+  "settings.localization.manage_submenu.translated_by": "",
+  "settings.localization.manage_submenu.restart.title": "",
+  "settings.localization.manage_submenu.restart.description": "",
 
   "settings.version.section1": "ur versin of launchr;",
   "settings.version.section2.up_to_date": "updatd!",
@@ -85,7 +85,7 @@
   "local_or_edit.field.working_directory.title": "work directory",
   "local_or_edit.field.working_directory.description": "da directory for da instance.",
 
-  "local_or_edit.field.description.title": "Description",
+  "local_or_edit.field.description.title": "descripton",
   "local_or_edit.field.description.description": "how da heck u describe it?",
 
   "local_or_edit.field.banner_url.title": "banner url",
@@ -93,12 +93,12 @@
 
   "            //-- START EXTRA SECTION --//            ": "",
   "// I dont wanna translate these, fuck yoy": "",
-  "start_extra.button.start": "Start",
-  "start_extra.button.submenu.open_in_terminal": "Open in Terminal",
-  "start_extra.button.submenu.edit": "Edit",
-  "start_extra.button.submenu.open_folder": "Open Folder",
-  "start_extra.button.submenu.delete_shortcut": "Delete Shortcut",
-  "start_extra.button.submenu.delete_instance": "Delete Instance",
+  "start_extra.button.start": "",
+  "start_extra.button.submenu.open_in_terminal": "",
+  "start_extra.button.submenu.edit": "",
+  "start_extra.button.submenu.open_folder": "",
+  "start_extra.button.submenu.delete_shortcut": "",
+  "start_extra.button.submenu.delete_instance": "",
 
   "            //-- DELETE INSTANCE SECTION --//            ": "",
   "delete_instance.title": "woa! hol up you're deleting an instance!",
@@ -124,9 +124,9 @@
   "            //-- SECTION DISPLAY SECTION --//            ": "",
   "section_display.empty": "{section} empty, perfect for adding stuffs, or try refresh guy.",
 
-  "section_display.transfer.title": "Select an instance to transfer!",
-  "section_display.transfer.warning.title": "Please note;",
-  "section_display.transfer.warning.description": "This will transfer the <code>{path}</code> folder to the selected instance. If you are transferring to <code>addons</code> from <code>mods</code>, you will have to transfer it yourself.",
+  "section_display.transfer.title": "",
+  "section_display.transfer.warning.title": "",
+  "section_display.transfer.warning.description": "",
 
   "            //-- SIDEBAR SECTION --//            ": "",
   "sidebar.button.collapse_sidebar.tooltip": "shrink sidbar",
@@ -149,9 +149,8 @@
   "            //-- GAMEBANANA SECTION --//            ": "",
   "gamebanana.title": "gameYuckyFrut",
 
-
-  "gamebanana.warning.title": "Not for FNF",
-  "gamebanana.warning.description": "This mod seems like it is not compatible with FNF. Please do not report this to the GitHub repository.",
+  "gamebanana.warning.title": "",
+  "gamebanana.warning.description": "",
 
   "gamebanana.importing_hard_coded.title": "importing executable?",
   "gamebanana.importing_hard_coded.description": "add path here",
