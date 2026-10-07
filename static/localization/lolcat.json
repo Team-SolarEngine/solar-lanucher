@@ -1,0 +1,172 @@
+{
+  "            //-- GLOBAL SECTION --//            ": "",
+  "global.close": "cloz pls",
+  "global.cancel": "cancel pls",
+  "global.done": "iz don",
+  "global.save": "save k?",
+  "global.confirm": "confirm k?",
+  "global.explorer": "fil explor",
+  "global.delete": "pls deelete",
+  "global.use_favourite_path": "fav path to take",
+  "global.not_found": "{type} not find??",
+
+  "            //-- MAIN SCREEN SECTION --//            ": "",
+  "main_screen.empty_screen.header": "cool launchr ez access to engin fils",
+
+  "            //-- SETTINGS SECTION --//            ": "",
+  "settings.global.Manage": "maneg",
+
+  "settings.add_pet.title": "add pet",
+  "settings.add_pet.description": "lil guy follow u around!",
+
+  "settings.pet_icon_url.title": "wher pet file",
+  "settings.pet_icon_url.description": "whet pet file (url or path to file)",
+
+  "settings.github_token.title": "tokn of powa",
+  "settings.github_token.description": "rate limt uncool, fix with ur own tokm of powa",
+
+  "settings.compact_mode.title": "squish everythng",
+  "settings.compact_mode.description": "smaller boxes, more on scren",
+
+  "settings.additional_engine_repositories.title": "add sourcs",
+  "settings.additional_engine_repositories.description": "currnt engin list too small? add moar!",
+  "settings.additional_engine_repositories.manage_submenu.title": "add sourcs",
+  "settings.additional_engine_repositories.manage_submenu.description": "mak sur they has releas or launchr sad.",
+  "settings.additional_engine_repositories.manage_submenu.button.add_repo": "add sourc",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title": "ur thoughts?",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title": "wat name?",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.description": "what call in app (Example: <code>Solar Engine</code>)",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title": "github link",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.description": "github link of sourc",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title": "img",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.description": "cool img in app",
+
+  "settings.favourite_path.title": "best path to use",
+  "settings.favourite_path.description": "path frequently use? add here! (only one slot for now)",
+
+  "settings.code_editor.title": "tool of choice",
+  "settings.code_editor.description": "wat ur tool of choice, add shortcat",
+
+  "settings.localization.title": "Localization (I am not translating allat - CharGoldenYT)",
+  "settings.localization.description": "Don't want to use LOLcat? Use other languages!",
+  "settings.localization.manage_submenu.title": "Pick a language!",
+  "settings.localization.manage_submenu.description": "Can't find your language? You can contribute for your language for free!",
+  "settings.localization.manage_submenu.translated_by": "Translated by ",
+  "settings.localization.manage_submenu.restart.title": "This requires a restart!",
+  "settings.localization.manage_submenu.restart.description": "I know, I know. Changing a setting and requires a restart to take effect? Annoying. But, we have a good reason. Everything won't update automatically. So this is our best bet. Thank you for understanding!",
+
+  "settings.version.section1": "ur versin of launchr;",
+  "settings.version.section2.up_to_date": "updatd!",
+  "settings.version.section2.out_of_date": "oh noe old!",
+  "settings.version.section2.limited": "rat limit :(",
+  "settings.version.button": "open releases",
+
+  "            //-- ADD NEW INSTANCE SECTION --//            ": "",
+  "prompt_for_new.title": "new fnf guy",
+  "prompt_for_new.description": "local foldr or internet",
+  "prompt_for_new.button.local": "locl",
+  "prompt_for_new.button.download_engines": "from intrnet",
+
+  "            //-- ADD LOCAL/EDIT INSTANCE SECTION --//            ": "",
+  "local.title": "add fnf local foldr",
+  "local.description": "<b>littl metl guy opens explorer </b>",
+
+  "edit.title": "{instance} edit time.",
+
+  "local_or_edit.field.mod_or_engine_name.title": "name is",
+  "local_or_edit.field.mod_or_engine_name.description": "what to display in launchr",
+
+  "local_or_edit.field.icon_path.title": "img path",
+  "local_or_edit.field.icon_path.description": "a cool img you like (1:1 scale recommended)",
+
+  "local_or_edit.field.execute_command.title": "lunch command",
+  "local_or_edit.field.execute_command.description": "da command you use to launch da game",
+
+  "local_or_edit.field.working_directory.title": "work directory",
+  "local_or_edit.field.working_directory.description": "da directory for da instance.",
+
+  "local_or_edit.field.description.title": "Description",
+  "local_or_edit.field.description.description": "how da heck u describe it?",
+
+  "local_or_edit.field.banner_url.title": "banner url",
+  "local_or_edit.field.banner_url.description": "da img or path u use for da banner, 16:9 best ratio.",
+
+  "            //-- START EXTRA SECTION --//            ": "",
+  "// I dont wanna translate these, fuck yoy": "",
+  "start_extra.button.start": "Start",
+  "start_extra.button.submenu.open_in_terminal": "Open in Terminal",
+  "start_extra.button.submenu.edit": "Edit",
+  "start_extra.button.submenu.open_folder": "Open Folder",
+  "start_extra.button.submenu.delete_shortcut": "Delete Shortcut",
+  "start_extra.button.submenu.delete_instance": "Delete Instance",
+
+  "            //-- DELETE INSTANCE SECTION --//            ": "",
+  "delete_instance.title": "woa! hol up you're deleting an instance!",
+  "delete_instance.description": "click outside da modal to cancel or pick from below",
+
+  "delete_instance.button.delete_shortcut": "bye shortcat",
+  "delete_instance.button.delete_shortcut.tooltip": "remove shortcat only",
+
+  "delete_instance.button.delete_instance": "bye instance",
+  "delete_instance.button.delete_instance.tooltip": "remove instance and shortcat",
+
+  "            //-- DOWNLOAD ENGINES SECTION --//            ": "",
+  "download.title": "engine grabber",
+  "download.description": "uhh whats a friday night funkin",
+
+  "download.path_to_download.title": "where da engin go?",
+  "download.path_to_download.description": "where to stor engin",
+
+  "download.section_engine.published_by": "releas bai; ",
+  "download.section_engine.uploaded_by": "file bai; ",
+  "download.section_engine.empty_download_assets": "oh noe no assets!",
+
+  "            //-- SECTION DISPLAY SECTION --//            ": "",
+  "section_display.empty": "{section} empty, perfect for adding stuffs, or try refresh guy.",
+
+  "section_display.transfer.title": "Select an instance to transfer!",
+  "section_display.transfer.warning.title": "Please note;",
+  "section_display.transfer.warning.description": "This will transfer the <code>{path}</code> folder to the selected instance. If you are transferring to <code>addons</code> from <code>mods</code>, you will have to transfer it yourself.",
+
+  "            //-- SIDEBAR SECTION --//            ": "",
+  "sidebar.button.collapse_sidebar.tooltip": "shrink sidbar",
+  "sidebar.button.add.tooltip": "Add instance with left paw, or open share page with right paw",
+
+  "            //-- DRAG AND DROP SECTION --//            ": "",
+  "drag_and_drop.title": "the foldr u addin",
+
+  "drag_and_drop.path_to_paste.title": "importing executable?",
+  "drag_and_drop.path_to_paste.description": "add path here",
+  "drag_and_drop.path_to_paste.field.title": "path to paste",
+
+  "drag_and_drop.instances.title": "mod foldr?",
+  "drag_and_drop.instances.description": "add to one a these guys",
+
+  "            //-- DOWNLOAD WAITING SECTION --//            ": "",
+  "download_waiting.title": "downloading more ram...",
+  "download_waiting.description": "I mean downloading the engine",
+
+  "            //-- GAMEBANANA SECTION --//            ": "",
+  "gamebanana.title": "gameYuckyFrut",
+
+
+  "gamebanana.warning.title": "Not for FNF",
+  "gamebanana.warning.description": "This mod seems like it is not compatible with FNF. Please do not report this to the GitHub repository.",
+
+  "gamebanana.importing_hard_coded.title": "importing executable?",
+  "gamebanana.importing_hard_coded.description": "add path here",
+  "gamebanana.importing_hard_coded.field.title": "download path",
+  "gamebanana.importing_hard_coded.field.description": "where to store the catnip",
+  "gamebanana.importing_hard_coded.field.button": "favorite location?",
+
+  "gamebanana.instances.title": "mod foldr?",
+  "gamebanana.instances.description": "add to one a these guys",
+
+  "            //-- NOTIFICATION SECTION --//            ": "",
+  "notification.download.title.gamebanana": "gameYuckyFruit mod",
+  "notification.download.title.engine": "downlodn engin",
+  "milklooker.description": "Yeah im the weirdo that looks at all the milk.",
+
+  "notification.download.description.hard_coded": "don!",
+  "notification.download.description.soft_coded": "don! add path pls"
+}
