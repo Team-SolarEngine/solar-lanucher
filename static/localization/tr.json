@@ -1,0 +1,169 @@
+{
+  "            //-- GLOBAL SECTION --//            ": "",
+  "global.close": "Kapat",
+  "global.cancel": "İptal",
+  "global.done": "Tamam",
+  "global.save": "Kaydet",
+  "global.confirm": "Onayla",
+  "global.explorer": "Gezgin",
+  "global.delete": "Sil",
+  "global.use_favourite_path": "Favori Yolu Kullan",
+  "global.not_found": "{type} bulunamadı.",
+
+  "            //-- MAIN SCREEN SECTION --//            ": "",
+  "main_screen.empty_screen.header": "Yeni, hafif FNF başlatıcınız. Hepsi tek bir yerde.",
+
+  "            //-- SETTINGS SECTION --//            ": "",
+  "settings.global.Manage": "Yönet",
+
+  "settings.add_pet.title": "Maskot Ekle",
+  "settings.add_pet.description": "Sağ altta şüpheli bir Among Us olsun! Size eşlik eder.",
+
+  "settings.pet_icon_url.title": "Maskot Simge URL'si",
+  "settings.pet_icon_url.description": "Şüpheli Among Us'ı sevmediniz mi? Özel bir simge için URL veya Yol kullanın!",
+
+  "settings.github_token.title": "GitHub Token'ı",
+  "settings.github_token.description": "İstek sınırlarından bıktınız mı? GitHub için kendi token'ınızı oluşturun ve kullanın!",
+
+  "settings.compact_mode.title": "Kompakt Mod",
+  "settings.compact_mode.description": "Çok fazla boşluk ve içerik mi var? Bunu açın!",
+
+  "settings.additional_engine_repositories.title": "Ek Motor Repoları",
+  "settings.additional_engine_repositories.description": "Mevcut motor seçiminden bıktınız mı? Daha fazlasını ekleyebilirsiniz!",
+  "settings.additional_engine_repositories.manage_submenu.title": "Ek Repolar",
+  "settings.additional_engine_repositories.manage_submenu.description": "İndirmek için özel motor repoları ekleyin. Sürümlerinin olduğundan emin olun!",
+  "settings.additional_engine_repositories.manage_submenu.button.add_repo": "Repo Ekle",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title": "Ne düşünüyorsun?",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title": "Repo Adı",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.description": "Arayüzde gösterilen reponun adı. Örn; <code>Solar Engine</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title": "GitHub URL'si (sahip/repo)",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.description": "Reponun GitHub URL'si. Örn; <code>Team-SolarEngine/Solar-Engine-Archived</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title": "Simge",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.description": "Arayüzde gösterilen reponun simgesi. Örn; <code>https://</code>",
+
+  "settings.favourite_path.title": "Favori Yol",
+  "settings.favourite_path.description": "Sık kullandığınız bir yol mu var? Buradan ayarlayın! Şu an tek bir alanımız var, ancak gelecekte daha fazlasını eklemeyi planlıyoruz.",
+
+  "settings.code_editor.title": "Kod Düzenleyici",
+  "settings.code_editor.description": "Geliştirici misiniz? İşte sizin için bir kısayol!",
+
+  "settings.localization.title": "Yerelleştirme",
+  "settings.localization.description": "İngilizce kullanmak istemiyor musunuz? Başka diller kullanın!",
+  "settings.localization.manage_submenu.title": "Bir dil seçin!",
+  "settings.localization.manage_submenu.description": "Dilinizi bulamadınız mı? Kendi diliniz için ücretsiz katkıda bulunabilirsiniz!",
+  "settings.localization.manage_submenu.translated_by": "Çeviren: ",
+  "settings.localization.manage_submenu.restart.title": "Bu işlem yeniden başlatma gerektirir!",
+  "settings.localization.manage_submenu.restart.description": "Biliyorum, biliyorum. Bir ayarı değiştirmek ve etkinleşmesi için yeniden başlatmak mı gerekiyor? Can sıkıcı. Ama geçerli bir sebebimiz var. Her şey otomatik olarak güncellenmeyecek. Bu yüzden en iyi seçeneğimiz bu. Anlayışınız için teşekkürler!",
+
+  "settings.version.section1": "Solar Launcher sürümünüz;",
+  "settings.version.section2.up_to_date": "ve güncel!",
+  "settings.version.section2.out_of_date": "ve güncel değil...",
+  "settings.version.section2.limited": "ve kısıtlandığınız için kontrol edemiyoruz...",
+  "settings.version.button": "Sürümleri aç",
+
+  "            //-- ADD NEW INSTANCE SECTION --//            ": "",
+  "prompt_for_new.title": "FNF için yeni bir örnek ekleniyor...",
+  "prompt_for_new.description": "Yeni bir örnek indirebilir veya önceden indirdiklerinizi ekleyebilirsiniz!",
+  "prompt_for_new.button.local": "Yerel",
+  "prompt_for_new.button.download_engines": "Motorları İndir",
+
+  "            //-- ADD LOCAL/EDIT INSTANCE SECTION --//            ": "",
+  "local.title": "Yeni Bir FNF Örneği Ekle",
+  "local.description": "<b>İpucu</b>; Dosya gezgini için ataş simgesine tıklayın...",
+
+  "edit.title": "{instance} Örneğini Düzenle.",
+
+  "local_or_edit.field.mod_or_engine_name.title": "FNF Mod/Motor adı",
+  "local_or_edit.field.mod_or_engine_name.description": "Başlatıcıda görüntülenecek FNF mod/motor adı.",
+
+  "local_or_edit.field.icon_path.title": "Simge Yolu",
+  "local_or_edit.field.icon_path.description": "Gönlünüzün istediği herhangi bir simge. 1:1 oranında olduğundan emin olun. URL veya Yol olabilir.",
+
+  "local_or_edit.field.execute_command.title": "Çalıştırma Komutu",
+  "local_or_edit.field.execute_command.description": "Örneği başlatmak için çalıştırılacak komut. Örn; <code>.\\Funkin.exe</code>",
+
+  "local_or_edit.field.working_directory.title": "Çalışma Dizini",
+  "local_or_edit.field.working_directory.description": "Örnek için çalışma dizini. Örn; <code>D:\\Games\\FNF\\Funkin</code>",
+
+  "local_or_edit.field.description.title": "Açıklama",
+  "local_or_edit.field.description.description": "Başlatıcıda görüntülenecek uygulamanın açıklaması. Örn; <code>Base game FNF V-slice</code>",
+
+  "local_or_edit.field.banner_url.title": "Banner URL'si",
+  "local_or_edit.field.banner_url.description": "Örnek için afiş görseli URL'si veya Yolu. En-boy oranı fark etmez ama 16:9 öneririz.",
+
+  "            //-- START EXTRA SECTION --//            ": "",
+  "start_extra.button.start": "Başlat",
+  "start_extra.button.submenu.open_in_terminal": "Terminalde Aç",
+  "start_extra.button.submenu.edit": "Düzenle",
+  "start_extra.button.submenu.open_folder": "Klasörü Aç",
+  "start_extra.button.submenu.delete_shortcut": "Kısayolu Sil",
+  "start_extra.button.submenu.delete_instance": "Örneği Sil",
+
+  "            //-- DELETE INSTANCE SECTION --//            ": "",
+  "delete_instance.title": "Örneği Sil",
+  "delete_instance.description": "Bir örneği siliyorsunuz! Bu pencerenin dışına tıklayın veya ikisinden birini seçin.",
+
+  "delete_instance.button.delete_shortcut": "Kısayolu Sil",
+  "delete_instance.button.delete_shortcut.tooltip": "Bu işlem uygulamayı açma kısayolunu siler, örneğin kendisini değil.",
+
+  "delete_instance.button.delete_instance": "Örneği Sil",
+  "delete_instance.button.delete_instance.tooltip": "Bu işlem örneği ve kısayolunu siler. Dikkatli kullanın.",
+
+  "            //-- DOWNLOAD ENGINES SECTION --//            ": "",
+  "download.title": "Motorları İndir",
+  "download.description": "İster Solar, Codename, Psych ister Vanilla Funkin olsun, hepsini destekliyoruz!",
+
+  "download.path_to_download.title": "İndirilecek Yol",
+  "download.path_to_download.description": "Motorun indirileceği yol. Örn; <code>C:\\Games\\FNF</code>",
+
+  "download.section_engine.published_by": "Yayınlayan; ",
+  "download.section_engine.uploaded_by": "Yükleyen; ",
+  "download.section_engine.empty_download_assets": "İndirilebilir dosya bulunamadı.",
+
+  "            //-- SECTION DISPLAY SECTION --//            ": "",
+  "section_display.empty": "{section} boş. Üstteki klasöre tıklayarak bir tane eklemeyi deneyin ve yenile düğmesine basın!",
+
+  "section_display.transfer.title": "Aktarılacak bir örnek seçin!",
+  "section_display.transfer.warning.title": "Lütfen dikkat;",
+  "section_display.transfer.warning.description": "Bu işlem <code>{path}</code> klasörünü seçilen örneğe aktaracaktır. Eğer <code>mods</code> klasöründen <code>addons</code> klasörüne aktarıyorsanız, bunu kendiniz yapmanız gerekecektir.",
+
+  "            //-- SIDEBAR SECTION --//            ": "",
+  "sidebar.button.collapse_sidebar.tooltip": "Yan Çubuğu Daralt",
+  "sidebar.button.add.tooltip": "Yeni bir uygulama eklemek için sol tıklayın <br/> Solar Team paylaşım sayfasını açmak için sağ tıklayın.",
+
+  "            //-- DRAG AND DROP SECTION --//            ": "",
+  "drag_and_drop.title": "Yapıştırmaya çalıştığınız klasör:",
+
+  "drag_and_drop.path_to_paste.title": "Soft modlanmamış bir modu mu içe aktarıyorsunuz?",
+  "drag_and_drop.path_to_paste.description": "Nereye koymak istiyorsanız yolunuzu buraya girin!",
+  "drag_and_drop.path_to_paste.field.title": "Yapıştırılacak Yol",
+
+  "drag_and_drop.instances.title": "Soft modlanmış bir modu mu içe aktarıyorsunuz?",
+  "drag_and_drop.instances.description": "Bu örneklerden birini seçin!",
+
+  "            //-- DOWNLOAD WAITING SECTION --//            ": "",
+  "download_waiting.title": "Lütfen sihrimizi yaparken bekleyin...",
+  "download_waiting.description": "Beklerken neden YouTube izlemiyorsunuz? Harika bir zaman öldürücüdür. <br/> Yaşadığınız yere veya bağlantınıza bağlı olarak bu işlem uzun sürebilir!",
+
+  "            //-- GAMEBANANA SECTION --//            ": "",
+  "gamebanana.title": "Şunun için indirmeler:",
+
+  "gamebanana.warning.title": "FNF için değil",
+  "gamebanana.warning.description": "Bu mod FNF ile uyumlu görünmüyor. Lütfen bunu GitHub reposuna bildirmeyin.",
+
+  "gamebanana.importing_hard_coded.title": "Soft modlanmamış bir modu mu koyuyorsunuz?",
+  "gamebanana.importing_hard_coded.description": "Nereye koymak istiyorsanız yolunuzu buraya girin!",
+  "gamebanana.importing_hard_coded.field.title": "İndirilecek Yol",
+  "gamebanana.importing_hard_coded.field.description": "Modun indirileceği yol. Örn; <code>C:\\Games\\FNF</code>",
+  "gamebanana.importing_hard_coded.field.button": "Favori yolu kullan",
+
+  "gamebanana.instances.title": "Soft modlanmış bir modu mu içe aktarıyorsunuz?",
+  "gamebanana.instances.description": "Bu örneklerden birini seçin!",
+
+  "            //-- NOTIFICATION SECTION --//            ": "",
+  "notification.download.title.gamebanana": "GameBanana Modu",
+  "notification.download.title.engine": "Motor İndiriliyor",
+
+  "notification.download.description.hard_coded": "İndirme tamamlandı!",
+  "notification.download.description.soft_coded": "İndirme tamamlandı! Sadece çalıştırılabilir dosyayı girmeniz gerekiyor, ardından her şey hazır!"
+}
