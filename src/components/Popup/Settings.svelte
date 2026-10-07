@@ -20,7 +20,7 @@
         { title: "settings.additional_engine_repositories.title", key: "additionalRepos", desc: "settings.additional_engine_repositories.description", type: "menu", default: "", call: () => toggleAddRepos = true },
         { title: "settings.favourite_path.title", key: "favouritePath", desc: "settings.favourite_path.description", type: "text", default: "" },
         { title: "settings.code_editor.title", key: "codeEditor", desc: "settings.code_editor.description", type: "text", default: "" },
-        { title: "settings.localization.title", key: "currentLanguage", desc: "settings.localization.description", type: "menu", default: "", call: () => toggleLocalizationMenu = true},
+        { title: "settings.localization.title", key: "currentLanguage", desc: "settings.localization.description", type: "menu", default: "en", call: () => toggleLocalizationMenu = true},
     ]
 
     async function loadSetting(key: string) {
