@@ -1,0 +1,169 @@
+{
+  "            //-- GLOBAL SECTION --//            ": "",
+  "global.close": "Sluiten",
+  "global.cancel": "Annuleer",
+  "global.done": "Klaar",
+  "global.save": "Opslaan",
+  "global.confirm": "Bevestig",
+  "global.explorer": "Explorer",
+  "global.delete": "Verwijder",
+  "global.use_favourite_path": "Gebruik Favoriete Pad",
+  "global.not_found": "{type} niet gevonden",
+
+  "            //-- MAIN SCREEN SECTION --//            ": "",
+  "main_screen.empty_screen.header": "Jouw nieuwe, lightweight FNF launcher. Allemaal in één plaats.",
+
+  "            //-- SETTINGS SECTION --//            ": "",
+  "settings.global.Manage": "Beheer",
+
+  "settings.add_pet.title": "Huisdier Toevoegen",
+  "settings.add_pet.description": "Heb sussy amongus rechtsonder! Houdt je gezeldschap.",
+
+  "settings.pet_icon_url.title": "Huisdier Icoon URL",
+  "settings.pet_icon_url.description": "Hou je niet van sussy amongus? Gebruik een URL of Pad voor je eigen icoontje!",
+
+  "settings.github_token.title": "GitHub Token",
+  "settings.github_token.description": "Rate limits beu? Maak je eigen token voor GitHub en gebruik het!",
+
+  "settings.compact_mode.title": "Compacte Modus",
+  "settings.compact_mode.description": "Te verspreid en te veel inhoud? Zet dit aan!",
+
+  "settings.additional_engine_repositories.title": "Overige Engine Repositories",
+  "settings.additional_engine_repositories.description": "Ben je de huidige engine selectie beu? Je kan er meer toevoegen!",
+  "settings.additional_engine_repositories.manage_submenu.title": "Overige Repositories",
+  "settings.additional_engine_repositories.manage_submenu.description": "Voeg je eigen engine repositories om van te downloaden. Zorg ervoor dat ze releases hebben!",
+  "settings.additional_engine_repositories.manage_submenu.button.add_repo": "Repository Toevoegen",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title": "Wat denk je?",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title": "Repository Naam",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.description": "De naam van de repository zoals getoont in de UI. bv; <code>Solar Engine</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title": "Github URL (eigenaar/repo)",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.description": "De GitHub URL van de repository. bv; <code>Team-SolarEngine/Solar-Engine-Archived</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title": "Icoontje",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.description": "Het icoontje van de repository zoals getoont in de UI. bv; <code>https://</code>",
+
+  "settings.favourite_path.title": "Favoriete Pad",
+  "settings.favourite_path.description": "Heb je een pad dat je vaak gebruikt? Zet het hier! We hebben enkel één slot, maar we zijn van plan er meerdere toe te voegen in de toekomst.",
+
+  "settings.code_editor.title": "Programmeer Omgeving",
+  "settings.code_editor.description": "Ben je een ontwikkelaar? Hier heb je een snelkoppeling!",
+
+  "settings.localization.title": "Lokalisatie",
+  "settings.localization.description": "Wil je nederlands niet gebruiken? Gebruik andere talen!",
+  "settings.localization.manage_submenu.title": "Kies een taal!",
+  "settings.localization.manage_submenu.description": "Kan je je taal niet vinden? Je kan gratis bijdragen aan je taal!",
+  "settings.localization.manage_submenu.translated_by": "Vertaald door ",
+  "settings.localization.manage_submenu.restart.title": "Je moet hiervoor herstarten!",
+  "settings.localization.manage_submenu.restart.description": "Ik weet het, ik weet het. Een instelling aanpassen dat een herstart nodig heeft om effect te hebben? Vervelend. Maar, hier is een goede reden voor. Niet alles zal automatisch bijwerken. Dus dit de beste oplossing. Bedankt voor je begrip!",
+
+  "settings.version.section1": "Jouw versie van Solar Launcher is;",
+  "settings.version.section2.up_to_date": "wat up to date is!",
+  "settings.version.section2.out_of_date": "wat verouderd is...",
+  "settings.version.section2.limited": "en we kunnen niet checken wat je bet gelimiteerd",
+  "settings.version.button": "Open releases",
+
+  "            //-- ADD NEW INSTANCE SECTION --//            ": "",
+  "prompt_for_new.title": "Nieuwe instantie toevoegen voor FNF...",
+  "prompt_for_new.description": "Je kan een nieuwe instantie downloaden, of je reeds gedownloade instanties toevoegen!",
+  "prompt_for_new.button.local": "Lokaal",
+  "prompt_for_new.button.download_engines": "Download Engines",
+
+  "            //-- ADD LOCAL/EDIT INSTANCE SECTION --//            ": "",
+  "local.title": "Voeg een nieuwe FNF Instantie toe!",
+  "local.description": "<b>Pro tip</b>; Klik op het paperclip icoontje voor file explorer...",
+
+  "edit.title": "Pas {instance} Aan.",
+
+  "local_or_edit.field.mod_or_engine_name.title": "FNF Mod/Engine naam",
+  "local_or_edit.field.mod_or_engine_name.description": "De FNF Mod/Engine naam om te tonen in de launcher.",
+
+  "local_or_edit.field.icon_path.title": "Icoon Pad",
+  "local_or_edit.field.icon_path.description": "Elk incoontje jouw hart wenst. Zorg ervoor dat het 1:1 is. Het kan een URL of een Pad zijn.",
+
+  "local_or_edit.field.execute_command.title": "Commando Uitvoeren",
+  "local_or_edit.field.execute_command.description": "Het commando om je instantie te openen. bv; <code>.\\Funkin.exe</code>",
+
+  "local_or_edit.field.working_directory.title": "Werkmap",
+  "local_or_edit.field.working_directory.description": "De werkmap van je instantie. bv; <code>D:\\Games\\FNF\\Funkin</code>",
+
+  "local_or_edit.field.description.title": "Beschrijving",
+  "local_or_edit.field.description.description": "De beschrijving van de instantie om te tonen in de launcher. bv; <code>Base game FNF V-slice</code>",
+
+  "local_or_edit.field.banner_url.title": "Banner URL",
+  "local_or_edit.field.banner_url.description": "De banner afbeelding URL of Pad van de instantie. Beeldverhouding maakt niet uit, maar we raden 16:9 wel aan.",
+
+  "            //-- START EXTRA SECTION --//            ": "",
+  "start_extra.button.start": "Start",
+  "start_extra.button.submenu.open_in_terminal": "Open in Terminal",
+  "start_extra.button.submenu.edit": "Bewerken",
+  "start_extra.button.submenu.open_folder": "Open Map",
+  "start_extra.button.submenu.delete_shortcut": "Verwijder snelkoppeling",
+  "start_extra.button.submenu.delete_instance": "Verwijder Instantie",
+
+  "            //-- DELETE INSTANCE SECTION --//            ": "",
+  "delete_instance.title": "Verwijder Instantie",
+  "delete_instance.description": "Je bent een instantie aan het verwijderen! Klik buiten dit venster of maak een keuze van beide opties.",
+
+  "delete_instance.button.delete_shortcut": "Verwijder snelkoppeling",
+  "delete_instance.button.delete_shortcut.tooltip": "Dit verwijdert de snelkoppeling om de instantie te openen. Niet de instantie zelf.",
+
+  "delete_instance.button.delete_instance": "Verwijder Instantie",
+  "delete_instance.button.delete_instance.tooltip": "Dit verwijdert de instantie en zijn snelkoppeling",
+
+  "            //-- DOWNLOAD ENGINES SECTION --//            ": "",
+  "download.title": "Download Engines",
+  "download.description": "Of het nu gaat om Solar, Codename, Psych of Vanilla Funkin, wij ondersteunen het!",
+
+  "download.path_to_download.title": "Pad naar download",
+  "download.path_to_download.description": "Een pad om de Engine naar te downloaden. bv; <code>C:\\Games\\FNF</code>",
+
+  "download.section_engine.published_by": "Gepubliceerd door;",
+  "download.section_engine.uploaded_by": "Geüpload door;",
+  "download.section_engine.empty_download_assets": "Er zijn geen downloadbare bestanden beschikbaar.",
+
+  "            //-- SECTION DISPLAY SECTION --//            ": "",
+  "section_display.empty": "{section} is leeg. Probeer er één toe te voegen door op de map bovenaan te klikken, druk dan op de kop vernieuwen",
+
+  "section_display.transfer.title": "Kies een instantie om over te zetten!",
+  "section_display.transfer.warning.title": "Let op;",
+  "section_display.transfer.warning.description": "Hiermee wordt de map <code>{path}</code> naar de geselecteerde instantie overgezet. Als je bestanden vanuit <code>mods</code> naar <code>addons</code> wilt overzetten, moet je dit zelf doen.",
+
+  "            //-- SIDEBAR SECTION --//            ": "",
+  "sidebar.button.collapse_sidebar.tooltip": "Zijbalk samenvouwen",
+  "sidebar.button.add.tooltip": "Klik met de linkermuisknop om een nieuwe app toe te voegen <br/>. Klik met de rechtermuisknop om de deelpagina van het Solar Team te openen.",
+
+  "            //-- DRAG AND DROP SECTION --//            ": "",
+  "drag_and_drop.title": "De map die je probeert de plakken is",
+
+  "drag_and_drop.path_to_paste.title": "Een mod importeren die geen softmod is?",
+  "drag_and_drop.path_to_paste.description": "Plaats je pad waar je het in wilt steken hier!",
+  "drag_and_drop.path_to_paste.field.title": "Pad om te plakken",
+
+  "drag_and_drop.instances.title": "Een mod importeren dat softmodded is?",
+  "drag_and_drop.instances.description": "Selecteer één van deze instanties!",
+
+  "            //-- DOWNLOAD WAITING SECTION --//            ": "",
+  "download_waiting.title": "Wacht even terwijl wij de magie doen...",
+  "download_waiting.description": "Als je toch moet wachten, waarom kijk je dan niet even op YouTube? Dat is trouwens een geweldige manier om de tijd te doden. <br/> Dit kan even duren, afhankelijk van waar je woont of hoe snel je verbinding is!",
+
+  "            //-- GAMEBANANA SECTION --//            ": "",
+  "gamebanana.title": "Downloads voor",
+
+  "gamebanana.warning.title": "Niet voor FNF",
+  "gamebanana.warning.description": "Deze mod lijkt niet compatibel te zijn met FNF. Meld dit alstublieft niet bij de GitHub repository.",
+
+  "gamebanana.importing_hard_coded.title": "Een mod installeren die geen softmod is?",
+  "gamebanana.importing_hard_coded.description": "Plaats je pad waar je het in wilt steken hier!",
+  "gamebanana.importing_hard_coded.field.title": "Pad naar download",
+  "gamebanana.importing_hard_coded.field.description": "Een pad om de Mod naar te downloaden. bv; <code>C:\\Games\\FNF</code>",
+  "gamebanana.importing_hard_coded.field.button": "Gebruik favoriete pad",
+
+  "gamebanana.instances.title": "Een mod importeren dat softmodded is?",
+  "gamebanana.instances.description": "Selecteer één van deze instanties!",
+
+  "            //-- NOTIFICATION SECTION --//            ": "",
+  "notification.download.title.gamebanana": "GameBanana Mod",
+  "notification.download.title.engine": "Engine aan het Downloaden",
+
+  "notification.download.description.hard_coded": "We zijn klaar met downloaden!",
+  "notification.download.description.soft_coded": "We zijn klaar met downloaden! Je hoeft nu alleen nog maar het uivoerbare bestand in te voeren, dan ben je helemaal klaar!"
+}
