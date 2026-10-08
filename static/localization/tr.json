@@ -86,7 +86,7 @@
   "local_or_edit.field.working_directory.description": "Örnek için çalışma dizini. Örn; <code>D:\\Games\\FNF\\Funkin</code>",
 
   "local_or_edit.field.description.title": "Açıklama",
-  "local_or_edit.field.description.description": "Başlatıcıda görüntülenecek uygulamanın açıklaması. Örn; <code>Base game FNF V-slice</code>",
+  "local_or_edit.field.description.description": "Başlatıcıda görüntülenecek örneğin açıklaması. Örn; <code>Base game FNF V-slice</code>",
 
   "local_or_edit.field.banner_url.title": "Banner URL'si",
   "local_or_edit.field.banner_url.description": "Örnek için afiş görseli URL'si veya Yolu. En-boy oranı fark etmez ama 16:9 öneririz.",
@@ -104,7 +104,7 @@
   "delete_instance.description": "Bir örneği siliyorsunuz! Bu pencerenin dışına tıklayın veya ikisinden birini seçin.",
 
   "delete_instance.button.delete_shortcut": "Kısayolu Sil",
-  "delete_instance.button.delete_shortcut.tooltip": "Bu işlem uygulamayı açma kısayolunu siler, örneğin kendisini değil.",
+  "delete_instance.button.delete_shortcut.tooltip": "Bu işlem oyunu açma kısayolunu siler, örneğin kendisini değil.",
 
   "delete_instance.button.delete_instance": "Örneği Sil",
   "delete_instance.button.delete_instance.tooltip": "Bu işlem örneği ve kısayolunu siler. Dikkatli kullanın.",
@@ -129,7 +129,7 @@
 
   "            //-- SIDEBAR SECTION --//            ": "",
   "sidebar.button.collapse_sidebar.tooltip": "Yan Çubuğu Daralt",
-  "sidebar.button.add.tooltip": "Yeni bir uygulama eklemek için sol tıklayın <br/> Solar Team paylaşım sayfasını açmak için sağ tıklayın.",
+  "sidebar.button.add.tooltip": "Yeni bir örnek eklemek için sol tıklayın <br/> Solar Team paylaşım sayfasını açmak için sağ tıklayın.",
 
   "            //-- DRAG AND DROP SECTION --//            ": "",
   "drag_and_drop.title": "Yapıştırmaya çalıştığınız klasör:",
