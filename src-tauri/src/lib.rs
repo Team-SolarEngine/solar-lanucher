@@ -116,6 +116,7 @@ pub fn run() {
             misc::get_os,
             apps::pure_run_command,
             apps::run_command,
+            json::check_json_file,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

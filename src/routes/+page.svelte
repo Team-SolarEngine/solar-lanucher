@@ -17,6 +17,7 @@
     import Local from "../components/Popup/AddNew/Local.svelte";
     import Download from "../components/Popup/AddNew/Download.svelte";
     import GameBananaMod from "../components/Popup/GameBananaMod.svelte";
+    import FirstTimePopup from "../components/Popup/FirstTimePopup.svelte";
 
     type AppData = {name: string, icon_url: string, execute_command: string, working_directory: string, description: string, banner_url: string};
 
@@ -25,6 +26,7 @@
     let promptForNew = $state(false);
     let modalNew = $state(false);
     let modalDownload = $state(false);
+    let modalForFirstTime = $state(false);
 
     let modalEdit = $state(false);
     let editingApp = $state<AppData | null>(null);
@@ -117,8 +119,25 @@
         modalEdit = true;
     }
 
+    async function checkForJson() {
+      /*
+       * This function checks if a json file exists.
+       */
+      try {
+        const jsonCall = await invoke("check_json_file")
+
+        if (jsonCall)
+          console.log("Continuing..")
+        else
+          modalForFirstTime = true;
+      } catch(e) {
+        useComponentSnackbarError(`Could not check for JSON file. ${e}`);
+      }
+    }
+
     onMount(() => {
         loadApps();
+        checkForJson();
 
         // listen for deep links while the app is running
         onOpenUrl((urls) => {
@@ -169,6 +188,7 @@
 
 <PromptForNew bind:promptForNew bind:modalNew bind:modalDownload />
 <EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadApps} />
+<FirstTimePopup bind:modalForFirstTime />
 <DragAndDrop/>
 
 <Local bind:modalNew onAppAdded={loadApps} prefill={newAppPrefill}/>
