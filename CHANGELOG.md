@@ -1,5 +1,16 @@
 # Solar Launcher Changelog
 
+## 0.8.2
+
+### Added
+- First time setup
+- Localization for 5 languages! (You can contribute to add your langauge. Wink wink.)
+  - English
+  - Malay
+  - Belgium
+  - Turkie
+  - lolcat
+
 ## 0.7.2
 
 ### Fixed
