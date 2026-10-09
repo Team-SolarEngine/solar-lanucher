@@ -11,6 +11,7 @@
         index = -1,
         isLast = false,
         stretch = false,
+        firstTimePopup,
     } = $props();
 
     let snackbar = $state<Snackbar>({
@@ -97,7 +98,13 @@
 <nav class="group split">
     <button class="border left-round primary" onclick={() => startApp()}>
       <i>play_arrow</i>
-      <span>{#await getWord("start_extra.button.start") then word}{@html word}{/await}</span>
+      <span>
+            {#if !firstTimePopup}
+                {#await getWord("start_extra.button.start") then word}{@html word}{/await}
+            {:else}
+                Start
+            {/if}
+      </span>
     </button>
     {#if !stretch}
         <div>
@@ -108,23 +115,25 @@
                     <i>keyboard_arrow_down</i>
                 {/if}
             </button>
-            <menu class="no-wrap" class:top={isLast}>
-                {#each extraFunctionalities as functionality}
-                    {#if functionality.name != "Delete"}
-                        <li onclick={functionality.action}>
-                            <i>{functionality.icon}</i> {#await getWord(functionality.key) then word}{@html word}{/await}
+            {#if !firstTimePopup}
+                <menu class="no-wrap" class:top={isLast}>
+                    {#each extraFunctionalities as functionality}
+                        {#if functionality.name != "Delete"}
+                            <li onclick={functionality.action}>
+                                <i>{functionality.icon}</i> {#await getWord(functionality.key) then word}{@html word}{/await}
+                            </li>
+                        {/if}
+                    {/each}
+    
+                    <hr class="small" />
+    
+                    {#each deleteTypes as deleteType}
+                        <li onclick={deleteType.action} class="tertiary-text">
+                            <i>delete</i> {#await getWord(deleteType.key) then word}{@html word}{/await}
                         </li>
-                    {/if}
-                {/each}
-
-                <hr class="small" />
-
-                {#each deleteTypes as deleteType}
-                    <li onclick={deleteType.action} class="tertiary-text">
-                        <i>delete</i> {#await getWord(deleteType.key) then word}{@html word}{/await}
-                    </li>
-                {/each}
-            </menu>
+                    {/each}
+                </menu>
+            {/if}
         </div>
     {:else}
         {#each extraFunctionalities as functionality}

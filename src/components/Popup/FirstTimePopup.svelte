@@ -1,5 +1,6 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
+    import CardApp from "../CardApp.svelte";
 
     let allLocalization = $state([
       { name: "English", code: "en", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/250px-Flag_of_the_United_Kingdom_%281-2%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry" },
@@ -44,6 +45,7 @@
     let buttonMessageBool = $state(false);
     let buttonMessage = $state("Confirm");
 
+    let compactMode = $state(false);
     let localization = $state("");
     let { modalForFirstTime = $bindable() } = $props()
 </script>
@@ -52,6 +54,41 @@
 <dialog class:active={modalForFirstTime}>
     <h2>Welcome to Solar Launcher!</h2>
     <span>Looks like this is your first time! Let's customize your settings a bit!</span>
+
+    <hr class="medium" />
+
+    <div class="field middle-align">
+        <nav>
+            <div class="max">
+                <h6>Compact Mode</h6>
+                  <div>Too spaced out and too much content? Turn this on!</div>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked={compactMode} onchange={() => { compactMode = !compactMode; saveSetting("compactMode", compactMode); }}>
+                <span></span>
+            </label>
+            <div class="tooltip max bottom" style="width: 25rem; box-shadow: none; background-color: var(--background);">
+                <CardApp
+                    name="Psych Engine"
+                    iconUrl="https://shadowmario.github.io/psychengine.lua/assets/icon.ico"
+                    executeCommand=""
+                    workingDirectory=""
+                    description="<b>Psych Engine</b> Hell Yeah"
+                    isPreview={false}
+                    firstTimePopup={true}
+                />
+                <CardApp
+                    name="Codename Engine"
+                    iconUrl="https://avatars.githubusercontent.com/u/122549339?s=200&v=4"
+                    executeCommand=""
+                    workingDirectory=""
+                    description="Ouu shi 👀"
+                    isPreview={false}
+                    firstTimePopup={true}
+                />
+            </div>
+        </nav>
+    </div>
 
     <hr class="medium" />
 
