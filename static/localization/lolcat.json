@@ -92,12 +92,12 @@
   "local_or_edit.field.banner_url.description": "da img or path u use for da banner, 16:9 best ratio.",
 
   "            //-- START EXTRA SECTION --//            ": "",
-  "start_extra.button.start": "stwat",
+  "start_extra.button.start": "stawt", "dave you fool you put the w in the wrong spot, i fixed it - CharGoldenYT": "",
   "start_extra.button.submenu.open_in_terminal": "opan da temin",
   "start_extra.button.submenu.edit": "penci",
   "start_extra.button.submenu.open_folder": "oo was dis",
   "start_extra.button.submenu.delete_shortcut": "bye shortcat",
-  "start_extra.button.submenu.delete_instance": "bys instance",
+  "start_extra.button.submenu.delete_instance": "bye instance",
 
   "            //-- DELETE INSTANCE SECTION --//            ": "",
   "delete_instance.title": "woa! hol up you're deleting an instance!",
