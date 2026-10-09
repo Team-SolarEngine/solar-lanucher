@@ -12,6 +12,19 @@ export async function getUserLanguage() {
   }
 }
 
+export async function cuteify(funny: string, lang: string)
+{
+  console.log(funny)
+  console.log(lang)
+  if (lang == "cuteMode")
+  {
+    funny = funny.replaceAll('l', 'w').replaceAll("L", 'W').replaceAll('r', 'w').replaceAll('R', 'W')
+  }
+
+  console.log(funny)
+  return funny
+}
+
 export async function getWord(word: string) {
   /*
    * Returns the localized word for the given key,
@@ -28,11 +41,11 @@ export async function getWord(word: string) {
     const localization = await getLocalization(language);
 
     if (localization[word] != "") {
-      return localization[word];
+      return cuteify(localization[word], language);
     }
 
     const fallbackLocalization = await getLocalization("en");
-    return fallbackLocalization[word];
+    return cuteify(fallbackLocalization[word], language);
   } catch (error) {
     console.log("Error getting word:", error);
     return "Error: " + error;
@@ -40,6 +53,10 @@ export async function getWord(word: string) {
 }
 
 export async function getLocalization(language: string) {
+  if (language == "cuteMode")
+  {
+    language = "en"
+  }
   try {
     const response = await fetch(`/localization/${language}.json`);
     const data = await response.json();
