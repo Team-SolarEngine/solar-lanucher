@@ -13,6 +13,7 @@ mod json;
 mod downloading;
 mod mods_togglers;
 mod misc;
+mod seven_zip;
 
 use tauri::Manager;
 
@@ -117,6 +118,7 @@ pub fn run() {
             apps::pure_run_command,
             apps::run_command,
             json::check_json_file,
+            seven_zip::download_7z,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
