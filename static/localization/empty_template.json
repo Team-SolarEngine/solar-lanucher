@@ -9,6 +9,7 @@
   "global.delete": "",
   "global.use_favourite_path": "",
   "global.not_found": "",
+  "global.download": "",
 
   "            //-- MAIN SCREEN SECTION --//            ": "",
   "main_screen.empty_screen.header": "",
@@ -60,6 +61,9 @@
   "settings.version.section2.out_of_date": "",
   "settings.version.section2.limited": "",
   "settings.version.button": "",
+  
+  "settings.download_7zip.title": "",
+  "settings.download_7zip.description": "",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "",

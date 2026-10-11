@@ -42,12 +42,26 @@
         window.location.reload()
     }
 
+    async function download8Zip() {
+        try {
+            await invoke("download_7z");
+        } catch(e) {
+            useComponentSnackbarError("Could not download 7zip: " + e)
+        }
+    }
+
     let buttonMessageBool = $state(false);
     let buttonMessage = $state("Confirm");
 
     let compactMode = $state(false);
     let localization = $state("");
     let { modalForFirstTime = $bindable() } = $props()
+
+    let snackbar = $state<Snackbar>({
+        snackbarError: false,
+        snackbarTime: 0,
+        givenError: "",
+    }); function useComponentSnackbarError(message: string) { useSnackbarError(message, snackbar); }
 </script>
 
 <div class="overlay" class:active={modalForFirstTime}></div>
@@ -92,6 +106,20 @@
 
     <hr class="medium" />
 
+    <div class="field label border">
+        <h6>Download 7z? - (Reccomended)</h6>
+        <div>
+            This will ensure you have support for
+            <code>.rar</code>, <code>.zip</code>, and <code>.7z</code>
+            all at the same time! - Please click the button once...
+        </div>
+        <button onclick={() => download8Zip()}>
+            Download
+        </button>
+    </div>
+
+    <hr class="medium" />
+
     <h3>Select your language</h3>
     <span>Don't speak English? Pick one of these!</span>
     {#each allLocalization as locale}
@@ -121,6 +149,8 @@
         </button>
     </div>
 </dialog>
+
+<div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
 
 <style>
     .localization {

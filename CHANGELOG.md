@@ -4,6 +4,7 @@
 
 ### Added
 - First time setup
+- `7z` for uncompressing. Uses `zip` crate for fallback if not found.
 - Localization for 5 languages! (You can contribute to add your langauge. Wink wink.)
   - English
   - Malay

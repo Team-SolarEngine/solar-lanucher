@@ -9,12 +9,13 @@
   "global.delete": "Verwijder",
   "global.use_favourite_path": "Gebruik Favoriete Pad",
   "global.not_found": "{type} niet gevonden",
+  "global.download": "Download",
 
   "            //-- MAIN SCREEN SECTION --//            ": "",
   "main_screen.empty_screen.header": "Jouw nieuwe, lightweight FNF launcher. Allemaal in één plaats.",
 
   "            //-- SETTINGS SECTION --//            ": "",
-  "settings.global.manage": "Beheer",
+  "settings.global.Manage": "Beheer",
 
   "settings.add_pet.title": "Huisdier Toevoegen",
   "settings.add_pet.description": "Heb sussy amongus rechtsonder! Houdt je gezeldschap.",
@@ -60,6 +61,9 @@
   "settings.version.section2.out_of_date": "wat verouderd is...",
   "settings.version.section2.limited": "en we kunnen niet checken wat je bet gelimiteerd",
   "settings.version.button": "Open releases",
+
+  "settings.download_7zip.title": "Download 7zip",
+  "settings.download_7zip.description": "Dit zal 7zip downloaden in jouw AppData map! Gebruik dit ÉÉN KEER.",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "Nieuwe instantie toevoegen voor FNF...",
