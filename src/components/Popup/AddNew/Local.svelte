@@ -60,6 +60,7 @@
          * to the backend, then closes the popup and refreshes the list.
          */
         submitted = true;
+        showExplorer = false;
         if (!appName || !appPath || !appWorkingDirectory) return useComponentSnackbarError(`Please fill in all fields.`);
 
         try {
@@ -191,9 +192,9 @@
 </dialog>
 
 <article class:active={showExplorer} class="_explorer scroll" style="max-width: 600px; position: absolute; top: 0; bottom: 0; left: 0; z-index: 999; margin-bottom: 12px; margin-left: 18px;">
-    <h6>{#await getWord("local_or_edit.explorer.title") then word}{@html word}{/await}</h6>
+    <h6>{#await getWord("global.explorer") then word}{@html word}{/await}</h6>
     {#if folderContents.length === 0}
-        <span>{#await getWord("local_or_edit.explorer.empty") then word}{@html word}{/await}</span>
+        <span>{#await getWord("global.not_found") then word}{@html word.replace("{type}", "Folder contents")}{/await}</span>
     {:else}
         <div>
             {#each folderContents as folder}
