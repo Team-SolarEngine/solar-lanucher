@@ -12,6 +12,9 @@
   - Turkie
   - lolcat
 
+### Fixed
+- Explorer not hiding after saving
+
 ## 0.7.2
 
 ### Fixed
