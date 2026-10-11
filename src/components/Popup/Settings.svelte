@@ -11,6 +11,7 @@
 
     let toggleAddRepos = $state(false);
     let toggleLocalizationMenu = $state(false);
+    let modalForDoneSevenZip = $state(false);
 
     const settingFields = [
         { title: "settings.add_pet.title", key: "addPet", desc: "settings.add_pet.description", type: "toggle", default: false },
@@ -59,6 +60,8 @@
     async function download8Zip() {
         try {
             await invoke("download_7z");
+            modalForDoneSevenZip = true;
+            setInterval(() => modalForDoneSevenZip = false, 5000)
         } catch(e) {
             useComponentSnackbarError("Could not download 7zip: " + e)
         }
@@ -141,3 +144,7 @@
 <LocalizationMenu bind:currentlyOpen={toggleLocalizationMenu} />
 
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
+
+<div class="snackbar primary" class:active={modalForDoneSevenZip}>
+    7zip is now downloaded! You can now download files that are compressed with .rar, .7z, .zip, and etc!
+</div>
