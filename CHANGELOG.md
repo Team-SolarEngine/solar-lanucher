@@ -1,6 +1,6 @@
 # Solar Launcher Changelog
 
-## 0.8.2
+## 0.8.0
 
 ### Added
 - First time setup
