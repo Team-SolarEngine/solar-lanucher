@@ -9,12 +9,13 @@
   "global.delete": "Delete",
   "global.use_favourite_path": "Use Favourite Path",
   "global.not_found": "{type} not found.",
+  "global.download": "Download",
 
   "            //-- MAIN SCREEN SECTION --//            ": "",
   "main_screen.empty_screen.header": "Your new, lightweight FNF launcher. All in one place.",
 
   "            //-- SETTINGS SECTION --//            ": "",
-  "settings.global.Manage": "Manage",
+  "settings.global.manage": "Manage",
 
   "settings.add_pet.title": "Add Pet",
   "settings.add_pet.description": "Have sussy amongus on the bottom right! Keeps you company.",
@@ -60,6 +61,9 @@
   "settings.version.section2.out_of_date": "which is out of date...",
   "settings.version.section2.limited": "and we can't check because you're limited...",
   "settings.version.button": "Open releases",
+
+  "settings.download_7zip.title": "Download 7zip",
+  "settings.download_7zip.description": "This will download 7zip in your AppData! Only use this ONCE.",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "Adding a new instance for FNF...",

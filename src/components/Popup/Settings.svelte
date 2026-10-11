@@ -4,6 +4,7 @@
     import AdditionalRepos from "./Settings/AdditionalRepos.svelte";
     import LocalizationMenu from "./Settings/LocalizationMenu.svelte";
     import { getWord } from "$lib/localization";
+    import { useSnackbarError, type Snackbar } from "$lib/interface";
 
     let { modalSettings = $bindable() } = $props()
     let settings = $state({} as any)
@@ -17,10 +18,11 @@
         { title: "settings.github_token.title", key: "githubToken", desc: "settings.github_token.description", type: "text", default: "", hidden: true },
         { title: "settings.compact_mode.title", key: "compactMode", desc: "settings.compact_mode.description", type: "toggle", default: "", hidden: true },
         // { title: "Path To Downloaded", key: "pathToDownloaded", desc: "When using the download options, files will be saved to this path.", type: "text", default: "" },
-        { title: "settings.additional_engine_repositories.title", key: "additionalRepos", desc: "settings.additional_engine_repositories.description", type: "menu", default: "", call: () => toggleAddRepos = true },
+        { title: "settings.additional_engine_repositories.title", key: "additionalRepos", desc: "settings.additional_engine_repositories.description", buttonText: "settings.global.manage", type: "menu", default: "", call: () => toggleAddRepos = true },
         { title: "settings.favourite_path.title", key: "favouritePath", desc: "settings.favourite_path.description", type: "text", default: "" },
         { title: "settings.code_editor.title", key: "codeEditor", desc: "settings.code_editor.description", type: "text", default: "" },
-        { title: "settings.localization.title", key: "currentLanguage", desc: "settings.localization.description", type: "menu", default: "en", call: () => toggleLocalizationMenu = true},
+        { title: "settings.localization.title", key: "currentLanguage", desc: "settings.localization.description", buttonText: "settings.global.manage", type: "menu", default: "en", call: () => toggleLocalizationMenu = true},
+        { title: "settings.download_7zip.title", key: "", desc: "settings.download_7zip.description", buttonText: "global.download", type: "menu", default: "en", call: () => download8Zip()},
     ]
 
     async function loadSetting(key: string) {
@@ -54,6 +56,14 @@
         });
     }
 
+    async function download8Zip() {
+        try {
+            await invoke("download_7z");
+        } catch(e) {
+            useComponentSnackbarError("Could not download 7zip: " + e)
+        }
+    }
+
     $effect(() => {
         if (modalSettings) {
             for (const field of settingFields) {
@@ -65,6 +75,12 @@
             }
         }
     })
+
+    let snackbar = $state<Snackbar>({
+        snackbarError: false,
+        snackbarTime: 0,
+        givenError: "",
+    }); function useComponentSnackbarError(message: string) { useSnackbarError(message, snackbar); }
 </script>
 
 <div class="overlay" class:active={modalSettings} onclick={() => modalSettings = false}></div>
@@ -103,7 +119,7 @@
                 {/if}
 
                 <button onclick={field.call}>
-                    {#await getWord("settings.global.Manage") then word}{@html word}{/await}
+                    {#await getWord(field.buttonText ?? "settings.global.manage") then word}{@html word}{/await}
                 </button>
             </div>
         {/if}
@@ -123,3 +139,5 @@
 
 <AdditionalRepos bind:currentlyOpen={toggleAddRepos} />
 <LocalizationMenu bind:currentlyOpen={toggleLocalizationMenu} />
+
+<div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>

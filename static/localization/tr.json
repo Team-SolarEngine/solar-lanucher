@@ -14,7 +14,7 @@
   "main_screen.empty_screen.header": "Yeni, hafif FNF başlatıcınız. Hepsi tek bir yerde.",
 
   "            //-- SETTINGS SECTION --//            ": "",
-  "settings.global.Manage": "Yönet",
+  "settings.global.manage": "Yönet",
 
   "settings.add_pet.title": "Maskot Ekle",
   "settings.add_pet.description": "Sağ altta şüpheli bir Among Us olsun! Size eşlik eder.",

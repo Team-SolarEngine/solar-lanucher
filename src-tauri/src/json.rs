@@ -2,7 +2,7 @@ use serde_json::Value;
 use std::fs;
 use std::path::PathBuf;
 
-const APP_ID: &str = "net.solarengine.solar-launcher";
+pub const APP_ID: &str = "net.solarengine.solar-launcher";
 
 fn get_data_path() -> PathBuf {
     /*

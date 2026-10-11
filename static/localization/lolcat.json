@@ -14,7 +14,7 @@
   "main_screen.empty_screen.header": "cool launchr ez access to engin fils",
 
   "            //-- SETTINGS SECTION --//            ": "",
-  "settings.global.Manage": "maneg",
+  "settings.global.manage": "maneg",
 
   "settings.add_pet.title": "add pet",
   "settings.add_pet.description": "lil guy follow u around!",
