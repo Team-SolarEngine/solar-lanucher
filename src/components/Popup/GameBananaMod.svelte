@@ -176,7 +176,7 @@
         console.log(finalDownloadPath)
 
         try {
-            await invoke("download_to_custom_dir", { url, filePath: finalDownloadPath });
+            await invoke("download_to_custom_dir", { url, filePath: finalDownloadPath, fileName: sanitzedName });
             modalDownload = false;
 
             if (isModForEngine(downloadPath)) {

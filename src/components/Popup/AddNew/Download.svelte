@@ -138,7 +138,7 @@
          */
 
         try {
-            await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
+            await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath, fileName: `${passthrough[0].name.slice(0, -4)}-${formatDate()}_${passthrough[0].tag}` });
             modalDownloading = false;
             await sendNotif(
                 await getWord("notification.download.title.engine"),

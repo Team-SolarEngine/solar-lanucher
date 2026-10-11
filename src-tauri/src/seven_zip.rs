@@ -25,7 +25,8 @@ pub async fn download_7z(_app: AppHandle) -> Result<String, String> {
         files.push("7za.dll");
         files.push("7z.dll");
         files.push("7za.exe");
-        executable = "7za.exe";
+        files.push("7z.exe");
+        executable = "7z.exe";
     } else if os == "linux" {
         files.push("7za-linux");
         executable = "7za-linux";
