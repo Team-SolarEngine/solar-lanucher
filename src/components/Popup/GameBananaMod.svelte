@@ -167,7 +167,11 @@
                   .replaceAll(`COM${i}`, "")
                   .replaceAll(`LPT${i}`, "")
             }
+        } else {
+            sanitzedName = sanitzedName
+            .replaceAll("/", "-")
         }
+
         let finalDownloadPath = downloadPath + "/" + sanitzedName;
         console.log(finalDownloadPath)
 

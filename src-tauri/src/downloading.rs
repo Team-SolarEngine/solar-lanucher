@@ -6,6 +6,8 @@ use std::fs::File;
 use std::io::Write;
 use std::path::Path;
 use futures_util::StreamExt;
+use crate::apps::run_command;
+use super::json::APP_ID;
 
 #[tauri::command]
 pub async fn download_to_custom_dir(
@@ -66,10 +68,21 @@ pub async fn download_to_custom_dir(
     }
 
     println!("Unzip the file");
-    unzip_file(
-        zip_path.to_str().ok_or("Invalid zip path")?,
-        &file_path,
-    ).map_err(|e| format!("Unzip failed: {e}"))?;
+
+    if does_sevenz_exist() {
+        println!("Using 7zip");
+        let cmdoutput = sevenz_unzip_file(
+            zip_path.to_str().ok_or("Invalid zip path")?,
+            &file_path,
+        ).await?;
+        println!("{cmdoutput}");
+    } else {
+        println!("Using `zip` package from rust");
+        pkg_unzip_file(
+            zip_path.to_str().ok_or("Invalid zip path")?,
+            &file_path,
+        ).map_err(|e| format!("Unzip failed: {e}"))?;
+    }
 
     println!("Delete the zip");
     std::fs::remove_file(zip_path).map_err(|e| format!("Failed to delete zip: {e}"))?;
@@ -78,7 +91,7 @@ pub async fn download_to_custom_dir(
     Ok(file_path)
 }
 
-fn unzip_file(zip_path: &str, target_dir: &str) -> zip::result::ZipResult<()> {
+fn pkg_unzip_file(zip_path: &str, target_dir: &str) -> zip::result::ZipResult<()> {
     let file = File::open(zip_path)?;
     let mut archive = ZipArchive::new(file)?;
 
@@ -99,4 +112,42 @@ fn unzip_file(zip_path: &str, target_dir: &str) -> zip::result::ZipResult<()> {
         }
     }
     Ok(())
+}
+
+async fn sevenz_unzip_file(zip_path: &str, target_dir: &str) -> Result<String, String> {
+    let config_dir = dirs::config_dir().ok_or("Could not determine config directory")?;
+    let app_dir = config_dir.join(APP_ID);
+    let os = std::env::consts::OS;
+    let executable;
+
+    if os == "windows" { executable = "7za.exe"; }
+    else if os == "linux" { executable = "7za-linux"; }
+    else if os == "macos" { executable = "7za-mac"; }
+    else { return Err(format!("Unsupported operating system: {os}")); }
+
+    let args = vec![
+        format!("'{}/{}'", app_dir.to_string_lossy(), executable),
+        format!("x '{}'", zip_path),
+        format!("-o'{}'", target_dir)
+    ];
+    let command = args.join(" ");
+    let output = run_command(command, false, ".".to_string()).await?;
+
+    Ok(output)
+}
+
+fn does_sevenz_exist() -> bool {
+    let config_dir = dirs::config_dir().expect("Could not determine config directory");
+    let app_dir = config_dir.join(APP_ID);
+
+    let os = std::env::consts::OS;
+    let mut executable = "";
+
+    if os == "windows" { executable = "7za.exe"; }
+    else if os == "linux" { executable = "7za-linux"; }
+    else if os == "macos" { executable = "7za-mac"; }
+    if executable == "" { return false; }
+
+    println!("{}", config_dir.join(executable).to_string_lossy());
+    app_dir.join(executable).exists()
 }
