@@ -1,0 +1,173 @@
+{
+  "            //-- GLOBAL SECTION --//            ": "",
+  "global.close": "Tutup",
+  "global.cancel": "Batal",
+  "global.done": "Selesai",
+  "global.save": "Simpan",
+  "global.confirm": "Konfirmasi",
+  "global.explorer": "Penjelajah",
+  "global.delete": "Hapus",
+  "global.use_favourite_path": "Gunakan Jalur Favorit",
+  "global.not_found": "{type} tidak ditemukan.",
+  "global.download": "Unduh",
+
+  "            //-- MAIN SCREEN SECTION --//            ": "",
+  "main_screen.empty_screen.header": "Launcher FNF baru Anda yang ringan. Semua dalam satu tempat.",
+
+  "            //-- SETTINGS SECTION --//            ": "",
+  "settings.global.manage": "Kelola",
+
+  "settings.add_pet.title": "Tambah Peliharaan",
+  "settings.add_pet.description": "Punya amongus sussy di kanan bawah! Menemani Anda.",
+
+  "settings.pet_icon_url.title": "URL Ikon Peliharaan",
+  "settings.pet_icon_url.description": "Tidak suka amogus sussy? Gunakan URL atau Jalur ke ikon kustom!",
+
+  "settings.github_token.title": "Token GitHub",
+  "settings.github_token.description": "Lelah dengan batas rate? Buat token Anda sendiri untuk GitHub dan gunakan!",
+
+  "settings.compact_mode.title": "Mode Ringkas",
+  "settings.compact_mode.description": "Terlalu banyak ruang dan terlalu banyak konten? Nyalakan ini!",
+
+  "settings.additional_engine_repositories.title": "Repositori Engine Tambahan",
+  "settings.additional_engine_repositories.description": "Bosan dengan pilihan engine saat ini? Anda bisa menambahkan lebih banyak!",
+  "settings.additional_engine_repositories.manage_submenu.title": "Repositori Tambahan",
+  "settings.additional_engine_repositories.manage_submenu.description": "Tambahkan repositori engine kustom untuk diunduh. Pastikan mereka memiliki rilis!",
+  "settings.additional_engine_repositories.manage_submenu.button.add_repo": "Tambah Repositori",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title": "Apa yang Anda pikirkan?",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title": "Nama Repositori",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.description": "Nama repositori yang ditampilkan di UI. contoh; <code>Solar Engine</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title": "URL GitHub (pemilik/repo)",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.description": "URL GitHub repositori. contoh; <code>Team-SolarEngine/Solar-Engine-Archived</code>",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title": "Ikon",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.description": "Ikon repositori yang ditampilkan di UI. contoh; <code>https://</code>",
+
+  "settings.favourite_path.title": "Jalur Favorit",
+  "settings.favourite_path.description": "Punya Jalur yang sering Anda gunakan? Atur di sini! Kami hanya punya satu slot, tapi kami berencana menambah lebih banyak di masa depan.",
+
+  "settings.code_editor.title": "Editor Kode",
+  "settings.code_editor.description": "Anda seorang developer? Ini pintasan untuk Anda!",
+
+  "settings.localization.title": "Lokalisasi",
+  "settings.localization.description": "Tidak ingin menggunakan bahasa Inggris? Gunakan bahasa lain!",
+  "settings.localization.manage_submenu.title": "Pilih bahasa!",
+  "settings.localization.manage_submenu.description": "Tidak menemukan bahasa Anda? Anda bisa berkontribusi untuk bahasa Anda secara gratis!",
+  "settings.localization.manage_submenu.translated_by": "Diterjemahkan oleh ",
+  "settings.localization.manage_submenu.restart.title": "Ini memerlukan restart!",
+  "settings.localization.manage_submenu.restart.description": "Saya tahu, saya tahu. Mengubah pengaturan dan memerlukan restart agar berlaku? Menjengkelkan. Tapi, kami punya alasan yang baik. Semuanya tidak akan diperbarui secara otomatis. Jadi ini adalah pilihan terbaik kami. Terima kasih atas pengertiannya!",
+
+  "settings.version.section1": "Versi Solar Launcher Anda adalah;",
+  "settings.version.section2.up_to_date": "yang sudah terbaru!",
+  "settings.version.section2.out_of_date": "yang sudah usang...",
+  "settings.version.section2.limited": "dan kami tidak bisa memeriksa karena Anda terbatas...",
+  "settings.version.button": "Buka rilis",
+
+  "settings.download_7zip.title": "Unduh 7zip",
+  "settings.download_7zip.description": "Ini akan mengunduh 7zip di AppData Anda! Hanya gunakan ini SEKALI.",
+
+  "            //-- ADD NEW INSTANCE SECTION --//            ": "",
+  "prompt_for_new.title": "Menambahkan instansi baru untuk FNF...",
+  "prompt_for_new.description": "Anda bisa mengunduh instansi baru, atau menambahkan yang sudah Anda unduh!",
+  "prompt_for_new.button.local": "Lokal",
+  "prompt_for_new.button.download_engines": "Unduh Engine",
+
+  "            //-- ADD LOCAL/EDIT INSTANCE SECTION --//            ": "",
+  "local.title": "Tambah Instansi FNF Baru",
+  "local.description": "<b>Pro tip</b>; Klik ikon klip untuk penjelajah file...",
+
+  "edit.title": "Edit Instansi {instance}.",
+
+  "local_or_edit.field.mod_or_engine_name.title": "Nama Mod/Engine FNF",
+  "local_or_edit.field.mod_or_engine_name.description": "Nama mod/engine FNF untuk ditampilkan di launcher.",
+
+  "local_or_edit.field.icon_path.title": "Jalur Ikon",
+  "local_or_edit.field.icon_path.description": "Ikon apa pun yang Anda inginkan. Pastikan rasio 1:1. Bisa berupa URL atau Jalur.",
+
+  "local_or_edit.field.execute_command.title": "Perintah Eksekusi",
+  "local_or_edit.field.execute_command.description": "Perintah untuk dijalankan guna meluncurkan instansi. contoh; <code>.\\Funkin.exe</code>",
+
+  "local_or_edit.field.working_directory.title": "Direktori Kerja",
+  "local_or_edit.field.working_directory.description": "Direktori kerja untuk instansi. contoh; <code>D:\\Games\\FNF\\Funkin</code>",
+
+  "local_or_edit.field.description.title": "Deskripsi",
+  "local_or_edit.field.description.description": "Deskripsi instansi untuk ditampilkan di launcher. contoh; <code>Game dasar FNF V-slice</code>",
+
+  "local_or_edit.field.banner_url.title": "URL Banner",
+  "local_or_edit.field.banner_url.description": "URL atau Jalur gambar banner untuk instansi. Rasio aspek tidak masalah, tapi kami merekomendasikan 16:9.",
+
+  "            //-- START EXTRA SECTION --//            ": "",
+  "start_extra.button.start": "Mulai",
+  "start_extra.button.submenu.open_in_terminal": "Buka di Terminal",
+  "start_extra.button.submenu.edit": "Edit",
+  "start_extra.button.submenu.open_folder": "Buka Folder",
+  "start_extra.button.submenu.delete_shortcut": "Hapus Pintasan",
+  "start_extra.button.submenu.delete_instance": "Hapus Instansi",
+
+  "            //-- DELETE INSTANCE SECTION --//            ": "",
+  "delete_instance.title": "Hapus Instansi",
+  "delete_instance.description": "Anda menghapus sebuah Instansi! Klik di luar modal ini, atau pilih salah satu.",
+
+  "delete_instance.button.delete_shortcut": "Hapus Pintasan",
+  "delete_instance.button.delete_shortcut.tooltip": "Ini menghapus pintasan untuk membuka game. Bukan instansi-nya sendiri.",
+
+  "delete_instance.button.delete_instance": "Hapus Instansi",
+  "delete_instance.button.delete_instance.tooltip": "Ini menghapus instansi dan pintasannya. Gunakan dengan hati-hati.",
+
+  "            //-- DOWNLOAD ENGINES SECTION --//            ": "",
+  "download.title": "Unduh Engine",
+  "download.description": "Baik itu Solar, Codename, Psych, atau Vanilla Funkin, kami mendukungnya!",
+
+  "download.path_to_download.title": "Jalur untuk mengunduh",
+  "download.path_to_download.description": "Jalur untuk mengunduh Engine. mis; <code>C:\\Games\\FNF</code>",
+
+  "download.section_engine.published_by": "Diterbitkan oleh; ",
+  "download.section_engine.uploaded_by": "Diunggah oleh; ",
+  "download.section_engine.empty_download_assets": "Tidak ada aset unduhan yang tersedia.",
+
+  "            //-- SECTION DISPLAY SECTION --//            ": "",
+  "section_display.empty": "{section} kosong. Coba tambahkan satu dengan mengklik folder di atas, dan tekan tombol refresh!",
+
+  "section_display.transfer.title": "Pilih instansi untuk ditransfer!",
+  "section_display.transfer.warning.title": "Mohon diperhatikan;",
+  "section_display.transfer.warning.description": "Ini akan mentransfer folder <code>{Jalur}</code> ke instansi yang dipilih. Jika Anda mentransfer ke <code>addons</code> dari <code>mods</code>, Anda harus mentransfernya sendiri.",
+
+  "            //-- SIDEBAR SECTION --//            ": "",
+  "sidebar.button.collapse_sidebar.tooltip": "Ciutkan Sidebar",
+  "sidebar.button.add.tooltip": "Klik kiri untuk menambah instansi baru <br/> Klik kanan untuk membuka halaman berbagi Solar Team.",
+
+  "            //-- DRAG AND DROP SECTION --//            ": "",
+  "drag_and_drop.title": "Folder yang Anda coba tempel adalah",
+
+  "drag_and_drop.path_to_paste.title": "Mengimpor mod yang bukan soft mod?",
+  "drag_and_drop.path_to_paste.description": "Letakkan Jalur Anda di mana Anda ingin meletakkannya di sini!",
+  "drag_and_drop.path_to_paste.field.title": "Jalur untuk ditempel",
+
+  "drag_and_drop.instances.title": "Mengimpor mod yang soft mod?",
+  "drag_and_drop.instances.description": "Pilih salah satu instansi ini!",
+
+  "            //-- DOWNLOAD WAITING SECTION --//            ": "",
+  "download_waiting.title": "Mohon tunggu sementara kami melakukan keajaiban...",
+  "download_waiting.description": "Sambil menunggu, kenapa tidak menonton YouTube? Pembunuh waktu yang luar biasa. <br/> Ini mungkin memakan waktu lama tergantung di mana Anda tinggal atau koneksi Anda!",
+
+  "            //-- GAMEBANANA SECTION --//            ": "",
+  "gamebanana.title": "Unduhan untuk",
+
+  "gamebanana.warning.title": "Bukan untuk FNF",
+  "gamebanana.warning.description": "Mod ini sepertinya tidak kompatibel dengan FNF. Mohon jangan laporkan ini ke repositori GitHub.",
+
+  "gamebanana.importing_hard_coded.title": "Memasukkan mod yang bukan soft mod?",
+  "gamebanana.importing_hard_coded.description": "Letakkan Jalur Anda di mana Anda ingin meletakkannya di sini!",
+  "gamebanana.importing_hard_coded.field.title": "Jalur untuk mengunduh",
+  "gamebanana.importing_hard_coded.field.description": "Jalur untuk mengunduh mod. mis; <code>C:\\Games\\FNF</code>",
+  "gamebanana.importing_hard_coded.field.button": "Gunakan Jalur favorit",
+
+  "gamebanana.instances.title": "Mengimpor mod yang soft mod?",
+  "gamebanana.instances.description": "Pilih salah satu instansi ini!",
+
+  "            //-- NOTIFICATION SECTION --//            ": "",
+  "notification.download.title.gamebanana": "Mod GameBanana",
+  "notification.download.title.engine": "Mengunduh Engine",
+
+  "notification.download.description.hard_coded": "Kami selesai mengunduh!",
+  "notification.download.description.soft_coded": "Kami selesai mengunduh! Kami hanya perlu Anda memasukkan file executable, dan Anda seharusnya sudah siap!"
+}
