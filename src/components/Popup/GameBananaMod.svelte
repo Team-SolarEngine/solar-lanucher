@@ -202,6 +202,8 @@
                 workingDirectory: finalDownloadPath,
             });
         } catch (e) {
+            if (e == "Unzip failed: invalid Zip archive: Could not find EOCD")
+                e = "7z isn't installed, and this is not a zip archive. Install it at settings!";
             useComponentSnackbarError(`Failed to download mod: ${e}`);
             modalDownload = false;
         }
