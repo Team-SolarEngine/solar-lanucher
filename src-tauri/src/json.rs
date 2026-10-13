@@ -2,7 +2,7 @@ use serde_json::Value;
 use std::fs;
 use std::path::PathBuf;
 
-const APP_ID: &str = "net.solarengine.solar-launcher";
+pub const APP_ID: &str = "net.solarengine.solar-launcher";
 
 fn get_data_path() -> PathBuf {
     /*
@@ -168,4 +168,15 @@ pub fn delete_key(collection: String, key: Value) -> Value {
     }
     write_all(&data);
     data.get(&collection).cloned().unwrap_or(Value::Null)
+}
+
+#[tauri::command]
+pub fn check_json_file() -> bool {
+    /*
+     * This function checks the json file if it exists or not.
+     * 
+     * Returns:
+     *   boolean
+     */
+    get_data_path().exists()
 }

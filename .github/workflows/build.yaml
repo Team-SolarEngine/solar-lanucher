@@ -5,8 +5,10 @@ on:
     paths:
       - 'src-tauri/**'
       - 'src/**'
+      - 'static/**'
       - 'pnpm-lock.yaml'
       - 'package.json'
+  workflow_dispatch:
 
 jobs:
   build:

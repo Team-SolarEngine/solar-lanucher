@@ -2,6 +2,7 @@
     import { invoke } from "@tauri-apps/api/core";
     import CardApp from "../../CardApp.svelte";
     import { useSnackbarError, type Snackbar, pickFile } from "$lib/interface";
+    import { getWord } from "$lib/localization";
 
     let { modalNew = $bindable(), onAppAdded = () => {}, prefill = {} } = $props()
 
@@ -59,6 +60,7 @@
          * to the backend, then closes the popup and refreshes the list.
          */
         submitted = true;
+        showExplorer = false;
         if (!appName || !appPath || !appWorkingDirectory) return useComponentSnackbarError(`Please fill in all fields.`);
 
         try {
@@ -131,46 +133,46 @@
 
 <div class="overlay" class:active={modalNew} onclick={close}></div>
 <dialog class="right" class:active={modalNew}>
-  <h5>Add a New FNF Instance</h5>
-  <span><b>Pro tip</b>; Click on the clip icon for a file explorer!</span>
+  <h5>{#await getWord("local.title") then word}{@html word}{/await}</h5>
+  <span>{#await getWord("local.description") then word}{@html word}{/await}</span>
 
   <div class="field label border" class:invalid={submitted && !appName}>
     <input type="text" bind:value={appName}>
-    <label>FNF Mod/Engine name <span style="color: red;">*</span></label>
-    <output>The FNF mod/engine name to display in the launcher.</output>
+    <label>{#await getWord("local_or_edit.field.mod_or_engine_name.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
+    <output>{#await getWord("local_or_edit.field.mod_or_engine_name.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label prefix border">
     <a onclick={async () => appIconURL = await pickFile(["png", "gif", "jpeg"], "Icon")}> <i>attach_file</i> </a>
     <input type="text" bind:value={appIconURL}>
-    <label>Icon Path</label>
-    <output>Any icon your heart desires. Make sure it's 1:1. It can be URL or Path.</output>
+    <label>{#await getWord("local_or_edit.field.icon_path.title") then word}{@html word}{/await}</label>
+    <output>{#await getWord("local_or_edit.field.icon_path.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label border" class:invalid={submitted && !appPath}>
     <input type="text" bind:value={appPath}>
-    <label>Execute Command <span style="color: red;">*</span></label>
-    <output>The command to execute when launching the app. eg; <code>.\Funkin.exe</code></output>
+    <label>{#await getWord("local_or_edit.field.execute_command.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
+    <output>{#await getWord("local_or_edit.field.execute_command.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label prefix border" class:invalid={submitted && !appWorkingDirectory}>
     <a onclick={async () => appWorkingDirectory = await pickFile([], "Folder", true)}> <i>attach_file</i> </a>
     <input type="text" bind:value={appWorkingDirectory}>
-    <label>Working Directory <span style="color: red;">*</span></label>
-    <output>The working directory for the app. eg; <code>D:\Games\FNF\Funkin</code></output>
+    <label>{#await getWord("local_or_edit.field.working_directory.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
+    <output>{#await getWord("local_or_edit.field.working_directory.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label border">
     <input type="text" bind:value={appDescription}>
-    <label>Description</label>
-    <output>The description of the app to display in the launcher. eg; <code>Base game FNF V-Slice</code></output>
+    <label>{#await getWord("local_or_edit.field.description.title") then word}{@html word}{/await}</label>
+    <output>{#await getWord("local_or_edit.field.description.description") then word}{@html word}{/await}</output>
   </div>
 
   <div class="field label prefix border">
     <a onclick={async () => bannerURL = await pickFile(["png", "gif", "jpeg"], "Folder")}> <i>attach_file</i> </a>
     <input type="text" bind:value={bannerURL}>
-    <label>Banner URL</label>
-    <output>The banner image URL or Path for the app. Aspect ratio doesn't matter. But we reccomend 16:9.</output>
+    <label>{#await getWord("local_or_edit.field.banner_url.title") then word}{@html word}{/await}</label>
+    <output>{#await getWord("local_or_edit.field.banner_url.description") then word}{@html word}{/await}</output>
   </div>
 
   <CardApp
@@ -183,16 +185,16 @@
   />
 
   <nav class="right-align no-space">
-    <button class="primary link" onclick={addApp}>Add App</button>
-    <button class="transparent link" onclick={toggleExplorer}>Explorer</button>
-    <button class="transparent link" onclick={close}>Close</button>
+    <button class="primary link" onclick={addApp}>{#await getWord("global.confirm") then word}{@html word}{/await}</button>
+    <button class="transparent link" onclick={toggleExplorer}>{#await getWord("global.explorer") then word}{@html word}{/await}</button>
+    <button class="transparent link" onclick={close}>{#await getWord("global.close") then word}{@html word}{/await}</button>
   </nav>
 </dialog>
 
 <article class:active={showExplorer} class="_explorer scroll" style="max-width: 600px; position: absolute; top: 0; bottom: 0; left: 0; z-index: 999; margin-bottom: 12px; margin-left: 18px;">
-    <h6>Folder Contents</h6>
+    <h6>{#await getWord("global.explorer") then word}{@html word}{/await}</h6>
     {#if folderContents.length === 0}
-        <span>No folders found here.</span>
+        <span>{#await getWord("global.not_found") then word}{@html word.replace("{type}", "Folder contents")}{/await}</span>
     {:else}
         <div>
             {#each folderContents as folder}

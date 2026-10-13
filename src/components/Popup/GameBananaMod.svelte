@@ -4,6 +4,7 @@
     import { pickFile } from "$lib/interface";
     import { sendNotif, getOS } from "$lib/sys";
     import CardApp from "../CardApp.svelte";
+    import { getWord } from "$lib/localization";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
     type AppData = {
@@ -166,23 +167,27 @@
                   .replaceAll(`COM${i}`, "")
                   .replaceAll(`LPT${i}`, "")
             }
+        } else {
+            sanitzedName = sanitzedName
+            .replaceAll("/", "-")
         }
+
         let finalDownloadPath = downloadPath + "/" + sanitzedName;
         console.log(finalDownloadPath)
 
         try {
-            await invoke("download_to_custom_dir", { url, filePath: finalDownloadPath });
+            await invoke("download_to_custom_dir", { url, filePath: finalDownloadPath, fileName: sanitzedName });
             modalDownload = false;
 
             if (isModForEngine(downloadPath)) {
                 await sendNotif(
-                    "GameBanana Mod",
-                    "We're done downloading!"
+                    await getWord("notification.download.title.gamebanana"),
+                    await getWord("notification.download.description.soft_coded")
                 );
             } else {
                 await sendNotif(
-                    "GameBanana Mod",
-                    "We're done downloading! We just need you to input the executable file, and you should be all set!"
+                    await getWord("notification.download.title.gamebanana"),
+                    await getWord("notification.download.description.hard_coded")
                 );
             }
 
@@ -197,6 +202,8 @@
                 workingDirectory: finalDownloadPath,
             });
         } catch (e) {
+            if (e == "Unzip failed: invalid Zip archive: Could not find EOCD")
+                e = "7z isn't installed, and this is not a zip archive. Install it at settings!";
             useComponentSnackbarError(`Failed to download mod: ${e}`);
             modalDownload = false;
         }
@@ -241,18 +248,15 @@
             <article class="tertiary">
                 <div class="row">
                     <i>warning</i>
-                    <h4>Not for FNF</h4>
+                    <h4>{#await getWord("gamebanana.warning.title") then word}{@html word}{/await}</h4>
                 </div>
-                <span>
-                    This mod seems like it is not compatible with FNF.
-                    Please do not report this to the GitHub repository.
-                </span>
+                <span> {#await getWord("gamebanana.warning.description") then word}{@html word}{/await} </span>
             </article>
             <hr class="medium">
         {/if}
 
         {#if downloads.length > 0}
-            <h6 style="margin-bottom: 10px;">Downloads for <b>{name}</b></h6>
+            <h6 style="margin-bottom: 10px;">{#await getWord("gamebanana.title") then word}{@html word}{/await} <b>{name}</b>...</h6>
             <img src={bannerUrl} alt={name} style="width: 100%; height: 200px; object-fit: cover;" class="round" />
             <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 10px;">
                 {#each downloads as download}
@@ -268,14 +272,14 @@
 
             <hr class="medium"/>
 
-            <h6>Importing a mod that's not engine modded?</h6>
-            <span>Put your path where you wanna put it here!</span>
+            <h6>{#await getWord("gamebanana.importing_hard_coded.title") then word}{@html word}{/await}</h6>
+            <span>{#await getWord("gamebanana.importing_hard_coded.description") then word}{@html word}{/await}</span>
 
             <div class="border field prefix label">
                 <a onclick={async () => downloadPath = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
                 <input type="text" bind:value={downloadPath} />
-                <label>Path to download <span style="color: red;">*</span></label>
-                <output> A path to download the mod. Example; <code>C:\Games\FNF\</code> </output>
+                <label>{#await getWord("gamebanana.importing_hard_coded.field.title") then word}{@html word}{/await}<span style="color: red;">*</span></label>
+                <output>{#await getWord("gamebanana.importing_hard_coded.field.description") then word}{@html word}{/await}</output>
 
                 <!--
                     if we use $effect, the downloadPath would be overridden when the component
@@ -286,14 +290,14 @@
                     you don't need a @Local.svelte popup when you're adding a mod.
                 -->
                 <button onclick={async () => downloadPath = path} style="margin-top: 4px;">
-                    Use favorite path
+                    {#await getWord("gamebanana.importing_hard_coded.field.button") then word}{@html word}{/await}
                 </button>
             </div>
 
             <hr class="medium"/>
         
-            <h6>Importing a mod that's engine modded?</h6>
-            <span>Select one of these instances!</span>
+            <h6>{#await getWord("gamebanana.instances.title") then word}{@html word}{/await}</h6>
+            <span>{#await getWord("gamebanana.instances.description") then word}{@html word}{/await}</span>
         
             {#if apps.length > 0}
                 {#each apps as app}
@@ -307,22 +311,20 @@
                     </section>
                 {/each}
             {:else}
-                <span>No instances found.</span>
+                <span>{#await getWord("global.not_found") then word}{word.replace("{type}", "Instances")}{/await}</span>
             {/if}
-
         {:else}
-            <p>No download assets on this mod.</p>
+            <p>{#await getWord("global.not_found") then word}{word.replace("{type}", "Download Assets")}{/await}</p>
         {/if}
     {:else}
-        <p>Could not find that mod.</p>
+        <p>{#await getWord("global.not_found") then word}{word.replace("{type}", "This mod is")}{/await}</p>
     {/if}
 </dialog>
 
 <div class="overlay" class:active={modalDownload}></div>
 <dialog class:active={modalDownload} style="width: 600px;">
-    <h5>Please wait while we do the magic...</h5>
-    <span>For you to wait, why don't you watch YouTube? Massive time killer by the way.</span>
-    <span>This may take a long time depending where you live or your connection!</span>
+    <h5>{#await getWord("download_waiting.title") then word}{@html word}{/await}</h5>
+    <span>{#await getWord("download_waiting.description") then word}{@html word}{/await}</span>
     <progress class="wavy indeterminate" value="100" max="100"></progress>
 </dialog>
 

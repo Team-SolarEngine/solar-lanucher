@@ -3,6 +3,7 @@
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { pickFile } from "$lib/interface";
     import { sendNotif } from "$lib/sys";
+    import { getWord } from "$lib/localization";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
@@ -137,11 +138,11 @@
          */
 
         try {
-            await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath });
+            await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath, fileName: `${passthrough[0].name.slice(0, -4)}-${formatDate()}_${passthrough[0].tag}` });
             modalDownloading = false;
             await sendNotif(
-                "Engine Downloading",
-                "We're done downloading! We just need you to input the executable file, and you should be all set!"
+                await getWord("notification.download.title.engine"),
+                await getWord("notification.download.description.hard_coded")
             );
 
             onDownloaded({
@@ -193,16 +194,16 @@
 
 <div class="overlay" class:active={modalDownload} onclick={() => modalDownload = false}></div>
 <dialog class="right" class:active={modalDownload}>
-    <h5>Download an engine!</h5>
-    <div>Whether that's Solar, Codename, Psych or Vanilla Funkin, we support it!</div>
+    <h5>{#await getWord("download.title") then word}{@html word}{/await}</h5>
+    <div>{#await getWord("download.description") then word}{@html word}{/await}</div>
 
     <hr class="medium" />
 
     <div class="border field prefix label">
         <a onclick={async () => pathToDownload = await pickFile([""], "Folder", true)}> <i>attach_file</i> </a>
         <input type="text" bind:value={pathToDownload} />
-        <label>Path to download <span style="color: red;">*</span></label>
-        <output> A path to download the Engine. Example; <code>C:\Games\FNF\</code> </output>
+        <label>{#await getWord("download.path_to_download.title") then word}{@html word}{/await} <span style="color: red;">*</span></label>
+        <output> {#await getWord("download.path_to_download.description") then word}{@html word}{/await} </output>
 
         <!--
             now I KNOW you want me to say the same thing for @GameBananaMod.svelte,
@@ -213,7 +214,7 @@
             will be removed in a future commit and use $effect() instead.
         -->
         <button onclick={async () => pathToDownload = path} style="margin-top: 4px;">
-            Use favorite path
+            {#await getWord("global.use_favourite_path") then word}{@html word}{/await}
         </button>
     </div>
 
@@ -241,7 +242,7 @@
                                             <img style="width: 50px; height: 50px; border-radius: 5px;" src={release.avatarUrl} alt={engine.name}/>
                                             <div>
                                                 <h6 style="font-weight: bold">{release.tag}</h6>
-                                                Published by - {release.author}
+                                                {#await getWord("download.section_engine.published_by") then word}{@html word}{/await} <b>{release.author}</b>
                                             </div>
                                         </div>
                                         <i>arrow_drop_down</i>
@@ -249,7 +250,7 @@
                                 </summary>
                                 <div style="margin-left: 20px; margin-top: 10px;">
                                     {#if release.downloads.length === 0}
-                                        <p>No download assets on this release.</p>
+                                        <p>{#await getWord("download.section_engine.empty_download_assets") then word}{@html word}{/await}</p>
                                     {:else}
                                         {#each release.downloads as download}
                                             <article onclick={() => handleDownload(download.url, [
@@ -266,7 +267,7 @@
                                                         <i>download</i>
                                                         <span><b>{download.name}</b></span>
                                                     </div>
-                                                    <span>Uploaded by; <b>{download.uploader.login}</b> @ {new Date(download.uploadedAt).toLocaleString()}</span>
+                                                    <span>{#await getWord("download.section_engine.uploaded_by") then word}{@html word}{/await} <b>{download.uploader.login}</b> @ {new Date(download.uploadedAt).toLocaleString()}</span>
                                                 </div>
                                             </article>
                                         {/each}
@@ -291,7 +292,6 @@
 <dialog class:active={modalDownloading} style="width: 600px;">
     <h5>Please wait while we do the magic...</h5>
     <span>For you to wait, why don't you watch YouTube? Massive time killer by the way.</span>
-    <span>This may take a long time depending where you live or your connection!</span>
     <progress class="wavy indeterminate" value="100" max="100"></progress>
 </dialog>
 

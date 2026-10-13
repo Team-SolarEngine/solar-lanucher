@@ -32,6 +32,7 @@
       onDeleted = () => {},
       onEdit = () => {},
       onSelect = () => {},
+      firstTimePopup = false,
     } = $props()
 
     function truncateString(str: string) {
@@ -69,6 +70,7 @@
                 onEdit={onEdit}
                 index={index}
                 isLast={isLast}
+                firstTimePopup={firstTimePopup}
             />
         {/if}
     {:else}

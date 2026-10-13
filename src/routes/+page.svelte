@@ -6,6 +6,7 @@
     import "beercss";
     import "material-dynamic-colors";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
+    import { getWord } from "$lib/localization";
 
     import Sidebar from '../components/Sidebar.svelte';
     import PromptForNew from '../components/Popup/PromptForNew.svelte';
@@ -16,6 +17,7 @@
     import Local from "../components/Popup/AddNew/Local.svelte";
     import Download from "../components/Popup/AddNew/Download.svelte";
     import GameBananaMod from "../components/Popup/GameBananaMod.svelte";
+    import FirstTimePopup from "../components/Popup/FirstTimePopup.svelte";
 
     type AppData = {name: string, icon_url: string, execute_command: string, working_directory: string, description: string, banner_url: string};
 
@@ -24,6 +26,7 @@
     let promptForNew = $state(false);
     let modalNew = $state(false);
     let modalDownload = $state(false);
+    let modalForFirstTime = $state(false);
 
     let modalEdit = $state(false);
     let editingApp = $state<AppData | null>(null);
@@ -116,8 +119,56 @@
         modalEdit = true;
     }
 
+    async function checkForJson() {
+      /*
+       * This function checks if a json file exists.
+       */
+      try {
+        const jsonCall = await invoke("check_json_file")
+
+        if (jsonCall)
+          console.log("Continuing..")
+        else
+          modalForFirstTime = true;
+      } catch(e) {
+        useComponentSnackbarError(`Could not check for JSON file. ${e}`);
+      }
+    }
+
+    async function loadSetting(key: string) {
+        /*
+         * This function loads a single setting value from the backend.
+         *
+         * Arguments:
+         *    key: string -> the name of the setting to load
+         *
+         * Returns:
+         *    Promise -> the value of the setting, or null
+         */
+        const data = await invoke("get_keys", { collection: "settings" }) as any;
+        return data?.[key];
+    }
+
+    async function saveSetting(key: string, value: any) {
+        /*
+         * This function saves a single setting value to the backend.
+         *
+         * Arguments:
+         *    key: string -> the name of the setting to save
+         *    value: string or boolean -> the new value of the setting
+         */
+
+        console.log("Saving setting:", key, value);
+        await invoke("update_key", {
+            collection: "settings",
+            key: key,
+            value: value,
+        });
+    }
+
     onMount(() => {
         loadApps();
+        checkForJson();
 
         // listen for deep links while the app is running
         onOpenUrl((urls) => {
@@ -134,6 +185,16 @@
         // so this is our workaround
         setInterval(loadSettings, 1000);
     });
+
+    onMount(async() => {
+        // check if the localization key is set to none
+        //   if it is: set it to "en" and refresh the web
+        //   if not: continue
+        if (!await loadSetting("currentLanguage")) {
+            await saveSetting("currentLanguage", "en");
+            window.location.reload();
+        }
+    })
 </script>
 
 <main class="main">
@@ -168,6 +229,7 @@
 
 <PromptForNew bind:promptForNew bind:modalNew bind:modalDownload />
 <EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadApps} />
+<FirstTimePopup bind:modalForFirstTime />
 <DragAndDrop/>
 
 <Local bind:modalNew onAppAdded={loadApps} prefill={newAppPrefill}/>
