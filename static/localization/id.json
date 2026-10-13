@@ -37,7 +37,7 @@
   "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.title": "Apa yang Anda pikirkan?",
   "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.title": "Nama Repositori",
   "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.name.description": "Nama repositori yang ditampilkan di UI. contoh; <code>Solar Engine</code>",
-  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title": "URL GitHub (pemilik/repo)",
+  "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.title": "URL GitHub (owner/repo)",
   "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.github_url.description": "URL GitHub repositori. contoh; <code>Team-SolarEngine/Solar-Engine-Archived</code>",
   "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.title": "Ikon",
   "settings.additional_engine_repositories.manage_submenu.add_repo.submenu.field.icon.description": "Ikon repositori yang ditampilkan di UI. contoh; <code>https://</code>",
