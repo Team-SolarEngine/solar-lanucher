@@ -6,7 +6,7 @@ use std::fs::File;
 use std::io::Write;
 use super::json::APP_ID;
 
-const BINARIES_URL: &str = "https://github.com/Team-SolarEngine/solar-lanucher/tree/main/src-tauri/binaries";
+const BINARIES_URL: &str = "https://github.com/Team-SolarEngine/solar-lanucher/raw/refs/heads/main/src-tauri/binaries/";
 
 #[tauri::command]
 pub async fn download_7z(_app: AppHandle) -> Result<String, String> {
