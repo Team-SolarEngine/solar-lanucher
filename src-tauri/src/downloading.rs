@@ -28,6 +28,11 @@ pub async fn download_to_custom_dir(
      *     str: The path to the downloaded file.
      */
 
+    println!("Check if it's not a .zip file and check if 7z exists");
+    if !file_name.contains(".zip") && !does_sevenz_exist() {
+        return Err(format!("Looks like you don't have 7z for this file extension! Go to settings and download 7z."));
+    }
+
     println!("Starting download for {}", url);
 
     println!("Resolve the base directory for the downloads");
