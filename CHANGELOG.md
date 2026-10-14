@@ -1,16 +1,24 @@
 # Solar Launcher Changelog
 
+## 0.8.1
+
+### Added
+- Indonesia translation (by [MTGM](https://github.com/sirthegamercoder))
+
+### Fixed
+- Wrong url to download 7z from GitHub raw binary
+
 ## 0.8.0
 
 ### Added
 - First time setup
 - `7z` for uncompressing. Uses `zip` crate for fallback if not found.
 - Localization for 5 languages! (You can contribute to add your langauge. Wink wink.)
-  - English
-  - Malay
-  - Belgium
-  - Turkie
-  - lolcat
+  - English (by [Daveberry](https://codedave.pages.dev/))
+  - Malay (by [Daveberry](https://codedave.pages.dev/))
+  - Belgium (by [VideoBot](https://video-bot.netlify.app/))
+  - Turkie (by [VideoBot](https://video-bot.netlify.app/))
+  - lolcat (by [CharGoldenYT](https://github.com/chargoldenyt))
 
 ### Fixed
 - Explorer not hiding after saving
