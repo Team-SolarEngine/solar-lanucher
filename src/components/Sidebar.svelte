@@ -105,13 +105,13 @@
     <!-- what a fucking mess lmao -->
     <div class:_show={!sidebarOpen} style="
             position: absolute;
-            bottom: 40%; left: 0;
+            bottom: 47.5%; left: 0;
             writing-mode: vertical-rl;
             text-orientation: mixed;
             transform: rotate(180deg) translateX(70%);
             transition: all 0.3s ease-in-out;
         ">
-        <span>{#await getWord("sidebar.slogan") then word}{@html word}{/await}</span>
+        <span>ouu shi 👀</span>
     </div>
 </article>
 
