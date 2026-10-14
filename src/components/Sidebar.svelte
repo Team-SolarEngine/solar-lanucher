@@ -2,7 +2,6 @@
     import Settings from "./Popup/Settings.svelte"
     import CardApp from "./CardApp.svelte";
     import { openUrl } from "@tauri-apps/plugin-opener";
-    import { invoke } from "@tauri-apps/api/core";
     import { getWord } from "$lib/localization";
 
     let {

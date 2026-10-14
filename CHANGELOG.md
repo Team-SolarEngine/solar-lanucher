@@ -8,6 +8,7 @@
 
 ### Misc
 - Cleaned up 50%(?) of the code.
+- Removed useless imports
 
 ## 0.8.1
 
