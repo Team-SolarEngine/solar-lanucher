@@ -168,7 +168,7 @@
 
 <main class="main">
     <div class="_sidebarSection">
-        <Sidebar {apps} onOpenAdd={() => promptForNew = true} onEdit={handleEdit} onDelete={loadApps} onSelect={(i) => selectedIndex = i} />
+        <Sidebar {apps} onOpenAdd={() => promptForNew = true} onEdit={handleEdit} onDelete={loadInstance} onSelect={(i) => selectedIndex = i} />
     </div>
 
     <div class="_mainContent">
@@ -182,7 +182,7 @@
                 executeCommand={apps[selectedIndex].execute_command}
                 index={selectedIndex}
                 onEdit={handleEdit}
-                onDelete={loadApps}
+                onDelete={loadInstance}
             />
         {:else}
             <MainContent />
