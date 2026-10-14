@@ -2,6 +2,7 @@
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { getWord } from "$lib/localization";
+    import { saveSetting } from "$lib/settings";
 
     let { currentlyOpen = $bindable() } = $props();
 
@@ -34,11 +35,7 @@
          * This function saves the current repos array to the backend settings.
          */
         try {
-            await invoke("update_key", {
-                collection: "settings",
-                key: "additionalRepos",
-                value: repos,
-            });
+            await saveSetting("additionalRepos", repos)
         } catch (error) {
             useComponentSnackbarError("Failed to save repos: " + error);
         }

@@ -4,6 +4,7 @@
     import { pickFile } from "$lib/interface";
     import { sendNotif } from "$lib/sys";
     import { getWord } from "$lib/localization";
+    import { loadSetting } from "$lib/settings";
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
 
@@ -44,20 +45,6 @@
 
     function useComponentSnackbarError(message: string) {
         useSnackbarError(message, snackbar);
-    }
-
-    async function loadSetting(key: string) {
-        /*
-         * This function loads a single setting value from the backend.
-         *
-         * Arguments:
-         *    key: string -> the name of the setting to load
-         *
-         * Returns:
-         *    Promise -> the value of the setting, or null
-         */
-        const data = await invoke("get_keys", { collection: "settings" }) as any;
-        return data?.[key];
     }
 
     async function getAllEngines() {

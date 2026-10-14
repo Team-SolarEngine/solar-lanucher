@@ -2,22 +2,9 @@
     import StartExtra from "./StartExtra.svelte";
     import { imageSrc } from "$lib/sys";
     import { invoke } from "@tauri-apps/api/core";
+    import { loadSetting } from "$lib/settings";
 
     let compactMode = $state(false)
-
-    async function loadSetting(key: string) {
-        /*
-         * This function loads a single setting value from the backend.
-         *
-         * Arguments:
-         *    key: string -> the name of the setting to load
-         *
-         * Returns:
-         *    Promise -> the value of the setting, or null
-         */
-        const data = await invoke("get_keys", { collection: "settings" }) as any;
-        return data?.[key];
-    }
 
     let {
       name = "",

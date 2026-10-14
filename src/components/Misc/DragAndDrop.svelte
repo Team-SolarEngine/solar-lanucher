@@ -6,20 +6,12 @@
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { getWord } from "$lib/localization";
+    import { loadApps, type AppData } from "$lib/apps";
 
     let hoveringDrag = $state(false);
     let pathToCopy = $state();
     let pathToPaste = $state();
     let openDialogForInstances = $state(false);
-
-    type AppData = {
-        name: string;
-        icon_url: string;
-        execute_command: string;
-        working_directory: string;
-        description: string;
-        banner_url: string;
-    };
 
     let apps = $state<AppData[]>([]);
 
@@ -31,13 +23,9 @@
         useSnackbarError(message, snackbar);
     }
 
-    async function loadApps() {
-        /*
-         * This function loads the list of apps from the backend
-         * so the CardApp components have all the data they need.
-         */
+    async function loadInstances() {
         try {
-            apps = await invoke("get_keys", { collection: "apps" });
+            apps = await loadApps();
         } catch (e) {
             console.error("Failed to load apps:", e);
         }
@@ -76,7 +64,7 @@
                 console.log("Dropping files");
                 pathToCopy = event.payload.paths[0];
                 openDialogForInstances = true;
-                loadApps();
+                loadInstances();
                 hoveringDrag = false;
             } else {
                 if (hoveringDrag) {

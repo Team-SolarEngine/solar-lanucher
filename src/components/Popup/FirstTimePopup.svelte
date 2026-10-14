@@ -1,6 +1,8 @@
 <script lang="ts">
     import { invoke } from "@tauri-apps/api/core";
     import CardApp from "../CardApp.svelte";
+    import { saveSetting } from "$lib/settings";
+    import { useSnackbarError, type Snackbar } from "$lib/interface";
 
     let allLocalization = $state([
       { name: "English", code: "en", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/250px-Flag_of_the_United_Kingdom_%281-2%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry" },
@@ -9,23 +11,6 @@
       { name: "Belgium", code: "nl-BE", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Flag_of_Belgium.svg/250px-Flag_of_Belgium.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "VideoBot" },
       {name: "LOLcat", code: "lolcat", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Orange_tabby_cat_sitting_on_fallen_leaves-Hisashi-01A.jpg/960px-Orange_tabby_cat_sitting_on_fallen_leaves-Hisashi-01A.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail", translator: "CharGoldenYT"}
     ]);
-
-    async function saveSetting(key: string, value: any) {
-        /*
-         * This function saves a single setting value to the backend.
-         *
-         * Arguments:
-         *    key: string -> the name of the setting to save
-         *    value: string or boolean -> the new value of the setting
-         */
-
-        console.log("Saving setting:", key, value);
-        await invoke("update_key", {
-            collection: "settings",
-            key: key,
-            value: value,
-        });
-    }
 
     async function translationSet(code: string) {
         saveSetting("currentLanguage", code);

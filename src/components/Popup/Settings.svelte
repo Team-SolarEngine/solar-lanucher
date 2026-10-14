@@ -5,6 +5,7 @@
     import LocalizationMenu from "./Settings/LocalizationMenu.svelte";
     import { getWord } from "$lib/localization";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
+    import { saveSetting, loadSetting } from "$lib/settings";
 
     let { modalSettings = $bindable() } = $props()
     let settings = $state({} as any)
@@ -25,37 +26,6 @@
         { title: "settings.localization.title", key: "currentLanguage", desc: "settings.localization.description", buttonText: "settings.global.manage", type: "menu", default: "en", call: () => toggleLocalizationMenu = true},
         { title: "settings.download_7zip.title", key: "", desc: "settings.download_7zip.description", buttonText: "global.download", type: "menu", default: "en", call: () => download8Zip()},
     ]
-
-    async function loadSetting(key: string) {
-        /*
-         * This function loads a single setting value from the backend.
-         *
-         * Arguments:
-         *    key: string -> the name of the setting to load
-         *
-         * Returns:
-         *    Promise -> the value of the setting, or null
-         */
-        const data = await invoke("get_keys", { collection: "settings" }) as any;
-        return data?.[key];
-    }
-
-    async function saveSetting(key: string, value: any) {
-        /*
-         * This function saves a single setting value to the backend.
-         *
-         * Arguments:
-         *    key: string -> the name of the setting to save
-         *    value: string or boolean -> the new value of the setting
-         */
-
-        console.log("Saving setting:", key, value);
-        await invoke("update_key", {
-            collection: "settings",
-            key: key,
-            value: value,
-        });
-    }
 
     async function download8Zip() {
         try {

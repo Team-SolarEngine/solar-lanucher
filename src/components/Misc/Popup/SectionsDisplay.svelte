@@ -4,6 +4,8 @@
     import CardApp from "../../../components/CardApp.svelte";
     import { imageSrc, getOS } from "$lib/sys";
     import { getWord } from "$lib/localization";
+    import { loadSetting } from "$lib/settings";
+    import { loadApps, type AppData } from "$lib/apps";
 
     let {
         workingDirectory,
@@ -29,23 +31,9 @@
         useSnackbarError(message, snackbar);
     }
 
-    let instancesOfInstnaces = $state([]);
+    let instancesOfInstnaces = $state<AppData[]>([]);
     let instancesDialog = $state(false);
     let selectedModFolder = $state("");
-
-    async function loadSetting(key: string) {
-        /*
-         * This function loads a single setting value from the backend.
-         *
-         * Arguments:
-         *    key: string -> the name of the setting to load
-         *
-         * Returns:
-         *    Promise -> the value of the setting, or null
-         */
-        const data = await invoke("get_keys", { collection: "settings" }) as any;
-        return data?.[key];
-    }
 
     async function openFolder(workingDirectory: string) {
         /*
@@ -207,13 +195,9 @@
         instancesDialog = true;
     }
 
-    async function loadApps() {
-        /*
-         * This function loads the list of apps from the backend
-         * so the CardApp components have all the data they need.
-         */
+    async function loadInstances() {
         try {
-            instancesOfInstnaces = await invoke("get_keys", { collection: "apps" });
+            instancesOfInstnaces = await loadApps();
         } catch (e) {
             console.error("Failed to load apps:", e);
         }
@@ -221,7 +205,7 @@
 
     $effect(() => {
         listMods();
-        loadApps();
+        loadInstances();
     });
 </script>
 

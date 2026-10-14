@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { getUserLanguage, getWord, getLocalization } from "$lib/localization";
     import { onMount } from "svelte";
+    import { saveSetting } from "$lib/settings";
 
     let { currentlyOpen = $bindable() } = $props();
     let requireRestart = $state(false);
@@ -34,11 +34,7 @@
 
         console.log("Saving language:", value);
         requireRestart = true;
-        await invoke("update_key", {
-            collection: "settings",
-            key: "currentLanguage",
-            value: value,
-        });
+        await saveSetting("currentLanguage", value)
     }
 
     async function totalLocalizationWord(code: string) {

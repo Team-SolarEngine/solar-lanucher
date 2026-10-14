@@ -5,16 +5,9 @@
     import { sendNotif, getOS } from "$lib/sys";
     import CardApp from "../CardApp.svelte";
     import { getWord } from "$lib/localization";
+    import { loadApps, type AppData } from "$lib/apps";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
-    type AppData = {
-        name: string;
-        icon_url: string;
-        execute_command: string;
-        working_directory: string;
-        description: string;
-        banner_url: string;
-    };
 
     let name = $state("");
     let sanitzedName = $state("");
@@ -226,13 +219,13 @@
         return /\/(mods|addons|content)\/?$/.test(normalized);
     }
 
-    async function loadApps() {
+    async function loadInstances() {
         /*
          * This function loads the list of apps from the backend
          * so the CardApp components have all the data they need.
          */
         try {
-            apps = await invoke("get_keys", { collection: "apps" });
+            apps = await loadApps();
         } catch (e) {
             console.error("Failed to load apps:", e);
         }

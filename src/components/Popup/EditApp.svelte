@@ -21,9 +21,7 @@
         snackbarError: false,
         snackbarTime: 0,
         givenError: "",
-    })
-
-    function useComponentSnackbarError(message: string) {
+    }); function useComponentSnackbarError(message: string) {
         useSnackbarError(message, snackbar);
     }
 
