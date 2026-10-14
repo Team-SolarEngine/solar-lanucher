@@ -38,6 +38,7 @@ pub async fn start_app(working_dir: String, command_exec: String, _open_terminal
     } else {
         for &emulator in &["alacritty", "gnome-terminal", "xfce4-terminal", "terminator", "foot", "konsole", "kitty"] {
             let _ = run_command(format!("{emulator} -e {command_exec}"), false, working_dir.to_string()).await;
+            return Ok(Default::default())
         }
         return Err("No terminal emulator found".to_string());
     };
