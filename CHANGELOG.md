@@ -1,5 +1,14 @@
 # Solar Launcher Changelog
 
+## 0.8.2
+
+### Fixed
+- Returns a error [from the start](https://music.apple.com/my/song/from-the-start/1682357121) at a start of a GB/GH download if you don't have 7z and you're downloading not a .zip file.
+- **[ UNIX ]** Opens only one terminal instead of looping until all terminal is opened.
+
+### Misc
+- Cleaned up 50%(?) of the code.
+
 ## 0.8.1
 
 ### Added
