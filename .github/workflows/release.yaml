@@ -141,7 +141,7 @@ jobs:
 
       - name: Push Discord Webhoook
         run: |
-            python push_announcement.py \
+            python python/push_announcement.py \
               ${{ secrets.DISCORD_WEBHOOK_URL }} \
               ${{ inputs.version }} \
               false
