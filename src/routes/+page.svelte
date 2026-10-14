@@ -18,8 +18,7 @@
     import Download from "../components/Popup/AddNew/Download.svelte";
     import GameBananaMod from "../components/Popup/GameBananaMod.svelte";
     import FirstTimePopup from "../components/Popup/FirstTimePopup.svelte";
-
-    type AppData = {name: string, icon_url: string, execute_command: string, working_directory: string, description: string, banner_url: string};
+    import { loadApps, type AppData } from "$lib/apps";
 
     let apps = $state<AppData[]>([]);
 
@@ -93,13 +92,13 @@
         petIconUrl = data?.petIconUrl || "images/sussy.png";
     }
 
-    async function loadApps() {
+    async function loadInstance() {
         /*
          * This function loads the list of apps from the backend.
          * It stores them so the sidebar and main content can render them.
          */
         try {
-            apps = await invoke("get_keys", { collection: "apps" });
+            apps = await loadApps();
         } catch (e) {
             useComponentSnackbarError(`Failed to load apps: ${e}`);
         }
@@ -167,7 +166,7 @@
     }
 
     onMount(() => {
-        loadApps();
+        loadInstance();
         checkForJson();
 
         // listen for deep links while the app is running
