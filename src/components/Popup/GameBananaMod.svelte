@@ -6,6 +6,7 @@
     import CardApp from "../CardApp.svelte";
     import { getWord } from "$lib/localization";
     import { loadApps, type AppData } from "$lib/apps";
+    import { loadSetting } from "$lib/settings";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
 
@@ -35,7 +36,7 @@
     $effect(() => {
         if (modalGameBanana) {
             loadMod();
-            loadApps();
+            loadInstances();
         }
 
         // only loads ONCE. if we added interval, it would repeatedly be loaded
@@ -44,20 +45,6 @@
             path = await loadSetting("favouritePath") as any;
         }; loadedFavouritePath();
     });
-
-    async function loadSetting(key: string) {
-        /*
-         * This function loads a single setting value from the backend.
-         *
-         * Arguments:
-         *    key: string -> the name of the setting to load
-         *
-         * Returns:
-         *    Promise -> the value of the setting, or null
-         */
-        const data = await invoke("get_keys", { collection: "settings" }) as any;
-        return data?.[key];
-    }
 
     async function loadMod() {
         /*
