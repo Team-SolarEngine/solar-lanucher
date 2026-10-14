@@ -1,5 +1,13 @@
 # Solar Launcher Changelog
 
+## 0.8.3
+
+### Fixed
+- Fixed the first time setup
+- Fix the GameBanana deeplink not finding instances
+- Fixed the sidebar not refreshing after a new instance is added
+- Fix deleting a instance shortcut
+
 ## 0.8.2
 
 ### Fixed
