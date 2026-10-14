@@ -189,7 +189,7 @@
         // check if the localization key is set to none
         //   if it is: set it to "en" and refresh the web
         //   if not: continue
-        if (!await loadSetting("currentLanguage")) {
+        if (!await loadSetting("currentLanguage") && await checkForJson()) {
             await saveSetting("currentLanguage", "en");
             window.location.reload();
         }
