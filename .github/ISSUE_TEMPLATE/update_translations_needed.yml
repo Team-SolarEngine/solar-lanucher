@@ -1,0 +1,24 @@
+name: Update Translation Needed
+title: "[IMPORTANT] UPDATE TRANSLATIONS NEEDED"
+description: Request all translators to update their translation. Do not use this.
+labels: [translation]
+
+assignees:
+  - daveberrys           # Malay
+  - VideoBotYT           # Belgium
+  - BaranMuzu            # Turkish
+  - CharGoldenYT         # lolcat
+  - sirthegamercoderr    # Indonesia
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # ATTENTION ALL TRANSLATORS
+
+        A new key has been added and we need you all to add your translation in the JSON format.
+
+        The key that has been added:
+        -
+
+        Please send a PR or send it in this issue thread.
