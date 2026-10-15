@@ -126,10 +126,14 @@
       try {
         const jsonCall = await invoke("check_json_file")
 
-        if (jsonCall)
+        if (jsonCall) {
           console.log("Continuing..")
-        else
+          return true;
+        }
+        else {
           modalForFirstTime = true;
+          return false;
+        }
       } catch(e) {
         useComponentSnackbarError(`Could not check for JSON file. ${e}`);
       }
