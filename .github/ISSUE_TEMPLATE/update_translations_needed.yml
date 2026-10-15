@@ -11,6 +11,16 @@ assignees:
   - sirthegamercoderr    # Indonesia
 
 body:
+  - type: checkboxes
+    id: iwillnotuse
+    attributes:
+      label: "This issue is only meant to serve as needing to update translation."
+      description: "Do not use this if you are not Daveberry or the contributors."
+      options:
+        - label: "I am not Daveberry or any of the contributors."
+    validations:
+      required: true
+
   - type: markdown
     attributes:
       value: |
