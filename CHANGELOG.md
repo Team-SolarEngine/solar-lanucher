@@ -1,5 +1,11 @@
 # Solar Launcher Changelog
 
+## 0.8.4
+
+## Fixed
+- Fixed Belgium translation
+- Fixed `currentLanguage` set to `en` if not found.
+
 ## 0.8.3
 
 ### Fixed
