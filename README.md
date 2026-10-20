@@ -1,11 +1,13 @@
 <div align="center">
     <img src=".github/readme/icon.png" width="250">
-    <h1>Solar Launcher</h1> <br/>
+    <h1>Solar Launcher</h1>
     <span>The launcher made for <b>developers</b>, and <b>normies</b>.</span> <br/>
     <img alt="Static Badge" src="https://img.shields.io/badge/tauri-hi?style=for-the-badge&logo=Tauri&logoColor=FFFFFF&label=made%20with&color=24C8D8">
     <img alt="Static Badge" src="https://img.shields.io/badge/Svelte-hi?style=for-the-badge&logo=svelte&logoColor=FFFFFF&label=made%20with&color=FF3E00">
     <img alt="Static Badge" src="https://img.shields.io/badge/BeerCSS-hi?style=for-the-badge&logo=css&logoColor=FFFFFF&label=made%20with&color=663399">
 </div>
+
+#
 
 A fork of [AppShortsies](https://github.com/daveberrys/appshortsies) made for launching FNF and non-FNF executable. Available for **Windows**, **macOS**, and **Linux**.
 
