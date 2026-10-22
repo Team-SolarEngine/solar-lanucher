@@ -5,7 +5,7 @@
         The launcher made for <b>developers</b>, and <b>normies</b>. <br/>
         A fork of <a href="https://github.com/daveberrys/appshortsies">AppShortsies</a> made for launching FNF and non-FNF executable. <br/>
         Available for <b>Windows</b>, <b>macOS</b>, and <b>Linux</b>.
-    </span> <br/> <br/>
+        </https://github.com/Team-SolarEngine/solar-lanucher/wikispan> <br/> <br/>
     <img alt="Static Badge" src="https://img.shields.io/badge/tauri-hi?style=for-the-badge&logo=Tauri&logoColor=FFFFFF&color=24C8D8">
     <img alt="Static Badge" src="https://img.shields.io/badge/Svelte-hi?style=for-the-badge&logo=svelte&logoColor=FFFFFF&color=FF3E00">
     <img alt="Static Badge" src="https://img.shields.io/badge/BeerCSS-hi?style=for-the-badge&logo=css&logoColor=FFFFFF&color=663399">
@@ -104,6 +104,10 @@ Deleting and disabling mods are now easier than ever! Just click on a checkbox t
 <div align="center"><h1>Don't like Solar Launcher?</h1></div>
 
 Use [WeekBox](https://gamebanana.com/tools/23228) instead! Support the team at WeekBox if you like it better than ours. Please don't go ramble about which one is better, just pick which one suits your need.
+
+<div align="center"><h1>Don't know how to use?</h1></div>
+
+We made a documentation to help you on how to use Solar Launcher to the fullest! [Here's the documentation! Read it throughly.](https://github.com/Team-SolarEngine/solar-lanucher/wiki)
 
 <div align="center"><h1>LICENSE</h1></div>
 
