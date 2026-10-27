@@ -16,6 +16,8 @@
 
   "            //-- SETTINGS SECTION --//            ": "",
   "settings.global.manage": "Manage",
+  "settings.global.title.manage": "Manage settings",
+  "settings.global.title.other": "Miscellaneous settings",
 
   "settings.add_pet.title": "Add Pet",
   "settings.add_pet.description": "Have sussy amongus on the bottom right! Keeps you company.",
@@ -64,6 +66,9 @@
 
   "settings.download_7zip.title": "Download 7zip",
   "settings.download_7zip.description": "This will download 7zip in your AppData! Only use this ONCE.",
+
+  "settings.docs.title": "Confused on how to use Solar Launcher?",
+  "settings.docs.description": "We made a documentation for you to follow! If you still need help, join our discord server!",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "Adding a new instance for FNF...",

@@ -3,6 +3,7 @@
     import CardApp from "../CardApp.svelte";
     import { saveSetting } from "$lib/settings";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
+    import { openUrl } from "@tauri-apps/plugin-opener";
 
     let allLocalization = $state([
       { name: "English", code: "en", flag: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/250px-Flag_of_the_United_Kingdom_%281-2%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", translator: "Daveberry" },
@@ -101,6 +102,25 @@
         <button onclick={() => download8Zip()}>
             Download
         </button>
+    </div>
+
+    <hr class="medium" />
+
+    <div class="field label border">
+        <h6>Confused on how to use Solar Launcher?</h6>
+        <div>
+            We made a documentation for you to follow!
+            It is detailed for you to help you with Solar Launcher!
+            If you still need help, join our discord server!
+        </div>
+        <div class="center-align">
+            <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/wiki")}>
+                Open Documentation
+            </button>
+            <button onclick={() => openUrl("https://discord.gg/RaHmP5fgyA")}>
+                Join Discord Server
+            </button>
+        </div>
     </div>
 
     <hr class="medium" />

@@ -6,6 +6,7 @@
     import { getWord } from "$lib/localization";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { saveSetting, loadSetting } from "$lib/settings";
+    import { openUrl } from "@tauri-apps/plugin-opener";
 
     let { modalSettings = $bindable() } = $props()
     let settings = $state({} as any)
@@ -58,7 +59,26 @@
 
 <div class="overlay" class:active={modalSettings} onclick={() => modalSettings = false}></div>
 <dialog class="right" class:active={modalSettings} style="max-width: 500px;">
-    <h5>{#await getWord("settings.global.Settings") then word}{@html word}{/await}</h5>
+    <h4 style="margin-bottom: 10px;">{#await getWord("settings.global.title.other") then word}{@html word}{/await}</h4>
+
+    <Version />
+    <hr class="medium"/>
+
+    <div class="field label border">
+        <h6>{#await getWord("settings.docs.title") then word}{@html word}{/await}</h6>
+        <div>{#await getWord("settings.docs.description") then word}{@html word}{/await}</div>
+        <div class="center-align">
+            <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/wiki")}>
+                Documentation
+            </button>
+            <button onclick={() => openUrl("https://discord.gg/RaHmP5fgyA")}>
+                Discord Server
+            </button>
+        </div>
+    </div>
+
+    <hr class="medium"/>
+    <h4>{#await getWord("settings.global.title.manage") then word}{@html word}{/await}</h4>
 
     {#each settingFields as field}
         {#if field.type === "toggle"}
@@ -101,9 +121,6 @@
             <hr class="medium"/>
         {/if}
     {/each}
-
-    <hr class="medium"/>
-    <Version />
 
     <nav class="right-align no-space">
         <button class="transparent link" onclick={() => modalSettings = false}>{#await getWord("global.close") then word}{@html word}{/await}</button>
