@@ -52,6 +52,15 @@
                 .map((line) => line.trim())
                 .filter(Boolean);
             splash = splashes[Math.floor(Math.random() * splashes.length)];
+
+            switch(splash) {
+                case "jarona!":
+                    new Audio('./sounds/jarona.mp3').play();
+                    break;
+                case "ja-orange!":
+                    new Audio('./sounds/ja-orange.mp3').play();
+                    break;
+            }
         } catch (e) {
             splash = "Well, something went wrong I guess.";
         }
