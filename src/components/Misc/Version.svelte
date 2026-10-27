@@ -33,12 +33,15 @@
 </script>
 
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
-    {#if version && latest && version == latest}
-        <span>{#await getWord("settings.version.section1") then word}{@html word}{/await} {os}-{version}, <span style="color: green">{#await getWord("settings.version.section2.up_to_date") then word}{@html word}{/await}</span></span>
-    {:else if version && latest && version != latest}
-        <span>{#await getWord("settings.version.section1") then word}{@html word}{/await} {os}-{version}, <span style="color: red">{#await getWord("settings.version.section2.out_of_date") then word}{@html word}{/await}</span></span>
-    {:else}
-        <span>{#await getWord("settings.version.section2.limited") then word}{@html word}{/await}</span>
-    {/if}
+    <span>
+        {#await getWord("settings.version.section1") then word}{@html word}{/await}
+        {#if version && latest && version == latest}
+            {os}-{version}, <span style="color: green">{#await getWord("settings.version.section2.up_to_date") then word}{@html word}{/await}</span>
+        {:else if version && latest && version != latest}
+            {os}-{version}, <span style="color: red">{#await getWord("settings.version.section2.out_of_date") then word}{@html word}{/await}</span>
+        {:else}
+            {#await getWord("settings.version.section2.limited") then word}{@html word}{/await}
+        {/if}
+    </span>
     <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>{#await getWord("settings.version.button") then word}{@html word}{/await}</button>
 </div>
