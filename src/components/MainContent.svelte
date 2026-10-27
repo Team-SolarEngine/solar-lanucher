@@ -55,10 +55,14 @@
 
             switch(splash) {
                 case "jarona!":
-                    new Audio('./sounds/jarona.mp3').play();
+                    setTimeout(() => {
+                        new Audio('/sounds/jarona.mp3').play().catch(console.error);
+                    }, 0);
                     break;
                 case "ja-orange!":
-                    new Audio('./sounds/ja-orange.mp3').play();
+                    setTimeout(() => {
+                        new Audio('/sounds/ja-orange.mp3').play().catch(console.error);
+                    }, 0);
                     break;
             }
         } catch (e) {
