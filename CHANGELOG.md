@@ -1,5 +1,17 @@
 # Solar Launcher Changelog
 
+## 0.8.5
+
+## Added
+- Remade all splash text
+- Added a little secret to splash text
+- Made explorer better for new users!
+- Button to open documentation, or discord server
+
+## Fixed
+- Broken rate-limited text
+- Unorganized settings menu
+
 ## 0.8.4
 
 ## Fixed
