@@ -94,6 +94,8 @@
 
   "local_or_edit.field.banner_url.title": "banner url",
   "local_or_edit.field.banner_url.description": "da img or path u use for da banner, 16:9 best ratio.",
+  
+  "local_or_edit.submenu.explorer.description": "<b>pro tpi:</b> clik a file, it will fill for u!!!",
 
   "            //-- START EXTRA SECTION --//            ": "",
   "start_extra.button.start": "stawt", "dave you fool you put the w in the wrong spot, i fixed it - CharGoldenYT": "",

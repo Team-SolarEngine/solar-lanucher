@@ -94,6 +94,8 @@
 
   "local_or_edit.field.banner_url.title": "Sepanduk URL",
   "local_or_edit.field.banner_url.description": "Banner image URL atau Path untuk instance. Aspect ratio tidak penting, tapi disarankan 16:9.",
+  
+  "local_or_edit.submenu.explorer.description": "<b>Pro tip:</b> Tekan yang fail, dia akan taruh untuk awak!",
 
   "            //-- START EXTRA SECTION --//            ": "",
   "start_extra.button.start": "Mula",

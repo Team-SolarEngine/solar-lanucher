@@ -94,6 +94,8 @@
 
   "local_or_edit.field.banner_url.title": "URL Banner",
   "local_or_edit.field.banner_url.description": "URL atau Jalur gambar banner untuk instansi. Rasio aspek tidak masalah, tapi kami merekomendasikan 16:9.",
+  
+  "local_or_edit.submenu.explorer.description": "",
 
   "            //-- START EXTRA SECTION --//            ": "",
   "start_extra.button.start": "Mulai",

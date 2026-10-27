@@ -95,6 +95,8 @@
   "local_or_edit.field.banner_url.title": "",
   "local_or_edit.field.banner_url.description": "",
 
+  "local_or_edit.submenu.explorer.description": "",
+
   "            //-- START EXTRA SECTION --//            ": "",
   "start_extra.button.start": "",
   "start_extra.button.submenu.open_in_terminal": "",

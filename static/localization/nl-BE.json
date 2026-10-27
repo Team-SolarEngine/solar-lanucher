@@ -94,6 +94,8 @@
 
   "local_or_edit.field.banner_url.title": "Banner URL",
   "local_or_edit.field.banner_url.description": "De banner afbeelding URL of Pad van de instantie. Beeldverhouding maakt niet uit, maar we raden 16:9 wel aan.",
+  
+  "local_or_edit.submenu.explorer.description": "",
 
   "            //-- START EXTRA SECTION --//            ": "",
   "start_extra.button.start": "Start",

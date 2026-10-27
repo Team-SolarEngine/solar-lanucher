@@ -94,6 +94,8 @@
 
   "local_or_edit.field.banner_url.title": "Banner URL'si",
   "local_or_edit.field.banner_url.description": "Örnek için afiş görseli URL'si veya Yolu. En-boy oranı fark etmez ama 16:9 öneririz.",
+  
+  "local_or_edit.submenu.explorer.description": "",
 
   "            //-- START EXTRA SECTION --//            ": "",
   "start_extra.button.start": "Başlat",
