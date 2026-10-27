@@ -196,7 +196,8 @@ okay real shit talk;
 <style>
     ._splashText {
         position: absolute;
-        right: -6rem;
+        left: -500px;
+        right: -50rem;
         bottom: -1rem;
         rotate: -4deg;
         color: yellow;
