@@ -16,6 +16,8 @@
 
   "            //-- SETTINGS SECTION --//            ": "",
   "settings.global.manage": "maneg",
+  "settings.global.title.manage": "",
+  "settings.global.title.other": "",
 
   "settings.add_pet.title": "add pet",
   "settings.add_pet.description": "lil guy follow u around!",
@@ -62,8 +64,11 @@
   "settings.version.section2.limited": "rat limit :(",
   "settings.version.button": "open releases",
   
-    "settings.download_7zip.title": "downlo 7zih",
-    "settings.download_7zip.description": "dis wil downlo 7z, ues onc!!",
+  "settings.download_7zip.title": "downlo 7zih",
+  "settings.download_7zip.description": "dis wil downlo 7z, ues onc!!",
+
+  "settings.docs.title": "",
+  "settings.docs.description": "",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "new fnf guy",

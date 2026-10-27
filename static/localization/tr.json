@@ -16,6 +16,8 @@
 
   "            //-- SETTINGS SECTION --//            ": "",
   "settings.global.manage": "Yönet",
+  "settings.global.title.manage": "",
+  "settings.global.title.other": "",
 
   "settings.add_pet.title": "Maskot Ekle",
   "settings.add_pet.description": "Sağ altta şüpheli bir Among Us olsun! Size eşlik eder.",
@@ -64,6 +66,9 @@
 
   "settings.download_7zip.title": "7zip İndir",
   "settings.download_7zip.description": "Bu işlem AppData klasörünüze 7zip indirecektir! Bunu yalnızca BİR KEZ kullanın.",
+
+  "settings.docs.title": "",
+  "settings.docs.description": "",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "FNF için yeni bir örnek ekleniyor...",

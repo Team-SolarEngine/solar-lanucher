@@ -16,6 +16,8 @@
 
   "            //-- SETTINGS SECTION --//            ": "",
   "settings.global.manage": "Kelola",
+  "settings.global.title.manage": "",
+  "settings.global.title.other": "",
 
   "settings.add_pet.title": "Tambah Peliharaan",
   "settings.add_pet.description": "Punya amongus sussy di kanan bawah! Menemani Anda.",
@@ -64,6 +66,9 @@
 
   "settings.download_7zip.title": "Unduh 7zip",
   "settings.download_7zip.description": "Ini akan mengunduh 7zip di AppData Anda! Hanya gunakan ini SEKALI.",
+
+  "settings.docs.title": "",
+  "settings.docs.description": "",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "Menambahkan instansi baru untuk FNF...",

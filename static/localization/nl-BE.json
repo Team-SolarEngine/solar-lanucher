@@ -16,6 +16,8 @@
 
   "            //-- SETTINGS SECTION --//            ": "",
   "settings.global.manage": "Beheer",
+  "settings.global.title.manage": "",
+  "settings.global.title.other": "",
 
   "settings.add_pet.title": "Huisdier Toevoegen",
   "settings.add_pet.description": "Heb sussy amongus rechtsonder! Houdt je gezeldschap.",
@@ -64,6 +66,9 @@
 
   "settings.download_7zip.title": "Download 7zip",
   "settings.download_7zip.description": "Dit zal 7zip downloaden in jouw AppData map! Gebruik dit ÉÉN KEER.",
+
+  "settings.docs.title": "",
+  "settings.docs.description": "",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "Nieuwe instantie toevoegen voor FNF...",
