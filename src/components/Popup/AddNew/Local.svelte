@@ -3,6 +3,7 @@
     import CardApp from "../../CardApp.svelte";
     import { useSnackbarError, type Snackbar, pickFile } from "$lib/interface";
     import { getWord } from "$lib/localization";
+    import { getOS } from "$lib/sys";
 
     let { modalNew = $bindable(), onAppAdded = () => {}, prefill = {} } = $props()
 
@@ -129,6 +130,25 @@
         showExplorer = !showExplorer;
         if (showExplorer) showFolderContents();
     }
+
+    async function setPathForOS(path: string, is_file: boolean) {
+        /*
+         * This function sets a path for the specific os for
+         * the execute command. This is especially helpful for
+         * first comers or people who doesn't know what they're doing!
+         * 
+         * If is_file is false, then it'll return nothing.
+         */
+
+        if (!is_file) return
+
+        if (await getOS() == "windows")
+            return appPath = `.\\${path}`
+        else
+          if (path.includes(".exe"))
+              return appPath = `wine ./${path}`
+          return appPath = `./${path}`
+    }
 </script>
 
 <div class="overlay" class:active={modalNew} onclick={close}></div>
@@ -193,19 +213,19 @@
 
 <article class:active={showExplorer} class="_explorer scroll" style="max-width: 600px; position: absolute; top: 0; bottom: 0; left: 0; z-index: 999; margin-bottom: 12px; margin-left: 18px;">
     <h6>{#await getWord("global.explorer") then word}{@html word}{/await}</h6>
-    {#if folderContents.length === 0}
-        <span>{#await getWord("global.not_found") then word}{@html word.replace("{type}", "Folder contents")}{/await}</span>
-    {:else}
-        <div>
+    <span>{#await getWord("local_or_edit.submenu.explorer.description") then word}{@html word}{/await}</span> <br/>
+    <article style="background-color: rgb(33, 32, 35);">
+        {#if folderContents.length === 0}
+            <span>{#await getWord("global.not_found") then word}{@html word.replace("{type}", "Folder contents")}{/await}</span>
+        {:else}
             {#each folderContents as folder}
-                <div style="margin-top: 10px;">
+                <div style="padding: 5px;" onclick={() => setPathForOS(getItemName(folder.path), !folder.is_folder)} class:_selectable={!folder.is_folder}>
                     <i>{folder.is_folder ? "folder" : "description"}</i>
                     <span style="overflow-wrap: break-word; word-break: break-word; display: inline-block;">{getItemName(folder.path)}</span>
                 </div>
-                <hr class="small"/>
             {/each}
-        </div>
-    {/if}
+        {/if}
+    </article>
 </article>
 
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
@@ -217,6 +237,14 @@
 
         &.active {
             transform: translateX(0px);
+        }
+    }
+
+    ._selectable {
+        transition: all 0.1s ease-in-out;
+        &:hover {
+            background-color: rgb(48, 47, 50);
+            border-radius: 4px;
         }
     }
 </style>
