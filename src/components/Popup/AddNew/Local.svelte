@@ -245,6 +245,7 @@
         &:hover {
             background-color: rgb(48, 47, 50);
             border-radius: 4px;
+            cursor: pointer;
         }
     }
 </style>
