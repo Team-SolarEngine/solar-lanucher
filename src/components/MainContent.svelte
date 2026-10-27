@@ -57,12 +57,12 @@
                 case "jarona!":
                     setTimeout(() => {
                         new Audio('/sounds/jarona.mp3').play().catch(console.error);
-                    }, 0);
+                    }, 500);
                     break;
                 case "ja-orange!":
                     setTimeout(() => {
                         new Audio('/sounds/ja-orange.mp3').play().catch(console.error);
-                    }, 0);
+                    }, 500);
                     break;
             }
         } catch (e) {
