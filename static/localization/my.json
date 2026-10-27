@@ -16,8 +16,8 @@
 
   "            //-- SETTINGS SECTION --//            ": "",
   "settings.global.manage": "Urus",
-  "settings.global.title.manage": "",
-  "settings.global.title.other": "",
+  "settings.global.title.manage": "Urus setting",
+  "settings.global.title.other": "Lain-lain setting",
 
   "settings.add_pet.title": "Tambah haiwan peliharaan",
   "settings.add_pet.description": "Letakkan Among Us di kenan bawah! Ia akan menamani awak.",
@@ -67,8 +67,8 @@
   "settings.download_7zip.title": "Download 7zip",
   "settings.download_7zip.description": "Ini akan download 7zip tempat awak punya AppData! Guna ini SEKALI.",
 
-  "settings.docs.title": "",
-  "settings.docs.description": "",
+  "settings.docs.title": "Tak tau menguna Solar Launcher?",
+  "settings.docs.description": "Kita buat dokumentation untuk awak ikut! Kalau awak masih mau tolong, join Discord Server!",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "Tambah Instance untuk FNF...",

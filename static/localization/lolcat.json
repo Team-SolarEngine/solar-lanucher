@@ -16,8 +16,8 @@
 
   "            //-- SETTINGS SECTION --//            ": "",
   "settings.global.manage": "maneg",
-  "settings.global.title.manage": "",
-  "settings.global.title.other": "",
+  "settings.global.title.manage": "maneg seting",
+  "settings.global.title.other": "misclanous seting",
 
   "settings.add_pet.title": "add pet",
   "settings.add_pet.description": "lil guy follow u around!",
@@ -67,8 +67,8 @@
   "settings.download_7zip.title": "downlo 7zih",
   "settings.download_7zip.description": "dis wil downlo 7z, ues onc!!",
 
-  "settings.docs.title": "",
-  "settings.docs.description": "",
+  "settings.docs.title": "confus use solar launch???",
+  "settings.docs.description": "we mad a documen!! if u need help,,, join da disco serve!!",
 
   "            //-- ADD NEW INSTANCE SECTION --//            ": "",
   "prompt_for_new.title": "new fnf guy",
