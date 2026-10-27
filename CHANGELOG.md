@@ -11,6 +11,7 @@
 ## Fixed
 - Broken rate-limited text
 - Unorganized settings menu
+- Splash text will now align properly
 
 ## 0.8.4
 
