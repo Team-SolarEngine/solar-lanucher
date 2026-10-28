@@ -3,6 +3,7 @@
     import CardApp from "./CardApp.svelte";
     import { openUrl } from "@tauri-apps/plugin-opener";
     import { getWord } from "$lib/localization";
+    import { loadApps } from "$lib/apps";
 
     let {
         onOpenAdd = () => {},
@@ -36,6 +37,23 @@
             modalSettings = true
         }
     }
+
+    async function loadInstances() {
+        /*
+         * This function fetches loadApps from Tauri.
+         * If next is identical to app, then don't do a change.
+         */
+        const next = await loadApps();
+        if (JSON.stringify(next) !== JSON.stringify(apps)) {
+            apps = next;
+        }
+    }
+
+    $effect(() => {
+        loadInstances();
+        const interval = setInterval(loadInstances, 1000);
+        return () => clearInterval(interval);
+    });
 </script>
 
 <article style="height: 100%; overflow-y: hidden; min-width: 25rem; max-width: 25rem; transition: all 0.3s ease-in-out; overflow-x: hidden;" class:_sidebarClose={!sidebarOpen}>

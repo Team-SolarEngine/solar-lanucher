@@ -7,6 +7,7 @@
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { saveSetting, loadSetting } from "$lib/settings";
     import { openUrl } from "@tauri-apps/plugin-opener";
+    import OrganizeInstances from "./Settings/OrganizeInstances.svelte";
 
     let { modalSettings = $bindable() } = $props()
     let settings = $state({} as any)
@@ -14,6 +15,7 @@
     let toggleAddRepos = $state(false);
     let toggleLocalizationMenu = $state(false);
     let modalForDoneSevenZip = $state(false);
+    let toggleOrganizationMenu = $state(false);
 
     const settingFields = [
         { title: "settings.add_pet.title", key: "addPet", desc: "settings.add_pet.description", type: "toggle", default: false },
@@ -26,6 +28,7 @@
         { title: "settings.code_editor.title", key: "codeEditor", desc: "settings.code_editor.description", type: "text", default: "" },
         { title: "settings.localization.title", key: "currentLanguage", desc: "settings.localization.description", buttonText: "settings.global.manage", type: "menu", default: "en", call: () => toggleLocalizationMenu = true},
         { title: "settings.download_7zip.title", key: "", desc: "settings.download_7zip.description", buttonText: "global.download", type: "menu", default: "en", call: () => download8Zip()},
+        { title: "settings.organize_instances.title", key: "", desc: "settings.organize_instances.description", buttonText: "settings.global.manage", type: "menu", default: "en", call: () => toggleOrganizationMenu = true},
     ]
 
     async function download8Zip() {
@@ -129,6 +132,7 @@
 
 <AdditionalRepos bind:currentlyOpen={toggleAddRepos} />
 <LocalizationMenu bind:currentlyOpen={toggleLocalizationMenu} />
+<OrganizeInstances bind:currentlyOpen={toggleOrganizationMenu} />
 
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
 
