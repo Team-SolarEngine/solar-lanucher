@@ -120,6 +120,6 @@
     "notification.download.title.engine": "Muat turun Engine",
     "notification.download.description.hard_coded": "Kita sudah siap muat turun!",
     "notification.download.description.soft_coded": "Kita sudah siap muat turun! Kita mau awak untuk input executable fail, dan awak sepatutnya sudah bersedia!",
-    "settings.organize_instances.title": "",
-    "settings.organize_instances.description": ""
+    "settings.organize_instances.title": "Mengatur instances",
+    "settings.organize_instances.description": "Mengatur instance sendiri! Awak tidak suka yang awak ada sekarang ini, jadi kenapa tidak mengatur?"
 }
