@@ -1,5 +1,11 @@
 # Solar Launcher Changelog
 
+## 0.8.6
+
+## Added
+- Organizing instances
+- Updated Turkey, Belgium, Indonesia translation
+
 ## 0.8.5
 
 ## Added
