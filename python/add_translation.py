@@ -14,10 +14,10 @@ for i in localization_files:
     with open(f"{localization_path}/{i}", "r") as f:
         json_file_content = json.load(f)
 
-    if i == "empty_template.json":
-        json_file_content[args.key] = ""
-    else:
+    if i == "en.json":
         json_file_content[args.key] = args.value
+    else:
+        json_file_content[args.key] = ""
 
     with open(f"{localization_path}/{i}", "w") as f:
-        json.dump(json_file_content, f, indent=4)
+        json.dump(json_file_content, f, indent=4, ensure_ascii=False)
