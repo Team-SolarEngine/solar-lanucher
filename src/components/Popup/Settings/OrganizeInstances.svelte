@@ -7,6 +7,7 @@
     let { currentlyOpen = $bindable() } = $props();
 
     let apps = $state<AppData[]>([]);
+    let focused_one = $state("");
 
     async function loadInstances() {
         /*
@@ -31,6 +32,8 @@
         apps[a] = second;
         apps[b] = first;
 
+        focused_one = first.name;
+
         // I genuinely have no clue how this works
         // but if it works.. it works I guess?
         await invoke("update_key", { collection: "apps", key: a, value: apps[a] });
@@ -46,7 +49,7 @@
 <dialog class="left" class:active={currentlyOpen} style="max-width: 700px;">
     {#if apps.length > 0}
         {#each apps as app, i}
-            <section style="display: flex; gap: 8px;">
+            <article style="display: flex; gap: 8px;" class:_focused_one={app.name == focused_one}>
                 <div style="flex: 1;">
                     <CardApp
                         name={app.name}
@@ -66,9 +69,16 @@
                         </button>
                     {/if}
                 </div>
-            </section>
+            </article>
         {/each}
     {:else}
         <span>{#await getWord("global.not_found") then word}{word.replace("{type}", "Instances")}{/await}</span>
     {/if}
 </dialog>
+
+<style>
+    ._focused_one {
+        background-color: rgb(31, 30, 33);
+        box-shadow: 0 0 8px 4px rgb(31, 30, 33);
+    }
+</style>
