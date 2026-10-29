@@ -121,5 +121,6 @@
     "notification.download.description.hard_coded": "We're done downloading!",
     "notification.download.description.soft_coded": "We're done downloading! We just need you to input the executable file, and you should be all set!",
     "settings.organize_instances.title": "Organize instances",
-    "settings.organize_instances.description": "Organize your instances! You may don't like your current one, so why not change up?"
+    "settings.organize_instances.description": "Organize your instances! You may don't like your current one, so why not change up?",
+    "instance_filter.title": "Filter Instances"
 }
