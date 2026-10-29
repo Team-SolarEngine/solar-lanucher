@@ -47,6 +47,10 @@ jobs:
         with:
           version: 9
 
+      - name: Setup Flatpak - Linux
+        if: ${{ matrix.platform }} == "ubuntu-latest"
+        run: sudo apt install flatpak flatpak-builder
+
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -71,6 +75,12 @@ jobs:
         with:
           args: --target ${{ matrix.target }}
 
+      - name: Build for Flatpak - Linux
+        if: ${{ matrix.platform }} == "ubuntu-latest"
+        run: |
+            flatpak-builder --force-clean --user --disable-cache --repo flatpak-repo flatpak-build net.solarengine.solarlauncher.yml
+            flatpak build-bundle $(pwd)/flatpak-repo $(pwd)/solarlauncher.flatpak net.solarengine.solarlauncher
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -78,6 +88,7 @@ jobs:
           path: |
             src-tauri/target/*/release/bundle/**/*
             src-tauri/target/release/bundle/**/*
+            solarlauncher.flatpak
           if-no-files-found: warn
   finalize:
     needs: build
@@ -120,12 +131,12 @@ jobs:
             Check out the summarized updates in [CHANGELOG.md](https://github.com/Team-SolarEngine/solar-lanucher/blob/main/CHANGELOG.md).
 
             ## Depending on your platform, download the appropriate file below.
-            | Platform                                              | Architecture  |        Filename       |
-            |-------------------------------------------------------|---------------|-----------------------|
-            | solarlauncher-macos-latest-aarch64-apple-darwin       | Apple Silicon | .dmg                  |
-            | solarlauncher-macos-latest-x86_64-apple-darwin        | Intel         | .dmg                  |
-            | solarlauncher-ubuntu-latest-x86_64-unknown-linux-gnu  | Intel         | .deb, .AppImage, .rpm |
-            | solarlauncher-windows-latest-x86_64-pc-windows-msvc   | Intel         | .msi, .exe            |
+            | Platform                                              | Architecture  | Filename                        |
+            |-------------------------------------------------------|---------------|---------------------------------|
+            | solarlauncher-macos-latest-aarch64-apple-darwin       | Apple Silicon | .dmg                            |
+            | solarlauncher-macos-latest-x86_64-apple-darwin        | Intel         | .dmg                            |
+            | solarlauncher-ubuntu-latest-x86_64-unknown-linux-gnu  | Intel         | .deb, .AppImage, .rpm, .flatpak |
+            | solarlauncher-windows-latest-x86_64-pc-windows-msvc   | Intel         | .msi, .exe                      |
 
             Optionally, you can also download the .tar.gz file for manual installation.
 
@@ -138,6 +149,7 @@ jobs:
             artifacts/**/*.msi
             artifacts/**/*.exe
             artifacts/**/*.rpm
+            artifacts/**/*.flatpak
 
       - name: Push Discord Webhoook
         run: |

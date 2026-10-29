@@ -40,6 +40,10 @@ jobs:
         with:
           version: 9
 
+      - name: Setup Flatpak - Linux
+        if: ${{ matrix.platform }} == "ubuntu-latest"
+        run: sudo apt install flatpak flatpak-builder
+
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -66,6 +70,12 @@ jobs:
         with:
           args: --target ${{ matrix.target }}
 
+      - name: Build for Flatpak - Linux
+        if: ${{ matrix.platform }} == "ubuntu-latest"
+        run: |
+            flatpak-builder --force-clean --user --disable-cache --repo flatpak-repo flatpak-build net.solarengine.solarlauncher.yml
+            flatpak build-bundle $(pwd)/flatpak-repo $(pwd)/solarlauncher.flatpak net.solarengine.solarlauncher
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -73,4 +83,5 @@ jobs:
           path: |
             src-tauri/target/*/release/bundle/**/*
             src-tauri/target/release/bundle/**/*
+            solarlauncher.flatpak
           if-no-files-found: warn
