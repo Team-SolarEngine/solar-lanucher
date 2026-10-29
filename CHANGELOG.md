@@ -4,6 +4,7 @@
 
 ## Added
 - Organizing instances
+- Searching instances
 - Updated Turkey, Belgium, Indonesia translation
 
 ## 0.8.5
