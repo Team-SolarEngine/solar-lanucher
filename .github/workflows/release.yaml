@@ -56,6 +56,7 @@ jobs:
         if: matrix.platform == 'ubuntu-latest'
         run: |
             sudo apt install flatpak flatpak-builder
+            flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo --user
             flatpak install flathub \
               org.gnome.Platform//51 \
               org.gnome.Sdk//51 \
