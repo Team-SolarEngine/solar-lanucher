@@ -78,7 +78,7 @@
 
 <style>
     ._focused_one {
-        background-color: rgb(31, 30, 33);
-        box-shadow: 0 0 8px 4px rgb(31, 30, 33);
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.05);
     }
 </style>

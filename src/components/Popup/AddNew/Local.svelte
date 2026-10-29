@@ -214,7 +214,7 @@
 <article class:active={showExplorer} class="_explorer scroll" style="max-width: 600px; position: absolute; top: 0; bottom: 0; left: 0; z-index: 999; margin-bottom: 12px; margin-left: 18px;">
     <h6>{#await getWord("global.explorer") then word}{@html word}{/await}</h6>
     <span>{#await getWord("local_or_edit.submenu.explorer.description") then word}{@html word}{/await}</span> <br/>
-    <article style="background-color: rgb(33, 32, 35);">
+    <article style="background-color: rgba(0, 0, 0, 0.1);">
         {#if folderContents.length === 0}
             <span>{#await getWord("global.not_found") then word}{@html word.replace("{type}", "Folder contents")}{/await}</span>
         {:else}
@@ -243,7 +243,7 @@
     ._selectable {
         transition: all 0.1s ease-in-out;
         &:hover {
-            background-color: rgb(48, 47, 50);
+            background-color: rgba(0, 0, 0, 0.2);
             border-radius: 4px;
             cursor: pointer;
         }
