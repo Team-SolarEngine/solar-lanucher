@@ -40,16 +40,24 @@ jobs:
         with:
           version: 9
 
-      - name: Setup Flatpak - Linux
-        if: matrix.platform == 'ubuntu-latest'
-        run: sudo apt install flatpak flatpak-builder
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
 
-      - name: Install dependencies (ubuntu)
+      - name: Setup Flatpak - Linux
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+            sudo apt install flatpak flatpak-builder
+            flatpak install flathub \
+              org.gnome.Platform//51 \
+              org.gnome.Sdk//51 \
+              org.freedesktop.Sdk.Extension.node24//26.08 \
+              org.freedesktop.Sdk.Extension.rust-stable//26.08 \
+              --noninteractive --user
+
+      - name: Install dependencies - Linux
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt-get update
@@ -70,7 +78,7 @@ jobs:
         with:
           args: --target ${{ matrix.target }}
 
-      - name: Build for Flatpak - Linux
+      - name: Build and Bundle for Flatpak - Linux
         if: matrix.platform == 'ubuntu-latest'
         run: |
             flatpak-builder --force-clean --user --disable-cache --repo flatpak-repo flatpak-build net.solarengine.solarlauncher.yml

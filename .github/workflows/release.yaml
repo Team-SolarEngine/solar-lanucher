@@ -47,14 +47,21 @@ jobs:
         with:
           version: 9
 
-      - name: Setup Flatpak - Linux
-        if: matrix.platform == 'ubuntu-latest'
-        run: sudo apt install flatpak flatpak-builder
-
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
+
+      - name: Setup Flatpak - Linux
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+            sudo apt install flatpak flatpak-builder
+            flatpak install flathub \
+              org.gnome.Platform//51 \
+              org.gnome.Sdk//51 \
+              org.freedesktop.Sdk.Extension.node24//26.08 \
+              org.freedesktop.Sdk.Extension.rust-stable//26.08 \
+              --noninteractive --user
 
       - name: Install dependencies (ubuntu)
         if: matrix.platform == 'ubuntu-latest'
