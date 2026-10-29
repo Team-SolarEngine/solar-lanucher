@@ -105,13 +105,31 @@ pub async fn pure_run_command(command: String, args: Vec<String>) -> Result<Stri
      *    Result<String, String> -> a success message or an error message
      */
     let child = {
-        let mut cmd = Command::new(&command);
+        #[cfg(unix)]
+        if is_running_in_flatpak() {
+            /*
+             * Inside Flatpak, run through flatpak-spawn --host so the
+             * command executes on the real system with the user's
+             * libraries instead of the sandbox.
+             */
+            let mut cmd = Command::new("flatpak-spawn");
+            cmd.arg("--host");
+            cmd.arg(&command);
+            cmd.args(&args);
+            cmd.spawn()
+        } else {
+            let mut cmd = Command::new(&command);
+            cmd.args(&args);
+            cmd.spawn()
+        }
 
         #[cfg(windows)]
-        cmd.creation_flags(CREATE_NO_WINDOW);
-
-        cmd.args(&args);
-        cmd.spawn()
+        {
+            let mut cmd = Command::new(&command);
+            cmd.creation_flags(CREATE_NO_WINDOW);
+            cmd.args(&args);
+            cmd.spawn()
+        }
     }
     .map_err(|e| e.to_string())?;
 
@@ -157,10 +175,22 @@ pub async fn run_command(command: String, _create_terminal_window: bool, working
 
         #[cfg(unix)]
         {
-            let mut cmd = Command::new("sh");
-            cmd.args(["-c", &command]);
-            cmd.current_dir(working_dir);
-            cmd.spawn()
+            if is_running_in_flatpak() {
+                /*
+                 * Inside Flatpak, run through flatpak-spawn --host so the
+                 * command executes on the real system with the user's shell
+                 * and libraries (e.g. libvlc) instead of the sandbox.
+                 */
+                let host_command = format!("cd '{working_dir}' && {command}");
+                let mut cmd = Command::new("flatpak-spawn");
+                cmd.args(["--host", "sh", "-c", &host_command]);
+                cmd.spawn()
+            } else {
+                let mut cmd = Command::new("sh");
+                cmd.args(["-c", &command]);
+                cmd.current_dir(working_dir);
+                cmd.spawn()
+            }
         }
     }
     .map_err(|e| e.to_string())?;
@@ -177,4 +207,15 @@ pub async fn run_command(command: String, _create_terminal_window: bool, working
     } else {
         Err(String::from_utf8_lossy(&result.stderr).to_string())
     }
+}
+
+fn is_running_in_flatpak() -> bool {
+    /*
+     * Returns true when the app is running inside a Flatpak sandbox.
+     * The /.flatpak-info file only exists inside the sandbox.
+     *
+     * Returns:
+     *    bool -> true if sandboxed by Flatpak
+     */
+    std::path::Path::new("/.flatpak-info").exists()
 }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>net.solarengine.solarlauncher</id>
+    <launchable type="desktop-id">net.solarengine.solarlauncher.desktop</launchable>
+    <name>Solar Launcher</name>
+    <developer id="tech.blueson.daveberry">
+        <name>Daveberry Cricket Blueson</name>
+    </developer>
+    <content_rating type="oars-1.1">
+    </content_rating>
+    <keywords>
+        <keyword>fnf</keyword>
+        <keyword>launcher</keyword>
+        <keyword>friday night funkin</keyword>
+    </keywords>
+    <branding>
+        <color type="primary" scheme_preference="light">#C779FF</color>
+        <color type="primary" scheme_preference="dark">#0CA3FF</color>
+    </branding>
+    <recommends>
+        <display_length compare="ge">360</display_length>
+    </recommends>
+    <summary>A launcher for Friday Night Funkin' instances.</summary>
+
+    <metadata_license>MIT</metadata_license>
+    <project_license>MIT</project_license>
+    <url type="homepage">https://github.com/Team-SolarEngine/solar-lanucher</url>
+
+    <supports>
+        <control>pointing</control>
+        <control>keyboard</control>
+        <control>touch</control>
+    </supports>
+
+    <description>
+        <p>
+            Launching FNF instances deep inside your folders may be tiring until now! Solar Launcher works with any Friday Night Funkin' instance, because we're flexible like that.
+        </p>
+        <p>Features:</p>
+        <ul>
+            <li>Browse and organize your FNF instances</li>
+            <li>Read instance files and list directories</li>
+            <li>Run commands and manage engines</li>
+            <li>Fetch mods and updates online</li>
+            <li>GameBanana deeplink integration</li>
+        </ul>
+    </description>
+    <screenshots>
+        <screenshot type="default">
+            <image>https://github.com/Team-SolarEngine/solar-lanucher/blob/main/.github/readme/1.png?raw=true</image>
+            <caption>Empty Screen</caption>
+        </screenshot>
+        <screenshot>
+            <image>https://github.com/Team-SolarEngine/solar-lanucher/blob/main/.github/readme/2.png?raw=true</image>
+            <caption>Main Content with banner, README and Changelog</caption>
+        </screenshot>
+        <screenshot>
+            <image>https://github.com/Team-SolarEngine/solar-lanucher/blob/main/.github/readme/3.png?raw=true</image>
+            <caption>Main Content without banner, README and Changelog</caption>
+        </screenshot>
+        <screenshot>
+            <image>https://github.com/Team-SolarEngine/solar-lanucher/blob/main/.github/readme/4.png?raw=true</image>
+            <caption>Mods section to toggle, delete, open folder, transfer, or open code editor</caption>
+        </screenshot>
+        <screenshot>
+            <image>https://github.com/Team-SolarEngine/solar-lanucher/blob/main/.github/readme/5.png?raw=true</image>
+            <caption>Settings menu</caption>
+        </screenshot>
+        <screenshot>
+            <image>https://github.com/Team-SolarEngine/solar-lanucher/blob/main/.github/readme/6.png?raw=true</image>
+            <caption>Gamebanana deeplink intergration</caption>
+        </screenshot>
+        <screenshot>
+            <image>https://github.com/Team-SolarEngine/solar-lanucher/blob/main/.github/readme/7.png?raw=true</image>
+            <caption>Download engines inside the launcher</caption>
+        </screenshot>
+        <screenshot>
+            <image>https://github.com/Team-SolarEngine/solar-lanucher/blob/main/.github/readme/8.png?raw=true</image>
+            <caption>Minimal, empty screen with sidebar closed</caption>
+        </screenshot>
+    </screenshots>
+    <releases>
+        <release version="0.8.6" date="2026-10-29" >
+            <description>
+            <ul>
+                <li>ADDED: Organizing instances</li>
+                <li>ADDED: Searching instances</li>
+                <li>ADDED: Updated Turkey, Belgium, Indonesia translation</li>
+            </ul>
+            </description>
+        </release>
+    </releases>
+    <update_contact>me@bluson.tech</update_contact>
+</component>

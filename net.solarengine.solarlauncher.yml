@@ -1,0 +1,74 @@
+app-id: net.solarengine.solarlauncher
+runtime: org.gnome.Platform
+runtime-version: "51"
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.node24
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: solarlauncher
+
+build-options:
+  no-debuginfo: true
+  append-path: /usr/lib/sdk/node24/bin:/usr/lib/sdk/rust-stable/bin
+
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --filesystem=home
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.Flatpak
+
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
+  - "*.a"
+  - "*.la"
+
+modules:
+  - name: solarlauncher
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+      env:
+        HOME: /run/build/solarlauncher
+        CARGO_HOME: /run/build/solarlauncher/src-tauri
+        CI: "true"
+        PATH: /run/build/solarlauncher/.local/bin:/usr/lib/sdk/node24/bin:/usr/lib/sdk/rust-stable/bin:/usr/bin:/bin
+    sources:
+      - type: dir
+        path: .
+      - type: file
+        path: net.solarengine.solarlauncher.metainfo.xml
+
+    build-commands:
+      - rm -rf node_modules src-tauri/target
+      - npm install -g pnpm@10 --prefix "$HOME/.local"
+      - pnpm install --frozen-lockfile
+      - pnpm exec tauri build -b deb
+
+      - mkdir -p deb-extract
+      - cd src-tauri/target/release/bundle/deb && ar x *.deb --output . && cd -
+      - tar -C deb-extract -xf src-tauri/target/release/bundle/deb/data.tar.*
+
+      - install -Dm755 deb-extract/usr/bin/solarlauncher /app/bin/solarlauncher
+
+      - sed -i 's/^Icon=.*/Icon=net.solarengine.solarlauncher/' deb-extract/usr/share/applications/solarlauncher.desktop
+      - sed -i 's/^Categories=.*/Categories=Utility;Development;/' deb-extract/usr/share/applications/solarlauncher.desktop
+      - install -Dm644 deb-extract/usr/share/applications/solarlauncher.desktop /app/share/applications/net.solarengine.solarlauncher.desktop
+
+      - |
+        for size in 32x32 128x128 128x128@2 256x256 512x512; do
+          src="deb-extract/usr/share/icons/hicolor/$size/apps/solarlauncher.png"
+          if [ -f "$src" ]; then
+            install -Dm644 "$src" "/app/share/icons/hicolor/$size/apps/net.solarengine.solarlauncher.png"
+          fi
+        done
+
+      - install -Dm644 flatpak/net.solarengine.solarlauncher.metainfo.xml /app/share/metainfo/net.solarengine.solarlauncher.metainfo.xml
