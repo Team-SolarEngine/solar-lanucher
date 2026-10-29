@@ -71,4 +71,4 @@ modules:
           fi
         done
 
-      - install -Dm644 flatpak/net.solarengine.solarlauncher.metainfo.xml /app/share/metainfo/net.solarengine.solarlauncher.metainfo.xml
+      - install -Dm644 net.solarengine.solarlauncher.metainfo.xml /app/share/metainfo/net.solarengine.solarlauncher.metainfo.xml

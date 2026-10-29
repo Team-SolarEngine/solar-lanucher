@@ -8,6 +8,8 @@ on:
       - 'static/**'
       - 'pnpm-lock.yaml'
       - 'package.json'
+      - 'net.solarengine.solarlauncher.*'
+      - '.github/workflows/build.yaml'
   workflow_dispatch:
 
 jobs:
