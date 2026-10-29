@@ -19,6 +19,7 @@
         onSelect: (index: number) => void;
     } = $props()
 
+    let filterSearch = $state("");
     let modalSettings = $state(false)
     let sidebarOpen = $state(true)
     const listsOfOptions = [
@@ -48,6 +49,14 @@
             apps = next;
         }
     }
+
+    let filteredItems = $derived(
+        apps
+            .map((app, originalIndex) => ({ app, originalIndex }))
+            .filter(({ app }) =>
+                app.name.toLowerCase().includes(filterSearch.trim().toLowerCase())
+            )
+    );
 
     $effect(() => {
         loadInstances();
@@ -94,9 +103,18 @@
         </div>
     </nav>
 
+    <div class="field label border">
+        <input type="text" bind:value={filterSearch}>
+        <label>Filter Instances</label>
+    </div>
+
     <div class="scroll" style="z-index: 0; height: 100%; transition: all 0.3s ease-in-out;" class:_sidebarElementClose={!sidebarOpen}>
-        {#if apps.length > 0}
-            {#each apps as app, i}
+        {#if apps.length === 0}
+            <span style="display: flex; align-items: center; justify-content: center; height: 100%;">{#await getWord("global.not_found") then word}{@html word.replace("{type}", "Instances")}{/await}</span>
+        {:else if filteredItems.length === 0}
+            <span style="display: flex; align-items: center; justify-content: center; height: 100%;">{#await getWord("global.not_found") then word}{@html word.replace("{type}", "Filtered search")}{/await}</span>
+        {:else}
+            {#each filteredItems as { app, originalIndex }, position (originalIndex)}
                 <CardApp
                     name={app.name}
                     iconUrl={app.icon_url}
@@ -104,17 +122,15 @@
                     workingDirectory={app.working_directory}
                     description={app.description}
                     isPreview={false}
-                    index={i}
-                    isLast={i === apps.length - 1 && apps.length > 1}
+                    index={originalIndex}
+                    isLast={position === filteredItems.length - 1 && filteredItems.length > 1}
                     onDeleted={onDelete}
                     bannerUrl={app.banner_url}
-                    onEdit={() => onEdit(i)}
-                    onSelect={onSelect}
+                    onEdit={() => onEdit(originalIndex)}
+                    onSelect={() => onSelect(originalIndex)}
                 />
             {/each}
-            <div style="min-height: 40px; width: 100%;"></div>
-        {:else}
-            <span style="display: flex; align-items: center; justify-content: center; height: 100%;">{#await getWord("sidebar.empty.no_instances") then word}{@html word}{/await}</span>
+            <div style="min-height: 120px; width: 100%;"></div>
         {/if}
     </div>
 
