@@ -121,5 +121,6 @@
     "notification.download.description.hard_coded": "",
     "notification.download.description.soft_coded": "",
     "settings.organize_instances.title": "",
-    "settings.organize_instances.description": ""
+    "settings.organize_instances.description": "",
+    "instance_filter.title": ""
 }

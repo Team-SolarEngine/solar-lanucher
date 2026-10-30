@@ -121,5 +121,6 @@
     "notification.download.description.hard_coded": "Kami selesai mengunduh!",
     "notification.download.description.soft_coded": "Kami selesai mengunduh! Kami hanya perlu Anda memasukkan file executable, dan Anda seharusnya sudah siap!",
     "settings.organize_instances.title": "Mengatur instansi",
-    "settings.organize_instances.description": "Atur instansi-instansi Anda! Mungkin Anda tidak menyukai instansi yang sekarang, jadi mengapa tidak mencoba yang baru?"
+    "settings.organize_instances.description": "Atur instansi-instansi Anda! Mungkin Anda tidak menyukai instansi yang sekarang, jadi mengapa tidak mencoba yang baru?",
+    "instance_filter.title": ""
 }

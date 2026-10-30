@@ -105,7 +105,7 @@
 
     <div class="field label border">
         <input type="text" bind:value={filterSearch}>
-        <label>Filter Instances</label>
+        <label>{#await getWord("instance_filter.title") then word}{@html word}{/await}</label>
     </div>
 
     <div class="scroll" style="z-index: 0; height: 100%; transition: all 0.3s ease-in-out;" class:_sidebarElementClose={!sidebarOpen}>
