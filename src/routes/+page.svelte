@@ -8,12 +8,14 @@
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { getWord } from "$lib/localization";
     import { loadSetting, saveSetting } from "$lib/settings";
+    import { setContext } from "svelte";
 
     import Sidebar from '../components/Sidebar.svelte';
     import PromptForNew from '../components/Popup/PromptForNew.svelte';
     import EditApp from '../components/Popup/EditApp.svelte';
     import MainContent from "../components/MainContent.svelte";
     import DragAndDrop from "../components/Misc/DragAndDrop.svelte";
+    import ErrorPopup from '../components/Popup/Error.svelte';
 
     import Local from "../components/Popup/AddNew/Local.svelte";
     import Download from "../components/Popup/AddNew/Download.svelte";
@@ -39,6 +41,18 @@
     let modalGameBanana = $state(false);
     let gameBananaModId = $state(0);
     let newAppPrefill = $state({});
+
+    let errorDat = $state({
+        open: false,
+        action: '',
+        supposed_to_happen: '',
+        why_it_failed: '',
+        logs: '',
+        extra_info: ''
+    });
+    setContext('errorReport', (errorData) => {
+        errorDat = errorData
+    })
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -204,6 +218,7 @@
 <EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadInstance} />
 <FirstTimePopup bind:modalForFirstTime />
 <DragAndDrop/>
+<ErrorPopup bind:errorDat/>
 
 <Local bind:modalNew onAppAdded={loadInstance} prefill={newAppPrefill}/>
 <Download bind:modalDownload onDownloaded={handleModDownloaded} />
