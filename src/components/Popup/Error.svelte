@@ -40,6 +40,15 @@ function pretendFail() {
         msg = msg + `\n\n## Extra Information\n${errorDat.extra_info}`
         await navigator.clipboard.writeText(msg);
     }
+
+    function close_popup() {
+        errorDat.open = false;
+        errorDat.action = "";
+        errorDat.supposed_to_happen= "";
+        errorDat.why_it_failed= "";
+        errorDat.logs = "";
+        errorDat.extra_info = "";
+    }
 </script>
 
 <div class="overlay" class:active={errorDat.open}></div>
@@ -60,12 +69,12 @@ function pretendFail() {
 
         <h5>Any extra info?</h5>
         <div class="field border">
-            <textarea bind:value={errorDat.extra_info} placeholder="I tried to ... but then ... and now ... and I want to fix this error!"></textarea>
+            <textarea bind:value={errorDat.extra_info} placeholder="I tried to ... but then ... and now ... and I want to fix this error!">{errorDat.extra_info}</textarea>
         </div>
     </article>
 
-    <div class="right-align no-space">
+    <div class="right-align no-space" style="margin-top: 8px;">
         <button onclick={template_err_msg}>Copy for Discord</button>
-        <button class="transparent">Continue on</button>
+        <button onclick={close_popup} class="transparent">Continue on</button>
     </div>
 </dialog>

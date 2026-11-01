@@ -5,8 +5,10 @@
     import { sendNotif } from "$lib/sys";
     import { getWord } from "$lib/localization";
     import { loadSetting } from "$lib/settings";
+    import { getContext } from 'svelte';
 
     let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
+    const callError = getContext('errorReport');
 
     let modalDownloading = $state(false);
     let pathToDownload = $state("");
@@ -140,9 +142,17 @@
                 workingDirectory: finalDownloadPath,
             });
         } catch (e) {
-            useComponentSnackbarError(`Failed to download mod: ${e}`);
             modalDownload = false;
             modalDownloading = false;
+
+            callError({
+                open: true,
+                action: 'Download engine',
+                supposed_to_happen: `Download ${passthrough[0].name.slice(0, -4)} and open AddNew.svelte`,
+                why_it_failed: 'Could be a UAC, permission, or network issue.',
+                logs: e,
+                extra_info: `...`
+            })
         }
     }
 
