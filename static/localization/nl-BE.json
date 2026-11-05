@@ -122,8 +122,8 @@
     "notification.download.description.soft_coded": "We zijn klaar met downloaden! Je hoeft nu alleen nog maar het uivoerbare bestand in te voeren, dan ben je helemaal klaar!",
     "settings.organize_instances.title": "Instanties Ordenen",
     "settings.organize_instances.description": "Breng orde in je instanties! Je houdt waarschijnlijk niet hoe het nu geordend is, waarom veranderen we het dan niet!?",
-    "notification.download.description.failed": "",
-    "sidebar.filter_instances": "",
-    "sidebar.disable_sounds.title": "",
-    "sidebar.disable_sounds.description": ""
+    "notification.download.description.failed": "Download mislukt! Probeer opnieuw, of zoek de fout uit...",
+    "sidebar.filter_instances": "Filter Instanties",
+    "sidebar.disable_sounds.title": "Geluiden uitzetten",
+    "sidebar.disable_sounds.description": "Zijn de geluiden vervelend or schriken je ze af? Zet dit aan!"
 }
