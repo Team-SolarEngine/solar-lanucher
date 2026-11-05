@@ -4,10 +4,10 @@
     import AdditionalRepos from "./Settings/AdditionalRepos.svelte";
     import LocalizationMenu from "./Settings/LocalizationMenu.svelte";
     import { getWord } from "$lib/localization";
-    import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { saveSetting, loadSetting } from "$lib/settings";
     import { openUrl } from "@tauri-apps/plugin-opener";
     import OrganizeInstances from "./Settings/OrganizeInstances.svelte";
+    import { getContext } from "svelte";
 
     let { modalSettings = $bindable() } = $props()
     let settings = $state({} as any)
@@ -16,6 +16,7 @@
     let toggleLocalizationMenu = $state(false);
     let modalForDoneSevenZip = $state(false);
     let toggleOrganizationMenu = $state(false);
+    const callError = getContext('errorReport');
 
     const settingFields = [
         { title: "settings.add_pet.title", key: "addPet", desc: "settings.add_pet.description", type: "toggle", default: false },
@@ -37,7 +38,14 @@
             modalForDoneSevenZip = true;
             setInterval(() => modalForDoneSevenZip = false, 5000)
         } catch(e) {
-            useComponentSnackbarError("Could not download 7zip: " + e)
+            callError({
+                open: true,
+                action: 'Download 7zip',
+                supposed_to_happen: `Download 7zip and move on`,
+                why_it_failed: 'Could be a UAC, I/O error, or network issue.',
+                logs: e,
+                extra_info: `...`
+            })
         }
     }
 
@@ -52,12 +60,6 @@
             }
         }
     })
-
-    let snackbar = $state<Snackbar>({
-        snackbarError: false,
-        snackbarTime: 0,
-        givenError: "",
-    }); function useComponentSnackbarError(message: string) { useSnackbarError(message, snackbar); }
 </script>
 
 <div class="overlay" class:active={modalSettings} onclick={() => modalSettings = false}></div>

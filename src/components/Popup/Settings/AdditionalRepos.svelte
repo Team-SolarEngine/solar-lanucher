@@ -3,6 +3,7 @@
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { getWord } from "$lib/localization";
     import { saveSetting } from "$lib/settings";
+    import { getContext } from "svelte";
 
     let { currentlyOpen = $bindable() } = $props();
 
@@ -12,6 +13,7 @@
         imageUrl: string;
     };
 
+    const callError = getContext('errorReport');
     let repos = $state<RepoEntry[]>([]);
     let newRepo = $state<RepoEntry>({ name: "", url: "", imageUrl: "" });
     let isAdding = $state(false);
@@ -36,8 +38,15 @@
          */
         try {
             await saveSetting("additionalRepos", repos)
-        } catch (error) {
-            useComponentSnackbarError("Failed to save repos: " + error);
+        } catch (e) {
+            callError({
+                open: true,
+                action: 'Add a additional repository',
+                supposed_to_happen: `Add ${newRepo.url} as a additional repository`,
+                why_it_failed: 'JSON write error, I/O error, permission error?',
+                logs: e,
+                extra_info: `...`
+            })
         }
     }
 

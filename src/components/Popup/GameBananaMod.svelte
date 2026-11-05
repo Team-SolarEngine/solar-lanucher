@@ -7,6 +7,7 @@
     import { getWord } from "$lib/localization";
     import { loadApps, type AppData } from "$lib/apps";
     import { loadSetting } from "$lib/settings";
+    import { getContext } from "svelte";
 
     let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
 
@@ -22,6 +23,7 @@
     let validForFNF = $state(false);
     let apps = $state<AppData[]>([]);
     let path = $state("");
+    const callError = getContext('errorReport');
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -80,7 +82,14 @@
                 size: formatBytes(file._nFilesize),
             }));
         } catch (e) {
-            useComponentSnackbarError(`Failed to fetch mod: ${e}`);
+            callError({
+                open: true,
+                action: 'Gamebanana Deeplink',
+                supposed_to_happen: `Open ${modId} from Deeplink`,
+                why_it_failed: 'No idea here...',
+                logs: e,
+                extra_info: `...`
+            })
         }
 
         loading = false;
@@ -182,9 +191,14 @@
                 workingDirectory: finalDownloadPath,
             });
         } catch (e) {
-            if (e == "Unzip failed: invalid Zip archive: Could not find EOCD")
-                e = "7z isn't installed, and this is not a zip archive. Install it at settings!";
-            useComponentSnackbarError(`Failed to download mod: ${e}`);
+            callError({
+                open: true,
+                action: 'Download GameBanana Mod',
+                supposed_to_happen: `Download ${modId} ${isModForEngine(downloadPath) ? "and move on." : "and open AddNew.svelte."}`,
+                why_it_failed: 'Could be a UAC, I/O error, or network issue.',
+                logs: e,
+                extra_info: `...`
+            })
             modalDownload = false;
         }
     }

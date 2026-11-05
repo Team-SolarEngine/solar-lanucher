@@ -149,7 +149,7 @@
                 open: true,
                 action: 'Download engine',
                 supposed_to_happen: `Download ${passthrough[0].name.slice(0, -4)} and open AddNew.svelte`,
-                why_it_failed: 'Could be a UAC, permission, or network issue.',
+                why_it_failed: 'Could be a UAC, I/O error, or network issue.',
                 logs: e,
                 extra_info: `...`
             })

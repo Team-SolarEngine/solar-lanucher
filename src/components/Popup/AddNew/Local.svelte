@@ -4,6 +4,7 @@
     import { useSnackbarError, type Snackbar, pickFile } from "$lib/interface";
     import { getWord } from "$lib/localization";
     import { getOS } from "$lib/sys";
+    import { getContext } from "svelte";
 
     let { modalNew = $bindable(), onAppAdded = () => {}, prefill = {} } = $props()
 
@@ -13,6 +14,7 @@
     let appWorkingDirectory = $state("")
     let appDescription = $state("")
     let bannerURL = $state("")
+    const callError = getContext('errorReport');
 
     let submitted = $state(false)
     let showExplorer = $state(false)
@@ -89,7 +91,14 @@
             }, 500);
             onAppAdded();
         } catch (e) {
-            useComponentSnackbarError(`Failed to add app: ${e}`);
+            callError({
+                open: true,
+                action: 'Adding a instance',
+                supposed_to_happen: `Add ${appName} instance`,
+                why_it_failed: 'JSON write error, I/O error, permission error?',
+                logs: e,
+                extra_info: `...`
+            })
         }
     }
 

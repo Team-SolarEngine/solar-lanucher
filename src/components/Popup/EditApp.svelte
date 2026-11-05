@@ -4,6 +4,7 @@
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { getWord } from "$lib/localization";
     import { getOS } from "$lib/sys";
+    import { getContext } from "svelte";
 
     let { modalEdit = $bindable(), editingApp = $bindable(), editIndex = -1, onAppEdited = () => {} } = $props()
 
@@ -17,6 +18,7 @@
     let submitted = $state(false)
     let showExplorer = $state(false)
     let folderContents: Array<{ path: string; is_folder: boolean }> = $state([])
+    const callError = getContext('errorReport');
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -74,7 +76,14 @@
             submitted = false;
             onAppEdited();
         } catch (e) {
-            useComponentSnackbarError(`Failed to update app: ${e}`);
+            callError({
+                open: true,
+                action: 'Edit a exsiting instance',
+                supposed_to_happen: `Edit ${appName}`,
+                why_it_failed: 'JSON write error, I/O error, permission error?',
+                logs: e,
+                extra_info: `...`
+            })
         }
     }
 
