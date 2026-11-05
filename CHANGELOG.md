@@ -7,6 +7,11 @@
 - Searching instances
 - Updated Turkey, Belgium, Indonesia translation
 - Better error system
+- Italian translation (by Sely)
+- Able to disable sounds from settings
+
+## Fixed
+- Erroring on Downloading shows you a notification
 
 ## 0.8.5
 
