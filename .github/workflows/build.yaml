@@ -48,10 +48,16 @@ jobs:
         with:
           targets: ${{ matrix.target }}
 
+      - name: Install dependencies (ubuntu)
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev libappindicator3-dev librsvg2-dev patchelf libssl-dev
+
       - name: Setup Flatpak - Linux
         if: matrix.platform == 'ubuntu-latest'
         run: |
-            sudo apt install flatpak flatpak-builder
+            sudo apt-get install -y flatpak flatpak-builder
             flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo --user
             flatpak install flathub \
               org.gnome.Platform//51 \
@@ -59,12 +65,6 @@ jobs:
               org.freedesktop.Sdk.Extension.node24//26.08 \
               org.freedesktop.Sdk.Extension.rust-stable//26.08 \
               --noninteractive --user
-
-      - name: Install dependencies - Linux
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev libappindicator3-dev librsvg2-dev patchelf libssl-dev
 
       - name: Rust cache
         uses: swatinem/rust-cache@v2
