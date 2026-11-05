@@ -123,5 +123,7 @@
     "settings.organize_instances.title": "",
     "settings.organize_instances.description": "",
     "notification.download.description.failed": "",
-    "sidebar.filter_instances": ""
+    "sidebar.filter_instances": "",
+    "sidebar.disable_sounds.title": "",
+    "sidebar.disable_sounds.description": ""
 }

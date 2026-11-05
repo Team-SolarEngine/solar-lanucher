@@ -123,5 +123,7 @@
     "settings.organize_instances.title": "Mengatur instances",
     "settings.organize_instances.description": "Mengatur instance sendiri! Awak tidak suka yang awak ada sekarang ini, jadi kenapa tidak mengatur?",
     "notification.download.description.failed": "",
-    "sidebar.filter_instances": ""
+    "sidebar.filter_instances": "",
+    "sidebar.disable_sounds.title": "",
+    "sidebar.disable_sounds.description": ""
 }

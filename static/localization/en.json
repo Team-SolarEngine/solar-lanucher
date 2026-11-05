@@ -123,5 +123,7 @@
     "settings.organize_instances.title": "Organize instances",
     "settings.organize_instances.description": "Organize your instances! You may don't like your current one, so why not change up?",
     "notification.download.description.failed": "Downloading has failed! Try again, or find out the error...",
-    "sidebar.filter_instances": "Filter Instances"
+    "sidebar.filter_instances": "Filter Instances",
+    "sidebar.disable_sounds.title": "Disable sounds",
+    "sidebar.disable_sounds.description": "Sounds too annoying or jumpscaring you? Enable this!"
 }

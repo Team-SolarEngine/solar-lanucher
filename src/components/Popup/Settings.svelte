@@ -27,9 +27,10 @@
         { title: "settings.additional_engine_repositories.title", key: "additionalRepos", desc: "settings.additional_engine_repositories.description", buttonText: "settings.global.manage", type: "menu", default: "", call: () => toggleAddRepos = true },
         { title: "settings.favourite_path.title", key: "favouritePath", desc: "settings.favourite_path.description", type: "text", default: "" },
         { title: "settings.code_editor.title", key: "codeEditor", desc: "settings.code_editor.description", type: "text", default: "" },
-        { title: "settings.localization.title", key: "currentLanguage", desc: "settings.localization.description", buttonText: "settings.global.manage", type: "menu", default: "en", call: () => toggleLocalizationMenu = true},
-        { title: "settings.download_7zip.title", key: "", desc: "settings.download_7zip.description", buttonText: "global.download", type: "menu", default: "en", call: () => download8Zip()},
-        { title: "settings.organize_instances.title", key: "", desc: "settings.organize_instances.description", buttonText: "settings.global.manage", type: "menu", default: "en", call: () => toggleOrganizationMenu = true},
+        { title: "settings.localization.title", key: "currentLanguage", desc: "settings.localization.description", buttonText: "settings.global.manage", type: "menu", default: "", call: () => toggleLocalizationMenu = true},
+        { title: "settings.download_7zip.title", key: "", desc: "settings.download_7zip.description", buttonText: "global.download", type: "menu", default: "", call: () => download8Zip()},
+        { title: "settings.organize_instances.title", key: "", desc: "settings.organize_instances.description", buttonText: "settings.global.manage", type: "menu", default: "", call: () => toggleOrganizationMenu = true},
+        { title: "sidebar.disable_sounds.title", key: "disableSounds", desc: "sidebar.disable_sounds.description", type: "toggle", default: false },
     ]
 
     async function download8Zip() {

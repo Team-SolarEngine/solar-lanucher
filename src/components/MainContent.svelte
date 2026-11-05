@@ -7,6 +7,7 @@
     import { fly } from "svelte/transition";
     import { cubicInOut } from "svelte/easing";
     import { getWord } from "$lib/localization";
+    import { loadSetting } from "$lib/settings";
 
     let {
         bannerUrl = "",
@@ -53,17 +54,19 @@
                 .filter(Boolean);
             splash = splashes[Math.floor(Math.random() * splashes.length)];
 
-            switch(splash) {
-                case "jarona!":
-                    setTimeout(() => {
-                        new Audio('/sounds/jarona.mp3').play().catch(console.error);
-                    }, 500);
-                    break;
-                case "ja-orange!":
-                    setTimeout(() => {
-                        new Audio('/sounds/ja-orange.mp3').play().catch(console.error);
-                    }, 500);
-                    break;
+            if (!await loadSetting("disableSounds") && !name) {
+                switch(splash) {
+                    case "jarona!":
+                        setTimeout(() => {
+                            new Audio('/sounds/jarona.mp3').play().catch(console.error);
+                        }, 500);
+                        break;
+                    case "ja-orange!":
+                        setTimeout(() => {
+                            new Audio('/sounds/ja-orange.mp3').play().catch(console.error);
+                        }, 500);
+                        break;
+                }
             }
         } catch (e) {
             splash = "Well, something went wrong I guess.";
