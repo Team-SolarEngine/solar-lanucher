@@ -122,5 +122,6 @@
     "notification.download.description.soft_coded": "",
     "settings.organize_instances.title": "",
     "settings.organize_instances.description": "",
-    "notification.download.description.failed": ""
+    "notification.download.description.failed": "",
+    "sidebar.filter_instances": ""
 }

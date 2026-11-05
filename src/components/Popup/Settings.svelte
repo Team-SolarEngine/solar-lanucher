@@ -136,8 +136,6 @@
 <LocalizationMenu bind:currentlyOpen={toggleLocalizationMenu} />
 <OrganizeInstances bind:currentlyOpen={toggleOrganizationMenu} />
 
-<div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
-
 <div class="snackbar primary" class:active={modalForDoneSevenZip}>
     7zip is now downloaded! You can now download files that are compressed with .rar, .7z, .zip, and etc!
 </div>
