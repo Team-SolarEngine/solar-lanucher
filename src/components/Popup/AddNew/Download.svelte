@@ -145,6 +145,11 @@
             modalDownload = false;
             modalDownloading = false;
 
+            await sendNotif(
+                await getWord("notification.download.title.engine"),
+                await getWord("notification.download.description.failed")
+            );
+
             callError({
                 open: true,
                 action: 'Download engine',

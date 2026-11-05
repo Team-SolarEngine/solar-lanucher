@@ -191,6 +191,11 @@
                 workingDirectory: finalDownloadPath,
             });
         } catch (e) {
+            await sendNotif(
+                await getWord("notification.download.title.gamebanana"),
+                await getWord("notification.download.description.failed")
+            );
+
             callError({
                 open: true,
                 action: 'Download GameBanana Mod',

@@ -121,5 +121,6 @@
     "notification.download.description.hard_coded": "İndirme tamamlandı!",
     "notification.download.description.soft_coded": "İndirme tamamlandı! Sadece çalıştırılabilir dosyayı girmeniz gerekiyor, ardından her şey hazır!",
     "settings.organize_instances.title": "Kurulumları düzenle",
-    "settings.organize_instances.description": "Kurulumlarınızı düzenleyin! Mevcut düzeninizi beğenmiyor olabilirsiniz, neden değiştirmeyesiniz?"
+    "settings.organize_instances.description": "Kurulumlarınızı düzenleyin! Mevcut düzeninizi beğenmiyor olabilirsiniz, neden değiştirmeyesiniz?",
+    "notification.download.description.failed": ""
 }

@@ -121,5 +121,6 @@
     "notification.download.description.hard_coded": "Abbiamo finito di scaricare!",
     "notification.download.description.soft_coded": "Abbiamo finito di scaricare! abbiamo solo bisogno che metti il file eseguibile, e dovresti essere fatto!",
     "settings.organize_instances.title": "Organizza Instanze",
-    "settings.organize_instances.description": "Organizza le tue instanze! Forse non ti piacerebbe quella tua corrente, quindi perche non cambiare?"
+    "settings.organize_instances.description": "Organizza le tue instanze! Forse non ti piacerebbe quella tua corrente, quindi perche non cambiare?",
+    "notification.download.description.failed": ""
 }
