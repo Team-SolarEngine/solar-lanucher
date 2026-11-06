@@ -1,8 +1,13 @@
 # Solar Launcher Changelog
 
+## 0.8.7 **[ IN DEVELOPMENT ]**
+
+### Fixed
+- Newly organized instance correctly opens the right main content.
+
 ## 0.8.6
 
-## Added
+### Added
 - Organizing instances
 - Searching instances
 - Updated Turkey, Belgium, Indonesia translation
@@ -10,25 +15,25 @@
 - Italian translation (by Sely)
 - Able to disable sounds from settings
 
-## Fixed
+### Fixed
 - Erroring on Downloading shows you a notification
 
 ## 0.8.5
 
-## Added
+### Added
 - Remade all splash text
 - Added a little secret to splash text
 - Made explorer better for new users!
 - Button to open documentation, or discord server
 
-## Fixed
+### Fixed
 - Broken rate-limited text
 - Unorganized settings menu
 - Splash text will now align properly
 
 ## 0.8.4
 
-## Fixed
+### Fixed
 - Fixed Belgium translation
 - Fixed `currentLanguage` set to `en` if not found.
 
