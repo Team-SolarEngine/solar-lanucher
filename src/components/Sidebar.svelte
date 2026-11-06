@@ -86,7 +86,7 @@
         </div>
     </nav>
 
-    <div class="field label border">
+    <div class="field label border" class:_filterInstnaceSidebarThingy={!sidebarOpen}>
         <input type="text" bind:value={filterSearch}>
         <label>{#await getWord("sidebar.filter_instances") then word}{@html word}{/await}</label>
     </div>
@@ -141,6 +141,11 @@
     ._sidebarElementClose {
         opacity: 0;
         transform: translateX(140%);
+    }
+
+    ._filterInstnaceSidebarThingy {
+        transition: opacity 0.2s linear;
+        opacity: 0;
     }
 
     ._show { transform: rotate(180deg) translateX(-90%) !important; }
