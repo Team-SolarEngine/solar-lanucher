@@ -122,8 +122,8 @@
     "notification.download.description.soft_coded": "Kami selesai mengunduh! Kami hanya perlu Anda memasukkan file executable, dan Anda seharusnya sudah siap!",
     "settings.organize_instances.title": "Mengatur instansi",
     "settings.organize_instances.description": "Atur instansi-instansi Anda! Mungkin Anda tidak menyukai instansi yang sekarang, jadi mengapa tidak mencoba yang baru?",
-    "notification.download.description.failed": "",
-    "sidebar.filter_instances": "",
-    "sidebar.disable_sounds.title": "",
-    "sidebar.disable_sounds.description": ""
+    "notification.download.description.failed": "Pengunduhan gagal! Coba lagi, atau cari tahu penyebab kesalahannya...",
+    "sidebar.filter_instances": "Instansi Filter",
+    "sidebar.disable_sounds.title": "Matikan suara",
+    "sidebar.disable_sounds.description": "Terasa terlalu mengganggu atau bikin kaget? Aktifkan ini!"
 }
