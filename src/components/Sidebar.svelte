@@ -39,17 +39,6 @@
         }
     }
 
-    async function loadInstances() {
-        /*
-         * This function fetches loadApps from Tauri.
-         * If next is identical to app, then don't do a change.
-         */
-        const next = await loadApps();
-        if (JSON.stringify(next) !== JSON.stringify(apps)) {
-            apps = next;
-        }
-    }
-
     let filteredItems = $derived(
         apps
             .map((app, originalIndex) => ({ app, originalIndex }))
@@ -57,12 +46,6 @@
                 app.name.toLowerCase().includes(filterSearch.trim().toLowerCase())
             )
     );
-
-    $effect(() => {
-        loadInstances();
-        const interval = setInterval(loadInstances, 1000);
-        return () => clearInterval(interval);
-    });
 </script>
 
 <article style="height: 100%; overflow-y: hidden; min-width: 25rem; max-width: 25rem; transition: all 0.3s ease-in-out; overflow-x: hidden;" class:_sidebarClose={!sidebarOpen}>

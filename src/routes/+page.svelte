@@ -107,18 +107,6 @@
         petIconUrl = data?.petIconUrl || "images/sussy.png";
     }
 
-    async function loadInstance() {
-        /*
-         * This function loads the list of apps from the backend.
-         * It stores them so the sidebar and main content can render them.
-         */
-        try {
-            apps = await loadApps();
-        } catch (e) {
-            useComponentSnackbarError(`Failed to load apps: ${e}`);
-        }
-    }
-
     function handleEdit(index: number) {
         /*
          * This function prepares the app to be edited.
@@ -153,8 +141,19 @@
       }
     }
 
+    async function loadInstances() {
+        /*
+         * This function fetches loadApps from Tauri.
+         * If next is identical to app, then don't do a change.
+         */
+        const next = await loadApps();
+        if (JSON.stringify(next) !== JSON.stringify(apps)) {
+            apps = next;
+        }
+    }
+
     onMount(() => {
-        loadInstance();
+        loadInstances();
         checkForJson();
 
         // listen for deep links while the app is running
@@ -182,11 +181,17 @@
             window.location.reload();
         }
     })
+
+    $effect(() => {
+        loadInstances();
+        const interval = setInterval(loadInstances, 1000);
+        return () => clearInterval(interval);
+    });
 </script>
 
 <main class="main">
     <div class="_sidebarSection">
-        <Sidebar {apps} onOpenAdd={() => promptForNew = true} onEdit={handleEdit} onDelete={loadInstance} onSelect={(i) => selectedIndex = i} />
+        <Sidebar {apps} onOpenAdd={() => promptForNew = true} onEdit={handleEdit} onDelete={loadInstances} onSelect={(i) => selectedIndex = i} />
     </div>
 
     <div class="_mainContent">
@@ -200,7 +205,7 @@
                 executeCommand={apps[selectedIndex].execute_command}
                 index={selectedIndex}
                 onEdit={handleEdit}
-                onDelete={loadInstance}
+                onDelete={loadInstances}
             />
         {:else}
             <MainContent />
@@ -215,12 +220,12 @@
 </main>
 
 <PromptForNew bind:promptForNew bind:modalNew bind:modalDownload />
-<EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadInstance} />
+<EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadInstances} />
 <FirstTimePopup bind:modalForFirstTime />
 <DragAndDrop/>
 <ErrorPopup bind:errorDat/>
 
-<Local bind:modalNew onAppAdded={loadInstance} prefill={newAppPrefill}/>
+<Local bind:modalNew onAppAdded={loadInstances} prefill={newAppPrefill}/>
 <Download bind:modalDownload onDownloaded={handleModDownloaded} />
 <GameBananaMod bind:modalGameBanana modId={gameBananaModId} onDownloaded={handleModDownloaded} />
 
