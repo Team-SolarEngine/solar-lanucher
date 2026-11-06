@@ -1,6 +1,6 @@
 # Solar Launcher Changelog
 
-## 0.8.6 [ IN DEVELOPMENT ]
+## 0.8.6
 
 ## Added
 - Organizing instances
