@@ -181,7 +181,7 @@ pub async fn run_command(command: String, _create_terminal_window: bool, working
                  * command executes on the real system with the user's shell
                  * and libraries (e.g. libvlc) instead of the sandbox.
                  */
-                let host_command = format!("\"cd '{working_dir}' && {command}\"");
+                let host_command = format!("cd '{working_dir}' && {command}");
                 let mut cmd = Command::new("flatpak-spawn");
                 cmd.args(["--host", "sh", "-c", &host_command]);
                 cmd.spawn()
