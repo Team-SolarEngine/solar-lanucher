@@ -152,6 +152,16 @@
         }
     }
 
+
+    async function playSound() {
+        if (!await loadSetting("disableSounds")) {
+            const sound = new Audio('/sounds/click.mp3');
+            sound.currentTime = 0;
+            sound.volume = 0.25;
+            sound.play().catch(() => {});
+        }
+    }
+
     onMount(() => {
         loadInstances();
         checkForJson();
@@ -171,6 +181,16 @@
         // so this is our workaround
         setInterval(loadSettings, 1000);
     });
+
+    onMount(() => {
+        window.addEventListener('click', playSound);
+        window.addEventListener('keydown', playSound);
+      
+        return () => {
+            window.removeEventListener('click', playSound);
+            window.removeEventListener('keydown', playSound);
+        };
+    })
 
     onMount(async() => {
         // check if the localization key is set to none
