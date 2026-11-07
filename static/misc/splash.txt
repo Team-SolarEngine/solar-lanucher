@@ -23,3 +23,4 @@ why does water taste weird on other places except my house?
 hyperfocused
 4 little ducks went out one day, over the hill and far away
 ja-orange!
+Null object reference
