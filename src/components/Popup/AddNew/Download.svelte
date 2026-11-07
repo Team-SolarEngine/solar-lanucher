@@ -137,11 +137,10 @@
 
             localInstance({
                 open: true,
-                name: `${passthrough[0].name.slice(0, -4)} - ${passthrough[0].tag}`,
-                iconUrl: passthrough[0].iconUrl,
-                bannerUrl: "",
-                description: passthrough[0].description,
-                workingDirectory: finalDownloadPath,
+                appName: `${passthrough[0].name.slice(0, -4)} - ${passthrough[0].tag}`,
+                appIconURL: passthrough[0].iconUrl,
+                appDescription: passthrough[0].description,
+                appWorkingDirectory: finalDownloadPath,
                 editing: false,
             });
         } catch (e) {

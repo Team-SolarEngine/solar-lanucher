@@ -184,11 +184,11 @@
             if (isModForEngine(downloadPath)) return;
             localInstance({
                 open: true,
-                name,
-                iconUrl: bannerUrl,
-                bannerUrl,
-                description,
-                workingDirectory: finalDownloadPath,
+                appName: name,
+                appIconURL: bannerUrl,
+                bannerURL: bannerUrl,
+                appDescription: description,
+                appWorkingDirectory: finalDownloadPath,
                 editing: false,
             });
         } catch (e) {
