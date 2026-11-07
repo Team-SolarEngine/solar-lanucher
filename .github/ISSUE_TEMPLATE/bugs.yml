@@ -2,6 +2,8 @@ name: Bug report
 title: "[BUG]: "
 description: Report bugs with the launcher here
 labels: [bug]
+projects:
+  - "@daveberrys's Launcher TODO"
 body:
   - type: checkboxes
     id: checkotherissues

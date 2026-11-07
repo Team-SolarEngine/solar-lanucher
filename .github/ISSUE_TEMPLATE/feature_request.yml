@@ -2,6 +2,8 @@ name: Feature Request
 title: "[FEATURE REQUEST]: "
 description: Request a feature for the launcher here
 labels: [enhancement]
+projects:
+  - "@daveberrys's Launcher TODO"
 body:
   - type: checkboxes
     id: checkotherissues
