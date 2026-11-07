@@ -2,15 +2,23 @@
 
 ## 0.8.7 **[ IN DEVELOPMENT ]**
 
+### Added
+- Sounds for clicking and using keyboard.
+- Drag and drop opens a new instnace
+- Updated Indonesia translation (Thanks; MTGM!)
+
 ### Fixed
 - Newly organized instance correctly opens the right main content.
+
+### Misc
+- Most components now use `getContext` and `setContext` for contributors.
 
 ## 0.8.6
 
 ### Added
 - Organizing instances
 - Searching instances
-- Updated Turkey, Belgium, Indonesia translation
+- Updated Turkey, Belgium, Indonesia translation (Thanks; BaranMuzu, VideoBot, MTGM!)
 - Better error system
 - Italian translation (by Sely)
 - Able to disable sounds from settings
