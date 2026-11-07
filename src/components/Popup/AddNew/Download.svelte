@@ -54,7 +54,7 @@
         /*
          * This function fetches the latest releases of every known engine
          * from GitHub and stores them so the list can be rendered.
-         * 
+         *
          * Additionally, if you have additional repositories configured,
          * they will be added to the list. They are re-loaded every time
          * this function runs, so new repos show up without a restart.
@@ -107,7 +107,7 @@
          * This function handles downloading a file from a given URL and saving it to the specified path.
          * If pathToDownload is not set, it displays an error message and returns early.
          * Otherwise, it hides the modal, sets the downloading state, and invokes the download_to_custom_dir backend function to save the file.
-         * 
+         *
          * Arguments:
          *     url: string -> the URL of the file to download
          *     passthrough: Array<{
@@ -165,14 +165,14 @@
     }
 
     function formatDate() {
-        /* 
+        /*
          * This function formats the date and time using your
          * local time zone. This is needed in case of a accidental
          * folder confliction when the mods have same names.
-         * 
+         *
          * Return:
          *    String -> The formatted date. eg; 2026-08-16_07-49-00
-         * 
+         *
          */
 
         const now = new Date();
@@ -182,7 +182,7 @@
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
-        
+
         return `${year}-${month}-${day}_${hours}-${minutes}-${seconds}`;
     }
 
@@ -219,6 +219,7 @@
             will be removed in a future commit and use $effect() instead.
         -->
         <button onclick={async () => pathToDownload = path} style="margin-top: 4px;">
+            <i>content_copy</i>
             {#await getWord("global.use_favourite_path") then word}{@html word}{/await}
         </button>
     </div>

@@ -1,17 +1,20 @@
 <script lang="ts">
     import { getCurrentWebview } from "@tauri-apps/api/webview";
-    import { onMount } from "svelte";
+    import { getContext, onMount } from "svelte";
     import CardApp from "../CardApp.svelte";
     import { pickFile } from "$lib/interface";
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { getWord } from "$lib/localization";
     import { loadApps, type AppData } from "$lib/apps";
+    import { loadSetting } from "$lib/settings";
 
     let hoveringDrag = $state(false);
     let pathToCopy = $state();
     let pathToPaste = $state();
+    let favouritePath = $state();
     let openDialogForInstances = $state(false);
+    const localInstance: any = getContext("localInstance")
 
     let apps = $state<AppData[]>([]);
 
@@ -31,7 +34,7 @@
         }
     }
 
-    async function copyFolderToDest() {
+    async function copyFolderToDest(hardCoded: boolean = false,) {
         /*
          * This function calls the backend code to paste the
          * directory to be copied and to the destination to paste.
@@ -41,6 +44,16 @@
         try {
             await invoke("paste_to_dir", { toCopy: pathToCopy, destToPaste: pathToPaste })
             openDialogForInstances = false;
+            const lastSlash = pathToCopy.lastIndexOf("/");
+            const filePath = pathToCopy.slice(lastSlash + 1);
+
+            if (hardCoded) {
+                localInstance({
+                    open: true,
+                    appWorkingDirectory: `${pathToPaste}/${filePath}`,
+                })
+            }
+
             pathToCopy = "";
             pathToPaste = "";
         } catch (e) {
@@ -80,6 +93,12 @@
             unlisten();
         };
     })
+
+    $effect(() => {
+        const loadedFavouritePath = async () => {
+            favouritePath = await loadSetting("favouritePath") as any;
+        }; loadedFavouritePath();
+    })
 </script>
 
 <div class="_overlay" class:active={hoveringDrag}>
@@ -105,10 +124,17 @@
         <label>{#await getWord("drag_and_drop.path_to_paste.field.title") then word}{@html word}{/await}</label>
     </div>
 
-    <button style="margin-top: 8px;" onclick={() => copyFolderToDest()}>
-        <i>check</i>
-        {#await getWord("global.confirm") then word}{@html word}{/await}
-    </button>
+    <div class="no-space">
+        <button style="margin-top: 8px;" onclick={() => copyFolderToDest(true)}>
+            <i>check</i>
+            {#await getWord("global.confirm") then word}{@html word}{/await}
+        </button>
+
+        <button class="transparent" onclick={async () => pathToPaste = favouritePath} style="margin-top: 4px;">
+            <i>content_copy</i>
+            {#await getWord("global.use_favourite_path") then word}{@html word}{/await}
+        </button>
+    </div>
 
     <hr class="medium"/>
 
