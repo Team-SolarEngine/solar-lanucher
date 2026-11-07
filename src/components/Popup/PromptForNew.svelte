@@ -1,10 +1,11 @@
 <script lang="ts">
     import { openUrl } from "@tauri-apps/plugin-opener";
     import { getWord } from "$lib/localization";
+    import { getContext } from "svelte";
 
-    export let promptForNew: boolean;
-    export let modalNew: boolean;
-    export let modalDownload: boolean;
+    let { promptForNew = $bindable() } = $props()
+    const downloadEngine: any = getContext("downloadEngine");
+    const localInstance: any = getContext("localInstance");
 
     const options = [
       { word: "prompt_for_new.button.local", icon: "desktop_windows", type: "local", primary: true },
@@ -23,9 +24,9 @@
         promptForNew = false;
 
         if (type === "local") {
-            modalNew = true;
+            localInstance({open: true})
         } else if (type === "download") {
-            modalDownload = true;
+            downloadEngine({open: true})
         } else if (type.includes("https://")) {
             openUrl(type);
         }

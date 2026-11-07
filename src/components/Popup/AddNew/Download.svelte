@@ -7,8 +7,9 @@
     import { loadSetting } from "$lib/settings";
     import { getContext } from 'svelte';
 
-    let { modalDownload = $bindable(), onDownloaded = () => {} } = $props();
-    const callError = getContext('errorReport');
+    let { downloadEngineDat = $bindable() } = $props();
+    const callError: any = getContext('errorReport');
+    const localInstance: any = getContext("localInstance");
 
     let modalDownloading = $state(false);
     let pathToDownload = $state("");
@@ -118,7 +119,7 @@
 
         if (!pathToDownload) return useComponentSnackbarError("Missing input for download path.");
 
-        modalDownload = false;
+        downloadEngineDat.open = false;
         modalDownloading = true;
         const finalDownloadPath = `${pathToDownload}/${passthrough[0].name.slice(0, -4)}-${formatDate()}_${passthrough[0].tag}`;
         /* should be just like; /home/daveberrys/FNF/Codename.Engine-linux.zip-2026-08-16_07-49-00_1.1.0-rc1
@@ -134,15 +135,17 @@
                 await getWord("notification.download.description.hard_coded")
             );
 
-            onDownloaded({
+            localInstance({
+                open: true,
                 name: `${passthrough[0].name.slice(0, -4)} - ${passthrough[0].tag}`,
                 iconUrl: passthrough[0].iconUrl,
                 bannerUrl: "",
                 description: passthrough[0].description,
                 workingDirectory: finalDownloadPath,
+                editing: false,
             });
         } catch (e) {
-            modalDownload = false;
+            downloadEngineDat.open = false;
             modalDownloading = false;
 
             await sendNotif(
@@ -184,7 +187,7 @@
     }
 
     $effect(() => {
-        if (modalDownload) getAllEngines();
+        if (downloadEngineDat.open) getAllEngines();
 
         // only loads ONCE. if we added interval, it would repeatedly be loaded
         // which if the user wants to change the path, it would get overrided.
@@ -194,8 +197,8 @@
     });
 </script>
 
-<div class="overlay" class:active={modalDownload} onclick={() => modalDownload = false}></div>
-<dialog class="right" class:active={modalDownload}>
+<div class="overlay" class:active={downloadEngineDat.open} onclick={() => downloadEngineDat.open = false}></div>
+<dialog class="right" class:active={downloadEngineDat.open}>
     <h5>{#await getWord("download.title") then word}{@html word}{/await}</h5>
     <div>{#await getWord("download.description") then word}{@html word}{/await}</div>
 

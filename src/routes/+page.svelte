@@ -12,7 +12,6 @@
 
     import Sidebar from '../components/Sidebar.svelte';
     import PromptForNew from '../components/Popup/PromptForNew.svelte';
-    import EditApp from '../components/Popup/EditApp.svelte';
     import MainContent from "../components/MainContent.svelte";
     import DragAndDrop from "../components/Misc/DragAndDrop.svelte";
     import ErrorPopup from '../components/Popup/Error.svelte';
@@ -50,9 +49,25 @@
         logs: '',
         extra_info: ''
     });
-    setContext('errorReport', (errorData) => {
-        errorDat = errorData
-    })
+    setContext('errorReport', (dat: any) => { errorDat = dat })
+
+    let localInstanceDat = $state({
+        open: false,
+        appName: '',
+        appIconURL: '',
+        appPath: '',
+        appWorkingDirectory: '',
+        appDescription: '',
+        bannerURL: '',
+        editing: false,
+        editIndex: 0,
+    });
+    setContext('localInstance', (dat: any) => { localInstanceDat = dat })
+
+    let downloadEngineDat = $state({
+        open: false,
+    });
+    setContext('downloadEngine', (dat: any) => { downloadEngineDat = dat })
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -62,18 +77,6 @@
 
     function useComponentSnackbarError(message: string) {
         useSnackbarError(message, snackbar);
-    }
-
-    function handleModDownloaded(mod: any) {
-        /*
-         * This function opens the AddNew popup pre-filled with
-         * the downloaded mod's info so the user can finish adding it.
-         *
-         * Arguments:
-         *    mod: object -> the name, icon, banner, description and path
-         */
-        newAppPrefill = mod;
-        modalNew = true;
     }
 
     async function handleDeepLink(url: string) {
@@ -239,15 +242,14 @@
     {/if}
 </main>
 
-<PromptForNew bind:promptForNew bind:modalNew bind:modalDownload />
-<EditApp bind:modalEdit bind:editingApp {editIndex} onAppEdited={loadInstances} />
+<PromptForNew bind:promptForNew />
 <FirstTimePopup bind:modalForFirstTime />
 <DragAndDrop/>
 <ErrorPopup bind:errorDat/>
 
-<Local bind:modalNew onAppAdded={loadInstances} prefill={newAppPrefill}/>
-<Download bind:modalDownload onDownloaded={handleModDownloaded} />
-<GameBananaMod bind:modalGameBanana modId={gameBananaModId} onDownloaded={handleModDownloaded} />
+<Local onAppAdded={loadInstances} bind:localInstanceDat/>
+<Download bind:downloadEngineDat />
+<GameBananaMod bind:modalGameBanana modId={gameBananaModId} />
 
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
 

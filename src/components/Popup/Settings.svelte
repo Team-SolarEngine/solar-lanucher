@@ -16,7 +16,7 @@
     let toggleLocalizationMenu = $state(false);
     let modalForDoneSevenZip = $state(false);
     let toggleOrganizationMenu = $state(false);
-    const callError = getContext('errorReport');
+    const callError: any = getContext('errorReport');
 
     const settingFields = [
         { title: "settings.add_pet.title", key: "addPet", desc: "settings.add_pet.description", type: "toggle", default: false },

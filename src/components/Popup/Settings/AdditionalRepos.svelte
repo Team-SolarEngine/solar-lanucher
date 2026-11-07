@@ -13,7 +13,7 @@
         imageUrl: string;
     };
 
-    const callError = getContext('errorReport');
+    const callError: any = getContext('errorReport');
     let repos = $state<RepoEntry[]>([]);
     let newRepo = $state<RepoEntry>({ name: "", url: "", imageUrl: "" });
     let isAdding = $state(false);

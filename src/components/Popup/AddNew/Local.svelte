@@ -6,7 +6,10 @@
     import { getOS } from "$lib/sys";
     import { getContext } from "svelte";
 
-    let { modalNew = $bindable(), onAppAdded = () => {}, prefill = {} } = $props()
+    let {
+        onAppAdded = () => {},
+        localInstanceDat = $bindable(),
+    } = $props()
 
     let appName = $state("")
     let appIconURL = $state("")
@@ -14,7 +17,7 @@
     let appWorkingDirectory = $state("")
     let appDescription = $state("")
     let bannerURL = $state("")
-    const callError = getContext('errorReport');
+    const callError: any = getContext('errorReport');
 
     let submitted = $state(false)
     let showExplorer = $state(false)
@@ -30,13 +33,13 @@
     }
 
     $effect(() => {
-        if (modalNew && prefill && Object.keys(prefill).length > 0) {
-            appName = prefill.name ?? "";
-            appIconURL = prefill.iconUrl ?? "";
-            appPath = prefill.executeCommand ?? "";
-            appWorkingDirectory = prefill.workingDirectory ?? "";
-            appDescription = prefill.description ?? "";
-            bannerURL = prefill.bannerUrl ?? "";
+        if (localInstanceDat.open && localInstanceDat) {
+            appName = localInstanceDat.name ?? "";
+            appIconURL = localInstanceDat.iconUrl ?? "";
+            appPath = localInstanceDat.executeCommand ?? "";
+            appWorkingDirectory = localInstanceDat.workingDirectory ?? "";
+            appDescription = localInstanceDat.description ?? "";
+            bannerURL = localInstanceDat.bannerUrl ?? "";
         }
     })
 
@@ -44,7 +47,7 @@
         /*
          * This function closes the popup and clears all the form fields.
          */
-        modalNew = false;
+        localInstanceDat.open = false;
         submitted = false;
         showExplorer = false;
         setTimeout(() => {
@@ -67,18 +70,33 @@
         if (!appName || !appPath || !appWorkingDirectory) return useComponentSnackbarError(`Please fill in all fields.`);
 
         try {
-            await invoke("add_key", {
-                collection: "apps",
-                value: {
-                    name: appName,
-                    icon_url: appIconURL,
-                    execute_command: appPath.replace("C:\\fakepath\\", "./"),
-                    working_directory: appWorkingDirectory,
-                    description: appDescription,
-                    banner_url: bannerURL,
-                }
-            });
-            modalNew = false;
+            if (localInstanceDat.editing) {
+                await invoke("update_key", {
+                    collection: "apps",
+                    key:localInstanceDat.editIndex,
+                    value: {
+                        name: appName,
+                        icon_url: appIconURL,
+                        execute_command: appPath,
+                        description: appDescription,
+                        banner_url: bannerURL,
+                        working_directory: appWorkingDirectory,
+                    }
+                });
+            } else {
+                await invoke("add_key", {
+                    collection: "apps",
+                    value: {
+                        name: appName,
+                        icon_url: appIconURL,
+                        execute_command: appPath.replace("C:\\fakepath\\", "./"),
+                        working_directory: appWorkingDirectory,
+                        description: appDescription,
+                        banner_url: bannerURL,
+                    }
+                });
+            }
+            localInstanceDat.open = false;
             submitted = false;
             showExplorer = false;
             setTimeout(() => {
@@ -160,10 +178,14 @@
     }
 </script>
 
-<div class="overlay" class:active={modalNew} onclick={close}></div>
-<dialog class="right" class:active={modalNew}>
-  <h5>{#await getWord("local.title") then word}{@html word}{/await}</h5>
-  <span>{#await getWord("local.description") then word}{@html word}{/await}</span>
+<div class="overlay" class:active={localInstanceDat.open} onclick={close}></div>
+<dialog class="right" class:active={localInstanceDat.open}>
+    {#if localInstanceDat.editing}
+        <h5>{#await getWord("local.title") then word}{@html word}{/await}</h5>
+        <span>{#await getWord("local.description") then word}{@html word}{/await}</span>
+    {:else}
+        <h5>{#await getWord("edit.title") then word}{word.replace("{instance}", appName)}{/await}</h5>
+    {/if}
 
   <div class="field label border" class:invalid={submitted && !appName}>
     <input type="text" bind:value={appName}>

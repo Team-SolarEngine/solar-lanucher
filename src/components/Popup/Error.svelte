@@ -4,7 +4,7 @@ thought I'd make a simple code on how to call this popup
 ```
 import { getContext } = 'svelte';
 
-const callError = getContext('errorReport');
+const callError: any = getContext('errorReport');
 
 function pretendFail() {
     try {

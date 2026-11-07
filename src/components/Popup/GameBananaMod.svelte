@@ -9,13 +9,12 @@
     import { loadSetting } from "$lib/settings";
     import { getContext } from "svelte";
 
-    let { modalGameBanana = $bindable(), modId = 0, onDownloaded = () => {} } = $props();
+    let { modalGameBanana = $bindable(), modId = 0 } = $props();
 
     let name = $state("");
     let sanitzedName = $state("");
     let description = $state("");
     let bannerUrl = $state("");
-    let images = $state<string[]>([]);
     let downloads = $state<Array<{ name: string; url: string; size: string }>>([]);
     let loading = $state(false);
     let downloadPath = $state("");
@@ -23,7 +22,9 @@
     let validForFNF = $state(false);
     let apps = $state<AppData[]>([]);
     let path = $state("");
-    const callError = getContext('errorReport');
+
+    const callError: any = getContext('errorReport');
+    const localInstance: any = getContext('localInstance');
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -58,7 +59,6 @@
         name = "";
         description = "";
         bannerUrl = "";
-        images = [];
         downloads = [];
 
         try {
@@ -74,7 +74,6 @@
                 .map((img: any) => img._sBaseUrl + "/" + img._sFile)
                 .filter(Boolean);
             bannerUrl = urls[0] || "";
-            images = urls.slice(1);
 
             downloads = (mod._aFiles || []).map((file: any) => ({
                 name: file._sFile,
@@ -183,12 +182,14 @@
             // if the path is a mods/addons folder, it's a mod for an engine,
             // not a standalone instance, so skip the AddNew dialog
             if (isModForEngine(downloadPath)) return;
-            onDownloaded({
+            localInstance({
+                open: true,
                 name,
                 iconUrl: bannerUrl,
                 bannerUrl,
                 description,
                 workingDirectory: finalDownloadPath,
+                editing: false,
             });
         } catch (e) {
             await sendNotif(
