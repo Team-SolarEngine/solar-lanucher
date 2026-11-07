@@ -8,6 +8,7 @@
     import { cubicInOut } from "svelte/easing";
     import { getWord } from "$lib/localization";
     import { loadSetting } from "$lib/settings";
+    import { getContext } from "svelte";
 
     let {
         bannerUrl = "",
@@ -17,7 +18,6 @@
         executeCommand = "",
         workingDirectory = "",
         index = -1,
-        onEdit = () => {},
         onDelete = () => {},
     } = $props();
 
@@ -28,6 +28,7 @@
 
     let splash = $state("");
     let solarLauncherTitle = $state("Solar Launcher")
+    const localInstance: any = getContext("localInstance")
 
     const flyIn = { y: -20, duration: 300, easing: cubicInOut };
     const flyOut = { y: 20, duration: 300, easing: cubicInOut };
@@ -78,6 +79,20 @@
         return str.length > maxLength ? str.slice(0, maxLength).trimEnd() + '...' : str;
     }
 
+    function callEdit() {
+        localInstance({
+            open: true,
+            bannerURL: bannerUrl,
+            appIconURL: logoUrl,
+            appDescription: description,
+            appName: name,
+            appPath: executeCommand,
+            appWorkingDirectory: workingDirectory,
+            editing: true,
+            editIndex: index,
+        })
+    }
+
     $effect(() => {
         loadMarkdowns();
         getSplashes();
@@ -122,7 +137,7 @@ okay real shit talk;
                     executeCommand={executeCommand}
                     stretch={true}
                     index={index}
-                    onEdit={onEdit}
+                    onEdit={callEdit}
                     onDeleted={onDelete}
                 />
             </div>

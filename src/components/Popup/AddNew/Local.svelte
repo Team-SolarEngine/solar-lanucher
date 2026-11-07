@@ -34,12 +34,12 @@
 
     $effect(() => {
         if (localInstanceDat.open && localInstanceDat) {
-            appName = localInstanceDat.name ?? "";
-            appIconURL = localInstanceDat.iconUrl ?? "";
-            appPath = localInstanceDat.executeCommand ?? "";
-            appWorkingDirectory = localInstanceDat.workingDirectory ?? "";
-            appDescription = localInstanceDat.description ?? "";
-            bannerURL = localInstanceDat.bannerUrl ?? "";
+            appName = localInstanceDat.appName ?? "";
+            appIconURL = localInstanceDat.appIconURL ?? "";
+            appPath = localInstanceDat.appPath ?? "";
+            appWorkingDirectory = localInstanceDat.appWorkingDirectory ?? "";
+            appDescription = localInstanceDat.appDescription ?? "";
+            bannerURL = localInstanceDat.bannerURL ?? "";
         }
     })
 
@@ -180,7 +180,7 @@
 
 <div class="overlay" class:active={localInstanceDat.open} onclick={close}></div>
 <dialog class="right" class:active={localInstanceDat.open}>
-    {#if localInstanceDat.editing}
+    {#if !localInstanceDat.editing}
         <h5>{#await getWord("local.title") then word}{@html word}{/await}</h5>
         <span>{#await getWord("local.description") then word}{@html word}{/await}</span>
     {:else}

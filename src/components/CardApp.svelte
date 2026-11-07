@@ -2,6 +2,7 @@
     import StartExtra from "./StartExtra.svelte";
     import { imageSrc } from "$lib/sys";
     import { loadSetting } from "$lib/settings";
+    import { getContext } from "svelte";
 
     let compactMode = $state(false)
 
@@ -16,10 +17,10 @@
       index = -1,
       isLast = false,
       onDeleted = () => {},
-      onEdit = () => {},
       onSelect = () => {},
       firstTimePopup = false,
     } = $props()
+    const localInstance: any = getContext("localInstance")
 
     function truncateString(str: string) {
         const maxLength = 250;
@@ -36,6 +37,20 @@
         const interval = setInterval(refreshCompactMode, 1000);
         return () => clearInterval(interval);
     })
+
+    function callEdit() {
+        localInstance({
+            open: true,
+            bannerURL: bannerUrl,
+            appIconURL: iconUrl,
+            appDescription: description,
+            appName: name,
+            appPath: executeCommand,
+            appWorkingDirectory: workingDirectory,
+            editing: true,
+            editIndex: index,
+        })
+    }
 </script>
 
 <article style="height: fit-content; cursor: pointer;" onclick={() => onSelect(index)}>
@@ -53,7 +68,7 @@
                 executeCommand={executeCommand}
                 workingDirectory={workingDirectory}
                 onDeleted={onDeleted}
-                onEdit={onEdit}
+                onEdit={callEdit}
                 index={index}
                 isLast={isLast}
                 firstTimePopup={firstTimePopup}

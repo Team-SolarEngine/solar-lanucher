@@ -227,7 +227,6 @@
                 workingDirectory={apps[selectedIndex].working_directory}
                 executeCommand={apps[selectedIndex].execute_command}
                 index={selectedIndex}
-                onEdit={handleEdit}
                 onDelete={loadInstances}
             />
         {:else}

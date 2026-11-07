@@ -4,8 +4,8 @@
     import { getWord } from "$lib/localization";
 
     let {
-        executeCommand,
-        workingDirectory,
+        executeCommand = "",
+        workingDirectory = "",
         onDeleted = () => {},
         onEdit = () => {},
         index = -1,
