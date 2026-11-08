@@ -209,7 +209,8 @@ pub async fn run_command(command: String, _create_terminal_window: bool, working
     }
 }
 
-fn is_running_in_flatpak() -> bool {
+#[tauri::command]
+pub fn is_running_in_flatpak() -> bool {
     /*
      * Returns true when the app is running inside a Flatpak sandbox.
      * The /.flatpak-info file only exists inside the sandbox.
