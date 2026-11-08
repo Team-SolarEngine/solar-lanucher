@@ -9,6 +9,7 @@
 
 ### Fixed
 - Newly organized instance correctly opens the right main content.
+- Flatpak's file system not working correctly
 
 ### Misc
 - Most components now use `getContext` and `setContext` for contributors.
