@@ -1,6 +1,6 @@
 # Solar Launcher Changelog
 
-## 0.8.7 **[ IN DEVELOPMENT ]**
+## 0.8.7
 
 ### Added
 - Sounds for clicking and using keyboard.
