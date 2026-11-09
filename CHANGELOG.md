@@ -6,6 +6,7 @@
 - Sounds for clicking and using keyboard.
 - Drag and drop opens a new instnace
 - Updated Indonesia translation (Thanks; MTGM!)
+- Done and fail chime for downloading
 
 ### Fixed
 - Newly organized instance correctly opens the right main content.
