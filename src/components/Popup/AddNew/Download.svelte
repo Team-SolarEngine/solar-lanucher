@@ -6,6 +6,7 @@
     import { getWord } from "$lib/localization";
     import { loadSetting } from "$lib/settings";
     import { getContext } from 'svelte';
+    import { playSound } from "$lib/sounds";
 
     let { downloadEngineDat = $bindable() } = $props();
     const callError: any = getContext('errorReport');
@@ -130,6 +131,8 @@
         try {
             await invoke<string>("download_to_custom_dir", { url, filePath: finalDownloadPath, fileName: `${passthrough[0].name.slice(0, -4)}-${formatDate()}_${passthrough[0].tag}` });
             modalDownloading = false;
+
+            await playSound("done_chime.mp3")
             await sendNotif(
                 await getWord("notification.download.title.engine"),
                 await getWord("notification.download.description.hard_coded")
@@ -147,6 +150,7 @@
             downloadEngineDat.open = false;
             modalDownloading = false;
 
+            await playSound("fail_chime.mp3")
             await sendNotif(
                 await getWord("notification.download.title.engine"),
                 await getWord("notification.download.description.failed")

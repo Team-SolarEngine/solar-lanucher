@@ -21,6 +21,7 @@
     import GameBananaMod from "../components/Popup/GameBananaMod.svelte";
     import FirstTimePopup from "../components/Popup/FirstTimePopup.svelte";
     import { loadApps, type AppData } from "$lib/apps";
+    import { playSound } from "$lib/sounds";
 
     let apps = $state<AppData[]>([]);
 
@@ -155,16 +156,6 @@
         }
     }
 
-
-    async function playSound() {
-        if (!await loadSetting("disableSounds")) {
-            const sound = new Audio('/sounds/click.mp3');
-            sound.currentTime = 0;
-            sound.volume = 0.25;
-            sound.play().catch(() => {});
-        }
-    }
-
     onMount(() => {
         loadInstances();
         checkForJson();
@@ -186,12 +177,13 @@
     });
 
     onMount(() => {
-        window.addEventListener('click', playSound);
-        window.addEventListener('keydown', playSound);
+        async function sound() { await playSound("click.mp3") }
+        window.addEventListener('click', sound);
+        window.addEventListener('keydown', sound);
       
         return () => {
-            window.removeEventListener('click', playSound);
-            window.removeEventListener('keydown', playSound);
+            window.removeEventListener('click', sound);
+            window.removeEventListener('keydown', sound);
         };
     })
 

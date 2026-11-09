@@ -8,6 +8,7 @@
     import { loadApps, type AppData } from "$lib/apps";
     import { loadSetting } from "$lib/settings";
     import { getContext } from "svelte";
+    import { playSound } from "$lib/sounds";
 
     let { modalGameBanana = $bindable(), modId = 0 } = $props();
 
@@ -167,6 +168,7 @@
             await invoke("download_to_custom_dir", { url, filePath: finalDownloadPath, fileName: sanitzedName });
             modalDownload = false;
 
+            await playSound("done_chime.mp3")
             if (isModForEngine(downloadPath)) {
                 await sendNotif(
                     await getWord("notification.download.title.gamebanana"),
@@ -192,6 +194,7 @@
                 editing: false,
             });
         } catch (e) {
+            await playSound("fail_chime.mp3")
             await sendNotif(
                 await getWord("notification.download.title.gamebanana"),
                 await getWord("notification.download.description.failed")
