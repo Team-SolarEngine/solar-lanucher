@@ -37,14 +37,6 @@
         }
     }
 
-    function allowDrop(event: DragEvent) {
-        /*
-         * This function prevents the browser's default
-         * behaviour so it can accept a drop
-         */
-        event.preventDefault();
-    }
-
     async function dropOn(targetIndex: number) {
         /*
          * This function makes it actually drop above the instance
@@ -106,9 +98,9 @@
             <article
                 draggable="true"
                 ondragstart={(event) => startDrag(event, i)}
-                ondragover={allowDrop}
+                ondragover={(e) => e.preventDefault()}
                 ondrop={() => dropOn(i)}
-                style="display: flex; gap: 8px; cursor: grab !important;"
+                class="dragger"
                 class:_focused_one={app.name === focused_one}
             >
                 <div
@@ -138,6 +130,14 @@
 </dialog>
 
 <style>
+    .dragger {
+        display: flex;
+        gap: 8px;
+        cursor: grab !important;
+        user-select: auto !important;
+        -webkit-user-select: auto !important;
+    }
+
     ._focused_one::before {
         content: '';
         position: absolute;
