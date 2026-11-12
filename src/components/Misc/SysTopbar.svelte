@@ -20,7 +20,7 @@
     ])
 </script>
 
-<article class="systb styled" data-tauri-drag-region>
+<article class="systb" data-tauri-drag-region>
     {#each sysTopbarAction as sta}
         <button class="transparent" onclick={sta.action}><i>{sta.icon}</i></button>
     {/each}
