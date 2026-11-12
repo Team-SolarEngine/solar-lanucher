@@ -23,6 +23,12 @@
     }
 
     function startDrag(event: DragEvent, index: number) {
+        /*
+         * This function starts the drag of the current element to
+         * other element. It first makes a value to remember the draggedIndex (global),
+         * then it would set the data, then tell the browser that this is a movable
+         * item.
+         */
         draggedIndex = index;
 
         event.dataTransfer?.setData("text/plain", String(index));
@@ -32,10 +38,29 @@
     }
 
     function allowDrop(event: DragEvent) {
+        /*
+         * This function prevents the browser's default
+         * behaviour so it can accept a drop
+         */
         event.preventDefault();
     }
 
     async function dropOn(targetIndex: number) {
+        /*
+         * This function makes it actually drop above the instance
+         * you want to put it below it.
+         * 
+         * If the dragged index null, then it'll return nothing.
+         * Then, it gets the currentIndex by making variable and
+         * then makes draggedIndex to null.
+         * 
+         * When it hits while, it'll make a const variable of
+         * nextIndex and it'll do simple math to do currentIndex - or + of
+         * the current index, depending if it's big or small through true/false.
+         * Then, it would move it, and then update currentIndex.
+         * 
+         * The while will keep looping until it's exactly the targetted index
+         */
         if (draggedIndex === null) return;
 
         let currentIndex = draggedIndex;
