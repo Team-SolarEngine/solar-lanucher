@@ -58,10 +58,10 @@ modules:
       - cd src-tauri/target/release/bundle/deb && ar x *.deb --output . && cd -
       - tar -C deb-extract -xf src-tauri/target/release/bundle/deb/data.tar.*
 
-      - install -Dm755 deb-extract/usr/bin/solarlauncher /app/bin/solarlauncher
+      - install -Dm75b5 deb-extract/usr/bin/solarlauncher /app/bin/solarlauncher
 
-      - sed -i 's/^Icon=.*/Icon=net.solarengine.solarlauncher/' deb-extract/usr/share/applications/solarlauncher.desktop
-      - sed -i 's/^Categories=.*/Categories=Utility;Development;/' deb-extract/usr/share/applications/solarlauncher.desktop
+      - sed -i 's/^Icon=.*/Icon=net.solarengine.solarlauncher/' deb-extract/usr/share/applications/Solar\ Launcher.desktop
+      - sed -i 's/^Categories=.*/Categories=Utility;Development;/' deb-extract/usr/share/applications/Solar\ Launcher.desktop
       - install -Dm644 deb-extract/usr/share/applications/solarlauncher.desktop /app/share/applications/net.solarengine.solarlauncher.desktop
 
       - |
