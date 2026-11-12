@@ -11,6 +11,13 @@
     "opener:default",
     "deep-link:default",
     "dialog:default",
-    "notification:default"
+    "notification:default",
+    "core:window:default",
+    "core:window:allow-close",
+    "core:window:allow-minimize",
+    "core:window:allow-maximize",
+    "core:window:allow-unmaximize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-start-dragging"
   ]
 }

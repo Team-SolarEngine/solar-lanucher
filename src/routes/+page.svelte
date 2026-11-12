@@ -15,6 +15,7 @@
     import MainContent from "../components/MainContent.svelte";
     import DragAndDrop from "../components/Misc/DragAndDrop.svelte";
     import ErrorPopup from '../components/Popup/Error.svelte';
+    import SysTopbar from '../components/Misc/SysTopbar.svelte';
 
     import Local from "../components/Popup/AddNew/Local.svelte";
     import Download from "../components/Popup/AddNew/Download.svelte";
@@ -243,6 +244,7 @@
 <GameBananaMod bind:modalGameBanana modId={gameBananaModId} />
 
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
+<SysTopbar/>
 
 <style>
     .main {

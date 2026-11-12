@@ -62,7 +62,7 @@
                 {#await getWord("sidebar.button.collapse_sidebar.tooltip") then word}{@html word}{/await}
             </span>
         </div>
-        <div class="max"></div>
+        <div class="max" data-tauri-drag-region style="height: 2rem; cursor: grab;"></div>
         <div class:_sidebarElementClose={!sidebarOpen} class="row" style="transition: all 0.3s ease-in-out;">
             <div class="no-space">
                 {#each listsOfOptions as op}
