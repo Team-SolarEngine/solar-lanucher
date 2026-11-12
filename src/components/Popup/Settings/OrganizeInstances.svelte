@@ -8,6 +8,7 @@
 
     let apps = $state<AppData[]>([]);
     let focused_one = $state("");
+    let draggedIndex = $state<number | null>(null);
 
     async function loadInstances() {
         /*
@@ -18,6 +19,32 @@
             apps = await loadApps();
         } catch (e) {
             console.error("Failed to load apps:", e);
+        }
+    }
+
+    function startDrag(event: DragEvent, index: number) {
+        draggedIndex = index;
+
+        event.dataTransfer?.setData("text/plain", String(index));
+        if (event.dataTransfer) {
+            event.dataTransfer.effectAllowed = "move";
+        }
+    }
+
+    function allowDrop(event: DragEvent) {
+        event.preventDefault();
+    }
+
+    async function dropOn(targetIndex: number) {
+        if (draggedIndex === null) return;
+
+        let currentIndex = draggedIndex;
+        draggedIndex = null;
+
+        while (currentIndex !== targetIndex) {
+            const nextIndex = currentIndex + (targetIndex > currentIndex ? 1 : -1);
+            await moveInstance(currentIndex, nextIndex);
+            currentIndex = nextIndex;
         }
     }
 
@@ -51,25 +78,32 @@
 <dialog class="left" class:active={currentlyOpen} style="max-width: 700px;">
     {#if apps.length > 0}
         {#each apps as app, i}
-            <article style="display: flex; gap: 8px;" class:_focused_one={app.name == focused_one}>
-                <div style="flex: 1;">
+            <article
+                draggable="true"
+                ondragstart={(event) => startDrag(event, i)}
+                ondragover={allowDrop}
+                ondrop={() => dropOn(i)}
+                style="display: flex; gap: 8px; cursor: grab !important;"
+                class:_focused_one={app.name === focused_one}
+            >
+                <div
+                    style="flex: 1;"
+                    ondragstart={(event) => startDrag(event, i)}
+                >
                     <CardApp
                         name={app.name}
                         iconUrl={app.icon_url}
                         isPreview={true}
                     />
                 </div>
+
+
                 <div style="display: flex; justify-content: center; flex-direction: column;">
-                    {#if i > 0}
-                        <button onclick={() => moveInstance(i, i - 1)} class="transparent circle">
-                            <i>arrow_upward</i>
-                        </button>
-                    {/if}
-                    {#if i !== apps.length - 1 && apps.length > 1}
-                        <button onclick={() => moveInstance(i, i + 1)} class="transparent circle">
-                            <i>arrow_downward</i>
-                        </button>
-                    {/if}
+                    <span
+                        style="cursor: grab;"
+                    >
+                        <i>drag_indicator</i>
+                    </span>
                 </div>
             </article>
         {/each}
@@ -79,8 +113,14 @@
 </dialog>
 
 <style>
-    ._focused_one {
+    ._focused_one::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform: translateX(-15px) translateY(-15px);
         background-color: rgba(255, 255, 255, 0.05);
         box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
     }
 </style>
