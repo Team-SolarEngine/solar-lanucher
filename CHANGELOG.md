@@ -1,5 +1,15 @@
 # Solar Launcher Changelog
 
+## 0.8.8
+
+### Added
+- Custom system window control buttons.
+- Switch the buttons up/down in OrganizeInstnaces to Drag and Drop
+
+### Fixed
+- Adding a new instnace doesn't show up in OrganizeInstances
+  - This also fixes Edit and Delete.
+
 ## 0.8.7
 
 ### Added
