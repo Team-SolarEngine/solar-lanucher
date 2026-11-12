@@ -9,6 +9,9 @@
 ### Fixed
 - Adding a new instnace doesn't show up in OrganizeInstances
   - This also fixes Edit and Delete.
+- It's now called `Solar Launcher` instead of `solarlauncher`.
+- Default window is set to 1280x720
+- Minimum size is set to 800x600
 
 ## 0.8.7
 
