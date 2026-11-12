@@ -1,37 +1,48 @@
 [package]
 name = "solarlauncher"
-version = "0.1.0"
-description = "launching fnf's instances deep inside your folders may be tiring until now! - works for any fnf instance, because we're *flexible like that*."
-authors = ["Solar Engine Team"]
+version = "0.8.8"
+description = "launching fnf instances from deep insde your folders, now fixed!"
+authors = [ "Solar Engine Team" ]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+author = [ "Team Solar Engine" ]
 
 [lib]
-# The `_lib` suffix may seem redundant but it is necessary
-# to make the lib name unique and wouldn't conflict with the bin name.
-# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
 name = "solarlauncher_lib"
-crate-type = ["staticlib", "cdylib", "rlib"]
+crate-type = [ "staticlib", "cdylib", "rlib" ]
 
-[build-dependencies]
-tauri-build = { version = "2", features = [] }
+[build-dependencies.tauri-build]
+version = "2"
+features = []
 
 [dependencies]
-tauri = { version = "2", features = ["protocol-asset"] }
 tauri-plugin-opener = "2"
 tauri-plugin-deep-link = "2"
-tauri-plugin-single-instance = { version = "2", features = ["deep-link"] }
-serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 dirs = "6"
-reqwest = { version = "0.12", features = ["stream"] }
-tokio = { version = "1", features = ["fs", "rt-multi-thread"] }
 zip = "8.6.0"
 futures-util = "0.3.34"
 tauri-plugin-dialog = "2.7.2"
 tauri-plugin-notification = "2"
 
-[target.'cfg(unix)'.dependencies]
-libc = "0.2"
+[dependencies.tauri]
+version = "2"
+features = [ "protocol-asset" ]
 
+[dependencies.tauri-plugin-single-instance]
+version = "2"
+features = [ "deep-link" ]
+
+[dependencies.serde]
+version = "1"
+features = [ "derive" ]
+
+[dependencies.reqwest]
+version = "0.12"
+features = [ "stream" ]
+
+[dependencies.tokio]
+version = "1"
+features = [ "fs", "rt-multi-thread" ]
+
+[target."cfg(unix)".dependencies]
+libc = "0.2"

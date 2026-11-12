@@ -1,7 +1,7 @@
 {
   "name": "solarlauncher",
-  "version": "",
-  "description": "",
+  "version": "0.8.8",
+  "description": "launching fnf instances from deep insde your folders, now fixed!",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "update": "node update.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -20,7 +21,8 @@
     "@tauri-apps/plugin-opener": "^2",
     "beercss": "^4.0.23",
     "marked": "^18.0.7",
-    "material-dynamic-colors": "^1.1.4"
+    "material-dynamic-colors": "^1.1.4",
+    "smol-toml": "^1.9.1"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.6",
