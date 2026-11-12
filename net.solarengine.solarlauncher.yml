@@ -62,7 +62,7 @@ modules:
 
       - sed -i 's/^Icon=.*/Icon=net.solarengine.solarlauncher/' deb-extract/usr/share/applications/Solar\ Launcher.desktop
       - sed -i 's/^Categories=.*/Categories=Utility;Development;/' deb-extract/usr/share/applications/Solar\ Launcher.desktop
-      - install -Dm644 deb-extract/usr/share/applications/solarlauncher.desktop /app/share/applications/net.solarengine.solarlauncher.desktop
+      - install -Dm644 deb-extract/usr/share/applications/Solar\ Launcher.desktop /app/share/applications/net.solarengine.solarlauncher.desktop
 
       - |
         for size in 32x32 128x128 128x128@2 256x256 512x512; do
