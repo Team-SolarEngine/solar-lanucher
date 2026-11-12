@@ -8,6 +8,7 @@
     import { getWord } from "$lib/localization";
     import { loadApps, type AppData } from "$lib/apps";
     import { loadSetting } from "$lib/settings";
+    import { getOS } from "$lib/sys";
 
     let hoveringDrag = $state(false);
     let pathToCopy = $state();
@@ -44,7 +45,7 @@
         try {
             await invoke("paste_to_dir", { toCopy: pathToCopy, destToPaste: pathToPaste })
             openDialogForInstances = false;
-            const lastSlash = pathToCopy.lastIndexOf("/");
+            const lastSlash = await getOS() == "windows" ? "\\" : "/";
             const filePath = pathToCopy.slice(lastSlash + 1);
 
             if (hardCoded) {
