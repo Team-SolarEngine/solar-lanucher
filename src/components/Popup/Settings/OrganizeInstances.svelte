@@ -41,7 +41,9 @@
     }
 
     $effect(() => {
-        loadInstances();
+        if (currentlyOpen) {
+            void loadInstances();
+        }
     });
 </script>
 
