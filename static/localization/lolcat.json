@@ -125,5 +125,7 @@
     "notification.download.description.failed": "downlod fail! try again,, or find out,,,",
     "sidebar.filter_instances": "filtr instncs",
     "sidebar.disable_sounds.title": "disabl kitty sounds",
-    "sidebar.disable_sounds.description": "sounds r cool!!! but it scawy? enabl!!"
+    "sidebar.disable_sounds.description": "sounds r cool!!! but it scawy? enabl!!",
+    "settings.organize_settings.submenu.note": "",
+    "settings.organize_settings.submenu.description": ""
 }

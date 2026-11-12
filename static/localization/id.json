@@ -125,5 +125,7 @@
     "notification.download.description.failed": "Pengunduhan gagal! Coba lagi, atau cari tahu penyebab kesalahannya...",
     "sidebar.filter_instances": "Instansi Filter",
     "sidebar.disable_sounds.title": "Matikan suara",
-    "sidebar.disable_sounds.description": "Terasa terlalu mengganggu atau bikin kaget? Aktifkan ini!"
+    "sidebar.disable_sounds.description": "Terasa terlalu mengganggu atau bikin kaget? Aktifkan ini!",
+    "settings.organize_settings.submenu.note": "",
+    "settings.organize_settings.submenu.description": ""
 }

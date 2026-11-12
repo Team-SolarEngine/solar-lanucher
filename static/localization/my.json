@@ -125,5 +125,7 @@
     "notification.download.description.failed": "Downloading gagal! Try lagi sekali, atau cari error...",
     "sidebar.filter_instances": "Cari Instances",
     "sidebar.disable_sounds.title": "Tutup suara",
-    "sidebar.disable_sounds.description": "Suara menjagi kamu mengila atau takutkan kamu? Buka ini!"
+    "sidebar.disable_sounds.description": "Suara menjagi kamu mengila atau takutkan kamu? Buka ini!",
+    "settings.organize_settings.submenu.note": "",
+    "settings.organize_settings.submenu.description": ""
 }

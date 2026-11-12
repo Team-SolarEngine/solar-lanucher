@@ -3,12 +3,15 @@
     import { getWord } from "$lib/localization";
     import { invoke } from "@tauri-apps/api/core";
     import CardApp from "../../CardApp.svelte";
+    import { getOS } from "$lib/sys";
+    import { onMount } from "svelte";
 
     let { currentlyOpen = $bindable() } = $props();
 
     let apps = $state<AppData[]>([]);
     let focused_one = $state("");
     let draggedIndex = $state<number | null>(null);
+    let isOnWindows = $state(false);
 
     async function loadInstances() {
         /*
@@ -89,10 +92,25 @@
             void loadInstances();
         }
     });
+
+    onMount(async() => {
+        isOnWindows = await getOS() == "windows"
+    })
 </script>
 
 <div class="overlay" class:active={currentlyOpen} onclick={() => currentlyOpen = false}></div>
 <dialog class="left" class:active={currentlyOpen} style="max-width: 700px;">
+    {#if isOnWindows}
+        <article class="tertiary">
+            <div class="row">
+                <i>warning</i>
+                <h4>{#await getWord("settings.organize_settings.submenu.note") then word}{@html word}{/await}</h4>
+            </div>
+            <span> {#await getWord("settings.organize_settings.submenu.description") then word}{@html word}{/await} </span>
+        </article>
+        <hr class="medium">
+    {/if}
+
     {#if apps.length > 0}
         {#each apps as app, i}
             <article
@@ -115,12 +133,22 @@
                 </div>
 
 
-                <div style="display: flex; justify-content: center; flex-direction: column;">
+                <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                    {#if i > 0}
+                        <button onclick={() => moveInstance(i, i - 1)} class="transparent circle">
+                            <i>arrow_upward</i>
+                        </button>
+                    {/if}
                     <span
                         style="cursor: grab;"
                     >
                         <i>drag_indicator</i>
                     </span>
+                    {#if i !== apps.length - 1 && apps.length > 1}
+                        <button onclick={() => moveInstance(i, i + 1)} class="transparent circle">
+                            <i>arrow_downward</i>
+                        </button>
+                    {/if}
                 </div>
             </article>
         {/each}
@@ -134,8 +162,8 @@
         display: flex;
         gap: 8px;
         cursor: grab !important;
-        user-select: auto !important;
-        -webkit-user-select: auto !important;
+        display: flex;
+        align-items: center;
     }
 
     ._focused_one::before {

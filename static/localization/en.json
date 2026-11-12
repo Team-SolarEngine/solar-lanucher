@@ -125,5 +125,7 @@
     "notification.download.description.failed": "Downloading has failed! Try again, or find out the error...",
     "sidebar.filter_instances": "Filter Instances",
     "sidebar.disable_sounds.title": "Disable sounds",
-    "sidebar.disable_sounds.description": "Sounds too annoying or jumpscaring you? Enable this!"
+    "sidebar.disable_sounds.description": "Sounds too annoying or jumpscaring you? Enable this!",
+    "settings.organize_settings.submenu.note": "Note!",
+    "settings.organize_settings.submenu.description": "Drag and drop does <b>NOT</b> work for windows. I cannot fix this due to Windows' webview. This only works for Linux, and macOS. Resort to using the arrows."
 }

@@ -125,5 +125,7 @@
     "notification.download.description.failed": "Download mislukt! Probeer opnieuw, of zoek de fout uit...",
     "sidebar.filter_instances": "Filter Instanties",
     "sidebar.disable_sounds.title": "Geluiden uitzetten",
-    "sidebar.disable_sounds.description": "Zijn de geluiden vervelend or schriken je ze af? Zet dit aan!"
+    "sidebar.disable_sounds.description": "Zijn de geluiden vervelend or schriken je ze af? Zet dit aan!",
+    "settings.organize_settings.submenu.note": "",
+    "settings.organize_settings.submenu.description": ""
 }

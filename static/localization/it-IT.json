@@ -125,5 +125,7 @@
     "notification.download.description.failed": "Il Download ha fallito! Prova di nuovo, o cerca l'errore...",
     "sidebar.filter_instances": "Filtra Instanze",
     "sidebar.disable_sounds.title": "Disattiva Suoni",
-    "sidebar.disable_sounds.description": "I suoni ti danno fastidio tipo come il jarona? o ti spaventano? Attiva Questo!"
+    "sidebar.disable_sounds.description": "I suoni ti danno fastidio tipo come il jarona? o ti spaventano? Attiva Questo!",
+    "settings.organize_settings.submenu.note": "",
+    "settings.organize_settings.submenu.description": ""
 }

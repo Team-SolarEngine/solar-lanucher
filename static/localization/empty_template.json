@@ -125,5 +125,7 @@
     "notification.download.description.failed": "",
     "sidebar.filter_instances": "",
     "sidebar.disable_sounds.title": "",
-    "sidebar.disable_sounds.description": ""
+    "sidebar.disable_sounds.description": "",
+    "settings.organize_settings.submenu.note": "",
+    "settings.organize_settings.submenu.description": ""
 }
