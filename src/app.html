@@ -10,19 +10,23 @@
   <body data-sveltekit-preload-data="hover">
     <div style="display: contents">%sveltekit.body%</div>
   </body>
-  <style>
-    html, body {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    :root {
-        user-select: none !important;
-        -webkit-user-select: none !important;
-    }
-
-    img {
-        -webkit-user-drag: none !important;
-    }
-  </style>
 </html>
+
+<style>
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+:root {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+} img {
+    -webkit-user-drag: none !important;
+}
+
+/* since we have a custom title bar, we have to lower them down! */
+dialog, .overlay {
+    margin-top: 70px;
+}
+</style>
