@@ -2,6 +2,7 @@
     import { getCurrentWindow } from '@tauri-apps/api/window';
     import { openUrl } from '@tauri-apps/plugin-opener';
     import { getContext } from 'svelte';
+    import Version from './Version.svelte';
 
     const appWindow = getCurrentWindow();
     let checkMaximized = $state(false);
@@ -59,7 +60,7 @@
                 alt="Solar Launcher"
                 width="32"
             />
-            <span style="font-size: 1.2rem"><b>Solar Launcher</b></span>
+            <span style="font-size: 1.2rem"><b>Solar Launcher <Version returnVersionOnly={true}/></b></span>
             <span style="margin-left: 4px;">- Yet another launcher for FNF.</span>
         </div>
 

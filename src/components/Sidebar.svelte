@@ -24,7 +24,6 @@
     let sidebarOpen = $state(true)
     const listsOfOptions = [
         {name: "Settings", icon: "settings", action: () => {openModal("settings")}},
-        {name: "Github", icon: "commit", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher")},
     ]
 
     function openModal(modal: string) {

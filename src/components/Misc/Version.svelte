@@ -5,43 +5,64 @@
     import { onMount } from "svelte";
     import { getWord } from "$lib/localization";
 
-    let version: string;
-    let latest: string;
-    let os: string;
+    let { returnVersionOnly = false } = $props()
 
-    async function getVersion() {
+    let version = $state("");
+    let latest = $state("");
+    let os = $state("");
+
+    async function getLatestVersion() {
         /*
-         * This function gets the current version from the backend
-         * and the latest version from the GitHub releases page.
+         * This function gets the current version from
+         * the latest version from the GitHub releases page.
          *
          * Returns:
          *    Promise -> an object with the current and latest versions
          */
-        const curVersion = await invoke<string>("get_current_ver");
         const repo = await fetch("https://api.github.com/repos/Team-SolarEngine/solar-lanucher/tags");
         const tags = await repo.json();
         const curLatest = tags[0].name;
-        return { curVersion, curLatest };
+        return curLatest;
+    }
+
+    async function getLocalVersion() {
+        /*
+         * This functions get the current version from
+         * the backend.
+         */
+        const curVersion = await invoke<string>("get_current_ver");
+        return curVersion
     }
 
     onMount(async () => {
-        const { curVersion, curLatest } = await getVersion();
-        version = curVersion;
-        latest = curLatest;
+        version = await getLocalVersion();
+        latest = await getLatestVersion();
         os = await getOS();
     })
 </script>
 
-<div style="display: flex; flex-direction: column; gap: 0.5rem">
+{#if returnVersionOnly}
     <span>
-        {#await getWord("settings.version.section1") then word}{@html word}{/await}
         {#if version && latest && version == latest}
-            {os}-{version}, <span style="color: green">{#await getWord("settings.version.section2.up_to_date") then word}{@html word}{/await}</span>
+            <span style="color: rgba(200, 255, 200, 1);">{version}</span>
         {:else if version && latest && version != latest}
-            {os}-{version}, <span style="color: red">{#await getWord("settings.version.section2.out_of_date") then word}{@html word}{/await}</span>
+            <span style="color: rgba(255, 200, 200, 1);">{version}</span>
         {:else}
-            {#await getWord("settings.version.section2.limited") then word}{@html word}{/await}
+            <span>{version}</span>
         {/if}
     </span>
-    <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>{#await getWord("settings.version.button") then word}{@html word}{/await}</button>
-</div>
+{:else}
+    <div style="display: flex; flex-direction: column; gap: 0.5rem">
+        <span>
+            {#await getWord("settings.version.section1") then word}{@html word}{/await}
+            {#if version && latest && version == latest}
+                {os}-{version}, <span style="color: green">{#await getWord("settings.version.section2.up_to_date") then word}{@html word}{/await}</span>
+            {:else if version && latest && version != latest}
+                {os}-{version}, <span style="color: red">{#await getWord("settings.version.section2.out_of_date") then word}{@html word}{/await}</span>
+            {:else}
+                {#await getWord("settings.version.section2.limited") then word}{@html word}{/await} - {version}
+            {/if}
+        </span>
+        <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>{#await getWord("settings.version.button") then word}{@html word}{/await}</button>
+    </div>
+{/if}
