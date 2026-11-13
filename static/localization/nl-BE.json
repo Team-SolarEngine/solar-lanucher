@@ -126,6 +126,6 @@
     "sidebar.filter_instances": "Filter Instanties",
     "sidebar.disable_sounds.title": "Geluiden uitzetten",
     "sidebar.disable_sounds.description": "Zijn de geluiden vervelend or schriken je ze af? Zet dit aan!",
-    "settings.organize_settings.submenu.note": "",
-    "settings.organize_settings.submenu.description": ""
+    "settings.organize_settings.submenu.note": "Let op!",
+    "settings.organize_settings.submenu.description": "Slepen werkt <b>NIET</b> op Windows. Ik kan dit niet fixen vanwege de webview van Windows. Dit werkt enkel voor Linux en MacOS. Gebruik de pijltjes."
 }
