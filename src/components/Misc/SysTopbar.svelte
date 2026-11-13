@@ -66,7 +66,7 @@
         <div class="functions">
             {#each functionsToCall as ftc}
                 <div>
-                    <button class="transparent">
+                    <button class="transparent small">
                         {ftc.name}
                         <i>arrow_drop_down</i>
                     </button>
@@ -150,7 +150,7 @@
             }
 
             .functions {
-                transform: translateY(0);
+                transform: translateY(4px);
                 opacity: 1;
             }
          }
