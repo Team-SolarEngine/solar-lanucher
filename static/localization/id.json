@@ -126,6 +126,6 @@
     "sidebar.filter_instances": "Instansi Filter",
     "sidebar.disable_sounds.title": "Matikan suara",
     "sidebar.disable_sounds.description": "Terasa terlalu mengganggu atau bikin kaget? Aktifkan ini!",
-    "settings.organize_settings.submenu.note": "",
-    "settings.organize_settings.submenu.description": ""
+    "settings.organize_settings.submenu.note": "Catatan!",
+    "settings.organize_settings.submenu.description": "Fitur drag and drop <b>TIDAK</b> berfungsi di Windows. Saya tidak dapat memperbaiki masalah ini karena webview Windows. Fitur ini hanya berfungsi di Linux dan macOS. Silakan gunakan tombol panah sebagai gantinya."
 }
