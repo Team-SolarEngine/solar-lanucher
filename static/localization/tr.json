@@ -123,9 +123,9 @@
     "settings.organize_instances.title": "Kurulumları düzenle",
     "settings.organize_instances.description": "Kurulumlarınızı düzenleyin! Mevcut düzeninizi beğenmiyor olabilirsiniz, neden değiştirmeyesiniz?",
     "notification.download.description.failed": "",
-    "sidebar.filter_instances": "",
-    "sidebar.disable_sounds.title": "",
-    "sidebar.disable_sounds.description": "",
-    "settings.organize_settings.submenu.note": "",
-    "settings.organize_settings.submenu.description": ""
+    "sidebar.filter_instances": "Kurulumları Filtreleyin",
+    "sidebar.disable_sounds.title": "Sesleri Kapat",
+    "sidebar.disable_sounds.description": "Sesler çok mu rahatsız edici ya da seni korkutuyor mu? Bunu aç!",
+    "settings.organize_settings.submenu.note": "Not!",
+    "settings.organize_settings.submenu.description": "Sürükle ve bırak Windows'ta <b>ÇALIŞMAZ</b>. Windows'un webview yapısı nedeniyle bunu düzeltemiyorum. Bu özellik yalnızca Linux ve macOS'ta çalışır. Bunun yerine okları kullanın."
 }
