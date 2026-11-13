@@ -1,5 +1,6 @@
 <script lang="ts">
     import { getCurrentWindow } from '@tauri-apps/api/window';
+    import { openUrl } from '@tauri-apps/plugin-opener';
     import { getContext } from 'svelte';
 
     const appWindow = getCurrentWindow();
@@ -28,23 +29,25 @@
     /*
      * == TODO LIST ==
      * - if there's no function and there's only action, make that a only button
-     * - add Extra, Contributing, Website
-     *   - Extra
-     *     - Reload App
-     *     - Information
-     *   - Contributing
-     *     - Open Github Repository
-     *     - Open Github Issues
-     *   - Websites
-     *     - GameBanana
-     *     - Discord
-     *     - FNF Solar Team
      */
     const functionsToCall = $derived([
         { name: "Open Dialog", functions: [
             { name: "Add new", icon: "add", action: () => localInstancePopup({open: true}) },
             { name: "Download Engine", icon: "download", action: () => downloadEnginePopup({open: true}) },
-        ]}
+        ]},
+        { name: "Extras", functions: [
+            { name: "Reload App", icon: "refresh", action: () => window.location.reload() },
+            { name: "Information", icon: "info", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/blob/main/README.md") }, //temp for now
+        ]},
+        { name: "Contributing", functions: [
+            { name: "Open Github Repository", icon: "commit", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher") },
+            { name: "Open Github Issues", icon: "bug_report", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/issues/new/choose") },
+        ]},
+        { name: "Websites", functions: [
+            { name: "GameBanana", icon: "more", action: () => openUrl("https://gamebanana.com/tools/23770") },
+            { name: "Discord", icon: "groups", action: () => openUrl("https://discord.gg/RaHmP5fgyA") },
+            { name: "FNF Solar Team", icon: "web", action: () => openUrl("https://solarengine.net") },
+        ]},
     ])
 </script>
 
