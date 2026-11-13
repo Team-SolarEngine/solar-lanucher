@@ -39,10 +39,12 @@
         { name: "Extras", functions: [
             { name: "Reload App", icon: "refresh", action: () => window.location.reload() },
             { name: "Information", icon: "info", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/blob/main/README.md") }, //temp for now
+            { name: "Open Documentation", icon: "commit", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/wiki") },
         ]},
-        { name: "Contributing", functions: [
-            { name: "Open Github Repository", icon: "commit", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher") },
-            { name: "Open Github Issues", icon: "bug_report", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/issues/new/choose") },
+        { name: "Github", functions: [
+            { name: "Github Repository", icon: "commit", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher") },
+            { name: "Github Issues", icon: "bug_report", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/issues/new/choose") },
+            { name: "Github Releases", icon: "release_alert", action: () => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest") },
         ]},
         { name: "Websites", functions: [
             { name: "GameBanana", icon: "more", action: () => openUrl("https://gamebanana.com/tools/23770") },
