@@ -43,9 +43,7 @@
 
 {#if returnVersionOnly}
     <span>
-        {#if version && latest && version == latest}
-            <span style="color: rgba(200, 255, 200, 1);">{version}</span>
-        {:else if version && latest && version != latest}
+        {#if version && latest && version != latest}
             <span style="color: rgba(255, 200, 200, 1);">{version}</span>
         {:else}
             <span>{version}</span>
@@ -60,7 +58,7 @@
             {:else if version && latest && version != latest}
                 {os}-{version}, <span style="color: red">{#await getWord("settings.version.section2.out_of_date") then word}{@html word}{/await}</span>
             {:else}
-                {#await getWord("settings.version.section2.limited") then word}{@html word}{/await} - {version}
+                {version}! ... {#await getWord("settings.version.section2.limited") then word}{@html word}{/await}
             {/if}
         </span>
         <button onclick={() => openUrl("https://github.com/Team-SolarEngine/solar-lanucher/releases/latest")}>{#await getWord("settings.version.button") then word}{@html word}{/await}</button>
