@@ -18,23 +18,62 @@
         { icon: checkMaximized ? "open_in_full" : "close_fullscreen", action: () => toggleMaximize() },
         { icon: "close", action: () => appWindow.close() }
     ])
+
+    const functionsToCall = $derived([
+        { name: "Open Dialog", functions: [
+            { name: "Add new", icon: "add", action: () => console.log("hi") },
+        ]}
+    ])
 </script>
 
 <article class="systb" data-tauri-drag-region>
-    {#each sysTopbarAction as sta}
-        <button class="transparent" onclick={sta.action}><i>{sta.icon}</i></button>
-    {/each}
+    <div class="hitbox">
+        <div class="appName">
+            <img
+                src="/images/Solar Icon.png"
+                alt="Solar Launcher"
+                width="32"
+            />
+            <span style="font-size: 1.2rem"><b>Solar Launcher</b></span>
+            <span style="margin-left: 4px;">- Yet another launcher for FNF.</span>
+        </div>
+
+        <div class="functions">
+            {#each functionsToCall as ftc}
+                <div>
+                    <button class="transparent">
+                        {ftc.name}
+                        <i>arrow_drop_down</i>
+                    </button>
+                    <menu>
+                        {#each ftc.functions as actions}
+                            <li onclick={actions.action}>
+                                <i>{actions.icon}</i>
+                                <span>{actions.name}</span>
+                            </li>
+                        {/each}
+                    </menu>
+                </div>
+            {/each}
+        </div>
+    </div>
+
+    <div>
+        {#each sysTopbarAction as sta}
+            <button class="transparent" onclick={sta.action}><i>{sta.icon}</i></button>
+        {/each}
+    </div>
 </article>
 
 <style>
     .systb {
-        position: absolute;
-        right: 0;
-        top: 0;
-        padding: 8px;
-        margin: 8px;
         cursor: grab;
-        padding-left: 6rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        border-radius: 0;
+        z-index: 999;
 
         &.styled {
             background-color: transparent;
@@ -44,4 +83,39 @@
             border-radius: 1rem;
         }
     }
+
+     .hitbox {
+         display: flex;
+         flex-direction: column;
+
+         .appName {
+             display: flex;
+             flex-direction: row;
+             align-items: center;
+             position: fixed;
+             transition: all 200ms ease-in-out;
+         }
+
+         .functions {
+             display: flex;
+             flex-direction: row;
+             align-items: center;
+             position: fixed;
+             opacity: 0;
+             transition: all 200ms ease-in-out;
+             transform: translateY(20px);
+         }
+
+         &:hover {
+            .appName {
+                transform: translateY(-20px);
+                opacity: 0
+            }
+
+            .functions {
+                transform: translateY(0);
+                opacity: 1;
+            }
+         }
+     }
 </style>

@@ -205,26 +205,29 @@
     });
 </script>
 
-<main class="main">
-    <div class="_sidebarSection">
-        <Sidebar {apps} onOpenAdd={() => promptForNew = true} onEdit={handleEdit} onDelete={loadInstances} onSelect={(i) => selectedIndex = i} />
-    </div>
-
-    <div class="_mainContent">
-        {#if selectedIndex >= 0 && apps[selectedIndex]}
-            <MainContent
-                name={apps[selectedIndex].name}
-                logoUrl={apps[selectedIndex].icon_url}
-                bannerUrl={apps[selectedIndex].banner_url}
-                description={apps[selectedIndex].description}
-                workingDirectory={apps[selectedIndex].working_directory}
-                executeCommand={apps[selectedIndex].execute_command}
-                index={selectedIndex}
-                onDelete={loadInstances}
-            />
-        {:else}
-            <MainContent />
-        {/if}
+<main class="window">
+    <SysTopbar/>
+    <div class="main">
+        <div class="_sidebarSection">
+            <Sidebar {apps} onOpenAdd={() => promptForNew = true} onEdit={handleEdit} onDelete={loadInstances} onSelect={(i) => selectedIndex = i} />
+        </div>
+    
+        <div class="_mainContent">
+            {#if selectedIndex >= 0 && apps[selectedIndex]}
+                <MainContent
+                    name={apps[selectedIndex].name}
+                    logoUrl={apps[selectedIndex].icon_url}
+                    bannerUrl={apps[selectedIndex].banner_url}
+                    description={apps[selectedIndex].description}
+                    workingDirectory={apps[selectedIndex].working_directory}
+                    executeCommand={apps[selectedIndex].execute_command}
+                    index={selectedIndex}
+                    onDelete={loadInstances}
+                />
+            {:else}
+                <MainContent />
+            {/if}
+        </div>
     </div>
 
     {#if showPet}
@@ -244,18 +247,31 @@
 <GameBananaMod bind:modalGameBanana modId={gameBananaModId} />
 
 <div class="snackbar error" class:active={snackbar.snackbarError}>{snackbar.givenError}</div>
-<SysTopbar/>
 
 <style>
+    .window {
+        display: flex;
+        flex-direction: column;
+        height: 100dvh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
     .main {
         display: flex !important;
         flex-direction: row !important;
-        height: 100vh;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        padding: 8px;
     }
 
     ._mainContent {
         flex: 1;
-        height: 100dvh;
+        min-width: 0;
+        height: 100%;
         overflow-y: auto;
     }
 
