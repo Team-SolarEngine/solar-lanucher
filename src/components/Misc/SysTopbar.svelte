@@ -1,7 +1,12 @@
 <script lang="ts">
     import { getCurrentWindow } from '@tauri-apps/api/window';
+    import { getContext } from 'svelte';
+
     const appWindow = getCurrentWindow();
     let checkMaximized = $state(false);
+
+    const downloadEnginePopup: any = getContext('downloadEngine')
+    const localInstancePopup: any = getContext('localInstance')
 
     async function toggleMaximize() {
         if (await appWindow.isMaximized()) {
@@ -19,9 +24,26 @@
         { icon: "close", action: () => appWindow.close() }
     ])
 
+
+    /*
+     * == TODO LIST ==
+     * - if there's no function and there's only action, make that a only button
+     * - add Extra, Contributing, Website
+     *   - Extra
+     *     - Reload App
+     *     - Information
+     *   - Contributing
+     *     - Open Github Repository
+     *     - Open Github Issues
+     *   - Websites
+     *     - GameBanana
+     *     - Discord
+     *     - FNF Solar Team
+     */
     const functionsToCall = $derived([
         { name: "Open Dialog", functions: [
-            { name: "Add new", icon: "add", action: () => console.log("hi") },
+            { name: "Add new", icon: "add", action: () => localInstancePopup({open: true}) },
+            { name: "Download Engine", icon: "download", action: () => downloadEnginePopup({open: true}) },
         ]}
     ])
 </script>
@@ -45,7 +67,7 @@
                         {ftc.name}
                         <i>arrow_drop_down</i>
                     </button>
-                    <menu>
+                    <menu class="no-wrap">
                         {#each ftc.functions as actions}
                             <li onclick={actions.action}>
                                 <i>{actions.icon}</i>
