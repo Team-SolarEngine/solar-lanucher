@@ -11,6 +11,7 @@
   - Updated Turkish
   - Updated lolcat
   - Updated Malay
+  - Updated Belgium
 
 ## 0.8.8
 
