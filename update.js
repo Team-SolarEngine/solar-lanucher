@@ -4,7 +4,7 @@ import { parse, stringify } from 'smol-toml';
 const INFO_APP = {
     name: 'solarlauncher',
     full_name: "Solar Launcher",
-    version: '0.8.8',
+    version: '0.8.9',
     description: "launching fnf instances from deep insde your folders, now fixed!",
     author: ['Team Solar Engine'],
     identifier: "net.solarengine.solarlauncher",

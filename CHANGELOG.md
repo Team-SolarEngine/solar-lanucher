@@ -1,5 +1,17 @@
 # Solar Launcher Changelog
 
+## 0.8.9
+
+### Added
+- Improved system control bar with shortcuts
+
+### Misc
+- **Localization**
+  - Updated Indonesian
+  - Updated Turkish
+  - Updated lolcat
+  - Updated Malay
+
 ## 0.8.8
 
 ### Added
