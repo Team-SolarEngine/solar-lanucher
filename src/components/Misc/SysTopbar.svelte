@@ -83,7 +83,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="control">
         {#each sysTopbarAction as sta}
             <button class="transparent" onclick={sta.action}><i>{sta.icon}</i></button>
         {/each}
@@ -96,9 +96,9 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin-bottom: 8px;
         border-radius: 0;
         z-index: 999;
+        height: 2.5rem;
 
         &.styled {
             background-color: transparent;
@@ -107,6 +107,13 @@
             backdrop-filter: blur(8px);
             border-radius: 1rem;
         }
+    }
+
+    .control {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: 0;
     }
 
      .hitbox {
@@ -119,9 +126,14 @@
              align-items: center;
              position: fixed;
              transition: all 200ms ease-in-out;
+             transform: translateY(2.5px);
+             top: 0;
+             left: 0;
          }
 
          .functions {
+             top: 0;
+             left: 0;
              display: flex;
              flex-direction: row;
              align-items: center;
