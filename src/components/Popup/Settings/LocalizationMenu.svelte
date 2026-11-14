@@ -51,7 +51,8 @@
             count++;
         }
 
-        return [totalCount, count];
+        const fixedNum = count / totalCount * 100
+        return [Number(fixedNum.toFixed(1)), totalCount - count];
       } catch (error) {
         console.log("Error getting total localization words:", error);
       }
@@ -77,7 +78,7 @@
                 <span style="font-size: 1.4rem;">{locale.name}
                     <span style="opacity: 0.5; font-size: 0.85rem;">
                         {#await totalLocalizationWord(locale.code) then result}
-                            {result[1]}/{result[0]}
+                            {result[0]}% {#if result[1] >> 0} ({result[1]} missing!){/if}
                         {/await}
                     </span>
                 </span>
