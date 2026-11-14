@@ -166,12 +166,7 @@
         align-items: center;
     }
 
-    ._focused_one::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transform: translateX(-15px) translateY(-15px);
+    ._focused_one {
         background-color: rgba(255, 255, 255, 0.05);
         box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.05);
         border-radius: 8px;
