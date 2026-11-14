@@ -126,6 +126,6 @@
     "sidebar.filter_instances": "Filtra Instanze",
     "sidebar.disable_sounds.title": "Disattiva Suoni",
     "sidebar.disable_sounds.description": "I suoni ti danno fastidio tipo come il jarona? o ti spaventano? Attiva Questo!",
-    "settings.organize_settings.submenu.note": "",
-    "settings.organize_settings.submenu.description": ""
+    "settings.organize_settings.submenu.note": "Nota!",
+    "settings.organize_settings.submenu.description": "Spostare <b>NON</b> funzionerà per Windows. Non posso aggiustare questo grazie a Windows' webview. Questo funzionerà solo per Linux, e macOS. Ricorri ad usare solo le freccie."
 }

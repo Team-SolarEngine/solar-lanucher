@@ -6,6 +6,7 @@
 - Improved system control bar with shortcuts
 
 ### Misc
+- Added version to Version.svelte despite being ratelimited.
 - **Localization**
   - Updated Indonesian
   - Updated Turkish

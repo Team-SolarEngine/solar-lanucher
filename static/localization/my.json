@@ -127,5 +127,5 @@
     "sidebar.disable_sounds.title": "Tutup suara",
     "sidebar.disable_sounds.description": "Suara menjagi kamu mengila atau takutkan kamu? Buka ini!",
     "settings.organize_settings.submenu.note": "Nota!",
-    "settings.organize_settings.submenu.description": "Drag dengan drop <b>TIDAK DAPAT</b> untuk Windows' webview. Ini boleh dapat dengan Linux, and macOS. Gunakan anak panah"
+    "settings.organize_settings.submenu.description": "Drag dengan drop <b>TIDAK DAPAT</b> untuk Windows' webview. Ini boleh dapat dalam Linux, dan macOS. Gunakan anak panah"
 }
