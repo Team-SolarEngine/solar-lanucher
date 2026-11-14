@@ -58,6 +58,11 @@ async function updateCargoToml() {
     }
 }
 
-await updatePackageJson()
-await updateTauriJson()
-await updateCargoToml()
+// await updatePackageJson()
+// await updateTauriJson()
+// await updateCargoToml()
+
+for (let i = 0; i < 5; i++)
+    console.log("  PLEASE EDIT `net.solarengine.solarlauncher.metainfo.xml`")
+console.log("The XML file cannot be automatically updated,")
+console.log("because I do not know how XML parsers work.")

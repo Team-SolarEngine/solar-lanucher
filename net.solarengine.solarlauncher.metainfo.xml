@@ -80,15 +80,13 @@
         </screenshot>
     </screenshots>
     <releases>
-        <release version="0.8.6" date="2026-10-29" >
+                                  <!-- year-mo-da -->
+        <release version="0.8.9" date="2026-10-29" >
             <description>
-            <ul>
-                <li>ADDED: Organizing instances</li>
-                <li>ADDED: Searching instances</li>
-                <li>ADDED: Updated Turkey, Belgium, Indonesia translation</li>
-            </ul>
+                <h1>We don't do changelogs here!</h1>
+                <p>Here's our changelogs in the <a href="https://github.com/Team-SolarEngine/solar-lanucher/blob/main/CHANGELOG.md">GitHub repository</a>!</p>
             </description>
         </release>
     </releases>
-    <update_contact>me@bluson.tech</update_contact>
+    <update_contact>daveberry@bluson.tech</update_contact>
 </component>
