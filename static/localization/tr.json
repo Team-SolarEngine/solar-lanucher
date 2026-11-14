@@ -122,7 +122,7 @@
     "notification.download.description.soft_coded": "İndirme tamamlandı! Sadece çalıştırılabilir dosyayı girmeniz gerekiyor, ardından her şey hazır!",
     "settings.organize_instances.title": "Kurulumları düzenle",
     "settings.organize_instances.description": "Kurulumlarınızı düzenleyin! Mevcut düzeninizi beğenmiyor olabilirsiniz, neden değiştirmeyesiniz?",
-    "notification.download.description.failed": "",
+    "notification.download.description.failed": "İndirme başarısız oldu! Tekrar deneyin veya hata nedenini kontrol edin.",
     "sidebar.filter_instances": "Kurulumları Filtreleyin",
     "sidebar.disable_sounds.title": "Sesleri Kapat",
     "sidebar.disable_sounds.description": "Sesler çok mu rahatsız edici ya da seni korkutuyor mu? Bunu aç!",
