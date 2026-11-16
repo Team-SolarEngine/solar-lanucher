@@ -93,5 +93,12 @@
         height: 32rem;
         overflow-y: auto;
         border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.25);
+
+        code {
+            background-color: transparent;
+            user-select: text !important;
+            -webkit-user-select: text !important;
+        }
     }
 </style>
