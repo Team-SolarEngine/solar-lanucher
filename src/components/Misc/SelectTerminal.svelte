@@ -1,5 +1,6 @@
 <script lang="ts">
     import { instanceState } from "$lib/instance.svelte";
+    import { getWord } from "$lib/localization";
     import { invoke } from "@tauri-apps/api/core";
     import { getContext } from "svelte";
 
@@ -28,6 +29,10 @@
 
 <div class="overlay" class:active={thisVar.open} onclick={() => thisVar.open = false}></div>
 <dialog class:active={thisVar.open} style="width: 48rem;">
+    <h3>{#await getWord("topbar.active_terminal.submenu.title") then word}{@html word}{/await}</h3>
+    <span>{#await getWord("topbar.active_terminal.submenu.description") then word}{@html word}{/await}</span>
+    <hr class="medium"/>
+
     {#each instanceState.instances as is}
         <article style="display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 0.4rem;">
@@ -47,6 +52,6 @@
             </div>
         </article>
     {:else}
-        <span>No current active terminals here. Try opening one in the background.</span>
+        <span style="opacity: 0.5;">{#await getWord("global.not_found") then word}{@html word.replace("{type}", "Active terminals")}{/await}</span>
     {/each}
 </dialog>

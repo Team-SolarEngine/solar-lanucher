@@ -128,5 +128,7 @@
     "sidebar.disable_sounds.description": "sounds r cool!!! but it scawy? enabl!!",
     "settings.organize_settings.submenu.note": "noet!!!",
     "settings.organize_settings.submenu.description": "drg n' drp <b>NO WORKIE</b> fo windo webvoo. i catnot fix ths due to windo webvoo. ths onl wrks wit linoox and maccyos. use arro!!",
-    "start_extra.button.stop": "stawp"
+    "start_extra.button.stop": "stawp",
+    "topbar.active_terminal.submenu.title": "",
+    "topbar.active_terminal.submenu.description": ""
 }
