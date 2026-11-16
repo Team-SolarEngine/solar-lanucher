@@ -51,7 +51,7 @@
     "settings.version.button": "Buka releases",
     "settings.download_7zip.title": "Download 7zip",
     "settings.download_7zip.description": "Ini akan download 7zip tempat awak punya AppData! Guna ini SEKALI.",
-    "settings.docs.title": "Tak tau menguna Solar Launcher?",
+    "settings.docs.title": "Tak tau mengguna Solar Launcher?",
     "settings.docs.description": "Kita buat dokumentation untuk awak ikut! Kalau awak masih mau tolong, join Discord Server!",
     "prompt_for_new.title": "Tambah Instance untuk FNF...",
     "prompt_for_new.description": "Awak bisa download instance baru, atau tambah instance yang sudah ada!",
@@ -128,5 +128,5 @@
     "sidebar.disable_sounds.description": "Suara menjagi kamu mengila atau takutkan kamu? Buka ini!",
     "settings.organize_settings.submenu.note": "Nota!",
     "settings.organize_settings.submenu.description": "Drag dengan drop <b>TIDAK DAPAT</b> untuk Windows' webview. Ini boleh dapat dalam Linux, dan macOS. Gunakan anak panah",
-    "start_extra.button.stop": ""
+    "start_extra.button.stop": "Berhenti"
 }
