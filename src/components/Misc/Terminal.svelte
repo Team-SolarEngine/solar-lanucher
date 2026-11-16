@@ -1,15 +1,12 @@
 <script lang="ts">
     import { listen } from "@tauri-apps/api/event";
-    import { getContext, onMount, tick } from "svelte";
+    import { getContext, onMount, tick, untrack } from "svelte";
     import Convert from 'ansi-to-html';
     import { invoke } from "@tauri-apps/api/core";
 
     const ansiConverter = new Convert();
     let logContainer: HTMLElement;
     let terminalLogs = $state('');
-    printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Hi! This is a very experimental logs page.`)
-    printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Stuff may be buggy, and I genuinely don't know fix them.`)
-    printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Best you're gonna get is this. Thanks a lot! <3`)
 
     const callError: any = getContext('errorReport');
     let { terminalMetadata = $bindable() } = $props()
@@ -45,15 +42,27 @@
     async function closeApp(pid: number) {
         try {
             await invoke("kill_app", { pid })
-            printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Sucessfully terminated ${pid} <br/>`)
+            printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Sucessfully terminated ${pid}`)
         } catch(e) {
-            printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Unsucessfully terminated ${pid}. What happened: ${e} <br/>`)
+            printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Unsucessfully terminated ${pid}. What happened: ${e}`)
         }
     }
 
-    $effect(() => {
+    onMount(() => {
         setupLogListener()
     })
+
+    $effect(() => {
+        if (terminalMetadata.open) {
+            untrack(() => {
+                terminalLogs = "";
+
+                printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Hi! This is a very experimental logs page.`);
+                printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Stuff may be buggy, and I genuinely don't know how to fix it.`);
+                printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Best you're gonna get is this. Thanks a lot! <3`);
+            });
+        }
+    });
 </script>
 
 <div class="overlay" class:active={terminalMetadata.open}></div>
