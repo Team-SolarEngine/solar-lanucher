@@ -1,9 +1,9 @@
 export const instanceState = $state({
-  instances: [] as { pid: number; workingDir: string }[]
+  instances: [] as { pid: number; workingDir: string, name: string, icon: string, sanitized: string}[]
 });
 
-export function addInstanceState(pid: number, workingDir: string) {
-  instanceState.instances.push({ pid, workingDir });
+export function addInstanceState(pid: number, workingDir: string, name: string, icon: string, sanitized: string) {
+  instanceState.instances.push({ pid, workingDir, name, icon, sanitized });
 }
 
 export function removeInstanceState(pid: number) {

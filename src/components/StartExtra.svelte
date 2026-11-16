@@ -119,7 +119,7 @@
                 sanitizedName: sanitized,
                 openTerminal,
             });
-            addInstanceState(pid, workingDirectory)
+            addInstanceState(pid, workingDirectory, appName, appIconURL, sanitized)
             if (openTerminal) terminalDialog({
                 open: true,
                 pid,

@@ -9,6 +9,7 @@
 
     const downloadEnginePopup: any = getContext('downloadEngine')
     const localInstancePopup: any = getContext('localInstance')
+    const activeTerminal: any = getContext('activeTerminal')
 
     async function toggleMaximize() {
         if (await appWindow.isMaximized()) {
@@ -35,6 +36,7 @@
         { name: "Open Dialog", functions: [
             { name: "Add new", icon: "add", action: () => localInstancePopup({open: true}) },
             { name: "Download Engine", icon: "download", action: () => downloadEnginePopup({open: true}) },
+            { name: "Active Terminals", icon: "terminal", action: () => activeTerminal({open: true}) },
         ]},
         { name: "Extras", functions: [
             { name: "Reload App", icon: "refresh", action: () => window.location.reload() },
