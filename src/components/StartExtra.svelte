@@ -94,11 +94,18 @@
          */
         try {
             console.log(`currrent pid: ${pid}`)
-            if (isRunning) {
-                isRunning = false;
-                await invoke("kill_app", { pid })
-                pid = 0;
-                return
+            if (instanceIsRunning(workingDirectory)) {
+                const pids = getInstancePids(workingDirectory);
+
+                for (const instancePid of pids) {
+                    if (instancePid <= 1) continue;
+            
+                    await invoke("kill_app", { pid: instancePid });
+                    removeInstanceState(instancePid);
+                }
+
+                isRunning = instanceIsRunning(workingDirectory);
+                return;
             }
 
             pid = await invoke("start_app", {
@@ -156,7 +163,7 @@
         const timer = setInterval(() => void check(), 1000);
 
         return () => {
-            disposed = false;
+            disposed = true;
             clearInterval(timer);
         };
     });
