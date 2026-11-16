@@ -6,24 +6,29 @@
 
     const ansiConverter = new Convert();
     let logContainer: HTMLElement;
-    let terminalLogs = $state(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Hi! This is a very experimental logs page.
-<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Stuff may be buggy, and I genuinely don't know fix them.
-<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Best you're gonna get is this. Thanks a lot! <3 <br/>`);
+    let terminalLogs = $state('');
+    printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Hi! This is a very experimental logs page.`)
+    printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Stuff may be buggy, and I genuinely don't know fix them.`)
+    printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Best you're gonna get is this. Thanks a lot! <3`)
 
     const callError: any = getContext('errorReport');
     let { terminalMetadata = $bindable() } = $props()
+
+    function printLog(str: string) {
+        terminalLogs += str + "<br>";
+        tick().then(() => {
+            if (logContainer) {
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
+        });
+    }
 
     async function setupLogListener() {
         try {
             await listen("terminal-output", (event) => {
                 const rawline = event.payload.message;
                 const coloredHtmlLine = ansiConverter.toHtml(rawline);
-                terminalLogs += coloredHtmlLine + "<br>";
-                tick().then(() => {
-                    if (logContainer) {
-                        logContainer.scrollTop = logContainer.scrollHeight;
-                    }
-                });
+                printLog(coloredHtmlLine)
             })
         } catch(e) {
             callError({
@@ -40,9 +45,9 @@
     async function closeApp(pid: number) {
         try {
             await invoke("kill_app", { pid })
-            terminalLogs += `<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Sucessfully terminated ${pid} <br/>`
+            printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Sucessfully terminated ${pid} <br/>`)
         } catch(e) {
-            terminalLogs += `<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Unsucessfully terminated ${pid}. What happened: ${e} <br/>`
+            printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Unsucessfully terminated ${pid}. What happened: ${e} <br/>`)
         }
     }
 
