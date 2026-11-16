@@ -33,29 +33,28 @@ pub async fn start_app(
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(windows)]
-    let _ = run_command(command_exec, working_dir).await;
+    let _ = run_command(command_exec, _open_terminal, working_dir).await;
 
     #[cfg(unix)]
-    async fn trust_exec(command_exec: &str, working_dir: &str) -> Result<String, String> {
-        let _ = run_command(format!("chmod +x '{}'", command_exec), working_dir.to_string()).await;
+    let trust_exec = async |cmd: &str, dir: &str| -> Result<String, String> {
+        let _ = run_command(app.clone(), format!("chmod +x '{}'", cmd), false, dir.to_string()).await;
         Ok("Trusted executable.".to_string())
-    }
+    };
 
     #[cfg(unix)]
     let _ = trust_exec(&command_exec, &working_dir).await?;
 
     #[cfg(unix)]
-    if !_open_terminal {
-        let _ = run_command(command_exec, working_dir.to_string()).await;
-    } else {
-        let _ = run_streaming_command(app, command_exec, working_dir.to_string()).await;
-    };
+    let _ = run_command(app, command_exec, _open_terminal, working_dir.to_string()).await;
 
     Ok("App started".to_string())
 }
 
 #[tauri::command]
-pub async fn open_folder(path: String) -> Result<String, String> {
+pub async fn open_folder(
+    app: AppHandle,
+    path: String
+) -> Result<String, String> {
     /*
      * This function opens a folder in the file explorer of the current OS.
      *
@@ -66,17 +65,17 @@ pub async fn open_folder(path: String) -> Result<String, String> {
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(target_os = "linux")]
-    run_command(format!("xdg-open \"{}\"", path), ".".to_string())
+    run_command(app, format!("xdg-open \"{}\"", path), false, ".".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "macos")]
-    run_command(format!("open \"{}\"", path), ".".to_string())
+    run_command(app, format!("open \"{}\"", path), false, ".".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "windows")]
-    run_command(format!("explorer {}", path.replace('/', "\\")), ".".to_string())
+    run_command(app, format!("explorer {}", path.replace('/', "\\")), false, ".".to_string())
         .await
         .map_err(|e| format!("{} - If you frequently see this, ignore it.", e))?;
 
@@ -156,7 +155,12 @@ pub async fn pure_run_command(command: String, args: Vec<String>) -> Result<Stri
 }
 
 #[tauri::command]
-pub async fn run_command(command: String, working_dir: String) -> Result<String, String> {
+pub async fn run_command(
+    app: AppHandle,
+    command: String,
+    _open_terminal: bool,
+    working_dir: String
+) -> Result<String, String> {
     /*
      * This function runs a command in the specified working directory and returns the output.
      * Note:
@@ -171,13 +175,15 @@ pub async fn run_command(command: String, working_dir: String) -> Result<String,
      * Returns:
      *    Result<String, String> -> the command output or an error message
      */
-     let child = {
+     let mut child = {
         #[cfg(windows)]
         {
             let mut cmd = Command::new("cmd");
             cmd.args(["/C", &command.replace('/', "\\")]);
             cmd.creation_flags(CREATE_NO_WINDOW);
             cmd.current_dir(working_dir);
+            cmd.stdout(Stdio::piped());
+            cmd.stderr(Stdio::piped());
             cmd.spawn()
         }
 
@@ -192,63 +198,13 @@ pub async fn run_command(command: String, working_dir: String) -> Result<String,
                 let host_command = format!("cd '{working_dir}' && {command}");
                 let mut cmd = Command::new("flatpak-spawn");
                 cmd.args(["--host", "sh", "-c", &host_command]);
-                cmd.spawn()
-            } else {
-                let mut cmd = Command::new("sh");
-                cmd.args(["-c", &command]);
-                cmd.current_dir(working_dir);
-                cmd.spawn()
-            }
-        }
-    }
-    .map_err(|e| e.to_string())?;
-
-    let result = tokio::task::spawn_blocking(move || {
-        child.wait_with_output()
-    })
-    .await
-    .map_err(|e| e.to_string())?
-    .map_err(|e| e.to_string())?;
-
-    if result.status.success() {
-        Ok(String::from_utf8_lossy(&result.stdout).to_string())
-    } else {
-        Err(String::from_utf8_lossy(&result.stderr).to_string())
-    }
-}
-
-#[tauri::command]
-pub async fn run_streaming_command(
-    app: AppHandle,
-    command: String,
-    working_dir: String,
-) -> Result<(), String> {
-    // 1. Spawn the child process using your exact existing logic
-    let mut child = {
-        #[cfg(windows)]
-        {
-            let mut cmd = Command::new("cmd");
-            cmd.args(["/C", &command.replace('/', "\\")]);
-            cmd.creation_flags(CREATE_NO_WINDOW);
-            cmd.current_dir(working_dir.clone());
-            cmd.stdout(Stdio::piped());
-            cmd.stderr(Stdio::piped());
-            cmd.spawn()
-        }
-
-        #[cfg(unix)]
-        {
-            if is_running_in_flatpak() {
-                let host_command = format!("cd '{working_dir}' && {command}");
-                let mut cmd = Command::new("flatpak-spawn");
-                cmd.args(["--host", "sh", "-c", &host_command]);
                 cmd.stdout(Stdio::piped());
                 cmd.stderr(Stdio::piped());
                 cmd.spawn()
             } else {
                 let mut cmd = Command::new("sh");
                 cmd.args(["-c", &command]);
-                cmd.current_dir(working_dir.clone());
+                cmd.current_dir(working_dir);
                 cmd.stdout(Stdio::piped());
                 cmd.stderr(Stdio::piped());
                 cmd.spawn()
@@ -259,16 +215,25 @@ pub async fn run_streaming_command(
 
     let stdout = child.stdout.take().ok_or("Failed to capture stdout")?;
     let app_clone = app.clone();
-    std::thread::spawn(move || {
+    let result = tokio::task::spawn_blocking(move || {
         let reader = BufReader::new(stdout);
         for line in reader.lines() {
             if let Ok(text) = line {
                 let _ = app_clone.emit("terminal-output", LogPayload { message: text });
             }
         }
-    });
+        // Just wait for the child process to exit instead of wait_with_output()
+        child.wait()
+    })
+    .await
+    .map_err(|e| e.to_string())?
+    .map_err(|e| e.to_string())?;
 
-    Ok(())
+    if result.success() {
+        Ok("Command executed successfully".to_string())
+    } else {
+        Err(format!("Command exited with status: {}", result))
+    }
 }
 
 #[tauri::command]

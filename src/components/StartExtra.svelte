@@ -48,10 +48,7 @@
          *    openTerminal: boolean -> whether to open a terminal or run hidden
          */
         try {
-            terminalDialog({
-                open: true,
-                appWorkingDirectory: workingDirectory
-            })
+            if (openTerminal) terminalDialog({ open: true })
             await invoke("start_app", {
                 workingDir: workingDirectory,
                 commandExec: executeCommand,

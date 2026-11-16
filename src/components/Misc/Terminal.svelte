@@ -48,8 +48,8 @@
     <!-- Bind logContainer to the element with overflow-y: auto -->
     <pre class="terminal" bind:this={logContainer}><code>{@html terminalLogs}</code></pre>
     
-    <div style="margin-top: 8px;" class="right-align" onclick={() => terminalMetadata.open = false}>
-        <button><i>close</i> Close</button>
+    <div style="margin-top: 8px;" class="right-align">
+        <button onclick={() => terminalMetadata.open = false}><i>close</i> Close</button>
     </div>
 </dialog>
 
