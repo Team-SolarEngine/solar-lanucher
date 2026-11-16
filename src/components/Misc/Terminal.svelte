@@ -3,6 +3,7 @@
     import { getContext, onMount, tick, untrack } from "svelte";
     import Convert from 'ansi-to-html';
     import { invoke } from "@tauri-apps/api/core";
+    import { getWord } from "$lib/localization";
 
     const ansiConverter = new Convert();
     let logContainer: HTMLElement;
@@ -71,8 +72,14 @@
     <pre class="terminal" bind:this={logContainer}><code>{@html terminalLogs}</code></pre>
     
     <div style="margin-top: 8px;" class="right-align">
-        <button class="transparent" onclick={() => closeApp(terminalMetadata.pid)}><i>stop_circle</i> Stop</button>
-        <button onclick={() => terminalMetadata.open = false}><i>close</i> Close</button>
+        <button class="transparent" onclick={() => closeApp(terminalMetadata.pid)}>
+            <i>stop_circle</i>
+            {#await getWord("start_extra.button.stop") then word}{@html word}{/await}
+        </button>
+        <button onclick={() => terminalMetadata.open = false}>
+            <i>close</i>
+            {#await getWord("global.close") then word}{@html word}{/await}
+        </button>
     </div>
 </dialog>
 
