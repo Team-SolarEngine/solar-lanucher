@@ -2,7 +2,9 @@
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { getWord } from "$lib/localization";
+    import { getContext } from "svelte";
 
+    const terminalDialog: any = getContext('terminal')
     let {
         executeCommand = "",
         workingDirectory = "",
@@ -46,6 +48,10 @@
          *    openTerminal: boolean -> whether to open a terminal or run hidden
          */
         try {
+            terminalDialog({
+                open: true,
+                appWorkingDirectory: workingDirectory
+            })
             await invoke("start_app", {
                 workingDir: workingDirectory,
                 commandExec: executeCommand,

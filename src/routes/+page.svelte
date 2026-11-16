@@ -23,6 +23,7 @@
     import FirstTimePopup from "../components/Popup/FirstTimePopup.svelte";
     import { loadApps, type AppData } from "$lib/apps";
     import { playSound } from "$lib/sounds";
+    import Terminal from "../components/Misc/Terminal.svelte";
 
     let apps = $state<AppData[]>([]);
 
@@ -70,6 +71,14 @@
         open: false,
     });
     setContext('downloadEngine', (dat: any) => { downloadEngineDat = dat })
+
+    let terminalMetadata = $state({
+        open: false,
+        appName: "",
+        appWorkingDirectory: "",
+        appIconURL: "",
+    });
+    setContext('terminal', (dat: any) => { terminalMetadata = dat })
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -241,6 +250,7 @@
 <FirstTimePopup bind:modalForFirstTime />
 <DragAndDrop/>
 <ErrorPopup bind:errorDat/>
+<Terminal bind:terminalMetadata/>
 
 <Local onAppAdded={loadInstances} bind:localInstanceDat/>
 <Download bind:downloadEngineDat />

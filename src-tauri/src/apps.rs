@@ -1,4 +1,6 @@
-use std::process::Command;
+use std::io::{BufRead, BufReader};
+use std::process::{Command, Stdio};
+use tauri::{AppHandle, Emitter};
 
 #[cfg(windows)]
 use std::os::windows::process::CommandExt;
@@ -6,8 +8,18 @@ use std::os::windows::process::CommandExt;
 #[cfg(windows)]
 const CREATE_NO_WINDOW: u32 = 0x08000000;
 
+#[derive(Clone, serde::Serialize)]
+struct LogPayload {
+    message: String,
+}
+
 #[tauri::command]
-pub async fn start_app(working_dir: String, command_exec: String, _open_terminal: bool) -> Result<String, String> {
+pub async fn start_app(
+    app: AppHandle,
+    working_dir: String,
+    command_exec: String,
+    _open_terminal: bool
+) -> Result<String, String> {
     /*
      * This function starts an app by running a command in the given directory.
      * It opens a terminal emulator if requested, otherwise it runs in the background.
@@ -21,11 +33,11 @@ pub async fn start_app(working_dir: String, command_exec: String, _open_terminal
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(windows)]
-    let _ = run_command(command_exec, _open_terminal, working_dir).await;
+    let _ = run_command(command_exec, working_dir).await;
 
     #[cfg(unix)]
     async fn trust_exec(command_exec: &str, working_dir: &str) -> Result<String, String> {
-        let _ = run_command(format!("chmod +x '{}'", command_exec), false, working_dir.to_string()).await;
+        let _ = run_command(format!("chmod +x '{}'", command_exec), working_dir.to_string()).await;
         Ok("Trusted executable.".to_string())
     }
 
@@ -34,13 +46,9 @@ pub async fn start_app(working_dir: String, command_exec: String, _open_terminal
 
     #[cfg(unix)]
     if !_open_terminal {
-        let _ = run_command(command_exec, false, working_dir.to_string()).await;
+        let _ = run_command(command_exec, working_dir.to_string()).await;
     } else {
-        for &emulator in &["alacritty", "gnome-terminal", "xfce4-terminal", "terminator", "foot", "konsole", "kitty"] {
-            let _ = run_command(format!("{emulator} -e {command_exec}"), false, working_dir.to_string()).await;
-            return Ok(Default::default())
-        }
-        return Err("No terminal emulator found".to_string());
+        let _ = run_streaming_command(app, command_exec, working_dir.to_string()).await;
     };
 
     Ok("App started".to_string())
@@ -58,17 +66,17 @@ pub async fn open_folder(path: String) -> Result<String, String> {
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(target_os = "linux")]
-    run_command(format!("xdg-open \"{}\"", path), false, ".".to_string())
+    run_command(format!("xdg-open \"{}\"", path), ".".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "macos")]
-    run_command(format!("open \"{}\"", path), false, ".".to_string())
+    run_command(format!("open \"{}\"", path), ".".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "windows")]
-    run_command(format!("explorer {}", path.replace('/', "\\")), false, ".".to_string())
+    run_command(format!("explorer {}", path.replace('/', "\\")), ".".to_string())
         .await
         .map_err(|e| format!("{} - If you frequently see this, ignore it.", e))?;
 
@@ -148,7 +156,7 @@ pub async fn pure_run_command(command: String, args: Vec<String>) -> Result<Stri
 }
 
 #[tauri::command]
-pub async fn run_command(command: String, _create_terminal_window: bool, working_dir: String) -> Result<String, String> {
+pub async fn run_command(command: String, working_dir: String) -> Result<String, String> {
     /*
      * This function runs a command in the specified working directory and returns the output.
      * Note:
@@ -168,7 +176,7 @@ pub async fn run_command(command: String, _create_terminal_window: bool, working
         {
             let mut cmd = Command::new("cmd");
             cmd.args(["/C", &command.replace('/', "\\")]);
-            cmd.creation_flags(if _create_terminal_window { 0 } else { CREATE_NO_WINDOW });
+            cmd.creation_flags(CREATE_NO_WINDOW);
             cmd.current_dir(working_dir);
             cmd.spawn()
         }
@@ -207,6 +215,60 @@ pub async fn run_command(command: String, _create_terminal_window: bool, working
     } else {
         Err(String::from_utf8_lossy(&result.stderr).to_string())
     }
+}
+
+#[tauri::command]
+pub async fn run_streaming_command(
+    app: AppHandle,
+    command: String,
+    working_dir: String,
+) -> Result<(), String> {
+    // 1. Spawn the child process using your exact existing logic
+    let mut child = {
+        #[cfg(windows)]
+        {
+            let mut cmd = Command::new("cmd");
+            cmd.args(["/C", &command.replace('/', "\\")]);
+            cmd.creation_flags(CREATE_NO_WINDOW);
+            cmd.current_dir(working_dir.clone());
+            cmd.stdout(Stdio::piped());
+            cmd.stderr(Stdio::piped());
+            cmd.spawn()
+        }
+
+        #[cfg(unix)]
+        {
+            if is_running_in_flatpak() {
+                let host_command = format!("cd '{working_dir}' && {command}");
+                let mut cmd = Command::new("flatpak-spawn");
+                cmd.args(["--host", "sh", "-c", &host_command]);
+                cmd.stdout(Stdio::piped());
+                cmd.stderr(Stdio::piped());
+                cmd.spawn()
+            } else {
+                let mut cmd = Command::new("sh");
+                cmd.args(["-c", &command]);
+                cmd.current_dir(working_dir.clone());
+                cmd.stdout(Stdio::piped());
+                cmd.stderr(Stdio::piped());
+                cmd.spawn()
+            }
+        }
+    }
+    .map_err(|e| e.to_string())?;
+
+    let stdout = child.stdout.take().ok_or("Failed to capture stdout")?;
+    let app_clone = app.clone();
+    std::thread::spawn(move || {
+        let reader = BufReader::new(stdout);
+        for line in reader.lines() {
+            if let Ok(text) = line {
+                let _ = app_clone.emit("terminal-output", LogPayload { message: text });
+            }
+        }
+    });
+
+    Ok(())
 }
 
 #[tauri::command]
