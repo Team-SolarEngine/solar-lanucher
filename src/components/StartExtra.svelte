@@ -9,7 +9,6 @@
       instanceIsRunning,
       removeInstanceState
     } from "$lib/instance.svelte";
-    import { listenerSanitizer } from "$lib/sanitizer";
 
     const terminalDialog: any = getContext('terminal')
     let {
@@ -111,7 +110,7 @@
                 return;
             }
 
-            const sanitized = listenerSanitizer(appName);
+            const sanitized = crypto.randomUUID();
             console.log(sanitized)
             pid = await invoke("start_app", {
                 workingDir: workingDirectory,
