@@ -4,7 +4,7 @@ import { parse, stringify } from 'smol-toml';
 const INFO_APP = {
     name: 'solarlauncher',
     full_name: "Solar Launcher",
-    version: '0.8.9',
+    version: '0.8.10',
     description: "launching fnf instances from deep insde your folders, now fixed!",
     author: ['Team Solar Engine'],
     identifier: "net.solarengine.solarlauncher",
@@ -49,7 +49,7 @@ async function updateCargoToml() {
         fileContent.package["name"] = INFO_APP["name"]
         fileContent.package["version"] = INFO_APP["version"]
         fileContent.package["description"] = INFO_APP["description"]
-        fileContent.package["author"] = INFO_APP["author"]
+        fileContent.package["authors"] = INFO_APP["author"]
         fileContent.lib["name"] = INFO_APP["name"] + "_lib"
 
         await writeFile("src-tauri/Cargo.toml", stringify(fileContent), 'utf8');
@@ -58,9 +58,9 @@ async function updateCargoToml() {
     }
 }
 
-// await updatePackageJson()
-// await updateTauriJson()
-// await updateCargoToml()
+await updatePackageJson()
+await updateTauriJson()
+await updateCargoToml()
 
 for (let i = 0; i < 5; i++)
     console.log("  PLEASE EDIT `net.solarengine.solarlauncher.metainfo.xml`")

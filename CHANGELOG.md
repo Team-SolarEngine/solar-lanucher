@@ -1,5 +1,11 @@
 # Solar Launcher Changelog
 
+## 0.8.10
+
+### Added
+- In-app terminal instead of using the system's terminal.
+- A start/stop like Steam for instances.
+
 ## 0.8.9
 
 ### Added
