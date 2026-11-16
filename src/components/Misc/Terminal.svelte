@@ -23,7 +23,7 @@
 
     async function setupLogListener() {
         try {
-            await listen("terminal-output", (event) => {
+            await listen(terminalMetadata.sanitized, (event) => {
                 const rawline = event.payload.message;
                 const coloredHtmlLine = ansiConverter.toHtml(rawline);
                 printLog(coloredHtmlLine)
@@ -49,12 +49,9 @@
         }
     }
 
-    onMount(() => {
-        setupLogListener()
-    })
-
     $effect(() => {
         if (terminalMetadata.open) {
+            setupLogListener()
             untrack(() => {
                 terminalLogs = "";
 
@@ -68,9 +65,17 @@
 
 <div class="overlay" class:active={terminalMetadata.open}></div>
 <dialog style="width: 48rem !important;" class:active={terminalMetadata.open}>
+    <div style="display: flex; gap: 0.4rem; align-items: center;">
+        <img style="width: 64px; border-radius: 8px;" src={terminalMetadata.appIconURL} alt={terminalMetadata.appName} />
+        <div style="display: flex; flex-direction: column;">
+            <span style="font-size: 1.4rem; font-weight: bold;">{terminalMetadata.appName}</span>
+            <span style="opacity: 0.5;">Listening: {terminalMetadata.sanitized}</span>
+        </div>
+    </div>
+
     <!-- Bind logContainer to the element with overflow-y: auto -->
     <pre class="terminal" bind:this={logContainer}><code>{@html terminalLogs}</code></pre>
-    
+
     <div style="margin-top: 8px;" class="right-align">
         <button class="transparent" onclick={() => closeApp(terminalMetadata.pid)}>
             <i>stop_circle</i>

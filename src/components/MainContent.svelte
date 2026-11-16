@@ -135,6 +135,8 @@ okay real shit talk;
                 <StartExtra
                     workingDirectory={workingDirectory}
                     executeCommand={executeCommand}
+                    appName={name}
+                    appIconURL={logoUrl}
                     stretch={true}
                     index={index}
                     onEdit={callEdit}

@@ -9,11 +9,14 @@
       instanceIsRunning,
       removeInstanceState
     } from "$lib/instance.svelte";
+    import { listenerSanitizer } from "$lib/sanitizer";
 
     const terminalDialog: any = getContext('terminal')
     let {
         executeCommand = "",
         workingDirectory = "",
+        appIconURL = "",
+        appName = "",
         onDeleted = () => {},
         onEdit = () => {},
         index = -1,
@@ -108,13 +111,22 @@
                 return;
             }
 
+            const sanitized = listenerSanitizer(appName);
+            console.log(sanitized)
             pid = await invoke("start_app", {
                 workingDir: workingDirectory,
                 commandExec: executeCommand,
+                sanitizedName: sanitized,
                 openTerminal,
             });
             addInstanceState(pid, workingDirectory)
-            if (openTerminal) terminalDialog({ open: true, pid })
+            if (openTerminal) terminalDialog({
+                open: true,
+                pid,
+                sanitized,
+                appName,
+                appIconURL
+            })
         } catch (e) {
             useComponentSnackbarError(`Failed to start app: ${e}`);
         }

@@ -77,6 +77,7 @@
         appName: "",
         appWorkingDirectory: "",
         appIconURL: "",
+        sanitized: "",
         pid: 0,
     });
     setContext('terminal', (dat: any) => { terminalMetadata = dat })

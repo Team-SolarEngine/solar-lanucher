@@ -18,6 +18,7 @@ pub async fn start_app(
     app: AppHandle,
     working_dir: String,
     command_exec: String,
+    sanitized_name: String,
     _open_terminal: bool
 ) -> Result<u32, String> {
     /*
@@ -33,12 +34,12 @@ pub async fn start_app(
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(windows)]
-    let pid = run_command(app, command_exec, _open_terminal, working_dir).await?;
+    let pid = run_command(app, command_exec, _open_terminal, working_dir, sanitized_name).await?;
 
     #[cfg(unix)]
     {
         let trust_exec = async |cmd: &str, dir: &str| -> Result<String, String> {
-            let _ = run_command(app.clone(), format!("chmod +x '{}'", cmd), false, dir.to_string()).await;
+            let _ = run_command(app.clone(), format!("chmod +x '{}'", cmd), false, dir.to_string(), "none".to_string()).await;
             Ok("Trusted executable.".to_string())
         };
 
@@ -46,7 +47,7 @@ pub async fn start_app(
     }
 
     #[cfg(unix)]
-    let pid = run_command(app, command_exec, _open_terminal, working_dir.to_string()).await?;
+    let pid = run_command(app, command_exec, _open_terminal, working_dir.to_string(), sanitized_name).await?;
 
     Ok(pid)
 }
@@ -66,17 +67,17 @@ pub async fn open_folder(
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(target_os = "linux")]
-    run_command(app, format!("xdg-open \"{}\"", path), false, ".".to_string())
+    run_command(app, format!("xdg-open \"{}\"", path), false, ".".to_string(), "none".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "macos")]
-    run_command(app, format!("open \"{}\"", path), false, ".".to_string())
+    run_command(app, format!("open \"{}\"", path), false, ".".to_string(), "none".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "windows")]
-    run_command(app, format!("explorer {}", path.replace('/', "\\")), false, ".".to_string())
+    run_command(app, format!("explorer {}", path.replace('/', "\\")), false, ".".to_string(), "none".to_string())
         .await
         .map_err(|e| format!("{} - If you frequently see this, ignore it.", e))?;
 
@@ -160,7 +161,8 @@ pub async fn run_command(
     app: AppHandle,
     command: String,
     _open_terminal: bool,
-    working_dir: String
+    working_dir: String,
+    sanitized_name: String,
 ) -> Result<u32, String> {
     /*
      * This function runs a command in the specified working directory and returns the output.
@@ -223,7 +225,7 @@ pub async fn run_command(
             let reader = BufReader::new(stdout);
             for line in reader.lines() {
                 if let Ok(text) = line {
-                    let _ = app_clone.emit("terminal-output", LogPayload { message: text });
+                    let _ = app_clone.emit(&format!("{}", sanitized_name).to_string(), LogPayload { message: text });
                 }
             }
             let _ = child.wait();
