@@ -235,9 +235,9 @@ pub async fn run_command(
 
 #[tauri::command]
 pub async fn kill_app(pid: u32) -> Result<String, String> {
+    println!("Requested to kill: {}", &pid.to_string());
     #[cfg(unix)]
     {
-        // On Linux/Unix, use the `kill` command or nix signal
         let status = std::process::Command::new("kill")
             .arg("-9")
             .arg(pid.to_string())
@@ -253,9 +253,9 @@ pub async fn kill_app(pid: u32) -> Result<String, String> {
 
     #[cfg(windows)]
     {
-        // On Windows, use `taskkill`
         let status = std::process::Command::new("taskkill")
-            .args(["/F", "/PID", &pid.to_string()])
+            .args(["/F", "/T", "/PID", &pid.to_string()])
+            .creation_flags(CREATE_NO_WINDOW)
             .status()
             .map_err(|e| e.to_string())?;
 
@@ -283,9 +283,10 @@ pub fn is_running_in_flatpak() -> bool {
 pub fn pid_exists(pid: u32) -> bool {
     #[cfg(target_os = "windows")]
     {
-        std::process::Command::new("tasklist")
-            .args(["/FI", &format!("PID eq {pid}"), "/FO", "CSV", "/NH"])
-            .output()
+        let mut cmd = std::process::Command::new("tasklist");
+        cmd.args(["/FI", &format!("PID eq {pid}"), "/FO", "CSV", "/NH"]);
+        cmd.creation_flags(CREATE_NO_WINDOW);
+        cmd.output()
             .map(|output| {
                 String::from_utf8_lossy(&output.stdout)
                     .lines()

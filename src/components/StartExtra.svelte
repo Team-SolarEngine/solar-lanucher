@@ -99,7 +99,7 @@
 
                 for (const instancePid of pids) {
                     if (instancePid <= 1) continue;
-            
+
                     await invoke("kill_app", { pid: instancePid });
                     removeInstanceState(instancePid);
                 }
