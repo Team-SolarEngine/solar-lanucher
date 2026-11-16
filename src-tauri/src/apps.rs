@@ -19,7 +19,7 @@ pub async fn start_app(
     working_dir: String,
     command_exec: String,
     _open_terminal: bool
-) -> Result<String, String> {
+) -> Result<u32, String> {
     /*
      * This function starts an app by running a command in the given directory.
      * It opens a terminal emulator if requested, otherwise it runs in the background.
@@ -33,21 +33,22 @@ pub async fn start_app(
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(windows)]
-    let _ = run_command(command_exec, _open_terminal, working_dir).await;
+    let pid = run_command(app, command_exec, _open_terminal, working_dir).await?;
 
     #[cfg(unix)]
-    let trust_exec = async |cmd: &str, dir: &str| -> Result<String, String> {
-        let _ = run_command(app.clone(), format!("chmod +x '{}'", cmd), false, dir.to_string()).await;
-        Ok("Trusted executable.".to_string())
-    };
+    {
+        let trust_exec = async |cmd: &str, dir: &str| -> Result<String, String> {
+            let _ = run_command(app.clone(), format!("chmod +x '{}'", cmd), false, dir.to_string()).await;
+            Ok("Trusted executable.".to_string())
+        };
+
+        trust_exec(&command_exec, &working_dir).await?;
+    }
 
     #[cfg(unix)]
-    let _ = trust_exec(&command_exec, &working_dir).await?;
+    let pid = run_command(app, command_exec, _open_terminal, working_dir.to_string()).await?;
 
-    #[cfg(unix)]
-    let _ = run_command(app, command_exec, _open_terminal, working_dir.to_string()).await;
-
-    Ok("App started".to_string())
+    Ok(pid)
 }
 
 #[tauri::command]
@@ -160,7 +161,7 @@ pub async fn run_command(
     command: String,
     _open_terminal: bool,
     working_dir: String
-) -> Result<String, String> {
+) -> Result<u32, String> {
     /*
      * This function runs a command in the specified working directory and returns the output.
      * Note:
@@ -213,26 +214,56 @@ pub async fn run_command(
     }
     .map_err(|e| e.to_string())?;
 
+    let pid = child.id();
     let stdout = child.stdout.take().ok_or("Failed to capture stdout")?;
     let app_clone = app.clone();
-    let result = tokio::task::spawn_blocking(move || {
-        let reader = BufReader::new(stdout);
-        for line in reader.lines() {
-            if let Ok(text) = line {
-                let _ = app_clone.emit("terminal-output", LogPayload { message: text });
-            }
-        }
-        // Just wait for the child process to exit instead of wait_with_output()
-        child.wait()
-    })
-    .await
-    .map_err(|e| e.to_string())?
-    .map_err(|e| e.to_string())?;
 
-    if result.success() {
-        Ok("Command executed successfully".to_string())
-    } else {
-        Err(format!("Command exited with status: {}", result))
+    tokio::spawn(async move {
+        let _ = tokio::task::spawn_blocking(move || {
+            let reader = BufReader::new(stdout);
+            for line in reader.lines() {
+                if let Ok(text) = line {
+                    let _ = app_clone.emit("terminal-output", LogPayload { message: text });
+                }
+            }
+            let _ = child.wait();
+        }).await;
+    });
+
+    Ok(pid)
+}
+
+#[tauri::command]
+pub async fn kill_app(pid: u32) -> Result<String, String> {
+    #[cfg(unix)]
+    {
+        // On Linux/Unix, use the `kill` command or nix signal
+        let status = std::process::Command::new("kill")
+            .arg("-9")
+            .arg(pid.to_string())
+            .status()
+            .map_err(|e| e.to_string())?;
+
+        if status.success() {
+            Ok(format!("Process {} terminated.", pid))
+        } else {
+            Err(format!("Failed to terminate process {}", pid))
+        }
+    }
+
+    #[cfg(windows)]
+    {
+        // On Windows, use `taskkill`
+        let status = std::process::Command::new("taskkill")
+            .args(["/F", "/PID", &pid.to_string()])
+            .status()
+            .map_err(|e| e.to_string())?;
+
+        if status.success() {
+            Ok(format!("Process {} terminated.", pid))
+        } else {
+            Err(format!("Failed to terminate process {}", pid))
+        }
     }
 }
 

@@ -2,13 +2,13 @@
     import { listen } from "@tauri-apps/api/event";
     import { getContext, onMount, tick } from "svelte";
     import Convert from 'ansi-to-html';
+    import { invoke } from "@tauri-apps/api/core";
 
     const ansiConverter = new Convert();
     let logContainer: HTMLElement;
-    let terminalLogs = $state(`Solar Launcher Logs
-    Hi! This is a very experimental logs page.
-    Stuff may be buggy, and I genuinely don't know fix them.
-    Best you're gonna get is this. Thanks a lot! <3 <br/><br/>`);
+    let terminalLogs = $state(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Hi! This is a very experimental logs page.
+<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Stuff may be buggy, and I genuinely don't know fix them.
+<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Best you're gonna get is this. Thanks a lot! <3 <br/>`);
 
     const callError: any = getContext('errorReport');
     let { terminalMetadata = $bindable() } = $props()
@@ -19,7 +19,6 @@
                 const rawline = event.payload.message;
                 const coloredHtmlLine = ansiConverter.toHtml(rawline);
                 terminalLogs += coloredHtmlLine + "<br>";
-                
                 tick().then(() => {
                     if (logContainer) {
                         logContainer.scrollTop = logContainer.scrollHeight;
@@ -38,6 +37,15 @@
         }
     }
 
+    async function closeApp(pid: number) {
+        try {
+            await invoke("kill_app", { pid })
+            terminalLogs += `<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Sucessfully terminated ${pid} <br/>`
+        } catch(e) {
+            terminalLogs += `<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Unsucessfully terminated ${pid}. What happened: ${e} <br/>`
+        }
+    }
+
     $effect(() => {
         setupLogListener()
     })
@@ -49,6 +57,7 @@
     <pre class="terminal" bind:this={logContainer}><code>{@html terminalLogs}</code></pre>
     
     <div style="margin-top: 8px;" class="right-align">
+        <button class="transparent" onclick={() => closeApp(terminalMetadata.pid)}><i>stop_circle</i> Stop</button>
         <button onclick={() => terminalMetadata.open = false}><i>close</i> Close</button>
     </div>
 </dialog>

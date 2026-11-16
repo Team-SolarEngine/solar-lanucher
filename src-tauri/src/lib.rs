@@ -120,6 +120,7 @@ pub fn run() {
             json::check_json_file,
             seven_zip::download_7z,
             apps::is_running_in_flatpak,
+            apps::kill_app,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

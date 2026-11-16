@@ -48,12 +48,12 @@
          *    openTerminal: boolean -> whether to open a terminal or run hidden
          */
         try {
-            if (openTerminal) terminalDialog({ open: true })
-            await invoke("start_app", {
+            const pid = await invoke("start_app", {
                 workingDir: workingDirectory,
                 commandExec: executeCommand,
                 openTerminal,
             });
+            if (openTerminal) terminalDialog({ open: true, pid })
         } catch (e) {
             useComponentSnackbarError(`Failed to start app: ${e}`);
         }
