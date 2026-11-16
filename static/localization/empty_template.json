@@ -127,5 +127,6 @@
     "sidebar.disable_sounds.title": "",
     "sidebar.disable_sounds.description": "",
     "settings.organize_settings.submenu.note": "",
-    "settings.organize_settings.submenu.description": ""
+    "settings.organize_settings.submenu.description": "",
+    "start_extra.button.stop": ""
 }

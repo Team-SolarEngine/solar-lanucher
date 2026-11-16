@@ -121,6 +121,7 @@ pub fn run() {
             seven_zip::download_7z,
             apps::is_running_in_flatpak,
             apps::kill_app,
+            apps::pid_exists,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

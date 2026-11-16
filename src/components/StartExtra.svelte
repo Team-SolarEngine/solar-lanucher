@@ -2,7 +2,13 @@
     import { invoke } from "@tauri-apps/api/core";
     import { useSnackbarError, type Snackbar } from "$lib/interface";
     import { getWord } from "$lib/localization";
-    import { getContext } from "svelte";
+    import { getContext, onMount } from "svelte";
+    import {
+      addInstanceState,
+      getInstancePids,
+      instanceIsRunning,
+      removeInstanceState
+    } from "$lib/instance.svelte";
 
     const terminalDialog: any = getContext('terminal')
     let {
@@ -26,7 +32,46 @@
         useSnackbarError(message, snackbar);
     }
 
+    let isRunning = $state(false);
+    let checking = $state(false);
+    let disposed = $state(false);
+
     let deleteInstancePopup = $state(false);
+    let pid = $state(0);
+
+    const check = async () => {
+        if (checking) return;
+        checking = true;
+
+        try {
+            const pids = getInstancePids(workingDirectory);
+
+            const results = await Promise.all(
+                pids.map(async (pid) => {
+                    const running = await invoke("pid_exists", { pid });
+                    return { pid, running };
+                })
+            );
+
+            if (disposed) return;
+
+            for (const result of results) {
+                if (!result.running) {
+                    removeInstanceState(result.pid);
+                }
+            }
+
+            isRunning = instanceIsRunning(workingDirectory);
+        } catch (e) {
+            console.error("Failed to check app processes:", e);
+            if (!disposed) {
+                isRunning = instanceIsRunning(workingDirectory);
+            }
+        } finally {
+            checking = false;
+        }
+    };
+
     let extraFunctionalities = $derived([
         { name: "Open in Terminal", key: "start_extra.button.submenu.open_in_terminal", icon: "terminal", action: () => startApp(true) },
         { name: "Edit", key: "start_extra.button.submenu.edit", icon: "edit", action: () => onEdit(index) },
@@ -48,11 +93,20 @@
          *    openTerminal: boolean -> whether to open a terminal or run hidden
          */
         try {
-            const pid = await invoke("start_app", {
+            console.log(`currrent pid: ${pid}`)
+            if (isRunning) {
+                isRunning = false;
+                await invoke("kill_app", { pid })
+                pid = 0;
+                return
+            }
+
+            pid = await invoke("start_app", {
                 workingDir: workingDirectory,
                 commandExec: executeCommand,
                 openTerminal,
             });
+            addInstanceState(pid, workingDirectory)
             if (openTerminal) terminalDialog({ open: true, pid })
         } catch (e) {
             useComponentSnackbarError(`Failed to start app: ${e}`);
@@ -96,14 +150,34 @@
             useComponentSnackbarError(`Failed to delete instance: ${e}`);
         }
     }
+
+    onMount(() => {
+        void check();
+        const timer = setInterval(() => void check(), 1000);
+
+        return () => {
+            disposed = false;
+            clearInterval(timer);
+        };
+    });
 </script>
 
 <nav class="group split">
-    <button class="border left-round primary" onclick={() => startApp()}>
-      <i>play_arrow</i>
+    <button class="border left-round primary" class:tertiary={isRunning} onclick={() => startApp()}>
+      <i>
+          {#if isRunning}
+              stop_circle
+          {:else}
+              play_arrow
+          {/if}
+      </i>
       <span>
             {#if !firstTimePopup}
-                {#await getWord("start_extra.button.start") then word}{@html word}{/await}
+                {#if isRunning}
+                    {#await getWord("start_extra.button.stop") then word}{@html word}{/await}
+                {:else}
+                    {#await getWord("start_extra.button.start") then word}{@html word}{/await}
+                {/if}
             {:else}
                 Start
             {/if}

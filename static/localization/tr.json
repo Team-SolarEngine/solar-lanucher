@@ -127,5 +127,6 @@
     "sidebar.disable_sounds.title": "Sesleri Kapat",
     "sidebar.disable_sounds.description": "Sesler çok mu rahatsız edici ya da seni korkutuyor mu? Bunu aç!",
     "settings.organize_settings.submenu.note": "Not!",
-    "settings.organize_settings.submenu.description": "Sürükle ve bırak Windows'ta <b>ÇALIŞMAZ</b>. Windows'un webview yapısı nedeniyle bunu düzeltemiyorum. Bu özellik yalnızca Linux ve macOS'ta çalışır. Bunun yerine okları kullanın."
+    "settings.organize_settings.submenu.description": "Sürükle ve bırak Windows'ta <b>ÇALIŞMAZ</b>. Windows'un webview yapısı nedeniyle bunu düzeltemiyorum. Bu özellik yalnızca Linux ve macOS'ta çalışır. Bunun yerine okları kullanın.",
+    "start_extra.button.stop": ""
 }

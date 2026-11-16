@@ -278,3 +278,33 @@ pub fn is_running_in_flatpak() -> bool {
      */
     std::path::Path::new("/.flatpak-info").exists()
 }
+
+#[tauri::command]
+pub fn pid_exists(pid: u32) -> bool {
+    #[cfg(target_os = "windows")]
+    {
+        std::process::Command::new("tasklist")
+            .args(["/FI", &format!("PID eq {pid}"), "/FO", "CSV", "/NH"])
+            .output()
+            .map(|output| {
+                String::from_utf8_lossy(&output.stdout)
+                    .lines()
+                    .any(|line| line.contains(&format!(",\"{pid}\",")))
+            })
+            .unwrap_or(false)
+    }
+
+    #[cfg(target_os = "linux")]
+    {
+        std::process::Command::new("ps")
+            .args(["-p", &pid.to_string(), "-o", "pid="])
+            .output()
+            .map(|output| !String::from_utf8_lossy(&output.stdout).trim().is_empty())
+            .unwrap_or(false)
+    }
+
+    #[cfg(not(any(target_os = "windows", target_os = "linux")))]
+    {
+        false
+    }
+}
