@@ -129,6 +129,6 @@
     "settings.organize_settings.submenu.note": "Nota!",
     "settings.organize_settings.submenu.description": "Drag dengan drop <b>TIDAK DAPAT</b> untuk Windows' webview. Ini boleh dapat dalam Linux, dan macOS. Gunakan anak panah",
     "start_extra.button.stop": "Berhenti",
-    "topbar.active_terminal.submenu.title": "",
-    "topbar.active_terminal.submenu.description": ""
+    "topbar.active_terminal.submenu.title": "Aktif Terminal",
+    "topbar.active_terminal.submenu.description": "Di sini yang awak punya terminal yang aktif pergi! Awak boleh henti, atau buka terminal dalam kalau hilang. Biasanya untuk pembangunan, tapi bagus untuk debug! <br/> <b>Terminal yang dibuka, logs dia hilang. Tidak boleh baiki, maaf.<b/>"
 }
