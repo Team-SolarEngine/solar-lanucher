@@ -6,6 +6,10 @@
 - In-app terminal instead of using the system's terminal.
 - A start/stop like Steam for instances.
 
+### Misc
+- Opens explorer if Execute Command is empty.
+- A more verbose error in the
+
 ## 0.8.9
 
 ### Added
