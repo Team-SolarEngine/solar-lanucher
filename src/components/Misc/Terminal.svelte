@@ -32,6 +32,12 @@
     }
 
     function setupLogListener() {
+        /*
+         * This function sets up the log listener from the
+         * given UUID. It also queues logs and waits 50ms
+         * to send them to the DOM. This way; It prevents
+         * lag, and memory/listen leaks.
+         */
         let stopped = false;
         let unlisten: (() => void) | undefined;
         let pending: string[] = [];
