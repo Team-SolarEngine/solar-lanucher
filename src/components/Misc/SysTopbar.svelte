@@ -12,6 +12,12 @@
     const activeTerminal: any = getContext('activeTerminal')
 
     async function toggleMaximize() {
+        /*
+         * This function checks if the app is minimized
+         * or unminimized and when on click, it will do
+         * the opposite. The buttons might not be accurate,
+         * don't blame me!
+         */
         if (await appWindow.isMaximized()) {
             checkMaximized = true;
             await appWindow.unmaximize();

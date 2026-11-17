@@ -28,6 +28,7 @@ pub async fn start_app(
      * Arguments:
      *    working_dir: string -> the directory to run the command in
      *    command_exec: string -> the command to execute
+     *    sanitized_name: string -> the sanitized name (originally sanitized, but UUID now.)
      *    _open_terminal: bool -> whether to open a terminal emulator or not
      *
      * Returns:
@@ -107,7 +108,7 @@ pub async fn pure_run_command(command: String, args: Vec<String>) -> Result<Stri
      * in a cmd/sh shell.
      *
      * Arguments:
-     *    command: string       -> the executable to run
+     *    command: string        -> the executable to run
      *    args: array of strings -> the arguments to pass to the executable
      *
      * Returns:
@@ -174,9 +175,10 @@ pub async fn run_command(
      *    command: string -> the command to run
      *    create_terminal_window: bool -> whether to create a terminal window for the command
      *    working_dir: string -> the working directory to run the command in
+     *    sanitized_name: string -> the sanitized name (originally sanitized, but UUID now.)
      *
      * Returns:
-     *    Result<String, String> -> the command output or an error message
+     *    Result<u32, String> -> returns the pid if success, or returns string if it fails.
      */
      let mut child = {
         #[cfg(windows)]
@@ -237,6 +239,11 @@ pub async fn run_command(
 
 #[tauri::command]
 pub async fn kill_app(pid: u32) -> Result<String, String> {
+    /*
+     * This function kills the app using `Command::new()`.
+     * Yeah that's about it.
+     */
+
     println!("Requested to kill: {}", &pid.to_string());
     #[cfg(unix)]
     {
@@ -283,6 +290,13 @@ pub fn is_running_in_flatpak() -> bool {
 
 #[tauri::command]
 pub fn pid_exists(pid: u32) -> bool {
+    /*
+     * This function checks if the pid given exists or not.
+     * 
+     * Returns:
+     *    bool -> true if exists, false if doesn't exist.
+     */
+
     #[cfg(target_os = "windows")]
     {
         let mut cmd = std::process::Command::new("tasklist");

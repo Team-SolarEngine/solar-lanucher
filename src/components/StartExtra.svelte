@@ -89,7 +89,9 @@
     async function startApp(openTerminal = false) {
         /*
          * This function starts the app by telling the backend to run
-         * its execute command in its working directory.
+         * its execute command in its working directory. It also tells it
+         * to add the instance to a array of PID's for terminal, and kills
+         * the instance if it's already running and asked twice.
          *
          * Arguments:
          *    openTerminal: boolean -> whether to open a terminal or run hidden

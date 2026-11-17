@@ -103,6 +103,14 @@ pub async fn download_to_custom_dir(
 }
 
 fn pkg_unzip_file(zip_path: &str, target_dir: &str) -> zip::result::ZipResult<()> {
+    /*
+     * This function unzips the file through the `zip` library, and unzips
+     * it at the targetted library from `target_dir`.
+     * 
+     * Returns:
+     *    zip::result::ZipResult<()> -> true if everything went right, false if everything went wrong.
+     */
+
     let file = File::open(zip_path)?;
     let mut archive = ZipArchive::new(file)?;
 
@@ -126,6 +134,14 @@ fn pkg_unzip_file(zip_path: &str, target_dir: &str) -> zip::result::ZipResult<()
 }
 
 async fn sevenz_unzip_file(zip_path: &str, target_dir: &str) -> Result<String, String> {
+    /*
+     * This function unzips the file through the user's 7z CLI,
+     * and unzips it at the targetted library from `target_dir`.
+     * 
+     * Returns:
+     *    Result<String, String> -> returns a string if it's good or bad.
+     */
+
     let config_dir = dirs::config_dir().ok_or("Could not determine config directory")?;
     let app_dir = config_dir.join(APP_ID);
     let os = std::env::consts::OS;
@@ -149,6 +165,13 @@ async fn sevenz_unzip_file(zip_path: &str, target_dir: &str) -> Result<String, S
 }
 
 fn does_sevenz_exist() -> bool {
+    /*
+     * This functions checks if 7z exists or not.
+     * 
+     * Returns:
+     *    bool -> true if yes, false if no
+     */
+
     let config_dir = dirs::config_dir().expect("Could not determine config directory");
     let app_dir = config_dir.join(APP_ID);
 

@@ -8,6 +8,7 @@
     const terminalDialog: any = getContext('terminal')
 
     async function closeApp(pid: number) {
+        // @Terminal.svelte - for ref.
         try {
             await invoke("kill_app", { pid })
         } catch(e) {
@@ -16,6 +17,11 @@
     }
 
     function openTerminalPopup(pid: number, sanitized: string, appName: string, appIconURL: string) {
+        /*
+         * This function opens up the terminal by closing the
+         * popup, and then calling it through `getContext('terminal')`
+         * with the requred variables to pass.
+         */
         thisVar.open = false;
         terminalDialog({
             open: true,

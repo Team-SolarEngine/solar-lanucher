@@ -70,5 +70,6 @@ fn copy_folder_recursive(source: &str, destination: &str) -> Result<(), String> 
 
 #[tauri::command]
 pub fn get_os() -> String {
+    // Do I need to explain myself with this?
     std::env::consts::OS.to_string()
 }
