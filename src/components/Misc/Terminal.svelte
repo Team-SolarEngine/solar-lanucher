@@ -130,6 +130,7 @@
         overflow-y: auto;
         border-radius: 8px;
         background-color: rgba(0, 0, 0, 0.25);
+        overflow-x: hidden;
 
         code {
             background-color: transparent;
