@@ -31,23 +31,23 @@
         });
     }
 
-    async function setupLogListener() {
-        /*
-         * This function sets up the listener to the UUID sent
-         * through @StartExtra.svelte and listens that forever
-         * until the backend from Tauri has stopped.
-         * 
-         * The reason why we *have* to use a UUID is because
-         * using a sanitized repeated name will cause the output
-         * to be printed twice in `terminalLogs`.
-         */
-        try {
-            await listen(terminalMetadata.sanitized, (event) => {
-                const rawline = event.payload.message;
-                const coloredHtmlLine = ansiConverter.toHtml(rawline);
-                printLog(coloredHtmlLine, true)
-            })
-        } catch(e) {
+    function setupLogListener() {
+        let stopped = false;
+        let unlisten: (() => void) | undefined;
+        let pending: string[] = [];
+
+        const timer = setInterval(() => {
+            if (!pending.length) return;
+            const sendLogs = pending.splice(0).join("");
+            printLog(sendLogs)
+        }, 50);
+
+        void listen(terminalMetadata.sanitized, (event) => {
+            pending.push(ansiConverter.toHtml(event.payload.message));
+        }).then((stopListening) => {
+            if (stopped) stopListening();
+            else unlisten = stopListening;
+        }).catch((e) => {
             callError({
                 open: true,
                 action: 'Launching the game in terminal',
@@ -56,7 +56,14 @@
                 logs: e,
                 extra_info: `...`
             })
-        }
+        });
+
+        return () => {
+            stopped = true;
+            unlisten?.();
+            clearInterval(timer);
+            pending = [];
+        };
     }
 
     async function closeApp(pid: number) {
@@ -122,6 +129,9 @@
             background-color: transparent;
             user-select: text !important;
             -webkit-user-select: text !important;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            overflow-x: hidden;
         }
     }
 </style>
