@@ -67,7 +67,20 @@
          */
         submitted = true;
         showExplorer = false;
-        if (!appName || !appPath || !appWorkingDirectory) return useComponentSnackbarError(`Please fill in all fields.`);
+
+        if (!appName || !appPath || !appWorkingDirectory) {
+            let requiredFields = []
+            if (!appName) {
+                requiredFields.push("Instance name")
+            } if (!appPath) {
+                requiredFields.push("Instance executable file (.exe, wine/bottles, or binary file)")
+                showExplorer = true;
+            } if (!appWorkingDirectory) {
+                requiredFields.push("Instance path executable")
+            }
+
+            return useComponentSnackbarError(`Please fill in the required fields: ${requiredFields.join(", ")}.`)
+        }
 
         try {
             if (localInstanceDat.editing) {
