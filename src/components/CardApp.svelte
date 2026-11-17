@@ -67,6 +67,8 @@
             <StartExtra
                 executeCommand={executeCommand}
                 workingDirectory={workingDirectory}
+                appIconURL={iconUrl}
+                appName={name}
                 onDeleted={onDeleted}
                 onEdit={callEdit}
                 index={index}

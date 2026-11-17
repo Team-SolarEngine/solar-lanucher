@@ -4,6 +4,7 @@
     import Convert from 'ansi-to-html';
     import { invoke } from "@tauri-apps/api/core";
     import { getWord } from "$lib/localization";
+    import { getOS } from "$lib/sys";
 
     const ansiConverter = new Convert();
     let logContainer: HTMLElement;
@@ -12,8 +13,17 @@
     const callError: any = getContext('errorReport');
     let { terminalMetadata = $bindable() } = $props()
 
-    function printLog(str: string) {
-        terminalLogs += str + "<br>";
+    async function printLog(str: string, gameLogs: boolean = false) {
+        /*
+         * This prints the logs to `terminalLogs`, which is a mutable
+         * variable and can be changed any time, and the terminal div
+         * will be automatically scrolled to the bottom.
+         */
+
+        // for some reason, windows already does `\n`, so this code
+        // prevents <br> being added to the terminal logs.
+        if (gameLogs && await getOS() == "windows") terminalLogs += str
+            else terminalLogs += str + "<br>";
         tick().then(() => {
             if (logContainer) {
                 logContainer.scrollTop = logContainer.scrollHeight;
@@ -22,11 +32,20 @@
     }
 
     async function setupLogListener() {
+        /*
+         * This function sets up the listener to the UUID sent
+         * through @StartExtra.svelte and listens that forever
+         * until the backend from Tauri has stopped.
+         * 
+         * The reason why we *have* to use a UUID is because
+         * using a sanitized repeated name will cause the output
+         * to be printed twice in `terminalLogs`.
+         */
         try {
-            await listen("terminal-output", (event) => {
+            await listen(terminalMetadata.sanitized, (event) => {
                 const rawline = event.payload.message;
                 const coloredHtmlLine = ansiConverter.toHtml(rawline);
-                printLog(coloredHtmlLine)
+                printLog(coloredHtmlLine, true)
             })
         } catch(e) {
             callError({
@@ -41,6 +60,10 @@
     }
 
     async function closeApp(pid: number) {
+        /*
+         * This function just closes the app and prints that it
+         * has sucessfully closed or failed. Nothing special.
+         */
         try {
             await invoke("kill_app", { pid })
             printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Sucessfully terminated ${pid}`)
@@ -49,12 +72,9 @@
         }
     }
 
-    onMount(() => {
-        setupLogListener()
-    })
-
     $effect(() => {
         if (terminalMetadata.open) {
+            setupLogListener()
             untrack(() => {
                 terminalLogs = "";
 
@@ -68,9 +88,17 @@
 
 <div class="overlay" class:active={terminalMetadata.open}></div>
 <dialog style="width: 48rem !important;" class:active={terminalMetadata.open}>
+    <div style="display: flex; gap: 0.4rem; align-items: center;">
+        <img style="width: 64px; border-radius: 8px;" src={terminalMetadata.appIconURL} alt={terminalMetadata.appName} />
+        <div style="display: flex; flex-direction: column;">
+            <span style="font-size: 1.4rem; font-weight: bold;">{terminalMetadata.appName}</span>
+            <span style="opacity: 0.5;">Listening: {terminalMetadata.sanitized}</span>
+        </div>
+    </div>
+
     <!-- Bind logContainer to the element with overflow-y: auto -->
     <pre class="terminal" bind:this={logContainer}><code>{@html terminalLogs}</code></pre>
-    
+
     <div style="margin-top: 8px;" class="right-align">
         <button class="transparent" onclick={() => closeApp(terminalMetadata.pid)}>
             <i>stop_circle</i>
@@ -88,5 +116,12 @@
         height: 32rem;
         overflow-y: auto;
         border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.25);
+
+        code {
+            background-color: transparent;
+            user-select: text !important;
+            -webkit-user-select: text !important;
+        }
     }
 </style>

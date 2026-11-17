@@ -14,6 +14,8 @@
     let {
         executeCommand = "",
         workingDirectory = "",
+        appIconURL = "",
+        appName = "",
         onDeleted = () => {},
         onEdit = () => {},
         index = -1,
@@ -87,7 +89,9 @@
     async function startApp(openTerminal = false) {
         /*
          * This function starts the app by telling the backend to run
-         * its execute command in its working directory.
+         * its execute command in its working directory. It also tells it
+         * to add the instance to a array of PID's for terminal, and kills
+         * the instance if it's already running and asked twice.
          *
          * Arguments:
          *    openTerminal: boolean -> whether to open a terminal or run hidden
@@ -99,7 +103,7 @@
 
                 for (const instancePid of pids) {
                     if (instancePid <= 1) continue;
-            
+
                     await invoke("kill_app", { pid: instancePid });
                     removeInstanceState(instancePid);
                 }
@@ -108,13 +112,22 @@
                 return;
             }
 
+            const sanitized = crypto.randomUUID();
+            console.log(sanitized)
             pid = await invoke("start_app", {
                 workingDir: workingDirectory,
                 commandExec: executeCommand,
+                sanitizedName: sanitized,
                 openTerminal,
             });
-            addInstanceState(pid, workingDirectory)
-            if (openTerminal) terminalDialog({ open: true, pid })
+            addInstanceState(pid, workingDirectory, appName, appIconURL, sanitized)
+            if (openTerminal) terminalDialog({
+                open: true,
+                pid,
+                sanitized,
+                appName,
+                appIconURL
+            })
         } catch (e) {
             useComponentSnackbarError(`Failed to start app: ${e}`);
         }

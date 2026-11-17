@@ -128,5 +128,7 @@
     "sidebar.disable_sounds.description": "Sounds too annoying or jumpscaring you? Enable this!",
     "settings.organize_settings.submenu.note": "Note!",
     "settings.organize_settings.submenu.description": "Drag and drop does <b>NOT</b> work for windows. I cannot fix this due to Windows' webview. This only works for Linux, and macOS. Resort to using the arrows.",
-    "start_extra.button.stop": "Stop"
+    "start_extra.button.stop": "Stop",
+    "topbar.active_terminal.submenu.title": "Active Terminals",
+    "topbar.active_terminal.submenu.description": "Here is where all your active instances go! You can stop, or open the terminal of them if you lost them. Usually for developers, but good for debugging! <br/> <b>Your logs do get cleared when you open them. Can't fix it, sorry.</b>"
 }

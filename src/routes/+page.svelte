@@ -24,6 +24,7 @@
     import { loadApps, type AppData } from "$lib/apps";
     import { playSound } from "$lib/sounds";
     import Terminal from "../components/Misc/Terminal.svelte";
+    import SelectTerminal from "../components/Misc/SelectTerminal.svelte";
 
     let apps = $state<AppData[]>([]);
 
@@ -77,9 +78,15 @@
         appName: "",
         appWorkingDirectory: "",
         appIconURL: "",
+        sanitized: "",
         pid: 0,
     });
     setContext('terminal', (dat: any) => { terminalMetadata = dat })
+
+    let activeTerminalMetadata = $state({
+        open: false,
+    });
+    setContext('activeTerminal', (dat: any) => { activeTerminalMetadata = dat })
 
     let snackbar = $state<Snackbar>({
         snackbarError: false,
@@ -252,6 +259,7 @@
 <DragAndDrop/>
 <ErrorPopup bind:errorDat/>
 <Terminal bind:terminalMetadata/>
+<SelectTerminal thisVar={activeTerminalMetadata}/>
 
 <Local onAppAdded={loadInstances} bind:localInstanceDat/>
 <Download bind:downloadEngineDat />

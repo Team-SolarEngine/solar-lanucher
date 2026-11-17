@@ -18,6 +18,7 @@ pub async fn start_app(
     app: AppHandle,
     working_dir: String,
     command_exec: String,
+    sanitized_name: String,
     _open_terminal: bool
 ) -> Result<u32, String> {
     /*
@@ -27,18 +28,19 @@ pub async fn start_app(
      * Arguments:
      *    working_dir: string -> the directory to run the command in
      *    command_exec: string -> the command to execute
+     *    sanitized_name: string -> the sanitized name (originally sanitized, but UUID now.)
      *    _open_terminal: bool -> whether to open a terminal emulator or not
      *
      * Returns:
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(windows)]
-    let pid = run_command(app, command_exec, _open_terminal, working_dir).await?;
+    let pid = run_command(app, command_exec, _open_terminal, working_dir, sanitized_name).await?;
 
     #[cfg(unix)]
     {
         let trust_exec = async |cmd: &str, dir: &str| -> Result<String, String> {
-            let _ = run_command(app.clone(), format!("chmod +x '{}'", cmd), false, dir.to_string()).await;
+            let _ = run_command(app.clone(), format!("chmod +x '{}'", cmd), false, dir.to_string(), "none".to_string()).await;
             Ok("Trusted executable.".to_string())
         };
 
@@ -46,7 +48,7 @@ pub async fn start_app(
     }
 
     #[cfg(unix)]
-    let pid = run_command(app, command_exec, _open_terminal, working_dir.to_string()).await?;
+    let pid = run_command(app, command_exec, _open_terminal, working_dir.to_string(), sanitized_name).await?;
 
     Ok(pid)
 }
@@ -66,17 +68,17 @@ pub async fn open_folder(
      *    Result<String, String> -> a success message or an error message
      */
     #[cfg(target_os = "linux")]
-    run_command(app, format!("xdg-open \"{}\"", path), false, ".".to_string())
+    run_command(app, format!("xdg-open \"{}\"", path), false, ".".to_string(), "none".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "macos")]
-    run_command(app, format!("open \"{}\"", path), false, ".".to_string())
+    run_command(app, format!("open \"{}\"", path), false, ".".to_string(), "none".to_string())
         .await
         .map_err(|e| format!("{}", e))?;
 
     #[cfg(target_os = "windows")]
-    run_command(app, format!("explorer {}", path.replace('/', "\\")), false, ".".to_string())
+    run_command(app, format!("explorer {}", path.replace('/', "\\")), false, ".".to_string(), "none".to_string())
         .await
         .map_err(|e| format!("{} - If you frequently see this, ignore it.", e))?;
 
@@ -106,7 +108,7 @@ pub async fn pure_run_command(command: String, args: Vec<String>) -> Result<Stri
      * in a cmd/sh shell.
      *
      * Arguments:
-     *    command: string       -> the executable to run
+     *    command: string        -> the executable to run
      *    args: array of strings -> the arguments to pass to the executable
      *
      * Returns:
@@ -160,7 +162,8 @@ pub async fn run_command(
     app: AppHandle,
     command: String,
     _open_terminal: bool,
-    working_dir: String
+    working_dir: String,
+    sanitized_name: String,
 ) -> Result<u32, String> {
     /*
      * This function runs a command in the specified working directory and returns the output.
@@ -172,9 +175,10 @@ pub async fn run_command(
      *    command: string -> the command to run
      *    create_terminal_window: bool -> whether to create a terminal window for the command
      *    working_dir: string -> the working directory to run the command in
+     *    sanitized_name: string -> the sanitized name (originally sanitized, but UUID now.)
      *
      * Returns:
-     *    Result<String, String> -> the command output or an error message
+     *    Result<u32, String> -> returns the pid if success, or returns string if it fails.
      */
      let mut child = {
         #[cfg(windows)]
@@ -223,7 +227,7 @@ pub async fn run_command(
             let reader = BufReader::new(stdout);
             for line in reader.lines() {
                 if let Ok(text) = line {
-                    let _ = app_clone.emit("terminal-output", LogPayload { message: text });
+                    let _ = app_clone.emit(&format!("{}", sanitized_name).to_string(), LogPayload { message: text });
                 }
             }
             let _ = child.wait();
@@ -235,9 +239,14 @@ pub async fn run_command(
 
 #[tauri::command]
 pub async fn kill_app(pid: u32) -> Result<String, String> {
+    /*
+     * This function kills the app using `Command::new()`.
+     * Yeah that's about it.
+     */
+
+    println!("Requested to kill: {}", &pid.to_string());
     #[cfg(unix)]
     {
-        // On Linux/Unix, use the `kill` command or nix signal
         let status = std::process::Command::new("kill")
             .arg("-9")
             .arg(pid.to_string())
@@ -253,9 +262,9 @@ pub async fn kill_app(pid: u32) -> Result<String, String> {
 
     #[cfg(windows)]
     {
-        // On Windows, use `taskkill`
         let status = std::process::Command::new("taskkill")
-            .args(["/F", "/PID", &pid.to_string()])
+            .args(["/F", "/T", "/PID", &pid.to_string()])
+            .creation_flags(CREATE_NO_WINDOW)
             .status()
             .map_err(|e| e.to_string())?;
 
@@ -281,11 +290,19 @@ pub fn is_running_in_flatpak() -> bool {
 
 #[tauri::command]
 pub fn pid_exists(pid: u32) -> bool {
+    /*
+     * This function checks if the pid given exists or not.
+     * 
+     * Returns:
+     *    bool -> true if exists, false if doesn't exist.
+     */
+
     #[cfg(target_os = "windows")]
     {
-        std::process::Command::new("tasklist")
-            .args(["/FI", &format!("PID eq {pid}"), "/FO", "CSV", "/NH"])
-            .output()
+        let mut cmd = std::process::Command::new("tasklist");
+        cmd.args(["/FI", &format!("PID eq {pid}"), "/FO", "CSV", "/NH"]);
+        cmd.creation_flags(CREATE_NO_WINDOW);
+        cmd.output()
             .map(|output| {
                 String::from_utf8_lossy(&output.stdout)
                     .lines()
