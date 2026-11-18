@@ -45,7 +45,7 @@
         const timer = setInterval(() => {
             if (!pending.length) return;
             const sendLogs = pending.splice(0).join("");
-            printLog(sendLogs)
+            printLog(sendLogs, true)
         }, 50);
 
         void listen(terminalMetadata.sanitized, (event) => {
@@ -87,14 +87,17 @@
 
     $effect(() => {
         if (terminalMetadata.open) {
-            setupLogListener()
+            const cleanup = setupLogListener();
+    
             untrack(() => {
                 terminalLogs = "";
-
+    
                 printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Hi! This is a very experimental logs page.`);
                 printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Stuff may be buggy, and I genuinely don't know how to fix it.`);
                 printLog(`<span style="color: #A730FF;">[ SOLAR LAUNCHER ]</span> Best you're gonna get is this. Thanks a lot! <3`);
             });
+    
+            return cleanup;
         }
     });
 </script>
