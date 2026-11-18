@@ -8,7 +8,7 @@
 
 ### Misc
 - Opens explorer if Execute Command is empty.
-- A more verbose error in the
+- A more verbose error if 3 fields are empty in Local.svelte
 
 ## 0.8.9
 
