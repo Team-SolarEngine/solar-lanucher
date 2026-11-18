@@ -18,8 +18,7 @@ This proves that you have done testing for the app so in the future, it does not
 - [ ] Testing other localization and using `python python/add_localization`.
 
 ### Localization PR
-- [ ] Testing other localization and using `python python/add_localization`.
-- [ ] I added my language with my language code and thumbnail from [wikipedia](https://www.wikipedia.org/) in `LocalizationMenu.svelte`.
+- [ ] I added my language with my language code and thumbnail from [wikipedia](https://www.wikipedia.org/) in `LocalizationMenu.svelte`. (Only for translations that hasn't had one.)
 
 ## Checklist
 A list of checklist before you do a pull request.
@@ -32,9 +31,8 @@ A list of checklist before you do a pull request.
 
 ### Localization PR
 - [ ] Checking for empty keys by doing `CTRL` + `F` and doing `''` and `""` to check if there's any empty values.
-- [ ] The wording is the same as the english localization.
+- [ ] The wording is the same as the english localization. (eg; `Active terminal` -> `Aktif terminal`.)
 - [ ] I did not touch any other languages except my own language.
-- [ ] There is exactly the same keys filled in as English.
 
 ## Screenshots or recordings.
 <!-- If not available, then put "Not available", and explain why. -->
