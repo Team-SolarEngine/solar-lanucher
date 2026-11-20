@@ -1,6 +1,6 @@
 [package]
 name = "solarlauncher"
-version = "0.8.10"
+version = "0.8.11"
 description = "launching fnf instances from deep insde your folders, now fixed!"
 authors = [ "Team Solar Engine" ]
 edition = "2021"

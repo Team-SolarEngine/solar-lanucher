@@ -1,5 +1,14 @@
 # Solar Launcher Changelog
 
+## 0.8.11
+
+### Fixed
+- New line terminal bug in unix
+
+### Misc
+- **Localization**
+  - Updated Indonesian
+
 ## 0.8.10
 
 ### Added
