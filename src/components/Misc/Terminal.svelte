@@ -13,7 +13,7 @@
     const callError: any = getContext('errorReport');
     let { terminalMetadata = $bindable() } = $props()
 
-    async function printLog(str: string, gameLogs: boolean = false) {
+    async function printLog(str: string) {
         /*
          * This prints the logs to `terminalLogs`, which is a mutable
          * variable and can be changed any time, and the terminal div
@@ -22,8 +22,8 @@
 
         // for some reason, windows already does `\n`, so this code
         // prevents <br> being added to the terminal logs.
-        if (gameLogs && await getOS() == "windows") terminalLogs += str
-            else terminalLogs += str + "<br>";
+        const addBreak = await getOS() == "windows" ? "" : "<br>"
+        terminalLogs += str + addBreak
         tick().then(() => {
             if (logContainer) {
                 logContainer.scrollTop = logContainer.scrollHeight;
@@ -42,10 +42,10 @@
         let unlisten: (() => void) | undefined;
         let pending: string[] = [];
 
-        const timer = setInterval(() => {
+        const timer = setInterval(async () => {
             if (!pending.length) return;
-            const sendLogs = pending.splice(0).join("");
-            printLog(sendLogs, true)
+            const sendLogs = pending.splice(0).join(await getOS() == "windows" ? "" : "<br>");
+            printLog(sendLogs)
         }, 50);
 
         void listen(terminalMetadata.sanitized, (event) => {
@@ -112,7 +112,6 @@
         </div>
     </div>
 
-    <!-- Bind logContainer to the element with overflow-y: auto -->
     <pre class="terminal" bind:this={logContainer}><code>{@html terminalLogs}</code></pre>
 
     <div style="margin-top: 8px;" class="right-align">
