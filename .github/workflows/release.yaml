@@ -12,7 +12,7 @@ on:
         default: false
 
 env:
-  python-version: 3.13
+  python-version: 3.15
 
 permissions:
   contents: write
@@ -35,15 +35,15 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 9
 
@@ -90,7 +90,7 @@ jobs:
             flatpak build-bundle $(pwd)/flatpak-repo $(pwd)/solarlauncher.flatpak net.solarengine.solarlauncher
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: solarlauncher-${{ matrix.platform }}-${{ matrix.target || 'native' }}
           path: |
@@ -102,16 +102,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Set up Python (${{ env.python-version }})
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ env.python-version }}
   
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           path: artifacts/
 
@@ -128,7 +128,7 @@ jobs:
           fi
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ inputs.version }}
