@@ -30,15 +30,15 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 9
 
@@ -88,7 +88,7 @@ jobs:
             flatpak build-bundle $(pwd)/flatpak-repo $(pwd)/solarlauncher.flatpak net.solarengine.solarlauncher
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: solarlauncher-${{ matrix.platform }}-${{ matrix.target || 'native' }}
           path: |
