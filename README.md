@@ -11,6 +11,11 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/BeerCSS-hi?style=for-the-badge&logo=css&logoColor=FFFFFF&color=663399">
 </div>
 
+> [!NOTE]
+> Solar Launcher is now **in maintenance and improvement state**. This means, the team will focus on bugfixes, performance, and security! We may also add selected new features along the way. But they're not as big.
+>
+> If you still have ideas in Solar Launcher that you want to be implemented, go ahead and make a [Feature Request issue](https://github.com/Team-SolarEngine/solar-lanucher/issues/new/choose)!
+
 <div align="center"><h1>Previews</h1></div>
 
 > These screenshots may be outdated. But nontheless, still the same interface.
