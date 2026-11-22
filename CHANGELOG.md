@@ -1,6 +1,6 @@
 # Solar Launcher Changelog
 
-## 0.8.11
+## 0.8.11 **[ IN DEVELOPMENT ]**
 
 ### Fixed
 - New line terminal bug in unix
