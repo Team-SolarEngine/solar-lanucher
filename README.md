@@ -90,7 +90,7 @@ Literally supports any executables. This gives you flexibility for... something 
 
 <div align="center"><h2>Desktop Cross Platform</h2></div>
 
-This is probably obvious, but we support desktop cross platform for <u>Windows</u>, <u>Linux</u>, and <u>macOS</u>. Sadly, we do not plan to make Android and iOS.
+This is probably obvious, but we support desktop cross platform for <u>Windows</u>, <u>Linux</u>, and <u>macOS</u>. ~~Sadly, we do not plan to make Android and iOS.~~ About that.. We're currently developing an Android version! For iOS, we cannot. Apple's iOS security is too locked down, and we're only doing it for Android. Thank you!
 
 <div align="center"><h2>Deep Links</h2></div>
 
